@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "nuclearsq:raw_lead_sqc"
+  },
+  "result": {
+    "id": "nuclearsq:lead_ingot_sqc"
+  },
+  "experience": 0.7,
+  "cookingtime": 100
+}

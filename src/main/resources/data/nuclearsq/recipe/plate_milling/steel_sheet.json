@@ -1,0 +1,17 @@
+{
+  "type": "nuclearsq:plate_milling",
+  "ingredient": {
+    "tag": "c:ingots/steel"
+  },
+  "count": 15,
+  "time": 100,
+  "energy_per_tick": 90,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:steel_sheet_sqc",
+        "count": 1
+      }
+    }
+  ]
+}

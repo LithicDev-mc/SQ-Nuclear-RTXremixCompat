@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/turbine_glowstone_generator_sqc"
+    }
+  }
+}

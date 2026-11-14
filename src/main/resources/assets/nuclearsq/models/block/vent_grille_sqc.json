@@ -1,0 +1,10 @@
+{
+  "loader": "neoforge:obj",
+  "model": "nuclearsq:models/block/vent_grille_sqc.obj",
+  "flip_v": true,
+  "ambient_occlusion": false,
+  "textures": {
+    "texture": "nuclearsq:block/vent_grille_sqc",
+    "particle": "nuclearsq:block/vent_grille_sqc"
+  }
+}

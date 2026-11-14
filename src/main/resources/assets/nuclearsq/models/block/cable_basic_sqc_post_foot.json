@@ -1,0 +1,76 @@
+{
+  "textures": {
+    "lip": "nuclearsq:block/cable_tray_lip_sqc",
+    "particle": "nuclearsq:block/cable_basic_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        5,
+        0,
+        5
+      ],
+      "to": [
+        11,
+        0.75,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            6,
+            0.75
+          ]
+        },
+        "east": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            6,
+            0.75
+          ]
+        },
+        "south": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            6,
+            0.75
+          ]
+        },
+        "west": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            6,
+            0.75
+          ]
+        },
+        "up": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            6,
+            6
+          ]
+        },
+        "down": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            6,
+            6
+          ]
+        }
+      }
+    }
+  ]
+}

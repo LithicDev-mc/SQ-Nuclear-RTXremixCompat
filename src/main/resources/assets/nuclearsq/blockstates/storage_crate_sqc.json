@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,second=false": {
+      "model": "nuclearsq:block/storage_crate_sqc"
+    },
+    "facing=north,second=true": {
+      "model": "nuclearsq:block/storage_crate_sqc_second"
+    },
+    "facing=east,second=false": {
+      "model": "nuclearsq:block/storage_crate_sqc",
+      "y": 90
+    },
+    "facing=east,second=true": {
+      "model": "nuclearsq:block/storage_crate_sqc_second",
+      "y": 90
+    },
+    "facing=south,second=false": {
+      "model": "nuclearsq:block/storage_crate_sqc",
+      "y": 180
+    },
+    "facing=south,second=true": {
+      "model": "nuclearsq:block/storage_crate_sqc_second",
+      "y": 180
+    },
+    "facing=west,second=false": {
+      "model": "nuclearsq:block/storage_crate_sqc",
+      "y": 270
+    },
+    "facing=west,second=true": {
+      "model": "nuclearsq:block/storage_crate_sqc_second",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:polymer",
+  "ingredient": {
+    "item": "nuclearsq:rubber_sqc"
+  },
+  "count": 2,
+  "time": 160,
+  "energy_per_tick": 2100,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:ion_resin_sqc",
+        "count": 4
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "water_in",
+      "amount": 500
+    }
+  ]
+}

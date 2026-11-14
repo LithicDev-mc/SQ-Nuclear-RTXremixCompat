@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "nuclearsq:lead_block_sqc",
+    "nuclearsq:lead_ore_sqc",
+    "nuclearsq:deepslate_lead_ore_sqc",
+    "nuclearsq:tin_ore_sqc",
+    "nuclearsq:deepslate_tin_ore_sqc",
+    "nuclearsq:fluorite_ore_sqc",
+    "nuclearsq:deepslate_fluorite_ore_sqc",
+    "nuclearsq:borax_ore_sqc",
+    "nuclearsq:deepslate_borax_ore_sqc"
+  ]
+}

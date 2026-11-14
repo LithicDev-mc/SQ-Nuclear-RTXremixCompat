@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:mod_loaded",
+        "modid": "mekanism"
+      }
+    }
+  ],
+  "type": "nuclearsq:acid_plant",
+  "ingredient": {
+    "tag": "c:raw_materials/iron"
+  },
+  "count": 4,
+  "time": 200,
+  "energy_per_tick": 2400,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:sulfur_dust_sqc",
+        "count": 3
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:iron_dust_sqc",
+        "count": 2
+      }
+    }
+  ]
+}

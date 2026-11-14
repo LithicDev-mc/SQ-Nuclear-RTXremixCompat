@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/exo_station_controller_sqc"
+    }
+  }
+}

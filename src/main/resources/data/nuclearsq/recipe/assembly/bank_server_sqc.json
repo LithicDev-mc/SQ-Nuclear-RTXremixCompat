@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 6
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_2_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:data_cable_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:gold_ingot"
+      },
+      "count": 15
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:bank_server_sqc",
+    "count": 1
+  }
+}

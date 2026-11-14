@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 6
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:glass_pane"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:glowstone_dust"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:data_cable_sqc"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:data_multi_sqc",
+    "count": 1
+  }
+}

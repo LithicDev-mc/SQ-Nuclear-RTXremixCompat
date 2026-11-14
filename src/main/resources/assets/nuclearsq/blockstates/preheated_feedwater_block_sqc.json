@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/preheated_feedwater_block_sqc"
+    }
+  }
+}

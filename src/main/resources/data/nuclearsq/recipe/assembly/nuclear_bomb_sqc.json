@@ -1,0 +1,39 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:comparator"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:uranium_core_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:lead_shielding_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:tnt"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:nuclear_bomb_sqc",
+    "count": 1
+  }
+}

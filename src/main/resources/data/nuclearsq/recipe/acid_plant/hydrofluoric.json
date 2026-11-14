@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:acid_plant",
+  "ingredient": {
+    "tag": "c:gems/fluorite"
+  },
+  "count": 1,
+  "time": 120,
+  "energy_per_tick": 2100,
+  "results": [],
+  "fluids": [
+    {
+      "port": "acid_out",
+      "amount": 250
+    }
+  ],
+  "fluid_results": [
+    {
+      "port": "hf_out",
+      "fluid": "nuclearsq:hydrofluoric_acid",
+      "amount": 500
+    }
+  ]
+}

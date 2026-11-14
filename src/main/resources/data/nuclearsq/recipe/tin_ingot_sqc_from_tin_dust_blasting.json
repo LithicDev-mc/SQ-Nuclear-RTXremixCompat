@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "nuclearsq:tin_dust_sqc"
+  },
+  "result": {
+    "id": "nuclearsq:tin_ingot_sqc"
+  },
+  "experience": 0.7,
+  "cookingtime": 100
+}

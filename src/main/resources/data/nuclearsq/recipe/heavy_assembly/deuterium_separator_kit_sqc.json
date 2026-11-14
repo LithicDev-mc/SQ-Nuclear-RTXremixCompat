@@ -1,0 +1,43 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cwk",
+    "e@&",
+    "rCm"
+  ],
+  "key": {
+    "&": {
+      "item": "nuclearsq:machine_port_gas_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:deuterium_separator_controller_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "k": {
+      "item": "nuclearsq:pressure_chamber_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "r": {
+      "item": "nuclearsq:pressure_chamber_reinforced_sqc"
+    },
+    "w": {
+      "item": "nuclearsq:machine_port_water_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:deuterium_separator_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

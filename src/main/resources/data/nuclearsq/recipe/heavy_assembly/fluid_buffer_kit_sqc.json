@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cSSc",
+    "$@Hm"
+  ],
+  "key": {
+    "$": {
+      "item": "nuclearsq:machine_port_acid_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:fluid_buffer_controller_sqc"
+    },
+    "H": {
+      "item": "nuclearsq:hdpe_seal_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:fluid_buffer_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

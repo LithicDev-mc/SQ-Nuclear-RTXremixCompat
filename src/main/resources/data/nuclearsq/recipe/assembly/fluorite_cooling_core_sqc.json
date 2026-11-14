@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:fluorite_gem"
+        ],
+        "tags": [
+          "c:gems/fluorite"
+        ]
+      },
+      "count": 61
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:osmium_heat_plate_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:fluorite_cooling_core_sqc",
+    "count": 1
+  }
+}

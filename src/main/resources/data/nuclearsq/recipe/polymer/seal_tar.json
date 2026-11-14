@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:polymer",
+  "ingredient": {
+    "item": "nuclearsq:rubber_sqc"
+  },
+  "count": 2,
+  "time": 120,
+  "energy_per_tick": 1800,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:rubber_seal_sqc",
+        "count": 4
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "tar_in",
+      "amount": 200
+    }
+  ]
+}

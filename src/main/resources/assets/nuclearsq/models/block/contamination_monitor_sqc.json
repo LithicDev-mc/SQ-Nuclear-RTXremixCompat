@@ -1,0 +1,215 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "nuclearsq:block/contamination_monitor_sqc",
+    "body": "nuclearsq:block/contamination_monitor_sqc",
+    "front": "nuclearsq:block/contamination_monitor_sqc_front",
+    "lamp": "nuclearsq:block/contamination_monitor_sqc_lamp_green"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        3,
+        12
+      ],
+      "to": [
+        13,
+        13,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#body"
+        },
+        "east": {
+          "uv": [
+            12,
+            3,
+            16,
+            13
+          ],
+          "texture": "#body"
+        },
+        "west": {
+          "uv": [
+            12,
+            3,
+            16,
+            13
+          ],
+          "texture": "#body"
+        },
+        "up": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#body"
+        },
+        "down": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#body"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        13,
+        13
+      ],
+      "to": [
+        10,
+        15,
+        15
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            1,
+            10,
+            3
+          ],
+          "texture": "#lamp"
+        },
+        "south": {
+          "uv": [
+            6,
+            1,
+            10,
+            3
+          ],
+          "texture": "#lamp"
+        },
+        "east": {
+          "uv": [
+            13,
+            1,
+            15,
+            3
+          ],
+          "texture": "#lamp"
+        },
+        "west": {
+          "uv": [
+            13,
+            1,
+            15,
+            3
+          ],
+          "texture": "#lamp"
+        },
+        "up": {
+          "uv": [
+            6,
+            13,
+            10,
+            15
+          ],
+          "texture": "#lamp"
+        },
+        "down": {
+          "uv": [
+            6,
+            13,
+            10,
+            15
+          ],
+          "texture": "#lamp"
+        }
+      }
+    },
+    {
+      "from": [
+        5.5,
+        12.5,
+        12.5
+      ],
+      "to": [
+        10.5,
+        13,
+        15.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.5,
+            3,
+            10.5,
+            3.5
+          ],
+          "texture": "#body"
+        },
+        "south": {
+          "uv": [
+            5.5,
+            3,
+            10.5,
+            3.5
+          ],
+          "texture": "#body"
+        },
+        "east": {
+          "uv": [
+            12.5,
+            3,
+            15.5,
+            3.5
+          ],
+          "texture": "#body"
+        },
+        "west": {
+          "uv": [
+            12.5,
+            3,
+            15.5,
+            3.5
+          ],
+          "texture": "#body"
+        },
+        "up": {
+          "uv": [
+            5.5,
+            12.5,
+            10.5,
+            15.5
+          ],
+          "texture": "#body"
+        },
+        "down": {
+          "uv": [
+            5.5,
+            12.5,
+            10.5,
+            15.5
+          ],
+          "texture": "#body"
+        }
+      }
+    }
+  ]
+}

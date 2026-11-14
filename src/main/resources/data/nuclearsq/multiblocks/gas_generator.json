@@ -1,0 +1,104 @@
+{
+  "id": "gas_generator",
+  "size": [
+    5,
+    5,
+    7
+  ],
+  "controller": [
+    2,
+    0,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "ethylene_in",
+      "type": "gas",
+      "dir": "in",
+      "cell": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "name": "energy_out",
+      "type": "energy",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        2,
+        0,
+        6
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:gas_generator_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "g": "nuclearsq:machine_port_gas_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "RR@RR",
+      "RRRRe",
+      "RRRRR",
+      "RRRRR",
+      "RRRRR",
+      "RRRRR",
+      "RRtRR"
+    ],
+    [
+      "     ",
+      "  R  ",
+      "     ",
+      "     ",
+      "     ",
+      "     ",
+      "     "
+    ],
+    [
+      "     ",
+      "     ",
+      "     ",
+      "     ",
+      "g    ",
+      "     ",
+      "     "
+    ],
+    [
+      "     ",
+      "     ",
+      "     ",
+      "     ",
+      "     ",
+      "     ",
+      "     "
+    ],
+    [
+      "     ",
+      "     ",
+      "     ",
+      "     ",
+      "     ",
+      "     ",
+      "     "
+    ]
+  ]
+}

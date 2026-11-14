@@ -1,0 +1,31 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:coolant_bucket_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:salt",
+          "minecraft:glowstone_dust"
+        ]
+      },
+      "count": 15
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:zircaloy_sheet_sqc"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:sodium_coolant_bucket_sqc",
+    "count": 1
+  }
+}

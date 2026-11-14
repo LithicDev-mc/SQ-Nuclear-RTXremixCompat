@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:reactor_plate_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:reactor_casing_sqc",
+    "count": 4
+  }
+}

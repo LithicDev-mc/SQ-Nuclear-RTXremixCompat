@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:particle_card_heavy_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_2_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:diamond"
+      },
+      "count": 30
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:ender_pearl"
+      },
+      "count": 30
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:particle_card_rare_sqc",
+    "count": 1
+  }
+}

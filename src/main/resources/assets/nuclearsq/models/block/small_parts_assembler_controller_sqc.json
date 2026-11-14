@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "nuclearsq:block/small_parts_assembler_controller_sqc",
+    "top": "nuclearsq:block/small_parts_assembler_controller_sqc_top",
+    "bottom": "nuclearsq:block/small_parts_assembler_controller_sqc_top"
+  }
+}

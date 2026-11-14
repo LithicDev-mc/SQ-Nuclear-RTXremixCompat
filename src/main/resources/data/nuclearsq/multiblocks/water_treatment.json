@@ -1,0 +1,219 @@
+{
+  "id": "water_treatment",
+  "size": [
+    7,
+    4,
+    5
+  ],
+  "controller": [
+    3,
+    0,
+    0
+  ],
+  "anchor": [
+    3,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "water_in",
+      "type": "big_water",
+      "dir": "in",
+      "cell": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "water_in_2",
+      "type": "big_water",
+      "dir": "in",
+      "cell": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "name": "water_in_3",
+      "type": "big_water",
+      "dir": "in",
+      "cell": [
+        0,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "water_in_4",
+      "type": "big_water",
+      "dir": "in",
+      "cell": [
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "water_in_5",
+      "type": "big_water",
+      "dir": "in",
+      "cell": [
+        6,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "water_in_6",
+      "type": "big_water",
+      "dir": "in",
+      "cell": [
+        6,
+        1,
+        3
+      ]
+    },
+    {
+      "name": "water_in_7",
+      "type": "big_water",
+      "dir": "in",
+      "cell": [
+        6,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "water_in_8",
+      "type": "big_water",
+      "dir": "in",
+      "cell": [
+        6,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "water_in_9",
+      "type": "water",
+      "dir": "in",
+      "cell": [
+        2,
+        3,
+        2
+      ]
+    },
+    {
+      "name": "water_in_10",
+      "type": "water",
+      "dir": "in",
+      "cell": [
+        4,
+        3,
+        2
+      ]
+    },
+    {
+      "name": "feedwater_out",
+      "type": "feedwater",
+      "dir": "out",
+      "cell": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "name": "feedwater_out_2",
+      "type": "feedwater",
+      "dir": "out",
+      "cell": [
+        5,
+        1,
+        0
+      ]
+    },
+    {
+      "name": "feedwater_out_3",
+      "type": "feedwater",
+      "dir": "out",
+      "cell": [
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "name": "feedwater_out_4",
+      "type": "feedwater",
+      "dir": "out",
+      "cell": [
+        5,
+        2,
+        0
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        6,
+        1,
+        0
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        6,
+        1,
+        1
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:water_treatment_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "b": "nuclearsq:machine_port_big_water_sqc",
+    "w": "nuclearsq:machine_port_water_sqc",
+    "f": "nuclearsq:machine_port_feedwater_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "RRR@RRR",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ],
+    [
+      " f   fe",
+      "      t",
+      "b     b",
+      "b     b",
+      "       "
+    ],
+    [
+      " f   f ",
+      "       ",
+      "b     b",
+      "b     b",
+      "       "
+    ],
+    [
+      "       ",
+      "       ",
+      "  w w  ",
+      "       ",
+      "       "
+    ]
+  ]
+}

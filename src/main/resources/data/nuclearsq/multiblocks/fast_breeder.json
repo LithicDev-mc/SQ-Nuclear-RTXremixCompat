@@ -1,0 +1,223 @@
+{
+  "id": "fast_breeder",
+  "size": [
+    9,
+    11,
+    9
+  ],
+  "controller": [
+    4,
+    0,
+    0
+  ],
+  "anchor": [
+    4,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "item_in",
+      "type": "item",
+      "dir": "in",
+      "cell": [
+        4,
+        10,
+        4
+      ]
+    },
+    {
+      "name": "sodium_in",
+      "type": "coolant",
+      "dir": "in",
+      "cell": [
+        0,
+        2,
+        7
+      ]
+    },
+    {
+      "name": "wet_steam_out",
+      "type": "wet_steam",
+      "dir": "out",
+      "cell": [
+        8,
+        9,
+        4
+      ]
+    },
+    {
+      "name": "feedwater_in",
+      "type": "feedwater",
+      "dir": "in",
+      "cell": [
+        8,
+        2,
+        5
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        8,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        4,
+        1,
+        8
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:fast_breeder_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "k": "nuclearsq:machine_port_coolant_sqc",
+    "n": "nuclearsq:machine_port_wet_steam_sqc",
+    "f": "nuclearsq:machine_port_feedwater_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "    @    ",
+      "iRRRRRRRe",
+      "RRRRRRRRR",
+      "RRRRRRRRR",
+      "RRRRRRRRR",
+      "RRRRRRRRR",
+      "RRRRRRRRR",
+      "RRRRRRRRR",
+      "RRRRRRRRR"
+    ],
+    [
+      "         ",
+      "RR     RR",
+      "   RRR   ",
+      "RRRRRRRRR",
+      "  RRRRR  ",
+      "RRRRRRRRR",
+      "   RRR   ",
+      "         ",
+      "    t    "
+    ],
+    [
+      "         ",
+      "         ",
+      "   RRR   ",
+      "RRRRRRRRR",
+      "  RRRRR  ",
+      "RRRRRRRRf",
+      "   RRR   ",
+      "k        ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "   RRR   ",
+      "  RRRRRRR",
+      "  RRRRR  ",
+      "  RRRRRRR",
+      "   RRR   ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "   RRR   ",
+      "  RRRRRRR",
+      "  RRRRR  ",
+      "  RRRRRRR",
+      "   RRR   ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "   RRR   ",
+      "  RRRRRRR",
+      "  RRRRR  ",
+      "  RRRRRRR",
+      "   RRR   ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "   RRR   ",
+      "  RRRRRRR",
+      "  RRRRR  ",
+      "  RRRRRRR",
+      "   RRR   ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "   RRR   ",
+      "  RRRRRRR",
+      "  RRRRRR ",
+      "  RRRRRRR",
+      "   RRR   ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "       RR",
+      "       Rn",
+      "       RR",
+      "         ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "    i    ",
+      "         ",
+      "         ",
+      "         ",
+      "         "
+    ]
+  ]
+}

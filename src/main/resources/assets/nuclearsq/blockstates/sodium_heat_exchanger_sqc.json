@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/sodium_heat_exchanger_sqc"
+    }
+  }
+}

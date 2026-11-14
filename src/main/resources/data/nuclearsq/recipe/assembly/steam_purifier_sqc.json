@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:lead_shielding_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:glass_seal_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_1_sqc"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:steam_purifier_sqc",
+    "count": 1
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/steam_generator_controller_sqc"
+    }
+  }
+}

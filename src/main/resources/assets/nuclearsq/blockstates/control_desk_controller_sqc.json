@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/control_desk_controller_sqc"
+    }
+  }
+}

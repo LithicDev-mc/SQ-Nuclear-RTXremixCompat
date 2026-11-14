@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:chemistry",
+  "ingredient": {
+    "tag": "minecraft:coals"
+  },
+  "count": 2,
+  "time": 160,
+  "energy_per_tick": 2400,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:enriched_carbon_sqc",
+        "count": 4
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "acid_in",
+      "amount": 200
+    }
+  ]
+}

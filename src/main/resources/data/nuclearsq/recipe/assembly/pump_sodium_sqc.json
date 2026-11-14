@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:pump_high_pressure_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:hdpe_seal_sqc"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:glowstone_conductor_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:pump_sodium_sqc",
+    "count": 1
+  }
+}

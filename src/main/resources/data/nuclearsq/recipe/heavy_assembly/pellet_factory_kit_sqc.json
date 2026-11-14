@@ -1,0 +1,44 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cSiSc",
+    "iK@Kc",
+    "cACAe",
+    "cSSSm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:pellet_factory_controller_sqc"
+    },
+    "A": {
+      "item": "nuclearsq:brass_bearing_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:pellet_factory_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

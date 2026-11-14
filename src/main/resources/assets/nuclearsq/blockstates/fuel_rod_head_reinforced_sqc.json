@@ -1,0 +1,45 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "nuclearsq:block/fuel_rod_head_reinforced_sqc"
+      }
+    },
+    {
+      "when": {
+        "rod_formed": "true",
+        "hull": "1"
+      },
+      "apply": {
+        "model": "nuclearsq:block/fuel_rod_hulls_1_sqc"
+      }
+    },
+    {
+      "when": {
+        "rod_formed": "true",
+        "hull": "2"
+      },
+      "apply": {
+        "model": "nuclearsq:block/fuel_rod_hulls_2_sqc"
+      }
+    },
+    {
+      "when": {
+        "rod_formed": "true",
+        "hull": "3"
+      },
+      "apply": {
+        "model": "nuclearsq:block/fuel_rod_hulls_3_sqc"
+      }
+    },
+    {
+      "when": {
+        "rod_formed": "true",
+        "hull": "4"
+      },
+      "apply": {
+        "model": "nuclearsq:block/fuel_rod_hulls_4_sqc"
+      }
+    }
+  ]
+}

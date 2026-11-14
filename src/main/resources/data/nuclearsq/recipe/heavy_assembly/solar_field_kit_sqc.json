@@ -1,0 +1,38 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "ppppp",
+    "pK@Kp",
+    "cBeBm",
+    "ppppp"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:solar_field_controller_sqc"
+    },
+    "B": {
+      "item": "nuclearsq:control_board_1_sqc"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "p": {
+      "item": "nuclearsq:solar_panel_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:solar_field_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

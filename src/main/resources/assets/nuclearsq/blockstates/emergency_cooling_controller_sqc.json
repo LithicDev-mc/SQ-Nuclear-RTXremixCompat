@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/emergency_cooling_controller_sqc"
+    }
+  }
+}

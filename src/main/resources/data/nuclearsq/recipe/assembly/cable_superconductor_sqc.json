@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:cable_hardened_sqc"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:superconducting_coil_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:rubber_sqc"
+      },
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:cable_superconductor_sqc",
+    "count": 8
+  }
+}

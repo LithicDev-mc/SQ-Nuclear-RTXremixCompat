@@ -1,0 +1,17 @@
+{
+  "type": "nuclearsq:foundry",
+  "ingredient": {
+    "item": "nuclearsq:silicon_pure_sqc"
+  },
+  "count": 2,
+  "time": 200,
+  "energy_per_tick": 3300,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:silicon_wafer_sqc",
+        "count": 4
+      }
+    }
+  ]
+}

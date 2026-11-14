@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:sodium_coolant_bucket_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:blue_ice"
+      },
+      "count": 30
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:hdpe_seal_sqc"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:cryo_coolant_bucket_sqc",
+    "count": 1
+  }
+}

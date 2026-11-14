@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:polymer",
+  "ingredient": {
+    "tag": "minecraft:coals"
+  },
+  "count": 1,
+  "time": 160,
+  "energy_per_tick": 1800,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:coke_sqc",
+        "count": 2
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "tar_in",
+      "amount": 200
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/containment_controller_sqc"
+    }
+  }
+}

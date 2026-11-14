@@ -1,0 +1,31 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:basic_control_circuit",
+          "nuclearsq:basic_circuit_sqc"
+        ]
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:redstone"
+      },
+      "count": 30
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:reactor_plate_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:control_board_1_sqc",
+    "count": 1
+  }
+}

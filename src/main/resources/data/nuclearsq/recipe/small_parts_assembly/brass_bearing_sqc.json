@@ -1,0 +1,28 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "create:brass_ingot",
+          "minecraft:gold_ingot"
+        ],
+        "tags": [
+          "c:ingots/brass"
+        ]
+      },
+      "count": 30
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:andesite_housing_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:brass_bearing_sqc",
+    "count": 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:copper_ingot"
+      },
+      "count": 61
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_bars"
+      },
+      "count": 15
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:copper_coil_sqc",
+    "count": 1
+  }
+}

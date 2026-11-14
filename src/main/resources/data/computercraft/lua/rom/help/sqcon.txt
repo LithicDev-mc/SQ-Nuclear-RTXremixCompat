@@ -1,0 +1,9 @@
+sqcon starts SQ Con, the control room of NuclearSQ: programs as tiles, a bar on the left, a command bar (Ctrl+Space) and notifications.
+Needs an advanced computer (colour). Power plant and Storage read sqc_network, sqc_machine and sqc_storage.
+
+ex:
+"sqcon" runs on this terminal.
+"sqcon -m" runs on the first image monitor or monitor.
+"sqcon -m monitor_0" runs on a specific monitor.
+"sqcon -s 0.5" sets the text size on normal monitors.
+"sqcon -d 128" sets the pixels per block on the image monitor.

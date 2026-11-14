@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/deuterium_separator_controller_sqc"
+    }
+  }
+}

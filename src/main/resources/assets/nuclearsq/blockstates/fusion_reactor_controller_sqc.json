@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/fusion_reactor_controller_sqc"
+    }
+  }
+}

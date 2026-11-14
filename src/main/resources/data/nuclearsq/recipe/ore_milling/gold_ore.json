@@ -1,0 +1,24 @@
+{
+  "type": "nuclearsq:ore_milling",
+  "ingredient": {
+    "tag": "c:ores/gold"
+  },
+  "count": 1,
+  "time": 200,
+  "energy_per_tick": 120,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:gold_dust_sqc",
+        "count": 2
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:gold_dust_sqc",
+        "count": 1
+      },
+      "chance": 0.05
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "loader": "neoforge:obj",
+  "model": "nuclearsq:models/block/fuel_rod_block_sqc.obj",
+  "flip_v": true,
+  "ambient_occlusion": false,
+  "automatic_culling": false,
+  "textures": {
+    "texture": "nuclearsq:block/fuel_rod_atlas_sqc",
+    "particle": "nuclearsq:block/fuel_rod_atlas_sqc"
+  }
+}

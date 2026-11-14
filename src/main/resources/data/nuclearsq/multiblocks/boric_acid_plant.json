@@ -1,0 +1,106 @@
+{
+  "id": "boric_acid_plant",
+  "size": [
+    3,
+    3,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "item_in",
+      "type": "item",
+      "dir": "in",
+      "cell": [
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "water_in",
+      "type": "water",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "acid_in",
+      "type": "acid",
+      "dir": "in",
+      "cell": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        0,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:boric_acid_plant_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "w": "nuclearsq:machine_port_water_sqc",
+    "a": "nuclearsq:machine_port_acid_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "R@R",
+      "eRi",
+      "wta"
+    ],
+    [
+      "   ",
+      " R ",
+      "   "
+    ],
+    [
+      "   ",
+      " i ",
+      "   "
+    ]
+  ]
+}

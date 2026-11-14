@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:polymer",
+  "ingredient": {
+    "item": "minecraft:dried_kelp"
+  },
+  "count": 8,
+  "time": 240,
+  "energy_per_tick": 2400,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:rubber_sqc",
+        "count": 2
+      }
+    }
+  ],
+  "aux": {
+    "tag": "c:dusts/sulfur"
+  },
+  "aux_count": 1,
+  "fluids": [
+    {
+      "port": "water_in",
+      "amount": 500
+    }
+  ]
+}

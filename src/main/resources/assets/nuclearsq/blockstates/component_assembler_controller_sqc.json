@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/component_assembler_controller_sqc"
+    }
+  }
+}

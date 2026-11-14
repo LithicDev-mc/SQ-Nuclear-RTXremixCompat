@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/xenon_filter_sqc"
+    }
+  }
+}

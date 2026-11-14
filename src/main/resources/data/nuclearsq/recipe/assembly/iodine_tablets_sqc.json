@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:dried_kelp"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:bone_meal"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:paper"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:iodine_tablets_sqc",
+    "count": 4
+  }
+}

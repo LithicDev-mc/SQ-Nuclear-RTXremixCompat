@@ -1,0 +1,28 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:dried_kelp"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:enriched_carbon_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:slime_ball"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:hdpe_sheet_sqc",
+    "count": 2
+  },
+  "time": 100
+}

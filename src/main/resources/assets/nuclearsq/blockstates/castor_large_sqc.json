@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "part=0": {
+      "model": "nuclearsq:block/castor_large_sqc_p0"
+    },
+    "part=1": {
+      "model": "nuclearsq:block/castor_large_sqc_p1"
+    },
+    "part=2": {
+      "model": "nuclearsq:block/castor_large_sqc_p2"
+    },
+    "part=3": {
+      "model": "nuclearsq:block/castor_large_sqc_p3"
+    },
+    "part=4": {
+      "model": "nuclearsq:block/castor_large_sqc_p4"
+    },
+    "part=5": {
+      "model": "nuclearsq:block/castor_large_sqc_p5"
+    },
+    "part=6": {
+      "model": "nuclearsq:block/castor_large_sqc_p6"
+    },
+    "part=7": {
+      "model": "nuclearsq:block/castor_large_sqc_p7"
+    },
+    "part=8": {
+      "model": "nuclearsq:block/castor_large_sqc_p8"
+    },
+    "part=9": {
+      "model": "nuclearsq:block/castor_large_sqc_p9"
+    },
+    "part=10": {
+      "model": "nuclearsq:block/castor_large_sqc_p10"
+    },
+    "part=11": {
+      "model": "nuclearsq:block/castor_large_sqc_p11"
+    }
+  }
+}

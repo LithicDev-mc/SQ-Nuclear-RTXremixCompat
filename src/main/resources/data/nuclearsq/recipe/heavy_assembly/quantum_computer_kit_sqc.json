@@ -1,0 +1,44 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cWcWc",
+    "cF@Ec",
+    "ciTic",
+    "cWeWm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:quantum_computer_controller_sqc"
+    },
+    "E": {
+      "item": "nuclearsq:ram_module_sqc"
+    },
+    "F": {
+      "item": "nuclearsq:cpu_module_sqc"
+    },
+    "T": {
+      "item": "nuclearsq:control_board_3_sqc"
+    },
+    "W": {
+      "item": "nuclearsq:quantum_module_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:quantum_computer_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

@@ -1,0 +1,171 @@
+{
+  "id": "control_rod_drive",
+  "size": [
+    5,
+    10,
+    5
+  ],
+  "controller": [
+    2,
+    4,
+    0
+  ],
+  "anchor": [
+    2,
+    4,
+    0
+  ],
+  "ports": [
+    {
+      "name": "primary_cold_in",
+      "type": "primary",
+      "dir": "in",
+      "cell": [
+        4,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "primary_hot_out",
+      "type": "primary",
+      "dir": "out",
+      "cell": [
+        0,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "rod_terminal",
+      "type": "terminal",
+      "dir": "in",
+      "cell": [
+        2,
+        5,
+        0
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "name": "control_signal",
+      "type": "signal",
+      "dir": "in",
+      "cell": [
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "name": "flux_signal",
+      "type": "signal",
+      "dir": "out",
+      "cell": [
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "name": "hydraulic_in",
+      "type": "water",
+      "dir": "in",
+      "cell": [
+        1,
+        4,
+        4
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:control_rod_drive_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "p": "nuclearsq:machine_port_primary_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "s": "nuclearsq:machine_port_signal_sqc",
+    "w": "nuclearsq:machine_port_water_sqc"
+  },
+  "layers": [
+    [
+      "RRRRR",
+      "R   R",
+      "R   R",
+      "R   R",
+      "RRRRR"
+    ],
+    [
+      "RRRRR",
+      "R   R",
+      "R   R",
+      "R   R",
+      "RRRRR"
+    ],
+    [
+      "RRRRR",
+      "R   R",
+      "p   p",
+      "R   R",
+      "RRRRR"
+    ],
+    [
+      "RRRRR",
+      "R   R",
+      "R   R",
+      "R   R",
+      "RRRRR"
+    ],
+    [
+      "Re@sR",
+      "R   R",
+      "R   R",
+      "R   R",
+      "RwRsR"
+    ],
+    [
+      "RRtRR",
+      "R   R",
+      "R   R",
+      "R   R",
+      "RRRRR"
+    ],
+    [
+      "RRRRR",
+      "R   R",
+      "R   R",
+      "R   R",
+      "RRRRR"
+    ],
+    [
+      "RRRRR",
+      "R   R",
+      "R   R",
+      "R   R",
+      "RRRRR"
+    ],
+    [
+      "RRRRR",
+      "R   R",
+      "R   R",
+      "R   R",
+      "RRRRR"
+    ],
+    [
+      "RRRRR",
+      "R   R",
+      "R   R",
+      "R   R",
+      "RRRRR"
+    ]
+  ]
+}

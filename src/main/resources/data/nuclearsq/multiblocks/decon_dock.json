@@ -1,0 +1,98 @@
+{
+  "id": "decon_dock",
+  "size": [
+    4,
+    2,
+    2
+  ],
+  "controller": [
+    0,
+    0,
+    0
+  ],
+  "anchor": [
+    0,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "lye_in",
+      "type": "acid",
+      "dir": "in",
+      "cell": [
+        3,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "diesel_in",
+      "type": "acid",
+      "dir": "in",
+      "cell": [
+        3,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "name": "item_out_back",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        3,
+        0,
+        0
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:decon_dock_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "a": "nuclearsq:machine_port_acid_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "@  t",
+      "e  a"
+    ],
+    [
+      "   i",
+      "i  a"
+    ]
+  ]
+}

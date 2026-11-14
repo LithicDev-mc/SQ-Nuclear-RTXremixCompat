@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "nuclearsq:deepslate_uranium_ore_sqc",
+    "nuclearsq:deepslate_lead_ore_sqc",
+    "nuclearsq:deepslate_tin_ore_sqc",
+    "nuclearsq:deepslate_osmium_ore_sqc",
+    "nuclearsq:deepslate_fluorite_ore_sqc",
+    "nuclearsq:deepslate_zircon_ore_sqc",
+    "nuclearsq:deepslate_lithium_ore_sqc",
+    "nuclearsq:deepslate_borax_ore_sqc"
+  ]
+}

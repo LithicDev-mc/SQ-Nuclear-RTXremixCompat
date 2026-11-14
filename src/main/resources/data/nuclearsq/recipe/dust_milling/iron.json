@@ -1,0 +1,17 @@
+{
+  "type": "nuclearsq:dust_milling",
+  "ingredient": {
+    "tag": "c:ingots/iron"
+  },
+  "count": 1,
+  "time": 100,
+  "energy_per_tick": 90,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:iron_dust_sqc",
+        "count": 1
+      }
+    }
+  ]
+}

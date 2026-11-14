@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:iron_nugget"
+      },
+      "count": 19
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:copper_ingot"
+      },
+      "count": 15
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:overhead_wire_sqc",
+    "count": 8
+  }
+}

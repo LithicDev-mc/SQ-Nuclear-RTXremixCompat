@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:translator_composite_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:glowstone_conductor_sqc"
+      },
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:translator_glowstone_sqc",
+    "count": 1
+  }
+}

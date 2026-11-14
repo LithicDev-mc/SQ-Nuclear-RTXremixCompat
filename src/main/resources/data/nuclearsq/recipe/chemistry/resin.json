@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:chemistry",
+  "ingredient": {
+    "item": "nuclearsq:spent_resin_sqc"
+  },
+  "count": 2,
+  "time": 160,
+  "energy_per_tick": 2100,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:ion_resin_sqc",
+        "count": 2
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "lye_out",
+      "amount": 200
+    }
+  ]
+}

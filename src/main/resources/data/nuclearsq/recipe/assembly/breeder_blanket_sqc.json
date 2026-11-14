@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:depleted_uranium_sqc"
+      },
+      "count": 30
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:zircaloy_sheet_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:breeder_blanket_sqc",
+    "count": 1
+  }
+}

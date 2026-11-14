@@ -1,0 +1,31 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:respirator_filter_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:iodine_tablets_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:enriched_carbon",
+          "nuclearsq:enriched_carbon_sqc"
+        ]
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:respirator_filter_iodine_sqc",
+    "count": 1
+  }
+}

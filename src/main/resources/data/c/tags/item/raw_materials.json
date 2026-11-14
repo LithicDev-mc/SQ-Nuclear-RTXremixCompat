@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "nuclearsq:raw_uranium_sqc",
+    "nuclearsq:raw_lead_sqc",
+    "nuclearsq:raw_tin_sqc",
+    "nuclearsq:raw_osmium_sqc",
+    "nuclearsq:raw_lithium_sqc"
+  ]
+}

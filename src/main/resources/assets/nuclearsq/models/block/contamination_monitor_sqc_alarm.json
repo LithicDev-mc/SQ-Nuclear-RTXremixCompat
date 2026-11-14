@@ -1,0 +1,6 @@
+{
+  "parent": "nuclearsq:block/contamination_monitor_sqc",
+  "textures": {
+    "lamp": "nuclearsq:block/contamination_monitor_sqc_lamp_red"
+  }
+}

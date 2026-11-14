@@ -1,0 +1,112 @@
+{
+  "id": "relief_tank",
+  "size": [
+    9,
+    3,
+    9
+  ],
+  "controller": [
+    4,
+    0,
+    0
+  ],
+  "anchor": [
+    4,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "relief_in",
+      "type": "primary",
+      "dir": "in",
+      "cell": [
+        4,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "primary_out",
+      "type": "primary",
+      "dir": "out",
+      "cell": [
+        8,
+        0,
+        4
+      ]
+    },
+    {
+      "name": "coolant_in",
+      "type": "coolant",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        3
+      ]
+    },
+    {
+      "name": "coolant_out",
+      "type": "coolant",
+      "dir": "out",
+      "cell": [
+        0,
+        0,
+        5
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        4,
+        2,
+        8
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:relief_tank_controller_sqc",
+    "W": "nuclearsq:pressure_chamber_sqc",
+    "p": "nuclearsq:machine_port_primary_sqc",
+    "k": "nuclearsq:machine_port_coolant_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "  WW@WW  ",
+      " WWWWWWW ",
+      "WWW   WWW",
+      "kW     WW",
+      "WW     Wp",
+      "kW     WW",
+      "WWW   WWW",
+      " WWWWWWW ",
+      "  WWWWW  "
+    ],
+    [
+      "  WWWWW  ",
+      " WWWWWWW ",
+      "WWW   WWW",
+      "WW     WW",
+      "WW     WW",
+      "WW     WW",
+      "WWW   WWW",
+      " WWWWWWW ",
+      "  WWWWW  "
+    ],
+    [
+      "  WWWWW  ",
+      " WWWpWWW ",
+      "WWW   WWW",
+      "WW     WW",
+      "WW     WW",
+      "WW     WW",
+      "WWW   WWW",
+      " WWWWWWW ",
+      "  WWtWW  "
+    ]
+  ]
+}

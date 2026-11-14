@@ -1,0 +1,82 @@
+{
+ "parent": "minecraft:block/block",
+ "textures": {
+  "particle": "nuclearsq:block/nuclear_ash_sqc",
+  "all": "nuclearsq:block/nuclear_ash_sqc"
+ },
+ "elements": [
+  {
+   "from": [
+    0,
+    0,
+    0
+   ],
+   "to": [
+    16,
+    4,
+    16
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0,
+      12,
+      16,
+      16
+     ],
+     "texture": "#all",
+     "cullface": "north"
+    },
+    "south": {
+     "uv": [
+      0,
+      12,
+      16,
+      16
+     ],
+     "texture": "#all",
+     "cullface": "south"
+    },
+    "west": {
+     "uv": [
+      0,
+      12,
+      16,
+      16
+     ],
+     "texture": "#all",
+     "cullface": "west"
+    },
+    "east": {
+     "uv": [
+      0,
+      12,
+      16,
+      16
+     ],
+     "texture": "#all",
+     "cullface": "east"
+    },
+    "up": {
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ],
+     "texture": "#all"
+    },
+    "down": {
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ],
+     "texture": "#all",
+     "cullface": "down"
+    }
+   }
+  }
+ ]
+}

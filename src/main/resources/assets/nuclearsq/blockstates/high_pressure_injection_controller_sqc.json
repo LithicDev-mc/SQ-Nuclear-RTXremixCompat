@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/high_pressure_injection_controller_sqc"
+    }
+  }
+}

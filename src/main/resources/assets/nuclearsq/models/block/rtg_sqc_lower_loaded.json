@@ -1,0 +1,7 @@
+{
+  "parent": "nuclearsq:block/rtg_sqc_lower",
+  "textures": {
+    "top": "nuclearsq:block/rtg_sqc_top_loaded",
+    "band": "nuclearsq:block/rtg_sqc_band_loaded"
+  }
+}

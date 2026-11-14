@@ -1,0 +1,17 @@
+{
+  "type": "nuclearsq:weapons_processing",
+  "ingredient": {
+    "item": "nuclearsq:plutonium_metal_sqc"
+  },
+  "count": 2,
+  "time": 600,
+  "energy_per_tick": 7200,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:weapons_plutonium_core_sqc",
+        "count": 1
+      }
+    }
+  ]
+}

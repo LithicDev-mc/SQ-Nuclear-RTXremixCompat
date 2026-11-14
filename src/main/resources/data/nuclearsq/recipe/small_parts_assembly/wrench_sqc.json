@@ -1,0 +1,15 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 15
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:wrench_sqc",
+    "count": 1
+  }
+}

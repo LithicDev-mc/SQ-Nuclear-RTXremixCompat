@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:coolant_bucket_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:gunpowder"
+      },
+      "count": 15
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:hdpe_seal_sqc"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:sulfuric_acid_bucket_sqc",
+    "count": 1
+  }
+}

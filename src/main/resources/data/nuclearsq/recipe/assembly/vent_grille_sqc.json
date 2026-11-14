@@ -1,0 +1,31 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:reactor_plate_sqc"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_bars"
+      },
+      "count": 61
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "create:propeller",
+          "minecraft:iron_trapdoor"
+        ]
+      },
+      "count": 15
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:vent_grille_sqc",
+    "count": 1
+  }
+}

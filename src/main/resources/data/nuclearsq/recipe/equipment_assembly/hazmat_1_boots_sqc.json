@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:equipment_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:leather"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:black_wool"
+      },
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:hazmat_1_boots_sqc",
+    "count": 1
+  }
+}

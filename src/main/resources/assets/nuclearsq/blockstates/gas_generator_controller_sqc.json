@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/gas_generator_controller_sqc"
+    }
+  }
+}

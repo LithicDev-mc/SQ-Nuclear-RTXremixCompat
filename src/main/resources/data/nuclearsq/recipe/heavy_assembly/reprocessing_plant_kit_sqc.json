@@ -1,0 +1,45 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "ccccc",
+    "cL@Lc",
+    "ciCic",
+    "cGeGc",
+    "cLHLm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:reprocessing_plant_controller_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "G": {
+      "item": "nuclearsq:glass_seal_sqc"
+    },
+    "H": {
+      "item": "nuclearsq:hdpe_seal_sqc"
+    },
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:reprocessing_plant_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

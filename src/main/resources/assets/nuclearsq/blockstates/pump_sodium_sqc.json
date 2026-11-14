@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/pump_sodium_sqc"
+    }
+  }
+}

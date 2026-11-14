@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:plate_milling",
+  "ingredient": {
+    "item": "nuclearsq:zirconium_ingot_sqc"
+  },
+  "count": 4,
+  "time": 100,
+  "energy_per_tick": 90,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:zircaloy_sheet_sqc",
+        "count": 2
+      }
+    }
+  ],
+  "aux": {
+    "tag": "c:ingots/tin"
+  },
+  "aux_count": 8
+}

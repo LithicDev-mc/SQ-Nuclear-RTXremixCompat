@@ -1,0 +1,40 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cFi",
+    "e@i",
+    "TRm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:clean_room_controller_sqc"
+    },
+    "F": {
+      "item": "nuclearsq:cpu_module_sqc"
+    },
+    "R": {
+      "item": "nuclearsq:ram_module_4gb_sqc"
+    },
+    "T": {
+      "item": "nuclearsq:control_board_3_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:clean_room_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

@@ -1,0 +1,37 @@
+{
+  "type": "nuclearsq:reprocessing",
+  "ingredient": {
+    "item": "nuclearsq:spent_fuel_sqc"
+  },
+  "count": 1,
+  "time": 400,
+  "energy_per_tick": 300,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:uranium_oxide_dust_sqc",
+        "count": 6
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:nuclear_ash_sqc",
+        "count": 2
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:enriched_uranium_sqc",
+        "count": 1
+      },
+      "chance": 0.3
+    },
+    {
+      "item": {
+        "id": "nuclearsq:plutonium_oxide_sqc",
+        "count": 1
+      },
+      "chance": 0.4
+    }
+  ]
+}

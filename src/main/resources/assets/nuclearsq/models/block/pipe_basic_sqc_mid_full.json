@@ -1,0 +1,164 @@
+{
+  "textures": {
+    "pipe": "nuclearsq:block/pipe_basic_sqc",
+    "particle": "nuclearsq:block/pipe_basic_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        5,
+        6.7574,
+        0
+      ],
+      "to": [
+        11,
+        9.2426,
+        16
+      ],
+      "faces": {
+        "east": {
+          "texture": "#pipe",
+          "uv": [
+            0,
+            8.257359312880714,
+            16,
+            10.742640687119286
+          ],
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#pipe",
+          "uv": [
+            0,
+            8.257359312880714,
+            16,
+            10.742640687119286
+          ],
+          "tintindex": 0
+        }
+      }
+    },
+    {
+      "from": [
+        6.7574,
+        5,
+        0
+      ],
+      "to": [
+        9.2426,
+        11,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#pipe",
+          "uv": [
+            0,
+            8.257359312880714,
+            16,
+            10.742640687119286
+          ],
+          "rotation": 90,
+          "tintindex": 0
+        },
+        "down": {
+          "texture": "#pipe",
+          "uv": [
+            0,
+            8.257359312880714,
+            16,
+            10.742640687119286
+          ],
+          "rotation": 90,
+          "tintindex": 0
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        6.7574,
+        0
+      ],
+      "to": [
+        11,
+        9.2426,
+        16
+      ],
+      "faces": {
+        "east": {
+          "texture": "#pipe",
+          "uv": [
+            0,
+            7,
+            16,
+            8
+          ],
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#pipe",
+          "uv": [
+            0,
+            7,
+            16,
+            8
+          ],
+          "tintindex": 0
+        }
+      },
+      "rotation": {
+        "angle": 45,
+        "axis": "z",
+        "origin": [
+          8,
+          8,
+          8
+        ]
+      }
+    },
+    {
+      "from": [
+        5,
+        6.7574,
+        0
+      ],
+      "to": [
+        11,
+        9.2426,
+        16
+      ],
+      "faces": {
+        "east": {
+          "texture": "#pipe",
+          "uv": [
+            0,
+            7,
+            16,
+            8
+          ],
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#pipe",
+          "uv": [
+            0,
+            7,
+            16,
+            8
+          ],
+          "tintindex": 0
+        }
+      },
+      "rotation": {
+        "angle": -45,
+        "axis": "z",
+        "origin": [
+          8,
+          8,
+          8
+        ]
+      }
+    }
+  ]
+}

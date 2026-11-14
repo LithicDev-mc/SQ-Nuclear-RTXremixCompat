@@ -1,0 +1,10 @@
+{
+  "loader": "neoforge:obj",
+  "model": "nuclearsq:models/block/heat_exchanger_sqc.obj",
+  "flip_v": true,
+  "ambient_occlusion": false,
+  "textures": {
+    "texture": "nuclearsq:block/heat_exchanger_sqc",
+    "particle": "nuclearsq:block/heat_exchanger_sqc"
+  }
+}

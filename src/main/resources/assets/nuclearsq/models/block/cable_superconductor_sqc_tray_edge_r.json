@@ -1,0 +1,40 @@
+{
+  "textures": {
+    "lip": "nuclearsq:block/cable_tray_lip_sqc",
+    "particle": "nuclearsq:block/cable_superconductor_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        4,
+        3
+      ],
+      "to": [
+        2.5,
+        12,
+        4
+      ],
+      "faces": {
+        "north": {
+          "texture": "#lip"
+        },
+        "east": {
+          "texture": "#lip"
+        },
+        "south": {
+          "texture": "#lip"
+        },
+        "west": {
+          "texture": "#lip"
+        },
+        "up": {
+          "texture": "#lip"
+        },
+        "down": {
+          "texture": "#lip"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:dirt",
+    "#minecraft:sand",
+    "minecraft:packed_mud",
+    "minecraft:gravel",
+    "minecraft:suspicious_gravel",
+    "minecraft:clay",
+    "minecraft:powder_snow",
+    "minecraft:muddy_mangrove_roots",
+    "minecraft:mud",
+    "minecraft:snow_block",
+    "minecraft:snow"
+  ]
+}

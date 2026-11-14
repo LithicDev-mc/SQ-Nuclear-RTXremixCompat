@@ -1,0 +1,404 @@
+{
+  "id": "fusion_reactor",
+  "size": [
+    21,
+    10,
+    21
+  ],
+  "controller": [
+    10,
+    0,
+    0
+  ],
+  "anchor": [
+    10,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "energy_in_2",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        8,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "energy_out",
+      "type": "energy",
+      "dir": "out",
+      "cell": [
+        12,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "energy_out_2",
+      "type": "energy",
+      "dir": "out",
+      "cell": [
+        14,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        11,
+        1,
+        0
+      ]
+    },
+    {
+      "name": "coolant_in",
+      "type": "coolant",
+      "dir": "in",
+      "cell": [
+        20,
+        0,
+        7
+      ]
+    },
+    {
+      "name": "coolant_out",
+      "type": "coolant",
+      "dir": "out",
+      "cell": [
+        20,
+        0,
+        13
+      ]
+    },
+    {
+      "name": "deuterium_in",
+      "type": "gas",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        7
+      ]
+    },
+    {
+      "name": "tritium_io",
+      "type": "gas",
+      "dir": "both",
+      "cell": [
+        0,
+        0,
+        10
+      ]
+    },
+    {
+      "name": "helium_out",
+      "type": "gas",
+      "dir": "out",
+      "cell": [
+        0,
+        0,
+        13
+      ]
+    },
+    {
+      "name": "item_in",
+      "type": "item",
+      "dir": "in",
+      "cell": [
+        8,
+        0,
+        20
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        12,
+        0,
+        20
+      ]
+    },
+    {
+      "name": "control_signal",
+      "type": "signal",
+      "dir": "in",
+      "cell": [
+        16,
+        0,
+        20
+      ]
+    },
+    {
+      "name": "plasma_signal",
+      "type": "signal",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        20
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:fusion_reactor_controller_sqc",
+    "C": "nuclearsq:reactor_casing_sqc",
+    "H": "nuclearsq:pressure_chamber_hardened_sqc",
+    "R": "nuclearsq:pressure_chamber_reinforced_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc",
+    "k": "nuclearsq:machine_port_coolant_sqc",
+    "g": "nuclearsq:machine_port_gas_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "s": "nuclearsq:machine_port_signal_sqc"
+  },
+  "layers": [
+    [
+      "CCCCCCeCeC@CeCeCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCC         CCCCCC",
+      "gCCCCC         CCCCCk",
+      "CCCCCC         CCCCCC",
+      "CCCCCC   CCC   CCCCCC",
+      "gCCCCC   CCC   CCCCCC",
+      "CCCCCC   CCC   CCCCCC",
+      "CCCCCC         CCCCCC",
+      "gCCCCC         CCCCCk",
+      "CCCCCC         CCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCsCCCiCCCiCCCsCCCC"
+    ],
+    [
+      "CCCCCCCCCCCtCCCCCCCCC",
+      "C                   C",
+      "C                   C",
+      "C                   C",
+      "C                   C",
+      "C    CCCCCCCCCCC    C",
+      "C    C         C    C",
+      "C    C         C    C",
+      "C    C         C    C",
+      "C    C   RRR   C    C",
+      "C    C   R R   C    C",
+      "C    C   RRR   C    C",
+      "C    C         C    C",
+      "C    C         C    C",
+      "C    C         C    C",
+      "C    CCCCCCCCCCC    C",
+      "C                   C",
+      "C                   C",
+      "C                   C",
+      "C                   C",
+      "CCCCCCCCCCCCCCCCCCCCC"
+    ],
+    [
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH   RRR   HHHHHH",
+      "HHHHHH   R R   HHHHHH",
+      "HHHHHH   RRR   HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH"
+    ],
+    [
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H    HHHHHHHHHHH    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H   RRR   H    H",
+      "H    H   R R   H    H",
+      "H    H   RRR   H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    HHHHHHHHHHH    H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "HHHHHHHHHHHHHHHHHHHHH"
+    ],
+    [
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H    HHHHHHHHHHH    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H   RRR   H    H",
+      "H    H   R R   H    H",
+      "H    H   RRR   H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    HHHHHHHHHHH    H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "HHHHHHHHHHHHHHHHHHHHH"
+    ],
+    [
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H    HHHHHHHHHHH    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H   RRR   H    H",
+      "H    H   R R   H    H",
+      "H    H   RRR   H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    HHHHHHHHHHH    H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "HHHHHHHHHHHHHHHHHHHHH"
+    ],
+    [
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H    HHHHHHHHHHH    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H   RRR   H    H",
+      "H    H   R R   H    H",
+      "H    H   RRR   H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    H         H    H",
+      "H    HHHHHHHHHHH    H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "H                   H",
+      "HHHHHHHHHHHHHHHHHHHHH"
+    ],
+    [
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH   RRR   HHHHHH",
+      "HHHHHH   R R   HHHHHH",
+      "HHHHHH   RRR   HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHH         HHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH",
+      "HHHHHHHHHHHHHHHHHHHHH"
+    ],
+    [
+      "                     ",
+      "                     ",
+      "  RRRRRRRRRRRRRRRRR  ",
+      "  RRRRRRRRRRRRRRRRR  ",
+      "  RR      R      RR  ",
+      "  RR      R      RR  ",
+      "  RR      R      RR  ",
+      "  RR      R      RR  ",
+      "  RR      R      RR  ",
+      "  RR     RRR     RR  ",
+      "  RRRRRRRR RRRRRRRR  ",
+      "  RR     RRR     RR  ",
+      "  RR      R      RR  ",
+      "  RR      R      RR  ",
+      "  RR      R      RR  ",
+      "  RR      R      RR  ",
+      "  RR      R      RR  ",
+      "  RRRRRRRRRRRRRRRRR  ",
+      "  RRRRRRRRRRRRRRRRR  ",
+      "                     ",
+      "                     "
+    ],
+    [
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     ",
+      "                     "
+    ]
+  ]
+}

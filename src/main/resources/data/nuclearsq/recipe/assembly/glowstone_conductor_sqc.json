@@ -1,0 +1,25 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:ingot_refined_glowstone",
+          "nuclearsq:refined_glowstone_ingot_sqc"
+        ]
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:copper_coil_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:glowstone_conductor_sqc",
+    "count": 1
+  }
+}

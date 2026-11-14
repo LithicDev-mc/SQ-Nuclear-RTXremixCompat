@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/substation_controller_sqc"
+    }
+  }
+}

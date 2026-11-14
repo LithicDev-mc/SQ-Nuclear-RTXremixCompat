@@ -1,0 +1,15 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "nuclearsq:block/shaft_coupling_sqc"
+    },
+    "axis=x": {
+      "model": "nuclearsq:block/shaft_coupling_sqc",
+      "y": 90
+    },
+    "axis=y": {
+      "model": "nuclearsq:block/shaft_coupling_sqc",
+      "x": 90
+    }
+  }
+}

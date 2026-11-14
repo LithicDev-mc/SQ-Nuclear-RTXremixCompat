@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:leaching",
+  "ingredient": {
+    "item": "nuclearsq:uranium_sludge_sqc"
+  },
+  "count": 3,
+  "time": 160,
+  "energy_per_tick": 900,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:uranium_oxide_sqc",
+        "count": 1
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "acid_in",
+      "amount": 100
+    },
+    {
+      "port": "water_in",
+      "amount": 200
+    }
+  ]
+}

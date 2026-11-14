@@ -1,0 +1,15 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:fuel_rod_sqc"
+      },
+      "count": 9
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:fuel_rod_block_sqc",
+    "count": 1
+  }
+}

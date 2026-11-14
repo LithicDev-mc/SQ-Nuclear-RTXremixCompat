@@ -1,0 +1,9 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {"ingredient": {"item": "minecraft:paper"}, "count": 4},
+    {"ingredient": {"item": "minecraft:redstone"}, "count": 2},
+    {"ingredient": {"item": "minecraft:gold_nugget"}, "count": 1}
+  ],
+  "result": {"id": "nuclearsq:pattern_card_sqc", "count": 4}
+}

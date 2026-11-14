@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:equipment_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:copper_ingot"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:bucket"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:decon_sprayer_sqc",
+    "count": 1
+  }
+}

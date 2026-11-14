@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nuclearsq:item/hard_drive_3_sqc"
+  }
+}

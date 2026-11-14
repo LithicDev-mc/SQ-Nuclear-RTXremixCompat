@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "nuclearsq:block/power_gate_side_sqc",
+    "north": "nuclearsq:block/power_gate_out_sqc",
+    "south": "nuclearsq:block/power_gate_in_sqc",
+    "east": "nuclearsq:block/power_gate_side_sqc",
+    "west": "nuclearsq:block/power_gate_side_sqc",
+    "up": "nuclearsq:block/power_gate_side_sqc",
+    "down": "nuclearsq:block/power_gate_side_sqc"
+  }
+}

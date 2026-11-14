@@ -1,0 +1,84 @@
+{
+  "id": "fuel_cell",
+  "size": [
+    3,
+    3,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "hydrogen_in",
+      "type": "gas",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "oxygen_in",
+      "type": "gas",
+      "dir": "in",
+      "cell": [
+        2,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "energy_out",
+      "type": "energy",
+      "dir": "out",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:fuel_cell_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc",
+    "g": "nuclearsq:machine_port_gas_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc"
+  },
+  "layers": [
+    [
+      "R@R",
+      "gRR",
+      "eRR"
+    ],
+    [
+      "   ",
+      " RR",
+      "  R"
+    ],
+    [
+      "   ",
+      " tg",
+      "   "
+    ]
+  ]
+}

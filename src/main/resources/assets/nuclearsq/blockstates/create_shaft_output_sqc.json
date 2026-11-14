@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "nuclearsq:block/create_shaft_output_sqc"
+    },
+    "facing=south": {
+      "model": "nuclearsq:block/create_shaft_output_sqc",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "nuclearsq:block/create_shaft_output_sqc",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "nuclearsq:block/create_shaft_output_sqc",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "nuclearsq:block/create_shaft_output_sqc",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "nuclearsq:block/create_shaft_output_sqc",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "create:iron_sheet",
+          "minecraft:iron_ingot"
+        ],
+        "tags": [
+          "c:plates/iron"
+        ]
+      },
+      "count": 61
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:reactor_plate_sqc",
+    "count": 2
+  }
+}

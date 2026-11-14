@@ -1,0 +1,47 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "ccHcc",
+    "cy@yc",
+    "%%Cec",
+    "cnAnm"
+  ],
+  "key": {
+    "%": {
+      "item": "nuclearsq:machine_port_primary_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:high_pressure_injection_controller_sqc"
+    },
+    "A": {
+      "item": "nuclearsq:brass_bearing_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "H": {
+      "item": "nuclearsq:hdpe_seal_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "n": {
+      "item": "nuclearsq:pump_electric_sqc"
+    },
+    "y": {
+      "item": "nuclearsq:pump_high_pressure_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:high_pressure_injection_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

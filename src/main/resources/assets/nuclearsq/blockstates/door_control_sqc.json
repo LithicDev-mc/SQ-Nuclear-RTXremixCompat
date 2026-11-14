@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "nuclearsq:block/door_control_sqc"
+    },
+    "facing=east": {
+      "model": "nuclearsq:block/door_control_sqc",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "nuclearsq:block/door_control_sqc",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nuclearsq:block/door_control_sqc",
+      "y": 270
+    }
+  }
+}

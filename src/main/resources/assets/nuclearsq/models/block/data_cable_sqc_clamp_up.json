@@ -1,0 +1,40 @@
+{
+  "textures": {
+    "clamp": "nuclearsq:block/cable_clamp_sqc",
+    "particle": "nuclearsq:block/data_cable_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        5.25,
+        15,
+        5.25
+      ],
+      "to": [
+        10.75,
+        16,
+        10.75
+      ],
+      "faces": {
+        "north": {
+          "texture": "#clamp"
+        },
+        "east": {
+          "texture": "#clamp"
+        },
+        "south": {
+          "texture": "#clamp"
+        },
+        "west": {
+          "texture": "#clamp"
+        },
+        "up": {
+          "texture": "#clamp"
+        },
+        "down": {
+          "texture": "#clamp"
+        }
+      }
+    }
+  ]
+}

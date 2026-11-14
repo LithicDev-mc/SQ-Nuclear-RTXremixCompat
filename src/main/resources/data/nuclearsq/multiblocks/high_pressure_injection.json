@@ -1,0 +1,81 @@
+{
+  "id": "high_pressure_injection",
+  "size": [
+    3,
+    2,
+    4
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        1,
+        0,
+        3
+      ]
+    },
+    {
+      "name": "primary_in",
+      "type": "primary",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "primary_out",
+      "type": "primary",
+      "dir": "out",
+      "cell": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:high_pressure_injection_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "p": "nuclearsq:machine_port_primary_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "t@R",
+      "RRp",
+      "pRR",
+      "ReR"
+    ],
+    [
+      "   ",
+      " R ",
+      " R ",
+      " R "
+    ]
+  ]
+}

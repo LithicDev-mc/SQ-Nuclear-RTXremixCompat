@@ -1,0 +1,10 @@
+{
+  "loader": "neoforge:obj",
+  "model": "nuclearsq:models/block/moderator_heavy_water_sqc.obj",
+  "flip_v": true,
+  "ambient_occlusion": false,
+  "textures": {
+    "texture": "nuclearsq:block/moderator_heavy_water_sqc",
+    "particle": "nuclearsq:block/moderator_heavy_water_sqc"
+  }
+}

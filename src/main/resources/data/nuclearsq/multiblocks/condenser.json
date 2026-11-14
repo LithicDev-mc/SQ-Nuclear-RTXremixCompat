@@ -1,0 +1,116 @@
+{
+  "id": "condenser",
+  "size": [
+    5,
+    4,
+    4
+  ],
+  "controller": [
+    2,
+    0,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "coolant_in",
+      "type": "coolant",
+      "dir": "in",
+      "cell": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "coolant_out",
+      "type": "coolant",
+      "dir": "out",
+      "cell": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "exhaust_in",
+      "type": "steam",
+      "dir": "in",
+      "cell": [
+        2,
+        3,
+        2
+      ]
+    },
+    {
+      "name": "water_out",
+      "type": "water",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        2,
+        1,
+        3
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:condenser_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "C": "nuclearsq:pressure_chamber_sqc",
+    "k": "nuclearsq:machine_port_coolant_sqc",
+    "d": "nuclearsq:machine_port_steam_sqc",
+    "w": "nuclearsq:machine_port_water_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "eR@RR",
+      "RRRRR",
+      "RRRRw",
+      "RRRRR"
+    ],
+    [
+      "     ",
+      "kCCCC",
+      "kCCCC",
+      "CCtCC"
+    ],
+    [
+      "     ",
+      "CCCCC",
+      "CCCCC",
+      "CCCCC"
+    ],
+    [
+      "     ",
+      "     ",
+      "  d  ",
+      "     "
+    ]
+  ]
+}

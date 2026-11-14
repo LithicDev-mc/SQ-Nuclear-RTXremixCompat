@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:acid_plant",
+  "ingredient": {
+    "tag": "c:dusts/sulfur"
+  },
+  "count": 1,
+  "time": 100,
+  "energy_per_tick": 1800,
+  "results": [],
+  "fluids": [
+    {
+      "port": "water_in",
+      "amount": 400
+    }
+  ],
+  "fluid_results": [
+    {
+      "port": "acid_out",
+      "fluid": "nuclearsq:sulfuric_acid",
+      "amount": 500
+    }
+  ]
+}

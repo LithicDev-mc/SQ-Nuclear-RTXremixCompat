@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "tilt=0": {
+      "model": "nuclearsq:block/solar_collector_sqc_tilt_0"
+    },
+    "tilt=1": {
+      "model": "nuclearsq:block/solar_collector_sqc_tilt_1"
+    },
+    "tilt=2": {
+      "model": "nuclearsq:block/solar_collector_sqc"
+    },
+    "tilt=3": {
+      "model": "nuclearsq:block/solar_collector_sqc_tilt_3"
+    },
+    "tilt=4": {
+      "model": "nuclearsq:block/solar_collector_sqc_tilt_4"
+    }
+  }
+}

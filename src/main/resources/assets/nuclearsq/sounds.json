@@ -1,0 +1,67 @@
+{
+  "nuke_beep": {
+    "sounds": [
+      {
+        "name": "nuclearsq:nuke_beep",
+        "stream": true
+      }
+    ]
+  },
+  "turbine": {
+    "subtitle": "subtitles.nuclearsq.turbine",
+    "sounds": [
+      {
+        "name": "nuclearsq:turbine_loop",
+        "attenuation_distance": 24
+      }
+    ]
+  },
+  "pump": {
+    "subtitle": "subtitles.nuclearsq.pump",
+    "sounds": [
+      {
+        "name": "nuclearsq:pump_loop",
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "geiger": {
+    "subtitle": "subtitles.nuclearsq.geiger",
+    "sounds": [
+      {
+        "name": "nuclearsq:geiger_click_1"
+      },
+      {
+        "name": "nuclearsq:geiger_click_2"
+      },
+      {
+        "name": "nuclearsq:geiger_click_3"
+      }
+    ]
+  },
+  "reactor_alarm": {
+    "subtitle": "subtitles.nuclearsq.reactor_alarm",
+    "sounds": [
+      {
+        "name": "nuclearsq:reactor_alarm",
+        "attenuation_distance": 64
+      }
+    ]
+  },
+  "monitor_touch": {
+    "subtitle": "subtitles.nuclearsq.monitor_touch",
+    "sounds": [
+      {
+        "name": "nuclearsq:monitor_touch"
+      }
+    ]
+  },
+  "monitor_on": {
+    "subtitle": "subtitles.nuclearsq.monitor_on",
+    "sounds": [
+      {
+        "name": "nuclearsq:monitor_on"
+      }
+    ]
+  }
+}

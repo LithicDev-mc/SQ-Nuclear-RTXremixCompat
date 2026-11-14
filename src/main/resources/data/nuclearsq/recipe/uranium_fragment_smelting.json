@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "tag": "c:ores/uranium"
+  },
+  "result": {
+    "id": "nuclearsq:uranium_fragment_sqc"
+  },
+  "experience": 0.7,
+  "cookingtime": 200
+}

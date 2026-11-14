@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=north,state=idle": {
+      "model": "nuclearsq:block/fan_module_sqc_idle"
+    },
+    "facing=north,state=active": {
+      "model": "nuclearsq:block/fan_module_sqc_active"
+    },
+    "facing=north,state=warn": {
+      "model": "nuclearsq:block/fan_module_sqc_warn"
+    },
+    "facing=east,state=idle": {
+      "model": "nuclearsq:block/fan_module_sqc_idle",
+      "y": 90
+    },
+    "facing=east,state=active": {
+      "model": "nuclearsq:block/fan_module_sqc_active",
+      "y": 90
+    },
+    "facing=east,state=warn": {
+      "model": "nuclearsq:block/fan_module_sqc_warn",
+      "y": 90
+    },
+    "facing=south,state=idle": {
+      "model": "nuclearsq:block/fan_module_sqc_idle",
+      "y": 180
+    },
+    "facing=south,state=active": {
+      "model": "nuclearsq:block/fan_module_sqc_active",
+      "y": 180
+    },
+    "facing=south,state=warn": {
+      "model": "nuclearsq:block/fan_module_sqc_warn",
+      "y": 180
+    },
+    "facing=west,state=idle": {
+      "model": "nuclearsq:block/fan_module_sqc_idle",
+      "y": 270
+    },
+    "facing=west,state=active": {
+      "model": "nuclearsq:block/fan_module_sqc_active",
+      "y": 270
+    },
+    "facing=west,state=warn": {
+      "model": "nuclearsq:block/fan_module_sqc_warn",
+      "y": 270
+    }
+  }
+}

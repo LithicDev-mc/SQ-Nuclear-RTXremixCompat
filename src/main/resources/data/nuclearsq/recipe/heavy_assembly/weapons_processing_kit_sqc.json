@@ -1,0 +1,44 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cLLLc",
+    "iK@Ki",
+    "cLCeL",
+    "cYYYm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:weapons_processing_controller_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "Y": {
+      "item": "nuclearsq:obsidian_composite_plate_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:weapons_processing_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

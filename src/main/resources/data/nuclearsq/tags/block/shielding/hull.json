@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "nuclearsq:reactor_casing_sqc",
+    "nuclearsq:pressure_chamber_sqc",
+    "nuclearsq:pressure_chamber_hardened_sqc",
+    "nuclearsq:pressure_chamber_reinforced_sqc",
+    "nuclearsq:pressure_chamber_experimental_sqc",
+    "nuclearsq:steam_generator_controller_sqc"
+  ]
+}

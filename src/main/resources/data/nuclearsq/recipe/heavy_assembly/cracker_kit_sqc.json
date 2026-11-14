@@ -1,0 +1,49 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cZKZc",
+    "$@KH&",
+    "cBAem"
+  ],
+  "key": {
+    "$": {
+      "item": "nuclearsq:machine_port_acid_sqc"
+    },
+    "&": {
+      "item": "nuclearsq:machine_port_gas_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:cracker_controller_sqc"
+    },
+    "A": {
+      "item": "nuclearsq:brass_bearing_sqc"
+    },
+    "B": {
+      "item": "nuclearsq:control_board_1_sqc"
+    },
+    "H": {
+      "item": "nuclearsq:hdpe_seal_sqc"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "Z": {
+      "item": "nuclearsq:zircaloy_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:cracker_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

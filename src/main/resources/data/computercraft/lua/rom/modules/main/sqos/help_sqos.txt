@@ -1,0 +1,9 @@
+sqos starts SQ-OS, the window operating system of NuclearSQ: desktop, windows, taskbar with start menu and clock, mouse and touch.
+Needs an advanced computer (colour). For the power plant and the storage see "help sqcon".
+
+ex:
+"sqos" runs on this terminal.
+"sqos -m" runs on the first image monitor or monitor.
+"sqos -m monitor_0" runs on a specific monitor.
+"sqos -s 0.5" sets the text size on normal monitors.
+"sqos -d 128" sets the pixels per block on the image monitor.

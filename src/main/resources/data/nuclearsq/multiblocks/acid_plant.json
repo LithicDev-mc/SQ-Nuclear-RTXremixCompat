@@ -1,0 +1,119 @@
+{
+  "id": "acid_plant",
+  "size": [
+    5,
+    3,
+    4
+  ],
+  "controller": [
+    2,
+    0,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "item_in",
+      "type": "item",
+      "dir": "in",
+      "cell": [
+        0,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "acid_out",
+      "type": "acid",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "hf_out",
+      "type": "acid",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "water_in",
+      "type": "water",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        3
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        0,
+        0,
+        3
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:acid_plant_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "a": "nuclearsq:machine_port_acid_sqc",
+    "w": "nuclearsq:machine_port_water_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "eR@RR",
+      "wRRRa",
+      "RRRRa",
+      "tRRRi"
+    ],
+    [
+      "     ",
+      "     ",
+      "R    ",
+      "     "
+    ],
+    [
+      "     ",
+      "     ",
+      "i    ",
+      "     "
+    ]
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "type": "nuclearsq:equipment_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:exo_core_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:chip_2_sqc"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:exo_core_sqc",
+    "count": 1,
+    "components": {
+      "nuclearsq:exo_tier": 2
+    }
+  }
+}

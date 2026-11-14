@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/main_coolant_pump_controller_sqc"
+    }
+  }
+}

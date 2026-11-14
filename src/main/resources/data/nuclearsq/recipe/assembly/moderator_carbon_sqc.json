@@ -1,0 +1,31 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:moderator_coal_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:enriched_carbon",
+          "nuclearsq:enriched_carbon_sqc"
+        ]
+      },
+      "count": 16
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:moderator_carbon_sqc",
+    "count": 1
+  }
+}

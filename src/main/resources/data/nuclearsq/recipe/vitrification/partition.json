@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:vitrification",
+  "ingredient": {
+    "item": "nuclearsq:ion_resin_sqc"
+  },
+  "count": 2,
+  "time": 400,
+  "energy_per_tick": 6000,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:spent_resin_sqc",
+        "count": 2
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:strontium_cesium_sqc",
+        "count": 1
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "nitric_in",
+      "amount": 200
+    },
+    {
+      "port": "hlw_out",
+      "amount": 300
+    }
+  ]
+}

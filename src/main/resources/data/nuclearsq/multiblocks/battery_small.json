@@ -1,0 +1,66 @@
+{
+  "id": "battery_small",
+  "size": [
+    2,
+    2,
+    2
+  ],
+  "controller": [
+    0,
+    0,
+    0
+  ],
+  "anchor": [
+    0,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "energy_out",
+      "type": "energy",
+      "dir": "out",
+      "cell": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        0,
+        1,
+        0
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:battery_small_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "@R",
+      "ee"
+    ],
+    [
+      "tR",
+      "RR"
+    ]
+  ]
+}

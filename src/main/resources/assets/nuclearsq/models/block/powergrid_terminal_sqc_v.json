@@ -1,0 +1,7 @@
+{
+  "parent": "powergrid:block/fe_inverter/block_v",
+  "textures": {
+    "1": "nuclearsq:block/powergrid_terminal_sqc",
+    "particle": "nuclearsq:block/powergrid_terminal_sqc"
+  }
+}

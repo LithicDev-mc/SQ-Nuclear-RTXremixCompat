@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nuclearsq:item/ion_exchanger_kit_sqc"
+  }
+}

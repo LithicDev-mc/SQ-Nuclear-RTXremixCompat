@@ -1,0 +1,56 @@
+{
+  "id": "control_desk",
+  "size": [
+    3,
+    2,
+    2
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        2,
+        0,
+        1
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:control_desk_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc"
+  },
+  "layers": [
+    [
+      "R@R",
+      "tRe"
+    ],
+    [
+      "   ",
+      "RRR"
+    ]
+  ]
+}

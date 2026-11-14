@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:equipment_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:rubber_sqc"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:copper_coil_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:glowstone_dust"
+      },
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:robo_collar_lamp_sqc",
+    "count": 1
+  }
+}

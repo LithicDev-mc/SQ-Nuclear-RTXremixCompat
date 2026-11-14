@@ -1,0 +1,35 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "SSSS ",
+    "VVVV ",
+    "??C==",
+    "==cc "
+  ],
+  "key": {
+    "=": {
+      "item": "minecraft:redstone_block"
+    },
+    "?": {
+      "item": "nuclearsq:server_rack_small_kit_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    },
+    "V": {
+      "item": "minecraft:iron_bars"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:server_rack_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

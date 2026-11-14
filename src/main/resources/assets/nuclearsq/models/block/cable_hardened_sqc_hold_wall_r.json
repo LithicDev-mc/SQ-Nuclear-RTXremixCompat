@@ -1,0 +1,213 @@
+{
+  "textures": {
+    "clamp": "nuclearsq:block/cable_clamp_sqc",
+    "lip": "nuclearsq:block/cable_tray_lip_sqc",
+    "particle": "nuclearsq:block/cable_hardened_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        -4,
+        5.5,
+        0
+      ],
+      "to": [
+        1,
+        10.5,
+        0.75
+      ],
+      "faces": {
+        "north": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        "east": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            0.75,
+            5
+          ]
+        },
+        "south": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            5,
+            5
+          ]
+        },
+        "west": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            0.75,
+            5
+          ]
+        },
+        "up": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            5,
+            0.75
+          ]
+        },
+        "down": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            5,
+            0.75
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        -3.5,
+        7.25,
+        0.75
+      ],
+      "to": [
+        -1.5,
+        8.75,
+        3
+      ],
+      "faces": {
+        "north": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            2,
+            1.5
+          ]
+        },
+        "east": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            2.25,
+            1.5
+          ]
+        },
+        "south": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            2,
+            1.5
+          ]
+        },
+        "west": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            2.25,
+            1.5
+          ]
+        },
+        "up": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            2,
+            2.25
+          ]
+        },
+        "down": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            2,
+            2.25
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        -1.5,
+        7,
+        0.75
+      ],
+      "to": [
+        0,
+        9,
+        13.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            1.5,
+            2
+          ]
+        },
+        "east": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            12.75,
+            2
+          ]
+        },
+        "south": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            1.5,
+            2
+          ]
+        },
+        "west": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            12.75,
+            2
+          ]
+        },
+        "up": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            1.5,
+            12.75
+          ]
+        },
+        "down": {
+          "texture": "#lip",
+          "uv": [
+            0,
+            0,
+            1.5,
+            12.75
+          ]
+        }
+      }
+    }
+  ]
+}

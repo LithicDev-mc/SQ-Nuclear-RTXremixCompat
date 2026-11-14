@@ -1,0 +1,41 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    " FF! ",
+    "=+S==",
+    "cSSc=",
+    "me  S"
+  ],
+  "key": {
+    "!": {
+      "item": "nuclearsq:data_console_sqc"
+    },
+    "+": {
+      "item": "nuclearsq:control_desk_controller_sqc"
+    },
+    "=": {
+      "item": "minecraft:redstone_block"
+    },
+    "F": {
+      "item": "nuclearsq:data_display_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:control_desk_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

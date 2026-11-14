@@ -1,0 +1,32 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "create:andesite_alloy",
+          "minecraft:andesite"
+        ]
+      },
+      "count": 61
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "create:iron_sheet",
+          "minecraft:iron_ingot"
+        ],
+        "tags": [
+          "c:plates/iron"
+        ]
+      },
+      "count": 15
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:andesite_housing_sqc",
+    "count": 1
+  }
+}

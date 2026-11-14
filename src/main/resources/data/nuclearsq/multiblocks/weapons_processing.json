@@ -1,0 +1,97 @@
+{
+  "id": "weapons_processing",
+  "size": [
+    7,
+    4,
+    5
+  ],
+  "controller": [
+    3,
+    0,
+    0
+  ],
+  "anchor": [
+    3,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "item_in",
+      "type": "item",
+      "dir": "in",
+      "cell": [
+        3,
+        3,
+        2
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        6,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        1,
+        4
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:weapons_processing_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "RRR@RRR",
+      "RRRRRRR",
+      "eRRRRRi",
+      "RRRRRRR",
+      "RRRRRRR"
+    ],
+    [
+      "   R   ",
+      "R    RR",
+      "RRRR RR",
+      "R     R",
+      "RtRRRRR"
+    ],
+    [
+      "       ",
+      "R     R",
+      "R     R",
+      "R     R",
+      "RRRRRRR"
+    ],
+    [
+      "       ",
+      "       ",
+      "   i   ",
+      "   R   ",
+      "       "
+    ]
+  ]
+}

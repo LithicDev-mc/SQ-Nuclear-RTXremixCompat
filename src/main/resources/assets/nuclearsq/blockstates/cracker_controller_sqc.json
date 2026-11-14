@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/cracker_controller_sqc"
+    }
+  }
+}

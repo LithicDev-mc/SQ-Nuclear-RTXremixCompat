@@ -1,0 +1,62 @@
+{
+  "textures": {
+    "cable": "nuclearsq:block/data_cable_bundle_sqc",
+    "particle": "nuclearsq:block/data_cable_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        10,
+        6
+      ],
+      "to": [
+        10,
+        16,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#cable",
+          "uv": [
+            0,
+            6,
+            6,
+            10
+          ],
+          "rotation": 90
+        },
+        "east": {
+          "texture": "#cable",
+          "uv": [
+            0,
+            6,
+            6,
+            10
+          ],
+          "rotation": 90
+        },
+        "south": {
+          "texture": "#cable",
+          "uv": [
+            0,
+            6,
+            6,
+            10
+          ],
+          "rotation": 90
+        },
+        "west": {
+          "texture": "#cable",
+          "uv": [
+            0,
+            6,
+            6,
+            10
+          ],
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}

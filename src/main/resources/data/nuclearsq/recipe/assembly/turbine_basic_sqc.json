@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:reactor_plate_sqc"
+      },
+      "count": 24
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:copper_coil_sqc"
+      },
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:turbine_basic_sqc",
+    "count": 1
+  }
+}

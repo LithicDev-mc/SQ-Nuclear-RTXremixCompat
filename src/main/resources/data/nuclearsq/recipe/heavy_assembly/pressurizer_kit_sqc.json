@@ -1,0 +1,44 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "crrrc",
+    "r%@%r",
+    "rKCKr",
+    "cgerm"
+  ],
+  "key": {
+    "%": {
+      "item": "nuclearsq:machine_port_primary_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:pressurizer_controller_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "g": {
+      "item": "nuclearsq:machine_port_signal_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "r": {
+      "item": "nuclearsq:pressure_chamber_reinforced_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:pressurizer_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

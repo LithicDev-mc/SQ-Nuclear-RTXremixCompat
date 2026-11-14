@@ -1,0 +1,56 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cLnLc",
+    "xo@fx",
+    "iuTZe",
+    "cLiLm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:fast_breeder_controller_sqc"
+    },
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "T": {
+      "item": "nuclearsq:control_board_3_sqc"
+    },
+    "Z": {
+      "item": "nuclearsq:zircaloy_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "f": {
+      "item": "nuclearsq:machine_port_feedwater_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "n": {
+      "item": "nuclearsq:pump_electric_sqc"
+    },
+    "o": {
+      "item": "nuclearsq:machine_port_coolant_sqc"
+    },
+    "u": {
+      "item": "nuclearsq:machine_port_wet_steam_sqc"
+    },
+    "x": {
+      "item": "nuclearsq:heat_exchanger_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:fast_breeder_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

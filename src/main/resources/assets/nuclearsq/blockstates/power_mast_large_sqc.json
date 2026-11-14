@@ -1,0 +1,172 @@
+{
+  "variants": {
+    "axis=x,part=0": {
+      "model": "nuclearsq:block/power_mast_large_0_sqc"
+    },
+    "axis=z,part=0": {
+      "model": "nuclearsq:block/power_mast_large_0_sqc",
+      "y": 90
+    },
+    "axis=x,part=1": {
+      "model": "nuclearsq:block/power_mast_large_1_sqc"
+    },
+    "axis=z,part=1": {
+      "model": "nuclearsq:block/power_mast_large_1_sqc",
+      "y": 90
+    },
+    "axis=x,part=2": {
+      "model": "nuclearsq:block/power_mast_large_2_sqc"
+    },
+    "axis=z,part=2": {
+      "model": "nuclearsq:block/power_mast_large_2_sqc",
+      "y": 90
+    },
+    "axis=x,part=3": {
+      "model": "nuclearsq:block/power_mast_large_3_sqc"
+    },
+    "axis=z,part=3": {
+      "model": "nuclearsq:block/power_mast_large_3_sqc",
+      "y": 90
+    },
+    "axis=x,part=4": {
+      "model": "nuclearsq:block/power_mast_large_4_sqc"
+    },
+    "axis=z,part=4": {
+      "model": "nuclearsq:block/power_mast_large_4_sqc",
+      "y": 90
+    },
+    "axis=x,part=5": {
+      "model": "nuclearsq:block/power_mast_large_5_sqc"
+    },
+    "axis=z,part=5": {
+      "model": "nuclearsq:block/power_mast_large_5_sqc",
+      "y": 90
+    },
+    "axis=x,part=6": {
+      "model": "nuclearsq:block/power_mast_large_6_sqc"
+    },
+    "axis=z,part=6": {
+      "model": "nuclearsq:block/power_mast_large_6_sqc",
+      "y": 90
+    },
+    "axis=x,part=7": {
+      "model": "nuclearsq:block/power_mast_large_7_sqc"
+    },
+    "axis=z,part=7": {
+      "model": "nuclearsq:block/power_mast_large_7_sqc",
+      "y": 90
+    },
+    "axis=x,part=8": {
+      "model": "nuclearsq:block/power_mast_large_8_sqc"
+    },
+    "axis=z,part=8": {
+      "model": "nuclearsq:block/power_mast_large_8_sqc",
+      "y": 90
+    },
+    "axis=x,part=9": {
+      "model": "nuclearsq:block/power_mast_large_9_sqc"
+    },
+    "axis=z,part=9": {
+      "model": "nuclearsq:block/power_mast_large_9_sqc",
+      "y": 90
+    },
+    "axis=x,part=10": {
+      "model": "nuclearsq:block/power_mast_large_10_sqc"
+    },
+    "axis=z,part=10": {
+      "model": "nuclearsq:block/power_mast_large_10_sqc",
+      "y": 90
+    },
+    "axis=x,part=11": {
+      "model": "nuclearsq:block/power_mast_large_11_sqc"
+    },
+    "axis=z,part=11": {
+      "model": "nuclearsq:block/power_mast_large_11_sqc",
+      "y": 90
+    },
+    "axis=x,part=12": {
+      "model": "nuclearsq:block/power_mast_large_12_sqc"
+    },
+    "axis=z,part=12": {
+      "model": "nuclearsq:block/power_mast_large_12_sqc",
+      "y": 90
+    },
+    "axis=x,part=13": {
+      "model": "nuclearsq:block/power_mast_large_13_sqc"
+    },
+    "axis=z,part=13": {
+      "model": "nuclearsq:block/power_mast_large_13_sqc",
+      "y": 90
+    },
+    "axis=x,part=14": {
+      "model": "nuclearsq:block/power_mast_large_14_sqc"
+    },
+    "axis=z,part=14": {
+      "model": "nuclearsq:block/power_mast_large_14_sqc",
+      "y": 90
+    },
+    "axis=x,part=15": {
+      "model": "nuclearsq:block/power_mast_large_15_sqc"
+    },
+    "axis=z,part=15": {
+      "model": "nuclearsq:block/power_mast_large_15_sqc",
+      "y": 90
+    },
+    "axis=x,part=16": {
+      "model": "nuclearsq:block/power_mast_large_16_sqc"
+    },
+    "axis=z,part=16": {
+      "model": "nuclearsq:block/power_mast_large_16_sqc",
+      "y": 90
+    },
+    "axis=x,part=17": {
+      "model": "nuclearsq:block/power_mast_large_17_sqc"
+    },
+    "axis=z,part=17": {
+      "model": "nuclearsq:block/power_mast_large_17_sqc",
+      "y": 90
+    },
+    "axis=x,part=18": {
+      "model": "nuclearsq:block/power_mast_large_18_sqc"
+    },
+    "axis=z,part=18": {
+      "model": "nuclearsq:block/power_mast_large_18_sqc",
+      "y": 90
+    },
+    "axis=x,part=19": {
+      "model": "nuclearsq:block/power_mast_large_19_sqc"
+    },
+    "axis=z,part=19": {
+      "model": "nuclearsq:block/power_mast_large_19_sqc",
+      "y": 90
+    },
+    "axis=x,part=20": {
+      "model": "nuclearsq:block/power_mast_large_20_sqc"
+    },
+    "axis=z,part=20": {
+      "model": "nuclearsq:block/power_mast_large_20_sqc",
+      "y": 90
+    },
+    "axis=x,part=21": {
+      "model": "nuclearsq:block/power_mast_large_21_sqc"
+    },
+    "axis=z,part=21": {
+      "model": "nuclearsq:block/power_mast_large_21_sqc",
+      "y": 90
+    },
+    "axis=x,part=22": {
+      "model": "nuclearsq:block/power_mast_large_22_sqc"
+    },
+    "axis=z,part=22": {
+      "model": "nuclearsq:block/power_mast_large_22_sqc",
+      "y": 90
+    },
+    "axis=x,part=23": {
+      "model": "nuclearsq:block/power_mast_large_23_sqc"
+    },
+    "axis=z,part=23": {
+      "model": "nuclearsq:block/power_mast_large_23_sqc",
+      "y": 90
+    }
+  }
+}

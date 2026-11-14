@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "nuclearsq:future_chest_sqc",
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "source": "block_entity",
+              "include": [
+                "nuclearsq:future_chest_contents"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "nuclearsq:blocks/future_chest_sqc"
+}

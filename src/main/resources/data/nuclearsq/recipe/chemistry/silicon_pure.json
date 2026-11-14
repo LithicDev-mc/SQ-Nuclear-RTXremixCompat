@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:chemistry",
+  "ingredient": {
+    "item": "nuclearsq:silicon_raw_sqc"
+  },
+  "count": 3,
+  "time": 240,
+  "energy_per_tick": 2700,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:silicon_pure_sqc",
+        "count": 2
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "acid_in",
+      "amount": 300
+    }
+  ]
+}

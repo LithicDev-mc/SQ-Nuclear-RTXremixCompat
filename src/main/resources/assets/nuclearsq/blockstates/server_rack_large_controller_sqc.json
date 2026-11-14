@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/server_rack_large_controller_sqc"
+    }
+  }
+}

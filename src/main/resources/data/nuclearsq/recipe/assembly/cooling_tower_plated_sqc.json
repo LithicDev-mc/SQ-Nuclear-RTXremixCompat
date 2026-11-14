@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:cooling_tower_segment_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:osmium_heat_plate_sqc"
+      },
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:cooling_tower_plated_sqc",
+    "count": 1
+  }
+}

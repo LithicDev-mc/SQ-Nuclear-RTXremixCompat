@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:uf6_conversion",
+  "ingredient": {
+    "item": "nuclearsq:yellowcake_sqc"
+  },
+  "count": 3,
+  "time": 300,
+  "energy_per_tick": 2400,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:uf6_cylinder_sqc",
+        "count": 1
+      }
+    }
+  ],
+  "aux": {
+    "tag": "c:gems/fluorite"
+  },
+  "aux_count": 1
+}

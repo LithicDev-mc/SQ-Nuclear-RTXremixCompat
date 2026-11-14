@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:reactor_plate_sqc"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_bars"
+      },
+      "count": 61
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:cooling_tower_segment_sqc",
+    "count": 1
+  }
+}

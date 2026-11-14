@@ -1,0 +1,30 @@
+{
+  "type": "nuclearsq:enrichment",
+  "ingredient": {
+    "item": "nuclearsq:yellowcake_sqc"
+  },
+  "count": 2,
+  "time": 200,
+  "energy_per_tick": 240,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:enriched_uranium_sqc",
+        "count": 1
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:uranium_oxide_sqc",
+        "count": 1
+      },
+      "chance": 0.25
+    },
+    {
+      "item": {
+        "id": "nuclearsq:depleted_uranium_sqc",
+        "count": 1
+      }
+    }
+  ]
+}

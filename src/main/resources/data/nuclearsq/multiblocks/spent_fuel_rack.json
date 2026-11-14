@@ -1,0 +1,77 @@
+{
+  "id": "spent_fuel_rack",
+  "size": [
+    3,
+    6,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "water_in",
+      "type": "water",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        2,
+        0,
+        0
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:spent_fuel_rack_controller_sqc",
+    "w": "nuclearsq:machine_port_water_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "w@t",
+      "   ",
+      "   "
+    ],
+    [
+      "   ",
+      "   ",
+      "   "
+    ],
+    [
+      "   ",
+      "   ",
+      "   "
+    ],
+    [
+      "   ",
+      "   ",
+      "   "
+    ],
+    [
+      "   ",
+      "   ",
+      "   "
+    ],
+    [
+      "   ",
+      "   ",
+      "   "
+    ]
+  ]
+}

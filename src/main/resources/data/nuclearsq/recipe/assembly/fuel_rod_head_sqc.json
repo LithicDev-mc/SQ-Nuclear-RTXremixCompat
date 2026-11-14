@@ -1,0 +1,31 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:andesite_housing_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "create:cogwheel",
+          "minecraft:stick"
+        ]
+      },
+      "count": 30
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:redstone"
+      },
+      "count": 61
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:fuel_rod_head_sqc",
+    "count": 1
+  }
+}

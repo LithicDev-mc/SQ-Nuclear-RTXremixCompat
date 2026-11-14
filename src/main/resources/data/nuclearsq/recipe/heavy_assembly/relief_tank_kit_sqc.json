@@ -1,0 +1,41 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "ckkkc",
+    "k%@%k",
+    "kdBdk",
+    "cokom"
+  ],
+  "key": {
+    "%": {
+      "item": "nuclearsq:machine_port_primary_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:relief_tank_controller_sqc"
+    },
+    "B": {
+      "item": "nuclearsq:control_board_1_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "d": {
+      "item": "nuclearsq:condenser_sqc"
+    },
+    "k": {
+      "item": "nuclearsq:pressure_chamber_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "o": {
+      "item": "nuclearsq:machine_port_coolant_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:relief_tank_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

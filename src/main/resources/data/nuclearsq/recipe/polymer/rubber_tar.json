@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:polymer",
+  "ingredient": {
+    "tag": "c:dusts/sulfur"
+  },
+  "count": 2,
+  "time": 200,
+  "energy_per_tick": 2400,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:rubber_sqc",
+        "count": 6
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "tar_in",
+      "amount": 400
+    }
+  ]
+}

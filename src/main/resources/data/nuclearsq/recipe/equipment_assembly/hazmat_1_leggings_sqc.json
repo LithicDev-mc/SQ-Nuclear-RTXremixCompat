@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:equipment_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:leather"
+      },
+      "count": 23
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:yellow_wool"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:hazmat_1_leggings_sqc",
+    "count": 1
+  }
+}

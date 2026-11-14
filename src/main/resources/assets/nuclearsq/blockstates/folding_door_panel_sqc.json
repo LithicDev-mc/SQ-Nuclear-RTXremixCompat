@@ -1,0 +1,48 @@
+{
+  "variants": {
+    "axis=z,phase=raw": {
+      "model": "nuclearsq:block/folding_door_panel_sqc"
+    },
+    "axis=z,phase=closed": {
+      "model": "nuclearsq:block/folding_door_panel_sqc"
+    },
+    "axis=z,phase=moving": {
+      "model": "nuclearsq:block/folding_door_panel_sqc"
+    },
+    "axis=z,phase=open": {
+      "model": "nuclearsq:block/folding_door_panel_sqc"
+    },
+    "axis=x,phase=raw": {
+      "model": "nuclearsq:block/folding_door_panel_sqc",
+      "y": 90
+    },
+    "axis=x,phase=closed": {
+      "model": "nuclearsq:block/folding_door_panel_sqc",
+      "y": 90
+    },
+    "axis=x,phase=moving": {
+      "model": "nuclearsq:block/folding_door_panel_sqc",
+      "y": 90
+    },
+    "axis=x,phase=open": {
+      "model": "nuclearsq:block/folding_door_panel_sqc",
+      "y": 90
+    },
+    "axis=y,phase=raw": {
+      "model": "nuclearsq:block/folding_door_panel_sqc",
+      "x": 90
+    },
+    "axis=y,phase=closed": {
+      "model": "nuclearsq:block/folding_door_panel_sqc",
+      "x": 90
+    },
+    "axis=y,phase=moving": {
+      "model": "nuclearsq:block/folding_door_panel_sqc",
+      "x": 90
+    },
+    "axis=y,phase=open": {
+      "model": "nuclearsq:block/folding_door_panel_sqc",
+      "x": 90
+    }
+  }
+}

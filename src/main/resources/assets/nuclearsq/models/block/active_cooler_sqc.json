@@ -1,0 +1,10 @@
+{
+  "loader": "neoforge:obj",
+  "model": "nuclearsq:models/block/active_cooler_sqc.obj",
+  "flip_v": true,
+  "ambient_occlusion": false,
+  "textures": {
+    "texture": "nuclearsq:block/active_cooler_sqc",
+    "particle": "nuclearsq:block/active_cooler_sqc"
+  }
+}

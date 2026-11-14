@@ -1,0 +1,130 @@
+{
+  "id": "distillation_column",
+  "size": [
+    3,
+    6,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "crude_in",
+      "type": "acid",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "tar_out",
+      "type": "acid",
+      "dir": "out",
+      "cell": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "diesel_out",
+      "type": "acid",
+      "dir": "out",
+      "cell": [
+        2,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "naphtha_out",
+      "type": "acid",
+      "dir": "out",
+      "cell": [
+        2,
+        4,
+        1
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:distillation_column_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "a": "nuclearsq:machine_port_acid_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "R@R",
+      "aRa",
+      "etR"
+    ],
+    [
+      "   ",
+      "iR ",
+      "   "
+    ],
+    [
+      "   ",
+      " Ra",
+      "   "
+    ],
+    [
+      "   ",
+      " R ",
+      "   "
+    ],
+    [
+      "   ",
+      " Ra",
+      "   "
+    ],
+    [
+      "   ",
+      " R ",
+      "   "
+    ]
+  ]
+}

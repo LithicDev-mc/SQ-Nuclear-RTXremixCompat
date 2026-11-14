@@ -1,0 +1,24 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "SLLLS",
+    "L   L",
+    "L   L",
+    "L   L",
+    "SLLLS"
+  ],
+  "key": {
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:castor_large_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

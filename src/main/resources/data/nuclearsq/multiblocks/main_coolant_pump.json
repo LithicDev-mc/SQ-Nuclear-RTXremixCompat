@@ -1,0 +1,84 @@
+{
+  "id": "main_coolant_pump",
+  "size": [
+    3,
+    3,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "primary_in",
+      "type": "primary",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "primary_out",
+      "type": "primary",
+      "dir": "out",
+      "cell": [
+        1,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:main_coolant_pump_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "p": "nuclearsq:machine_port_primary_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "t@R",
+      "pRe",
+      "RpR"
+    ],
+    [
+      "   ",
+      " R ",
+      "   "
+    ],
+    [
+      "   ",
+      " R ",
+      "   "
+    ]
+  ]
+}

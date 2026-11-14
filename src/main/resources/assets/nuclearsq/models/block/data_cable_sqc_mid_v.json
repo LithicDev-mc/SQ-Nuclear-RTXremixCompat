@@ -1,0 +1,95 @@
+{
+  "textures": {
+    "cable": "nuclearsq:block/data_cable_bundle_sqc",
+    "sleeve": "nuclearsq:block/data_cable_sleeve_sqc",
+    "particle": "nuclearsq:block/data_cable_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        6,
+        6
+      ],
+      "to": [
+        10,
+        10,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#cable",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "rotation": 90
+        },
+        "east": {
+          "texture": "#cable",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "rotation": 90
+        },
+        "south": {
+          "texture": "#cable",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "rotation": 90
+        },
+        "west": {
+          "texture": "#cable",
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        5.5,
+        7,
+        5.5
+      ],
+      "to": [
+        10.5,
+        9,
+        10.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#sleeve"
+        },
+        "east": {
+          "texture": "#sleeve"
+        },
+        "south": {
+          "texture": "#sleeve"
+        },
+        "west": {
+          "texture": "#sleeve"
+        },
+        "up": {
+          "texture": "#sleeve"
+        },
+        "down": {
+          "texture": "#sleeve"
+        }
+      }
+    }
+  ]
+}

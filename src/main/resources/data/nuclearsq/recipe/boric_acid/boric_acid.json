@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:boric_acid",
+  "ingredient": {
+    "tag": "c:gems/borax"
+  },
+  "count": 1,
+  "time": 160,
+  "energy_per_tick": 1500,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:boric_acid_sqc",
+        "count": 4
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "acid_in",
+      "amount": 250
+    },
+    {
+      "port": "water_in",
+      "amount": 200
+    }
+  ]
+}

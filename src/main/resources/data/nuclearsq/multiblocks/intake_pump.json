@@ -1,0 +1,249 @@
+{
+  "id": "intake_pump",
+  "size": [
+    9,
+    9,
+    9
+  ],
+  "controller": [
+    8,
+    4,
+    5
+  ],
+  "anchor": [
+    8,
+    4,
+    5
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        8,
+        4,
+        4
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        8,
+        4,
+        6
+      ]
+    },
+    {
+      "name": "water_out_l_1",
+      "type": "big_water",
+      "dir": "out",
+      "cell": [
+        0,
+        5,
+        8
+      ]
+    },
+    {
+      "name": "water_out_l_2",
+      "type": "big_water",
+      "dir": "out",
+      "cell": [
+        1,
+        5,
+        8
+      ]
+    },
+    {
+      "name": "water_out_l_3",
+      "type": "big_water",
+      "dir": "out",
+      "cell": [
+        0,
+        6,
+        8
+      ]
+    },
+    {
+      "name": "water_out_l_4",
+      "type": "big_water",
+      "dir": "out",
+      "cell": [
+        1,
+        6,
+        8
+      ]
+    },
+    {
+      "name": "water_out_r_1",
+      "type": "big_water",
+      "dir": "out",
+      "cell": [
+        7,
+        5,
+        8
+      ]
+    },
+    {
+      "name": "water_out_r_2",
+      "type": "big_water",
+      "dir": "out",
+      "cell": [
+        8,
+        5,
+        8
+      ]
+    },
+    {
+      "name": "water_out_r_3",
+      "type": "big_water",
+      "dir": "out",
+      "cell": [
+        7,
+        6,
+        8
+      ]
+    },
+    {
+      "name": "water_out_r_4",
+      "type": "big_water",
+      "dir": "out",
+      "cell": [
+        8,
+        6,
+        8
+      ]
+    },
+    {
+      "name": "water_out_s_1",
+      "type": "water",
+      "dir": "out",
+      "cell": [
+        3,
+        5,
+        8
+      ]
+    },
+    {
+      "name": "water_out_s_2",
+      "type": "water",
+      "dir": "out",
+      "cell": [
+        5,
+        5,
+        8
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:intake_pump_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc",
+    "b": "nuclearsq:machine_port_big_water_sqc",
+    "w": "nuclearsq:machine_port_water_sqc"
+  },
+  "layers": [
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "        R",
+      "        e",
+      "        @",
+      "        t",
+      "        R",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "bb w w bb"
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "bb     bb"
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         "
+    ],
+    [
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         ",
+      "         "
+    ]
+  ]
+}

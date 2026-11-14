@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/fuel_cell_controller_sqc"
+    }
+  }
+}

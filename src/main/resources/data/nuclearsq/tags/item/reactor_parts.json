@@ -1,0 +1,173 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "nuclearsq:containment_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:containment_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:control_rod_drive_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:control_rod_drive_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:deuterium_separator_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:deuterium_separator_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:emergency_cooling_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:emergency_cooling_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fuel_rod_block_experimental_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fuel_rod_block_hardened_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fuel_rod_block_reinforced_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fuel_rod_block_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fuel_rod_head_experimental_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fuel_rod_head_hardened_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fuel_rod_head_reinforced_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fuel_rod_head_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fusion_reactor_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:fusion_reactor_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:high_pressure_injection_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:high_pressure_injection_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:high_pressure_pump_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:high_pressure_pump_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:main_coolant_pump_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:main_coolant_pump_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:plutonium_core_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:pressure_chamber_experimental_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:pressure_chamber_hardened_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:pressure_chamber_reinforced_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:pressure_chamber_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:pressurizer_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:pressurizer_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:reactor_casing_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:reactor_plate_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:relief_tank_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:relief_tank_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:steam_dryer_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:steam_dryer_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:steam_generator_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:steam_generator_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:steam_separator_controller_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:steam_separator_kit_sqc",
+      "required": false
+    },
+    {
+      "id": "nuclearsq:uranium_core_sqc",
+      "required": false
+    }
+  ]
+}

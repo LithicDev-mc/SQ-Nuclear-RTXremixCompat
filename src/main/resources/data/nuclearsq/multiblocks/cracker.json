@@ -1,0 +1,85 @@
+{
+  "id": "cracker",
+  "size": [
+    3,
+    3,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "naphtha_in",
+      "type": "acid",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "ethylene_out",
+      "type": "gas",
+      "dir": "out",
+      "cell": [
+        2,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        0,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:cracker_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "a": "nuclearsq:machine_port_acid_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "g": "nuclearsq:machine_port_gas_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "R@R",
+      "aRR",
+      "etR"
+    ],
+    [
+      "   ",
+      " R ",
+      "   "
+    ],
+    [
+      "   ",
+      " Rg",
+      "   "
+    ]
+  ]
+}

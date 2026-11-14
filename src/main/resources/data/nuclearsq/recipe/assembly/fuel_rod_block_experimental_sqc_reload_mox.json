@@ -1,0 +1,26 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:fuel_charge",
+        "item": "nuclearsq:fuel_rod_block_experimental_sqc",
+        "full": false
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:mox_core_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:fuel_rod_block_experimental_sqc",
+    "count": 1,
+    "components": {
+      "nuclearsq:fuel_mox": {}
+    }
+  }
+}

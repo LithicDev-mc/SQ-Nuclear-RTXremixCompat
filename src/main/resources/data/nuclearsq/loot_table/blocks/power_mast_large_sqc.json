@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "nuclearsq:power_mast_large_sqc"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "nuclearsq:power_mast_large_sqc",
+          "properties": {
+            "part": "0"
+          }
+        }
+      ]
+    }
+  ],
+  "random_sequence": "nuclearsq:blocks/power_mast_large_sqc"
+}

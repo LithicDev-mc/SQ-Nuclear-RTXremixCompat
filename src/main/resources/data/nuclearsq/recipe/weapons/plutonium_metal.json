@@ -1,0 +1,24 @@
+{
+  "type": "nuclearsq:weapons_processing",
+  "ingredient": {
+    "item": "nuclearsq:plutonium_oxide_sqc"
+  },
+  "count": 4,
+  "time": 800,
+  "energy_per_tick": 4800,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:plutonium_metal_sqc",
+        "count": 1
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:nuclear_ash_sqc",
+        "count": 1
+      },
+      "chance": 0.5
+    }
+  ]
+}

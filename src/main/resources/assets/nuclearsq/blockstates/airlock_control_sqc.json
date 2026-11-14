@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/airlock_control_sqc"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "tag": "minecraft:coals"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:steel_ingot_sqc",
+    "count": 1
+  },
+  "time": 100
+}

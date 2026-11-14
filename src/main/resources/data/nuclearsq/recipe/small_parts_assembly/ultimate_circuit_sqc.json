@@ -1,0 +1,28 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:elite_circuit_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:diamond"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:lapis_lazuli"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:ultimate_circuit_sqc",
+    "count": 1
+  },
+  "time": 100
+}

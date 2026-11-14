@@ -1,0 +1,56 @@
+{
+  "id": "exo_station",
+  "size": [
+    2,
+    2,
+    2
+  ],
+  "controller": [
+    0,
+    0,
+    0
+  ],
+  "anchor": [
+    0,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:exo_station_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "@t",
+      "eR"
+    ],
+    [
+      "RR",
+      "RR"
+    ]
+  ]
+}

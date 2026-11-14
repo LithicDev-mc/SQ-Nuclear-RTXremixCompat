@@ -1,0 +1,50 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cZZZc",
+    "w@Hic",
+    "cZHie",
+    "$B&$m"
+  ],
+  "key": {
+    "$": {
+      "item": "nuclearsq:machine_port_acid_sqc"
+    },
+    "&": {
+      "item": "nuclearsq:machine_port_gas_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:polymer_plant_controller_sqc"
+    },
+    "B": {
+      "item": "nuclearsq:control_board_1_sqc"
+    },
+    "H": {
+      "item": "nuclearsq:hdpe_seal_sqc"
+    },
+    "Z": {
+      "item": "nuclearsq:zircaloy_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "w": {
+      "item": "nuclearsq:machine_port_water_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:polymer_plant_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

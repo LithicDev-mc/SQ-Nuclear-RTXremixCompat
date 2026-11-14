@@ -1,0 +1,45 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "crrrc",
+    "rs@sr",
+    "rLjLr",
+    "reiLr",
+    "crrrm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:steam_purifier_controller_sqc"
+    },
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "j": {
+      "item": "nuclearsq:steam_purifier_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "r": {
+      "item": "nuclearsq:pressure_chamber_reinforced_sqc"
+    },
+    "s": {
+      "item": "nuclearsq:machine_port_steam_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:steam_purifier_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

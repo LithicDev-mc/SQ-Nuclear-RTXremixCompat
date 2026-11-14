@@ -1,0 +1,42 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cvtvc",
+    "lo@ol",
+    "vvBvv",
+    "lvvvl",
+    "cvtvm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:cooling_tower_xl_controller_sqc"
+    },
+    "B": {
+      "item": "nuclearsq:control_board_1_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "l": {
+      "item": "nuclearsq:cooling_tower_plated_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "o": {
+      "item": "nuclearsq:machine_port_coolant_sqc"
+    },
+    "t": {
+      "item": "nuclearsq:cooling_tower_segment_sqc"
+    },
+    "v": {
+      "item": "nuclearsq:vent_grille_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:cooling_tower_xl_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

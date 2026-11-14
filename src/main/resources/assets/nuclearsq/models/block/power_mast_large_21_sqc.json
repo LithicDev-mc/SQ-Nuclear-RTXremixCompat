@@ -1,0 +1,12 @@
+{
+  "loader": "neoforge:obj",
+  "model": "nuclearsq:models/block/power_mast_large_21_sqc.obj",
+  "flip_v": true,
+  "ambient_occlusion": false,
+  "automatic_culling": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "texture": "nuclearsq:block/grid_atlas_sqc",
+    "particle": "nuclearsq:block/grid_atlas_sqc"
+  }
+}

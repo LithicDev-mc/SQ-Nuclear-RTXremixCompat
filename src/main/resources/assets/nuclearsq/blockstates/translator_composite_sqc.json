@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/translator_composite_sqc"
+    }
+  }
+}

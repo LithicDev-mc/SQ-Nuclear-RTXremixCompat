@@ -1,0 +1,1 @@
+{"parent": "minecraft:item/generated", "textures": {"layer0": "nuclearsq:item/geiger_counter_sqc", "layer1": "nuclearsq:item/geiger_needle_06"}}

@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:andesite_housing_sqc"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:reactor_plate_sqc"
+      },
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:pressure_chamber_sqc",
+    "count": 1
+  }
+}

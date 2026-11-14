@@ -1,0 +1,126 @@
+{
+ "parent": "minecraft:item/generated",
+ "textures": {
+  "layer0": "nuclearsq:item/geiger_counter_sqc"
+ },
+ "overrides": [
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_00"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.03125
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_01"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.09375
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_02"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.15625
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_03"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.21875
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_04"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.28125
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_05"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.34375
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_06"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.40625
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_07"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.46875
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_08"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.53125
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_09"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.59375
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_10"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.65625
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_11"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.71875
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_12"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.78125
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_13"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.84375
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_14"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.90625
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_15"
+  },
+  {
+   "predicate": {
+    "nuclearsq:geiger_signal": 1.0,
+    "nuclearsq:geiger_angle": 0.96875
+   },
+   "model": "nuclearsq:item/geiger_counter_needle_00"
+  }
+ ]
+}

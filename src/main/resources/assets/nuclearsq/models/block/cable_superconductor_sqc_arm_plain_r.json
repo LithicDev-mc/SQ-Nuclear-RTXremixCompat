@@ -1,0 +1,60 @@
+{
+  "textures": {
+    "cable": "nuclearsq:block/cable_superconductor_sqc",
+    "particle": "nuclearsq:block/cable_superconductor_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        6,
+        0
+      ],
+      "to": [
+        5,
+        10,
+        6
+      ],
+      "faces": {
+        "east": {
+          "texture": "#cable",
+          "uv": [
+            10,
+            6,
+            16,
+            10
+          ]
+        },
+        "west": {
+          "texture": "#cable",
+          "uv": [
+            0,
+            6,
+            6,
+            10
+          ]
+        },
+        "up": {
+          "texture": "#cable",
+          "uv": [
+            0,
+            1,
+            6,
+            5
+          ],
+          "rotation": 90
+        },
+        "down": {
+          "texture": "#cable",
+          "uv": [
+            10,
+            1,
+            16,
+            5
+          ],
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}

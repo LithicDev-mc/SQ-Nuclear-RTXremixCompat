@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "half=lower,loaded=false": {
+      "model": "nuclearsq:block/rtg_sqc_lower"
+    },
+    "half=lower,loaded=true": {
+      "model": "nuclearsq:block/rtg_sqc_lower_loaded"
+    },
+    "half=upper,loaded=false": {
+      "model": "nuclearsq:block/rtg_sqc_upper"
+    },
+    "half=upper,loaded=true": {
+      "model": "nuclearsq:block/rtg_sqc_upper_loaded"
+    }
+  }
+}

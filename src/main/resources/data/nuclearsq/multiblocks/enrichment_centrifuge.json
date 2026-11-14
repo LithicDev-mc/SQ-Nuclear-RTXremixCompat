@@ -1,0 +1,89 @@
+{
+  "id": "enrichment_centrifuge",
+  "size": [
+    3,
+    4,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "item_in",
+      "type": "item",
+      "dir": "in",
+      "cell": [
+        1,
+        3,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:enrichment_centrifuge_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "R@R",
+      "eRi",
+      "RRR"
+    ],
+    [
+      "   ",
+      "R R",
+      "t R"
+    ],
+    [
+      "   ",
+      "R R",
+      "R R"
+    ],
+    [
+      "   ",
+      " i ",
+      "   "
+    ]
+  ]
+}

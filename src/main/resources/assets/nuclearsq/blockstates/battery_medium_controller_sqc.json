@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/battery_medium_controller_sqc"
+    }
+  }
+}

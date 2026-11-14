@@ -1,0 +1,78 @@
+{
+  "id": "shaft_generator",
+  "size": [
+    3,
+    5,
+    4
+  ],
+  "controller": [
+    1,
+    3,
+    0
+  ],
+  "anchor": [
+    1,
+    3,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_out",
+      "type": "energy",
+      "dir": "out",
+      "cell": [
+        1,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        2,
+        3,
+        3
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:shaft_generator_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "RRR",
+      "RRR",
+      "RRR",
+      "RRR"
+    ],
+    [
+      "RRR",
+      "RRR",
+      "RRR",
+      "RRR"
+    ],
+    [
+      "RRR",
+      "RRR",
+      "RRR",
+      "RRR"
+    ],
+    [
+      "R@ ",
+      "RRR",
+      "RRR",
+      "Ret"
+    ],
+    [
+      "   ",
+      " R ",
+      " R ",
+      "   "
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "type": "nuclearsq:leaching",
+  "ingredient": {
+    "item": "nuclearsq:yellowcake_sqc"
+  },
+  "count": 2,
+  "time": 200,
+  "energy_per_tick": 1200,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:uranium_oxide_sqc",
+        "count": 2
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:uranium_sludge_sqc",
+        "count": 1
+      },
+      "chance": 0.5
+    }
+  ],
+  "fluids": [
+    {
+      "port": "acid_in",
+      "amount": 250
+    },
+    {
+      "port": "water_in",
+      "amount": 500
+    }
+  ]
+}

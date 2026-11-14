@@ -1,0 +1,104 @@
+{
+  "id": "uf6_converter",
+  "size": [
+    5,
+    4,
+    4
+  ],
+  "controller": [
+    2,
+    0,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "item_in",
+      "type": "item",
+      "dir": "in",
+      "cell": [
+        1,
+        3,
+        2
+      ]
+    },
+    {
+      "name": "hf_in",
+      "type": "acid",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        3
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        2,
+        0,
+        3
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:uf6_converter_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "a": "nuclearsq:machine_port_acid_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "RR@RR",
+      "eRRRR",
+      "RRRRi",
+      "aRtRR"
+    ],
+    [
+      "     ",
+      "     ",
+      " R R ",
+      "     "
+    ],
+    [
+      "     ",
+      "     ",
+      " R   ",
+      "     "
+    ],
+    [
+      "     ",
+      "     ",
+      " i   ",
+      "     "
+    ]
+  ]
+}

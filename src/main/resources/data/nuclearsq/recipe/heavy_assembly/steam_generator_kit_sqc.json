@@ -1,0 +1,48 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "ccccc",
+    "hL@Lh",
+    "%fCu%",
+    "cZhZc",
+    "chhhm"
+  ],
+  "key": {
+    "%": {
+      "item": "nuclearsq:machine_port_primary_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:steam_generator_controller_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "Z": {
+      "item": "nuclearsq:zircaloy_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "f": {
+      "item": "nuclearsq:machine_port_feedwater_sqc"
+    },
+    "h": {
+      "item": "nuclearsq:pressure_chamber_hardened_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "u": {
+      "item": "nuclearsq:machine_port_wet_steam_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:steam_generator_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

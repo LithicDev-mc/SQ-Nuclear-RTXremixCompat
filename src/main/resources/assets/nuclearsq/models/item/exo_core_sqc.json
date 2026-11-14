@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nuclearsq:item/exo_core_sqc"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "nuclearsq:tier": 2
+      },
+      "model": "nuclearsq:item/exo_core_sqc_2"
+    },
+    {
+      "predicate": {
+        "nuclearsq:tier": 3
+      },
+      "model": "nuclearsq:item/exo_core_sqc_3"
+    },
+    {
+      "predicate": {
+        "nuclearsq:tier": 4
+      },
+      "model": "nuclearsq:item/exo_core_sqc_4"
+    },
+    {
+      "predicate": {
+        "nuclearsq:tier": 5
+      },
+      "model": "nuclearsq:item/exo_core_sqc_5"
+    }
+  ]
+}

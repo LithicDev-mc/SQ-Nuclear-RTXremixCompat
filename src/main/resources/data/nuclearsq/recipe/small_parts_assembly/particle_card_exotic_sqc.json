@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:particle_card_rare_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_2_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:ender_eye"
+      },
+      "count": 61
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:diamond_block"
+      },
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:particle_card_exotic_sqc",
+    "count": 1
+  }
+}

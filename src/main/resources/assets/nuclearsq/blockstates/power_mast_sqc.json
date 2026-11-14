@@ -1,0 +1,88 @@
+{
+  "variants": {
+    "axis=x,part=0": {
+      "model": "nuclearsq:block/power_mast_0_sqc"
+    },
+    "axis=z,part=0": {
+      "model": "nuclearsq:block/power_mast_0_sqc",
+      "y": 90
+    },
+    "axis=x,part=1": {
+      "model": "nuclearsq:block/power_mast_1_sqc"
+    },
+    "axis=z,part=1": {
+      "model": "nuclearsq:block/power_mast_1_sqc",
+      "y": 90
+    },
+    "axis=x,part=2": {
+      "model": "nuclearsq:block/power_mast_2_sqc"
+    },
+    "axis=z,part=2": {
+      "model": "nuclearsq:block/power_mast_2_sqc",
+      "y": 90
+    },
+    "axis=x,part=3": {
+      "model": "nuclearsq:block/power_mast_3_sqc"
+    },
+    "axis=z,part=3": {
+      "model": "nuclearsq:block/power_mast_3_sqc",
+      "y": 90
+    },
+    "axis=x,part=4": {
+      "model": "nuclearsq:block/power_mast_4_sqc"
+    },
+    "axis=z,part=4": {
+      "model": "nuclearsq:block/power_mast_4_sqc",
+      "y": 90
+    },
+    "axis=x,part=5": {
+      "model": "nuclearsq:block/power_mast_5_sqc"
+    },
+    "axis=z,part=5": {
+      "model": "nuclearsq:block/power_mast_5_sqc",
+      "y": 90
+    },
+    "axis=x,part=6": {
+      "model": "nuclearsq:block/power_mast_6_sqc"
+    },
+    "axis=z,part=6": {
+      "model": "nuclearsq:block/power_mast_6_sqc",
+      "y": 90
+    },
+    "axis=x,part=7": {
+      "model": "nuclearsq:block/power_mast_7_sqc"
+    },
+    "axis=z,part=7": {
+      "model": "nuclearsq:block/power_mast_7_sqc",
+      "y": 90
+    },
+    "axis=x,part=8": {
+      "model": "nuclearsq:block/power_mast_8_sqc"
+    },
+    "axis=z,part=8": {
+      "model": "nuclearsq:block/power_mast_8_sqc",
+      "y": 90
+    },
+    "axis=x,part=9": {
+      "model": "nuclearsq:block/power_mast_9_sqc"
+    },
+    "axis=z,part=9": {
+      "model": "nuclearsq:block/power_mast_9_sqc",
+      "y": 90
+    },
+    "axis=x,part=10": {
+      "model": "nuclearsq:block/power_mast_10_sqc"
+    },
+    "axis=z,part=10": {
+      "model": "nuclearsq:block/power_mast_10_sqc",
+      "y": 90
+    },
+    "axis=x,part=11": {
+      "model": "nuclearsq:block/power_mast_11_sqc"
+    },
+    "axis=z,part=11": {
+      "model": "nuclearsq:block/power_mast_11_sqc",
+      "y": 90
+    }
+  }
+}

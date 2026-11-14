@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "nuclearsq:block/future_chest_sqc_body"
+  },
+  "elements": []
+}

@@ -1,0 +1,11 @@
+{
+  "type": "nuclearsq:reprocessing",
+  "ingredient": { "item": "nuclearsq:filter_residue_sqc" },
+  "count": 8,
+  "time": 600,
+  "energy_per_tick": 300,
+  "results": [
+    { "item": { "id": "nuclearsq:uranium_core_sqc", "count": 1 }, "chance": 0.5 },
+    { "item": { "id": "nuclearsq:nuclear_ash_sqc", "count": 4 } }
+  ]
+}

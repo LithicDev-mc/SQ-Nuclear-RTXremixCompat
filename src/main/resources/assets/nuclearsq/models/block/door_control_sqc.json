@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "nuclearsq:block/door_control_side_sqc",
+    "north": "nuclearsq:block/door_control_sqc",
+    "south": "nuclearsq:block/door_control_side_sqc",
+    "east": "nuclearsq:block/door_control_side_sqc",
+    "west": "nuclearsq:block/door_control_side_sqc",
+    "up": "nuclearsq:block/door_control_side_sqc",
+    "down": "nuclearsq:block/door_control_side_sqc"
+  }
+}

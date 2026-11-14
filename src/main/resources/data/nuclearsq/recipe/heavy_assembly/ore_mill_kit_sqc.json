@@ -1,0 +1,42 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "ccccc",
+    "cA@Ac",
+    "ciBic",
+    "cSeSc",
+    "ccccm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:ore_mill_controller_sqc"
+    },
+    "A": {
+      "item": "nuclearsq:brass_bearing_sqc"
+    },
+    "B": {
+      "item": "nuclearsq:control_board_1_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:ore_mill_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

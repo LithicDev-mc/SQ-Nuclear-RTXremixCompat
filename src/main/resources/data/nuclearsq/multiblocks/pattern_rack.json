@@ -1,0 +1,73 @@
+{
+  "id": "pattern_rack",
+  "size": [
+    4,
+    5,
+    3
+  ],
+  "controller": [
+    0,
+    0,
+    0
+  ],
+  "anchor": [
+    0,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "in",
+      "cell": [
+        3,
+        0,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:pattern_rack_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "@RRR",
+      "RRRR",
+      "eRRt"
+    ],
+    [
+      "RRRR",
+      "RRRR",
+      "RRRR"
+    ],
+    [
+      "RRRR",
+      "RRRR",
+      "RRRR"
+    ],
+    [
+      "RRRR",
+      "RRRR",
+      "RRRR"
+    ],
+    [
+      "RRRR",
+      "RRRR",
+      "RRRR"
+    ]
+  ]
+}

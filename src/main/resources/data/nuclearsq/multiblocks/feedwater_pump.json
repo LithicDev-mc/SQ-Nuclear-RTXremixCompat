@@ -1,0 +1,81 @@
+{
+  "id": "feedwater_pump",
+  "size": [
+    3,
+    2,
+    4
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        2,
+        0,
+        3
+      ]
+    },
+    {
+      "name": "feedwater_in",
+      "type": "feedwater",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "feedwater_out",
+      "type": "feedwater",
+      "dir": "out",
+      "cell": [
+        2,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:feedwater_pump_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "f": "nuclearsq:machine_port_feedwater_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "R@R",
+      "fRR",
+      "RRR",
+      "RRe"
+    ],
+    [
+      "   ",
+      " tf",
+      " R ",
+      " R "
+    ]
+  ]
+}

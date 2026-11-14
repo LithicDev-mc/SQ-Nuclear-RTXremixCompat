@@ -1,0 +1,30 @@
+{
+  "type": "nuclearsq:reprocessing",
+  "ingredient": {
+    "item": "nuclearsq:bred_neptunium_sqc"
+  },
+  "count": 1,
+  "time": 600,
+  "energy_per_tick": 480,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:plutonium_238_oxide_sqc",
+        "count": 1
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:nuclear_ash_sqc",
+        "count": 1
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:neptunium_oxide_sqc",
+        "count": 1
+      },
+      "chance": 0.25
+    }
+  ]
+}

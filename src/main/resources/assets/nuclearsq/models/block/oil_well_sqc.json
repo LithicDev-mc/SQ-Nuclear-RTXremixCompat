@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "nuclearsq:block/oil_well_top_sqc",
+    "side": "nuclearsq:block/oil_well_side_sqc",
+    "bottom": "nuclearsq:block/oil_well_side_sqc"
+  }
+}

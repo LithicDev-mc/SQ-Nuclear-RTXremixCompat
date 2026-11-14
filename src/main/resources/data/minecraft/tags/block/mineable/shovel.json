@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "nuclearsq:nuclear_ash_sqc",
+    "nuclearsq:radioactive_fallout_sqc"
+  ]
+}

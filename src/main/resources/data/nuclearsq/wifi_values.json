@@ -1,0 +1,16 @@
+{
+  "adapter": {
+    "range": [48, 128, 320],
+    "fe_per_tick": 12,
+    "buffer": 300000,
+    "max_receive": 4000,
+    "charge_radius": 4,
+    "charge_rate": 200
+  },
+  "terminal": {
+    "capacity": 40000,
+    "open_cost": 100,
+    "craft_cost": 20,
+    "max_receive": 1000
+  }
+}

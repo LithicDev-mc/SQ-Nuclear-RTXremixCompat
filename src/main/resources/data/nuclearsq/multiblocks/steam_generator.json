@@ -1,0 +1,224 @@
+{
+  "id": "steam_generator",
+  "size": [
+    7,
+    16,
+    7
+  ],
+  "controller": [
+    3,
+    0,
+    0
+  ],
+  "anchor": [
+    3,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "primary_hot_in",
+      "type": "primary",
+      "dir": "in",
+      "cell": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "name": "primary_cold_out",
+      "type": "primary",
+      "dir": "out",
+      "cell": [
+        6,
+        1,
+        3
+      ]
+    },
+    {
+      "name": "feedwater_in",
+      "type": "feedwater",
+      "dir": "in",
+      "cell": [
+        0,
+        9,
+        3
+      ]
+    },
+    {
+      "name": "wet_steam_out",
+      "type": "wet_steam",
+      "dir": "out",
+      "cell": [
+        3,
+        15,
+        3
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        3,
+        1,
+        6
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:steam_generator_controller_sqc",
+    "H": "nuclearsq:pressure_chamber_hardened_sqc",
+    "p": "nuclearsq:machine_port_primary_sqc",
+    "f": "nuclearsq:machine_port_feedwater_sqc",
+    "n": "nuclearsq:machine_port_wet_steam_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "  H@H  ",
+      " HHHHH ",
+      "HHHHHHH",
+      "HHHHHHH",
+      "HHHHHHH",
+      " HHHHH ",
+      "  HHH  "
+    ],
+    [
+      "  HHH  ",
+      " HHHHH ",
+      " HHHHH ",
+      "pHHHHHp",
+      " HHHHH ",
+      " HHHHH ",
+      "  HtH  "
+    ],
+    [
+      "       ",
+      "  HHH  ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      "  HHH  ",
+      "       "
+    ],
+    [
+      "       ",
+      "  HHH  ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      "  HHH  ",
+      "       "
+    ],
+    [
+      "       ",
+      "  HHH  ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      "  HHH  ",
+      "       "
+    ],
+    [
+      "       ",
+      "  HHH  ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      "  HHH  ",
+      "       "
+    ],
+    [
+      "       ",
+      "  HHH  ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      "  HHH  ",
+      "       "
+    ],
+    [
+      "       ",
+      "  HHH  ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      "  HHH  ",
+      "       "
+    ],
+    [
+      "       ",
+      "  HHH  ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      "  HHH  ",
+      "       "
+    ],
+    [
+      "       ",
+      "  HHH  ",
+      " HHHHH ",
+      "fHHHHH ",
+      " HHHHH ",
+      "  HHH  ",
+      "       "
+    ],
+    [
+      "       ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      " HHHHH ",
+      "       "
+    ],
+    [
+      "  HHH  ",
+      " HHHHH ",
+      "HHHHHHH",
+      "HHHHHHH",
+      "HHHHHHH",
+      " HHHHH ",
+      "  HHH  "
+    ],
+    [
+      "  HHH  ",
+      " HHHHH ",
+      "HHHHHHH",
+      "HHHHHHH",
+      "HHHHHHH",
+      " HHHHH ",
+      "  HHH  "
+    ],
+    [
+      "  HHH  ",
+      " HHHHH ",
+      "HHHHHHH",
+      "HHHHHHH",
+      "HHHHHHH",
+      " HHHHH ",
+      "  HHH  "
+    ],
+    [
+      "  HHH  ",
+      " HHHHH ",
+      "HHHHHHH",
+      "HHHHHHH",
+      "HHHHHHH",
+      " HHHHH ",
+      "  HHH  "
+    ],
+    [
+      "       ",
+      "  HHH  ",
+      " HHHHH ",
+      " HHnHH ",
+      " HHHHH ",
+      "  HHH  ",
+      "       "
+    ]
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:polymer",
+  "ingredient": {
+    "item": "nuclearsq:rubber_sqc"
+  },
+  "count": 3,
+  "time": 120,
+  "energy_per_tick": 1800,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:rubber_seal_sqc",
+        "count": 2
+      }
+    }
+  ],
+  "aux": {
+    "item": "nuclearsq:glass_seal_sqc"
+  },
+  "aux_count": 1
+}

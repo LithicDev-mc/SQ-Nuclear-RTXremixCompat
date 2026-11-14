@@ -1,0 +1,74 @@
+{
+  "textures": {
+    "terminal": "nuclearsq:block/cable_terminal_sqc",
+    "box": "nuclearsq:block/cable_box_sqc",
+    "gland": "nuclearsq:block/cable_gland_sqc",
+    "particle": "nuclearsq:block/cable_basic_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        13,
+        3
+      ],
+      "to": [
+        13,
+        16,
+        13
+      ],
+      "faces": {
+        "north": {
+          "texture": "#box"
+        },
+        "east": {
+          "texture": "#box"
+        },
+        "south": {
+          "texture": "#box"
+        },
+        "west": {
+          "texture": "#box"
+        },
+        "up": {
+          "texture": "#box"
+        },
+        "down": {
+          "texture": "#terminal"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        12,
+        5
+      ],
+      "to": [
+        11,
+        13,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#gland"
+        },
+        "east": {
+          "texture": "#gland"
+        },
+        "south": {
+          "texture": "#gland"
+        },
+        "west": {
+          "texture": "#gland"
+        },
+        "up": {
+          "texture": "#gland"
+        },
+        "down": {
+          "texture": "#gland"
+        }
+      }
+    }
+  ]
+}

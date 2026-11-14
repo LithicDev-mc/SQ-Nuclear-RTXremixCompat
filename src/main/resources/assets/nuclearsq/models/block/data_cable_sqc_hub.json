@@ -1,0 +1,40 @@
+{
+  "textures": {
+    "muff": "nuclearsq:block/data_cable_muff_sqc",
+    "particle": "nuclearsq:block/data_cable_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        5,
+        0.5,
+        5
+      ],
+      "to": [
+        11,
+        6,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#muff"
+        },
+        "east": {
+          "texture": "#muff"
+        },
+        "south": {
+          "texture": "#muff"
+        },
+        "west": {
+          "texture": "#muff"
+        },
+        "up": {
+          "texture": "#muff"
+        },
+        "down": {
+          "texture": "#muff"
+        }
+      }
+    }
+  ]
+}

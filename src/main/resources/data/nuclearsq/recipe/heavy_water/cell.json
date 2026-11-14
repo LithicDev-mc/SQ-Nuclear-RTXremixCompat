@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:heavy_water",
+  "ingredient": {
+    "item": "nuclearsq:glass_seal_sqc"
+  },
+  "count": 2,
+  "time": 600,
+  "energy_per_tick": 4500,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:heavy_water_cell_sqc",
+        "count": 1
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "water_in",
+      "amount": 16000
+    }
+  ]
+}

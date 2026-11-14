@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "nuclearsq:block/airlock_control_sqc",
+    "end": "nuclearsq:block/door_control_side_sqc"
+  }
+}

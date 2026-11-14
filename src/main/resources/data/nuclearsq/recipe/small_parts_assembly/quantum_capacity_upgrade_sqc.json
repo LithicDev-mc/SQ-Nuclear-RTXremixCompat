@@ -1,0 +1,34 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_2_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:copper_coil_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:chest"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:quantum_capacity_upgrade_sqc",
+    "count": 1
+  },
+  "time": 200
+}

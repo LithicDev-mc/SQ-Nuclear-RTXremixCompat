@@ -1,0 +1,85 @@
+{
+  "id": "steam_dryer",
+  "size": [
+    5,
+    3,
+    3
+  ],
+  "controller": [
+    2,
+    1,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "wet_steam_in",
+      "type": "wet_steam",
+      "dir": "in",
+      "cell": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "steam_out",
+      "type": "steam",
+      "dir": "out",
+      "cell": [
+        4,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "water_out",
+      "type": "water",
+      "dir": "out",
+      "cell": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        2,
+        1,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:steam_dryer_controller_sqc",
+    "C": "nuclearsq:pressure_chamber_sqc",
+    "n": "nuclearsq:machine_port_wet_steam_sqc",
+    "d": "nuclearsq:machine_port_steam_sqc",
+    "w": "nuclearsq:machine_port_water_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "     ",
+      "CCwCC",
+      "     "
+    ],
+    [
+      "CC@CC",
+      "nCCCd",
+      "CCtCC"
+    ],
+    [
+      "     ",
+      "CCCCC",
+      "     "
+    ]
+  ]
+}

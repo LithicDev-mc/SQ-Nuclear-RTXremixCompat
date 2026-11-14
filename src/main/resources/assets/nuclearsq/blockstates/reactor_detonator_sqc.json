@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/reactor_detonator_sqc"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+modLoader="javafml"
+
+loaderVersion="${loader_version_range}"
+
+license="${mod_license}"
+
+issueTrackerURL="https://discord.gg/9DUcANyAvV"
+
+[[mods]]
+
+modId="${mod_id}"
+
+version="${mod_version}"
+
+displayName="${mod_name}"
+
+displayURL="https://discord.gg/9DUcANyAvV"
+
+logoFile="nuclearsq_logo.png"
+
+credits="GeckoLib (MIT), Sable Companion by RyanHCode and Ocelot (MIT, bundled)"
+
+authors="SideQuestChris"
+
+description='''
+Nuclear reactors, turbines, radiation and a droppable nuclear bomb (works without Create; optionally compatible with Create / Create Aeronautics).
+'''
+
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="geckolib"
+    type="required"
+    versionRange="[${geckolib_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="computercraft"
+    type="optional"
+    versionRange="[1.110,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId="create"
+    type="optional"
+    versionRange="[6.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId="sablecompanion"
+    type="optional"
+    versionRange="[1.6.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="mekanism"
+    type="optional"
+    versionRange="[10.7.0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId="powergrid"
+    type="optional"
+    versionRange="[0.6.0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId="sable"
+    type="optional"
+    versionRange="[2.0.0,)"
+    ordering="NONE"
+    side="BOTH"

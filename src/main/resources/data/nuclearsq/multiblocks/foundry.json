@@ -1,0 +1,87 @@
+{
+  "id": "foundry",
+  "size": [
+    5,
+    3,
+    4
+  ],
+  "controller": [
+    2,
+    0,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "item_in",
+      "type": "item",
+      "dir": "in",
+      "cell": [
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        2,
+        0,
+        3
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:foundry_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "RR@RR",
+      "eRRRR",
+      "RRRRi",
+      "RRtRR"
+    ],
+    [
+      "     ",
+      "     ",
+      " R   ",
+      "     "
+    ],
+    [
+      "     ",
+      "     ",
+      " i   ",
+      "     "
+    ]
+  ]
+}

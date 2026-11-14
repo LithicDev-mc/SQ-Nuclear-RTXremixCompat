@@ -1,0 +1,64 @@
+{
+  "id": "server_rack",
+  "size": [
+    2,
+    4,
+    2
+  ],
+  "controller": [
+    0,
+    0,
+    0
+  ],
+  "anchor": [
+    0,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "in",
+      "cell": [
+        1,
+        0,
+        1
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:server_rack_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "@R",
+      "et"
+    ],
+    [
+      "RR",
+      "RR"
+    ],
+    [
+      "RR",
+      "RR"
+    ],
+    [
+      "RR",
+      "RR"
+    ]
+  ]
+}

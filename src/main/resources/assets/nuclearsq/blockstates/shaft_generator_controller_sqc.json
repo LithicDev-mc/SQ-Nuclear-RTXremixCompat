@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/shaft_generator_controller_sqc"
+    }
+  }
+}

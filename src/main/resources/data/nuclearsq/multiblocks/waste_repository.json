@@ -1,0 +1,122 @@
+{
+  "id": "waste_repository",
+  "size": [
+    5,
+    9,
+    5
+  ],
+  "controller": [
+    2,
+    0,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "items",
+      "type": "item",
+      "dir": "in",
+      "cell": [
+        4,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:waste_repository_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "tR@RR",
+      "RRRRR",
+      "eRRRi",
+      "RRRRR",
+      "RRRRR"
+    ],
+    [
+      "     ",
+      " R R ",
+      "     ",
+      " R R ",
+      "     "
+    ],
+    [
+      "     ",
+      " R R ",
+      "     ",
+      " R R ",
+      "     "
+    ],
+    [
+      "     ",
+      " R R ",
+      "     ",
+      " R R ",
+      "     "
+    ],
+    [
+      "     ",
+      " R R ",
+      "     ",
+      " R R ",
+      "     "
+    ],
+    [
+      "     ",
+      " R R ",
+      "     ",
+      " R R ",
+      "     "
+    ],
+    [
+      "     ",
+      " R R ",
+      "     ",
+      " R R ",
+      "     "
+    ],
+    [
+      "     ",
+      " RRR ",
+      " RRR ",
+      " RRR ",
+      "     "
+    ],
+    [
+      "     ",
+      "     ",
+      "     ",
+      "     ",
+      "     "
+    ]
+  ]
+}

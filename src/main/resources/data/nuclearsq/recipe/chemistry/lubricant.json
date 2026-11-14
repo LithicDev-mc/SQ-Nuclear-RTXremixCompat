@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:chemistry",
+  "ingredient": {
+    "tag": "c:ingots/lithium"
+  },
+  "count": 1,
+  "time": 200,
+  "energy_per_tick": 2400,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:lubricant_sqc",
+        "count": 4
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "diesel_in",
+      "amount": 500
+    }
+  ]
+}

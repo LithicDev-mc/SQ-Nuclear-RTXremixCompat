@@ -1,0 +1,62 @@
+{
+  "id": "solar_field",
+  "size": [
+    5,
+    2,
+    5
+  ],
+  "controller": [
+    2,
+    0,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_out",
+      "type": "energy",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        4,
+        0,
+        1
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:solar_field_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "RR@RR",
+      "RRRRt",
+      "RRRRe",
+      "RRRRR",
+      "RRRRR"
+    ],
+    [
+      "     ",
+      "RRRRR",
+      "RRRRR",
+      "RRRRR",
+      "RRRRR"
+    ]
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "loader": "neoforge:obj",
+  "model": "nuclearsq:models/block/translator_basic_sqc.obj",
+  "flip_v": true,
+  "ambient_occlusion": false,
+  "textures": {
+    "texture": "nuclearsq:block/translator_basic_sqc",
+    "particle": "nuclearsq:block/translator_basic_sqc"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "textures": {
+    "cable": "nuclearsq:block/cable_reinforced_sqc",
+    "clamp": "nuclearsq:block/cable_clamp_sqc",
+    "particle": "nuclearsq:block/cable_reinforced_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        1,
+        0
+      ],
+      "to": [
+        10,
+        5,
+        6
+      ],
+      "faces": {
+        "east": {
+          "texture": "#cable",
+          "uv": [
+            10,
+            11,
+            16,
+            15
+          ]
+        },
+        "west": {
+          "texture": "#cable",
+          "uv": [
+            0,
+            11,
+            6,
+            15
+          ]
+        },
+        "up": {
+          "texture": "#cable",
+          "uv": [
+            0,
+            6,
+            6,
+            10
+          ],
+          "rotation": 90
+        },
+        "down": {
+          "texture": "#cable",
+          "uv": [
+            10,
+            6,
+            16,
+            10
+          ],
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        5.25,
+        0.5,
+        0.5
+      ],
+      "to": [
+        10.75,
+        5.75,
+        1.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#clamp"
+        },
+        "east": {
+          "texture": "#clamp"
+        },
+        "south": {
+          "texture": "#clamp"
+        },
+        "west": {
+          "texture": "#clamp"
+        },
+        "up": {
+          "texture": "#clamp"
+        },
+        "down": {
+          "texture": "#clamp"
+        }
+      }
+    }
+  ]
+}

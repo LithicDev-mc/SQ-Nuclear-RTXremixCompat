@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/waste_repository_controller_sqc"
+    }
+  }
+}

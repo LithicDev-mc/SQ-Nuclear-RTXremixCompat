@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:heavy_water",
+  "ingredient": {
+    "tag": "c:dusts/sulfur"
+  },
+  "count": 1,
+  "time": 400,
+  "energy_per_tick": 3600,
+  "results": [],
+  "fluids": [
+    {
+      "port": "water_in",
+      "amount": 8000
+    }
+  ],
+  "fluid_results": [
+    {
+      "port": "heavy_out",
+      "fluid": "nuclearsq:heavy_water",
+      "amount": 100
+    }
+  ]
+}

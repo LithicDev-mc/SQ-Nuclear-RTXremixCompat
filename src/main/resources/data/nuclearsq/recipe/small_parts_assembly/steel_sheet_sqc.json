@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:ingot_steel"
+        ],
+        "tags": [
+          "c:ingots/steel"
+        ]
+      },
+      "count": 30
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:steel_sheet_sqc",
+    "count": 1
+  }
+}

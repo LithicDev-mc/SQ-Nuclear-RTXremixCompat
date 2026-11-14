@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:fuel_charge",
+        "item": "nuclearsq:fuel_rod_block_sqc",
+        "full": true
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:osmium_heat_plate_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:fuel_rod_block_reinforced_sqc",
+    "count": 1,
+    "components": {
+      "nuclearsq:fuel_charge": 0,
+      "nuclearsq:fuel_unloaded": {}
+    }
+  }
+}

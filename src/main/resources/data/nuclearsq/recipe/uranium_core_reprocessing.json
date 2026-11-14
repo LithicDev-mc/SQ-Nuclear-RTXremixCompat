@@ -1,0 +1,24 @@
+{
+  "type": "nuclearsq:reprocessing",
+  "ingredient": {
+    "type": "nuclearsq:optional",
+    "items": [
+      "nuclearsq:enriched_uranium_sqc",
+      "mekanism:ingot_uranium"
+    ],
+    "tags": [
+      "c:ingots/uranium"
+    ]
+  },
+  "count": 1,
+  "time": 400,
+  "energy_per_tick": 360,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:uranium_core_sqc",
+        "count": 1
+      }
+    }
+  ]
+}

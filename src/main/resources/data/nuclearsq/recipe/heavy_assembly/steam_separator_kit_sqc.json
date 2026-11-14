@@ -1,0 +1,44 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "crrrc",
+    "ru@sr",
+    "rwBGr",
+    "crrrm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:steam_separator_controller_sqc"
+    },
+    "B": {
+      "item": "nuclearsq:control_board_1_sqc"
+    },
+    "G": {
+      "item": "nuclearsq:glass_seal_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "r": {
+      "item": "nuclearsq:pressure_chamber_reinforced_sqc"
+    },
+    "s": {
+      "item": "nuclearsq:machine_port_steam_sqc"
+    },
+    "u": {
+      "item": "nuclearsq:machine_port_wet_steam_sqc"
+    },
+    "w": {
+      "item": "nuclearsq:machine_port_water_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:steam_separator_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

@@ -1,0 +1,94 @@
+{
+  "variants": {
+    "facing=north,half=lower,state=idle": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_idle"
+    },
+    "facing=north,half=lower,state=active": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_active"
+    },
+    "facing=north,half=lower,state=warn": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_warn"
+    },
+    "facing=north,half=upper,state=idle": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_idle"
+    },
+    "facing=north,half=upper,state=active": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_active"
+    },
+    "facing=north,half=upper,state=warn": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_warn"
+    },
+    "facing=east,half=lower,state=idle": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_idle",
+      "y": 90
+    },
+    "facing=east,half=lower,state=active": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_active",
+      "y": 90
+    },
+    "facing=east,half=lower,state=warn": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_warn",
+      "y": 90
+    },
+    "facing=east,half=upper,state=idle": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_idle",
+      "y": 90
+    },
+    "facing=east,half=upper,state=active": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_active",
+      "y": 90
+    },
+    "facing=east,half=upper,state=warn": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_warn",
+      "y": 90
+    },
+    "facing=south,half=lower,state=idle": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_idle",
+      "y": 180
+    },
+    "facing=south,half=lower,state=active": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_active",
+      "y": 180
+    },
+    "facing=south,half=lower,state=warn": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_warn",
+      "y": 180
+    },
+    "facing=south,half=upper,state=idle": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_idle",
+      "y": 180
+    },
+    "facing=south,half=upper,state=active": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_active",
+      "y": 180
+    },
+    "facing=south,half=upper,state=warn": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_warn",
+      "y": 180
+    },
+    "facing=west,half=lower,state=idle": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_idle",
+      "y": 270
+    },
+    "facing=west,half=lower,state=active": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_active",
+      "y": 270
+    },
+    "facing=west,half=lower,state=warn": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_lower_warn",
+      "y": 270
+    },
+    "facing=west,half=upper,state=idle": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_idle",
+      "y": 270
+    },
+    "facing=west,half=upper,state=active": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_active",
+      "y": 270
+    },
+    "facing=west,half=upper,state=warn": {
+      "model": "nuclearsq:block/energy_saver_module_sqc_upper_warn",
+      "y": 270
+    }
+  }
+}

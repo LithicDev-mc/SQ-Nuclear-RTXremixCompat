@@ -1,0 +1,1242 @@
+{
+ "sections": [
+  {
+   "id": "grp_start",
+   "name": {
+    "de": "Start",
+    "en": "Start"
+   },
+   "chapters": [
+    {
+     "id": "intro",
+     "name": {
+      "de": "Einstieg",
+      "en": "Introduction"
+     },
+     "pages": [
+      {
+       "id": "intro_welcome",
+       "anim": "WELCOME"
+      },
+      {
+       "id": "intro_book",
+       "anim": "NONE"
+      },
+      {
+       "id": "intro_materials",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "guide",
+     "name": {
+      "de": "Geführter Einstieg",
+      "en": "Guided Start"
+     },
+     "pages": [
+      {
+       "id": "guide_overview",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_start",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_first",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_materials",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_control",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_storage",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_chem",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_chips",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_assemblers",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_fuel",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_safety",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_reactor",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_steam",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_loop",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_run",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_distribute",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_cycle",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_fusion",
+       "anim": "GUIDE"
+      }
+     ]
+    },
+    {
+     "id": "machines",
+     "name": {
+      "de": "Maschinen-Grundlagen",
+      "en": "Machine basics"
+     },
+     "pages": [
+      {
+       "id": "mach_blueprint",
+       "anim": "NONE"
+      },
+      {
+       "id": "mach_terminals",
+       "anim": "PANEL"
+      },
+      {
+       "id": "mach_menus",
+       "anim": "PANEL"
+      },
+      {
+       "id": "mach_tests",
+       "anim": "NONE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "grp_manufacturing",
+   "name": {
+    "de": "Fertigung",
+    "en": "Manufacturing"
+   },
+   "chapters": [
+    {
+     "id": "assembly",
+     "name": {
+      "de": "Assembler",
+      "en": "Assemblers"
+     },
+     "pages": [
+      {
+       "id": "line_assembly",
+       "anim": "LINE"
+      },
+      {
+       "id": "intro_assembly",
+       "anim": "ASSEMBLY"
+      },
+      {
+       "id": "small_parts_assembler",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "reactor_assembler",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "equipment_assembler",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "mach_heavy",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "component_assembler",
+       "anim": "NONE"
+      },
+      {
+       "id": "particle_assembler",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "metal",
+     "name": {
+      "de": "Erz und Metall",
+      "en": "Ore and Metal"
+     },
+     "pages": [
+      {
+       "id": "line_metal",
+       "anim": "LINE"
+      },
+      {
+       "id": "rod_ore_mill",
+       "anim": "NONE"
+      },
+      {
+       "id": "hammer_mill",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "plate_mill",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "rod_foundry",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "modules",
+     "name": {
+      "de": "Geräte-Module",
+      "en": "Machine Modules"
+     },
+     "pages": [
+      {
+       "id": "module_overview",
+       "anim": "NONE"
+      },
+      {
+       "id": "module_fan",
+       "anim": "NONE"
+      },
+      {
+       "id": "module_overclock",
+       "anim": "NONE"
+      },
+      {
+       "id": "module_saver",
+       "anim": "NONE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "grp_chem",
+   "name": {
+    "de": "Chemie",
+    "en": "Chemistry"
+   },
+   "chapters": [
+    {
+     "id": "chem_uran",
+     "name": {
+      "de": "Uranaufbereitung",
+      "en": "Uranium Processing"
+     },
+     "pages": [
+      {
+       "id": "line_uranium",
+       "anim": "LINE"
+      },
+      {
+       "id": "rod_uranium",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_acid",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_leaching",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_uf6",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_centrifuge",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_pellets",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "chem_reactor",
+     "name": {
+      "de": "Reaktorchemie",
+      "en": "Reactor Chemistry"
+     },
+     "pages": [
+      {
+       "id": "line_reactor_chem",
+       "anim": "LINE"
+      },
+      {
+       "id": "rod_boric",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_heavywater",
+       "anim": "NONE"
+      },
+      {
+       "id": "chem_electrolysis",
+       "anim": "NONE"
+      },
+      {
+       "id": "chem_fuel_cell",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "chem_waste",
+     "name": {
+      "de": "Wiederaufbereitung",
+      "en": "Reprocessing"
+     },
+     "pages": [
+      {
+       "id": "line_waste",
+       "anim": "LINE"
+      },
+      {
+       "id": "reprocessing_plant",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_slag",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_vitrify",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "chem_oil",
+     "name": {
+      "de": "Öl und Gas",
+      "en": "Oil and Gas"
+     },
+     "pages": [
+      {
+       "id": "line_oil",
+       "anim": "LINE"
+      },
+      {
+       "id": "oil_overview",
+       "anim": "NONE"
+      },
+      {
+       "id": "oil_derrick",
+       "anim": "NONE"
+      },
+      {
+       "id": "distillation_column",
+       "anim": "NONE"
+      },
+      {
+       "id": "cracker",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_polymer",
+       "anim": "NONE"
+      },
+      {
+       "id": "gas_generator",
+       "anim": "NONE"
+      },
+      {
+       "id": "fluid_buffer",
+       "anim": "NONE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "grp_robotic",
+   "name": {
+    "de": "Robotic",
+    "en": "Robotics"
+   },
+   "chapters": [
+    {
+     "id": "robots",
+     "name": {
+      "de": "Roboter",
+      "en": "Robots"
+     },
+     "pages": [
+      {
+       "id": "line_robots",
+       "anim": "LINE"
+      },
+      {
+       "id": "line_exo",
+       "anim": "LINE"
+      },
+      {
+       "id": "robot_arm",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_gripper",
+       "anim": "NONE"
+      },
+      {
+       "id": "tools_nanobots",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_robot",
+       "anim": "NONE"
+      },
+      {
+       "id": "decon_dock",
+       "anim": "NONE"
+      },
+      {
+       "id": "robo_pets",
+       "anim": "NONE"
+      },
+      {
+       "id": "survey_drone",
+       "anim": "NONE"
+      },
+      {
+       "id": "exo",
+       "anim": "NONE"
+      },
+      {
+       "id": "exo_station",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "exo_modules",
+       "anim": "NONE"
+      },
+      {
+       "id": "exo_modules_more",
+       "anim": "NONE"
+      },
+      {
+       "id": "exo_modules_mining",
+       "anim": "NONE"
+      },
+      {
+       "id": "exo_modules_rd",
+       "anim": "NONE"
+      },
+      {
+       "id": "exo_modules_hotbar",
+       "anim": "NONE"
+      },
+      {
+       "id": "exo_modules_battery",
+       "anim": "NONE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "grp_computing",
+   "name": {
+    "de": "Computing",
+    "en": "Computing"
+   },
+   "chapters": [
+    {
+     "id": "chips",
+     "name": {
+      "de": "Chip-Fertigung",
+      "en": "Chip Production"
+     },
+     "pages": [
+      {
+       "id": "line_chips",
+       "anim": "LINE"
+      },
+      {
+       "id": "chips_chain",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_chemlab",
+       "anim": "NONE"
+      },
+      {
+       "id": "micro_assembler",
+       "anim": "NONE"
+      },
+      {
+       "id": "clean_room",
+       "anim": "NONE"
+      },
+      {
+       "id": "pattern_rack",
+       "anim": "NONE"
+      },
+      {
+       "id": "compute_assembler",
+       "anim": "NONE"
+      },
+      {
+       "id": "quantum_computer",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "data",
+     "name": {
+      "de": "Datennetz & Leitstand",
+      "en": "Data Network & Control Room"
+     },
+     "pages": [
+      {
+       "id": "data_net",
+       "anim": "NONE"
+      },
+      {
+       "id": "data_console",
+       "anim": "PANEL"
+      },
+      {
+       "id": "data_logbook",
+       "anim": "NONE"
+      },
+      {
+       "id": "data_power",
+       "anim": "NONE"
+      },
+      {
+       "id": "data_scanner",
+       "anim": "NONE"
+      },
+      {
+       "id": "data_instruments",
+       "anim": "NONE"
+      },
+      {
+       "id": "data_wall",
+       "anim": "NONE"
+      },
+      {
+       "id": "data_monitor",
+       "anim": "NONE"
+      },
+      {
+       "id": "data_desk",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "data_cc",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "storage",
+     "name": {
+      "de": "Digitaler Speicher",
+      "en": "Digital Storage"
+     },
+     "pages": [
+      {
+       "id": "line_storage",
+       "anim": "LINE"
+      },
+      {
+       "id": "storage_racks",
+       "anim": "NONE"
+      },
+      {
+       "id": "storage_drives",
+       "anim": "NONE"
+      },
+      {
+       "id": "storage_compute",
+       "anim": "NONE"
+      },
+      {
+       "id": "storage_cluster",
+       "anim": "NONE"
+      },
+      {
+       "id": "storage_terminal",
+       "anim": "NONE"
+      },
+      {
+       "id": "storage_monitor",
+       "anim": "NONE"
+      },
+      {
+       "id": "storage_crafting",
+       "anim": "NONE"
+      },
+      {
+       "id": "storage_itemport",
+       "anim": "NONE"
+      },
+      {
+       "id": "storage_crate",
+       "anim": "NONE"
+      },
+      {
+       "id": "storage_wifi",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "bank",
+     "name": {
+      "de": "Bank und Auktionshaus",
+      "en": "Bank and Auction House"
+     },
+     "pages": [
+      {
+       "id": "bank_overview",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_terminal",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_server",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_modem",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_coins",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_confirm",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_apps",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_auction",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_exchange",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_security",
+       "anim": "NONE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "grp_energy",
+   "name": {
+    "de": "Energie",
+    "en": "Energy"
+   },
+   "chapters": [
+    {
+     "id": "renewable",
+     "name": {
+      "de": "Stromquellen",
+      "en": "Power Sources"
+     },
+     "pages": [
+      {
+       "id": "line_power",
+       "anim": "LINE"
+      },
+      {
+       "id": "energy_start",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "energy_solar",
+       "anim": "NONE"
+      },
+      {
+       "id": "energy_wind",
+       "anim": "NONE"
+      },
+      {
+       "id": "energy_rtg",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "transport",
+     "name": {
+      "de": "Leitungen",
+      "en": "Conduits"
+     },
+     "pages": [
+      {
+       "id": "transport_pipes",
+       "anim": "NONE"
+      },
+      {
+       "id": "transport_item_pipes",
+       "anim": "NONE"
+      },
+      {
+       "id": "transport_cables",
+       "anim": "NONE"
+      },
+      {
+       "id": "transport_battery",
+       "anim": "NONE"
+      },
+      {
+       "id": "transport_grid",
+       "anim": "NONE"
+      },
+      {
+       "id": "transport_substation",
+       "anim": "NONE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "grp_reactor",
+   "name": {
+    "de": "Reaktor",
+    "en": "Reactor"
+   },
+   "chapters": [
+    {
+     "id": "rod_basic",
+     "name": {
+      "de": "Brennstab",
+      "en": "Fuel Rod"
+     },
+     "pages": [
+      {
+       "id": "rod_build",
+       "anim": "ROD"
+      },
+      {
+       "id": "rod_reinforced",
+       "anim": "ROD"
+      },
+      {
+       "id": "rod_advanced",
+       "anim": "ROD"
+      },
+      {
+       "id": "rod_fuel",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "reactor",
+     "name": {
+      "de": "Reaktor",
+      "en": "Reactor"
+     },
+     "pages": [
+      {
+       "id": "line_reactor",
+       "anim": "LINE"
+      },
+      {
+       "id": "reactor_pwr",
+       "anim": "NONE"
+      },
+      {
+       "id": "reactor_pwr_loop",
+       "anim": "PRIMARY"
+      },
+      {
+       "id": "energy_loop",
+       "anim": "LOOP"
+      },
+      {
+       "id": "rod_drive",
+       "anim": "ROD"
+      },
+      {
+       "id": "reactor_core",
+       "anim": "HEAT"
+      },
+      {
+       "id": "reactor_terminal",
+       "anim": "PANEL"
+      },
+      {
+       "id": "rod_vessel",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_water",
+       "anim": "NONE"
+      },
+      {
+       "id": "reactor_water",
+       "anim": "NONE"
+      },
+      {
+       "id": "reactor_xenon",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_exchanger",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "cooling",
+     "name": {
+      "de": "Wärme & Kühlmittel",
+      "en": "Heat & Coolant"
+     },
+     "pages": [
+      {
+       "id": "cool_heat",
+       "anim": "HEAT"
+      },
+      {
+       "id": "cool_pumps",
+       "anim": "NONE"
+      },
+      {
+       "id": "cool_fluids",
+       "anim": "NONE"
+      },
+      {
+       "id": "cool_loop",
+       "anim": "NONE"
+      },
+      {
+       "id": "cool_ports",
+       "anim": "NONE"
+      },
+      {
+       "id": "cool_parts",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "energy",
+     "name": {
+      "de": "Kreislauf & Turbine",
+      "en": "Loop & Turbine"
+     },
+     "pages": [
+      {
+       "id": "energy_chain",
+       "anim": "ENERGY"
+      },
+      {
+       "id": "energy_steam",
+       "anim": "NONE"
+      },
+      {
+       "id": "energy_turbine",
+       "anim": "PANEL"
+      },
+      {
+       "id": "energy_shaft",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "energy_parts",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "efficiency",
+     "name": {
+      "de": "Wirkungsgrad",
+      "en": "Efficiency"
+     },
+     "pages": [
+      {
+       "id": "eff_overview",
+       "anim": "NONE"
+      },
+      {
+       "id": "eff_reheater",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "eff_preheater",
+       "anim": "MACHINE"
+      }
+     ]
+    },
+    {
+     "id": "cooling_plant",
+     "name": {
+      "de": "Kreislauf-Großanlagen",
+      "en": "Loop Plants"
+     },
+     "pages": [
+      {
+       "id": "cool_plant",
+       "anim": "MACHINE"
+      },
+      {
+       "id": "plant_purifier",
+       "anim": "NONE"
+      },
+      {
+       "id": "plant_condenser",
+       "anim": "NONE"
+      },
+      {
+       "id": "plant_intake",
+       "anim": "NONE"
+      },
+      {
+       "id": "plant_treatment",
+       "anim": "NONE"
+      },
+      {
+       "id": "plant_fwpump",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "cooling_big",
+     "name": {
+      "de": "Reaktor-Großanlagen",
+      "en": "Reactor Plants"
+     },
+     "pages": [
+      {
+       "id": "cool_big",
+       "anim": "NONE"
+      },
+      {
+       "id": "big_tower",
+       "anim": "NONE"
+      },
+      {
+       "id": "big_relief_tank",
+       "anim": "NONE"
+      },
+      {
+       "id": "big_steam_generator",
+       "anim": "NONE"
+      },
+      {
+       "id": "big_pressurizer",
+       "anim": "NONE"
+      },
+      {
+       "id": "big_separator",
+       "anim": "NONE"
+      },
+      {
+       "id": "big_dryer",
+       "anim": "NONE"
+      },
+      {
+       "id": "big_emergency",
+       "anim": "NONE"
+      },
+      {
+       "id": "big_hp_injection",
+       "anim": "NONE"
+      },
+      {
+       "id": "big_containment",
+       "anim": "NONE"
+      },
+      {
+       "id": "cool_bigpumps",
+       "anim": "NONE"
+      },
+      {
+       "id": "cool_hppump",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "safety",
+     "name": {
+      "de": "Sicherheit",
+      "en": "Safety"
+     },
+     "pages": [
+      {
+       "id": "safety_boom",
+       "anim": "BOOM"
+      },
+      {
+       "id": "safety_detonator",
+       "anim": "NONE"
+      },
+      {
+       "id": "safety_tips",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "fuel_end",
+     "name": {
+      "de": "Abgebrannter Brennstoff",
+      "en": "Spent Fuel"
+     },
+     "pages": [
+      {
+       "id": "rod_spent",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_castor",
+       "anim": "NONE"
+      },
+      {
+       "id": "fast_breeder",
+       "anim": "NONE"
+      },
+      {
+       "id": "rod_repository",
+       "anim": "NONE"
+      }
+     ]
+    },
+    {
+     "id": "fusion_core",
+     "name": {
+      "de": "Fusionsreaktor",
+      "en": "Fusion Reactor"
+     },
+     "pages": [
+      {
+       "id": "line_fusion",
+       "anim": "LINE"
+      },
+      {
+       "id": "fusion_overview",
+       "anim": "NONE"
+      },
+      {
+       "id": "fusion_reactor",
+       "anim": "NONE"
+      },
+      {
+       "id": "fusion_fuel",
+       "anim": "NONE"
+      },
+      {
+       "id": "fusion_deuterium",
+       "anim": "NONE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_mod",
+   "name": {
+    "de": "All Items",
+    "en": "All Items"
+   },
+   "chapters": [
+    {
+     "id": "the_mod",
+     "name": {
+      "de": "All Items",
+      "en": "All Items"
+     },
+     "pages": [
+      {
+       "id": "the_mod_all",
+       "anim": "SCOPE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "protection",
+   "name": {
+    "de": "Strahlenschutz",
+    "en": "Radiation Protection"
+   },
+   "chapters": [
+    {
+     "id": "protection",
+     "name": {
+      "de": "Strahlenschutz",
+      "en": "Radiation Protection"
+     },
+     "pages": [
+      {
+       "id": "prot_basics",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_sickness",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_suit",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_mask",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_dosimeter",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_geiger",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_zones",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_shower",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_doors",
+       "anim": "NONE"
+      },
+      {
+       "id": "prot_airlock",
+       "anim": "NONE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "weapons",
+   "name": {
+    "de": "Weapons",
+    "en": "Weapons"
+   },
+   "chapters": [
+    {
+     "id": "weapons",
+     "name": {
+      "de": "Weapons",
+      "en": "Weapons"
+     },
+     "pages": [
+      {
+       "id": "weapons_overview",
+       "anim": "WEAPONS"
+      },
+      {
+       "id": "weapons_processing",
+       "anim": "NONE"
+      },
+      {
+       "id": "weapons_bomb",
+       "anim": "NONE"
+      },
+      {
+       "id": "weapons_bomb_large",
+       "anim": "NONE"
+      },
+      {
+       "id": "weapons_tsar",
+       "anim": "NONE"
+      },
+      {
+       "id": "weapons_arming",
+       "anim": "NONE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "achievements",
+   "name": {
+    "de": "Errungenschaften",
+    "en": "Achievements"
+   },
+   "chapters": [
+    {
+     "id": "achievements",
+     "name": {
+      "de": "Errungenschaften",
+      "en": "Achievements"
+     },
+     "pages": [
+      {
+       "id": "ach_lines",
+       "anim": "LINES"
+      },
+      {
+       "id": "ach_overview",
+       "anim": "ACHIEVE"
+      },
+      {
+       "id": "catalog_all",
+       "anim": "CATALOG"
+      },
+      {
+       "id": "progress_tree",
+       "anim": "TREE"
+      },
+      {
+       "id": "intro_roadmap",
+       "anim": "PLANT"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

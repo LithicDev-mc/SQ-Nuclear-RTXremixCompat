@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/feedwater_pump_sqc"
+    }
+  }
+}

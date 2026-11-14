@@ -1,0 +1,42 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cKmKc",
+    "Ke@eK",
+    "LRCRL",
+    "KeReK",
+    "cKLKc"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:battery_large_controller_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:battery_large_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

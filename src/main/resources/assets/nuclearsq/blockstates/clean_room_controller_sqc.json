@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/clean_room_controller_sqc"
+    }
+  }
+}

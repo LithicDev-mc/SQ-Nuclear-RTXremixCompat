@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,unfolded=true": {
+      "model": "nuclearsq:block/future_chest_sqc"
+    },
+    "facing=north,unfolded=false": {
+      "model": "nuclearsq:block/future_chest_sqc_hidden"
+    },
+    "facing=east,unfolded=true": {
+      "model": "nuclearsq:block/future_chest_sqc",
+      "y": 90
+    },
+    "facing=east,unfolded=false": {
+      "model": "nuclearsq:block/future_chest_sqc_hidden",
+      "y": 90
+    },
+    "facing=south,unfolded=true": {
+      "model": "nuclearsq:block/future_chest_sqc",
+      "y": 180
+    },
+    "facing=south,unfolded=false": {
+      "model": "nuclearsq:block/future_chest_sqc_hidden",
+      "y": 180
+    },
+    "facing=west,unfolded=true": {
+      "model": "nuclearsq:block/future_chest_sqc",
+      "y": 270
+    },
+    "facing=west,unfolded=false": {
+      "model": "nuclearsq:block/future_chest_sqc_hidden",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "textures": {
+    "cable": "nuclearsq:block/cable_hardened_sqc",
+    "particle": "nuclearsq:block/cable_hardened_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        8,
+        6
+      ],
+      "to": [
+        5,
+        10,
+        8
+      ],
+      "faces": {
+        "east": {
+          "texture": "#cable",
+          "uv": [
+            8,
+            6,
+            10,
+            8
+          ]
+        },
+        "west": {
+          "texture": "#cable",
+          "uv": [
+            6,
+            6,
+            8,
+            8
+          ]
+        },
+        "up": {
+          "texture": "#cable",
+          "uv": [
+            6,
+            1,
+            8,
+            5
+          ],
+          "rotation": 90
+        },
+        "down": {
+          "texture": "#cable",
+          "uv": [
+            8,
+            1,
+            10,
+            5
+          ],
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        6,
+        6
+      ],
+      "to": [
+        5,
+        8,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#cable",
+          "uv": [
+            8,
+            11,
+            10,
+            15
+          ],
+          "rotation": 90
+        },
+        "east": {
+          "texture": "#cable",
+          "uv": [
+            8,
+            6,
+            10,
+            10
+          ],
+          "rotation": 90
+        },
+        "south": {
+          "texture": "#cable",
+          "uv": [
+            8,
+            1,
+            10,
+            5
+          ],
+          "rotation": 90
+        },
+        "west": {
+          "texture": "#cable",
+          "uv": [
+            8,
+            6,
+            10,
+            10
+          ],
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "from": [
+        1.01,
+        6.5858,
+        6.5858
+      ],
+      "to": [
+        4.99,
+        9.4142,
+        9.4142
+      ],
+      "faces": {
+        "north": {
+          "texture": "#cable"
+        },
+        "east": {
+          "texture": "#cable"
+        },
+        "south": {
+          "texture": "#cable"
+        },
+        "west": {
+          "texture": "#cable"
+        },
+        "up": {
+          "texture": "#cable"
+        },
+        "down": {
+          "texture": "#cable"
+        }
+      },
+      "rotation": {
+        "angle": 45,
+        "axis": "x",
+        "origin": [
+          3,
+          8,
+          8
+        ]
+      }
+    }
+  ]
+}

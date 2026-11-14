@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/pump_high_pressure_sqc"
+    }
+  }
+}

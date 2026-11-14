@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "core=false": {
+      "model": "nuclearsq:block/oil_stain_sqc"
+    },
+    "core=true": {
+      "model": "nuclearsq:block/oil_well_sqc"
+    }
+  }
+}

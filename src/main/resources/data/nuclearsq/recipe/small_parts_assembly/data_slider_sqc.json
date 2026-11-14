@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:lever"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:comparator"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:data_cable_sqc"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:data_slider_sqc",
+    "count": 1
+  }
+}

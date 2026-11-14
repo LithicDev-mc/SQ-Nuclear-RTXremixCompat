@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:uf6_conversion",
+  "ingredient": {
+    "item": "nuclearsq:uranium_oxide_sqc"
+  },
+  "count": 2,
+  "time": 300,
+  "energy_per_tick": 2400,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:uf6_cylinder_sqc",
+        "count": 1
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "hf_in",
+      "amount": 300
+    }
+  ]
+}

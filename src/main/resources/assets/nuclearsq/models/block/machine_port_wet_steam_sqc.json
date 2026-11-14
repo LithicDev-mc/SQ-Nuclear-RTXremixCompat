@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "nuclearsq:block/machine_port_wet_steam_sqc"
+  }
+}

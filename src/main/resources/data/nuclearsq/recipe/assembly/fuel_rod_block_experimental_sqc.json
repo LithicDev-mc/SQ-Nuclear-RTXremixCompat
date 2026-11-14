@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:fuel_charge",
+        "item": "nuclearsq:fuel_rod_block_hardened_sqc",
+        "full": true
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:atomic_hull_plate_sqc"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:plutonium_core_sqc"
+      },
+      "count": 15
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:fuel_rod_block_experimental_sqc",
+    "count": 1,
+    "components": {
+      "nuclearsq:fuel_charge": 0,
+      "nuclearsq:fuel_unloaded": {}
+    }
+  }
+}

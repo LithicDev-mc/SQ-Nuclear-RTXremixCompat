@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:equipment_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:stick"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:string"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:feather"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:robo_feather_wand_sqc",
+    "count": 1
+  }
+}

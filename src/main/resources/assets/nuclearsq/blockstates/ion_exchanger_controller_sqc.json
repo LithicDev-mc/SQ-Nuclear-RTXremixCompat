@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/ion_exchanger_controller_sqc"
+    }
+  }
+}

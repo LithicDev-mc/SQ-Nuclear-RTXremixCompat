@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:damaged_anvil",
+    "minecraft:reinforced_deepslate",
+    "minecraft:iron_block",
+    "minecraft:anvil",
+    "minecraft:chipped_anvil",
+    "minecraft:netherite_block",
+    "nuclearsq:cable_reinforced_sqc",
+    "nuclearsq:pipe_reinforced_sqc",
+    "nuclearsq:fuel_rod_block_reinforced_sqc",
+    "nuclearsq:fuel_rod_head_reinforced_sqc",
+    "nuclearsq:turbine_steel_blades_sqc"
+  ]
+}

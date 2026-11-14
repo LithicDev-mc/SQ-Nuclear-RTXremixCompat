@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:reprocessing",
+  "ingredient": {
+    "type": "nuclearsq:optional",
+    "items": [
+      "nuclearsq:plutonium_oxide_sqc",
+      "mekanism:pellet_plutonium"
+    ]
+  },
+  "count": 4,
+  "time": 600,
+  "energy_per_tick": 480,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:plutonium_core_sqc",
+        "count": 1
+      }
+    }
+  ]
+}

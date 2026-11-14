@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/leaching_plant_controller_sqc"
+    }
+  }
+}

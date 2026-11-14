@@ -1,0 +1,63 @@
+{
+  "id": "fluid_buffer",
+  "size": [
+    3,
+    3,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "fluid_io",
+      "type": "acid",
+      "dir": "both",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        0,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:fluid_buffer_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "a": "nuclearsq:machine_port_acid_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "R@R",
+      "aRR",
+      "RtR"
+    ],
+    [
+      "   ",
+      " R ",
+      "   "
+    ],
+    [
+      "   ",
+      " R ",
+      "   "
+    ]
+  ]
+}

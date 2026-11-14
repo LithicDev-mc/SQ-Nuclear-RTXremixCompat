@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "nuclearsq:raw_lithium_sqc"
+  },
+  "result": {
+    "id": "nuclearsq:lithium_ingot_sqc"
+  },
+  "experience": 0.7,
+  "cookingtime": 100
+}

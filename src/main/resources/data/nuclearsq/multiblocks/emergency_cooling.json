@@ -1,0 +1,88 @@
+{
+  "id": "emergency_cooling",
+  "size": [
+    5,
+    3,
+    4
+  ],
+  "controller": [
+    2,
+    0,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "water_in",
+      "type": "water",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "name": "primary_out",
+      "type": "primary",
+      "dir": "out",
+      "cell": [
+        4,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        2,
+        2,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:emergency_cooling_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "w": "nuclearsq:machine_port_water_sqc",
+    "p": "nuclearsq:machine_port_primary_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      " e@RR",
+      "R RRR",
+      "wRRRR",
+      "RRRRR"
+    ],
+    [
+      " RRR ",
+      "RRRRp",
+      "RRRR ",
+      "RRRR "
+    ],
+    [
+      "     ",
+      "     ",
+      "RRtR ",
+      " RR  "
+    ]
+  ]
+}

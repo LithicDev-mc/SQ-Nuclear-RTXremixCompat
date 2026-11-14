@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "nuclearsq:osmium_dust_sqc"
+  },
+  "result": {
+    "id": "nuclearsq:osmium_ingot_sqc"
+  },
+  "experience": 0.7,
+  "cookingtime": 100
+}

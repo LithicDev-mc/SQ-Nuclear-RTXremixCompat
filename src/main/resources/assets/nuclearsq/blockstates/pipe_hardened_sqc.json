@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/pipe_hardened_sqc"
+    }
+  }
+}

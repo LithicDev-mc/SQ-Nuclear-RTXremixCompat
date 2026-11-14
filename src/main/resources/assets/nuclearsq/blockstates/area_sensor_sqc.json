@@ -1,0 +1,110 @@
+{
+  "variants": {
+    "alarm=false,face=ceiling,facing=east": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "x": 180,
+      "y": 270
+    },
+    "alarm=false,face=ceiling,facing=north": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "x": 180,
+      "y": 180
+    },
+    "alarm=false,face=ceiling,facing=south": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "x": 180
+    },
+    "alarm=false,face=ceiling,facing=west": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "x": 180,
+      "y": 90
+    },
+    "alarm=false,face=floor,facing=east": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "y": 90
+    },
+    "alarm=false,face=floor,facing=north": {
+      "model": "nuclearsq:block/area_sensor_sqc"
+    },
+    "alarm=false,face=floor,facing=south": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "y": 180
+    },
+    "alarm=false,face=floor,facing=west": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "y": 270
+    },
+    "alarm=false,face=wall,facing=east": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "x": 90,
+      "y": 90
+    },
+    "alarm=false,face=wall,facing=north": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "x": 90
+    },
+    "alarm=false,face=wall,facing=south": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "x": 90,
+      "y": 180
+    },
+    "alarm=false,face=wall,facing=west": {
+      "model": "nuclearsq:block/area_sensor_sqc",
+      "x": 90,
+      "y": 270
+    },
+    "alarm=true,face=ceiling,facing=east": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "x": 180,
+      "y": 270
+    },
+    "alarm=true,face=ceiling,facing=north": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "x": 180,
+      "y": 180
+    },
+    "alarm=true,face=ceiling,facing=south": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "x": 180
+    },
+    "alarm=true,face=ceiling,facing=west": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "x": 180,
+      "y": 90
+    },
+    "alarm=true,face=floor,facing=east": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "y": 90
+    },
+    "alarm=true,face=floor,facing=north": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm"
+    },
+    "alarm=true,face=floor,facing=south": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "y": 180
+    },
+    "alarm=true,face=floor,facing=west": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "y": 270
+    },
+    "alarm=true,face=wall,facing=east": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "x": 90,
+      "y": 90
+    },
+    "alarm=true,face=wall,facing=north": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "x": 90
+    },
+    "alarm=true,face=wall,facing=south": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "x": 90,
+      "y": 180
+    },
+    "alarm=true,face=wall,facing=west": {
+      "model": "nuclearsq:block/area_sensor_sqc_alarm",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

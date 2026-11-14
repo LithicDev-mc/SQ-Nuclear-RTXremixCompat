@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:plutonium_oxide_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:uranium_oxide_dust_sqc"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:zircaloy_sheet_sqc"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:mox_core_sqc",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:chemistry",
+  "ingredient": {
+    "item": "minecraft:obsidian"
+  },
+  "count": 4,
+  "time": 240,
+  "energy_per_tick": 2700,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:etched_obsidian_sqc",
+        "count": 2
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "hf_in",
+      "amount": 300
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "axis=x,quad=0": {
+      "model": "nuclearsq:block/big_pipe_x0_sqc"
+    },
+    "axis=x,quad=1": {
+      "model": "nuclearsq:block/big_pipe_x1_sqc"
+    },
+    "axis=x,quad=2": {
+      "model": "nuclearsq:block/big_pipe_x2_sqc"
+    },
+    "axis=x,quad=3": {
+      "model": "nuclearsq:block/big_pipe_x3_sqc"
+    },
+    "axis=y,quad=0": {
+      "model": "nuclearsq:block/big_pipe_y0_sqc"
+    },
+    "axis=y,quad=1": {
+      "model": "nuclearsq:block/big_pipe_y1_sqc"
+    },
+    "axis=y,quad=2": {
+      "model": "nuclearsq:block/big_pipe_y2_sqc"
+    },
+    "axis=y,quad=3": {
+      "model": "nuclearsq:block/big_pipe_y3_sqc"
+    },
+    "axis=z,quad=0": {
+      "model": "nuclearsq:block/big_pipe_z0_sqc"
+    },
+    "axis=z,quad=1": {
+      "model": "nuclearsq:block/big_pipe_z1_sqc"
+    },
+    "axis=z,quad=2": {
+      "model": "nuclearsq:block/big_pipe_z2_sqc"
+    },
+    "axis=z,quad=3": {
+      "model": "nuclearsq:block/big_pipe_z3_sqc"
+    }
+  }
+}

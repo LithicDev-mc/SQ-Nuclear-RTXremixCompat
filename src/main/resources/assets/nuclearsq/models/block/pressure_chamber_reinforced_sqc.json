@@ -1,0 +1,10 @@
+{
+  "loader": "neoforge:obj",
+  "model": "nuclearsq:models/block/pressure_chamber_reinforced_sqc.obj",
+  "flip_v": true,
+  "ambient_occlusion": false,
+  "textures": {
+    "texture": "nuclearsq:block/pressure_chamber_reinforced_sqc",
+    "particle": "nuclearsq:block/pressure_chamber_reinforced_sqc"
+  }
+}

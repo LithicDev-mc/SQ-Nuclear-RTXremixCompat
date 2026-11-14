@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "nuclearsq:block/power_gate_sqc"
+    },
+    "facing=east": {
+      "model": "nuclearsq:block/power_gate_sqc",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "nuclearsq:block/power_gate_sqc",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nuclearsq:block/power_gate_sqc",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "nuclearsq:block/power_gate_sqc",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "nuclearsq:block/power_gate_sqc",
+      "x": 90
+    }
+  }
+}

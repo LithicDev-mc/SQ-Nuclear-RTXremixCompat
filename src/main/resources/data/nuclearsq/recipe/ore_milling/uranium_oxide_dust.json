@@ -1,0 +1,17 @@
+{
+  "type": "nuclearsq:ore_milling",
+  "ingredient": {
+    "item": "nuclearsq:uranium_oxide_sqc"
+  },
+  "count": 4,
+  "time": 200,
+  "energy_per_tick": 120,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:uranium_oxide_dust_sqc",
+        "count": 1
+      }
+    }
+  ]
+}

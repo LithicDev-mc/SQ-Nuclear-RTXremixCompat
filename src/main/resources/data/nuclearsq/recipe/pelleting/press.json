@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:pelleting",
+  "ingredient": {
+    "item": "nuclearsq:uranium_oxide_dust_sqc"
+  },
+  "count": 2,
+  "time": 160,
+  "energy_per_tick": 1800,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:uranium_pellet_sqc",
+        "count": 3
+      }
+    }
+  ],
+  "aux": {
+    "item": "nuclearsq:enriched_uranium_sqc"
+  },
+  "aux_count": 1
+}

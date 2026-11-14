@@ -1,0 +1,74 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "idle": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {}
+    },
+    "running": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "cage": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "2.0": [
+              0,
+              26,
+              0
+            ],
+            "4.0": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "wheel_a": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "2.0": [
+              -360,
+              0,
+              0
+            ],
+            "4.0": [
+              -720,
+              0,
+              0
+            ]
+          }
+        },
+        "wheel_b": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "2.0": [
+              360,
+              0,
+              0
+            ],
+            "4.0": [
+              720,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    }
+  },
+  "geckolib_format_version": 2
+}

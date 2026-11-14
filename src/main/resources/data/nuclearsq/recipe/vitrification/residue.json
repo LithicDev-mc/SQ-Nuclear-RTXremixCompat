@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:vitrification",
+  "ingredient": {
+    "item": "nuclearsq:filter_residue_sqc"
+  },
+  "count": 8,
+  "time": 300,
+  "energy_per_tick": 4500,
+  "results": [],
+  "fluids": [
+    {
+      "port": "acid_in",
+      "amount": 400
+    }
+  ],
+  "fluid_results": [
+    {
+      "port": "hlw_out",
+      "fluid": "nuclearsq:hlw",
+      "amount": 500
+    }
+  ]
+}

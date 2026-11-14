@@ -1,0 +1,10 @@
+{
+  "loader": "neoforge:obj",
+  "model": "nuclearsq:models/block/water_inlet_sqc.obj",
+  "flip_v": true,
+  "ambient_occlusion": false,
+  "textures": {
+    "texture": "nuclearsq:block/water_inlet_sqc",
+    "particle": "nuclearsq:block/water_inlet_sqc"
+  }
+}

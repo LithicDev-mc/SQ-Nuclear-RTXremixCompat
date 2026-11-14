@@ -1,0 +1,74 @@
+{
+  "id": "particle_assembler",
+  "size": [
+    5,
+    3,
+    3
+  ],
+  "controller": [
+    2,
+    0,
+    0
+  ],
+  "anchor": [
+    2,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "item_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        4,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        0,
+        0,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:particle_assembler_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "RR@RR",
+      "eRRRi",
+      "tRRRR"
+    ],
+    [
+      "R   R",
+      "     ",
+      "R   R"
+    ],
+    [
+      "RRRRR",
+      "R   R",
+      "RRRRR"
+    ]
+  ]
+}

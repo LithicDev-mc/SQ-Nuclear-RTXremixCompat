@@ -1,0 +1,48 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cSSSc",
+    "SAKAS",
+    "SK@KS",
+    "SCTCS",
+    "meLLc"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:wind_turbine_large_controller_sqc"
+    },
+    "A": {
+      "item": "nuclearsq:brass_bearing_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    },
+    "T": {
+      "item": "nuclearsq:control_board_3_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:wind_turbine_large_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

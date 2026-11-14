@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:vitrification",
+  "ingredient": {
+    "tag": "minecraft:sand"
+  },
+  "count": 4,
+  "time": 600,
+  "energy_per_tick": 7500,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:glass_canister_sqc",
+        "count": 1
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "hlw_out",
+      "amount": 500
+    }
+  ]
+}

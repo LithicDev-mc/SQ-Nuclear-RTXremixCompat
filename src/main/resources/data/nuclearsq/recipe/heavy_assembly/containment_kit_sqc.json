@@ -1,0 +1,51 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "crrrc",
+    "rL@Lr",
+    "ufCfu",
+    "rieLr",
+    "crhrm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:containment_controller_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "f": {
+      "item": "nuclearsq:machine_port_feedwater_sqc"
+    },
+    "h": {
+      "item": "nuclearsq:pressure_chamber_hardened_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "r": {
+      "item": "nuclearsq:pressure_chamber_reinforced_sqc"
+    },
+    "u": {
+      "item": "nuclearsq:machine_port_wet_steam_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:containment_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

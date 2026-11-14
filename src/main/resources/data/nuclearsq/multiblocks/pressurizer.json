@@ -1,0 +1,120 @@
+{
+  "id": "pressurizer",
+  "size": [
+    3,
+    8,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "relief_out",
+      "type": "primary",
+      "dir": "out",
+      "cell": [
+        1,
+        7,
+        1
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "primary_in",
+      "type": "primary",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "pressure_signal",
+      "type": "signal",
+      "dir": "out",
+      "cell": [
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        2,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:pressurizer_controller_sqc",
+    "R": "nuclearsq:pressure_chamber_reinforced_sqc",
+    "p": "nuclearsq:machine_port_primary_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "s": "nuclearsq:machine_port_signal_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      " @ ",
+      "pRe",
+      " R "
+    ],
+    [
+      "RRR",
+      "RRR",
+      "RsR"
+    ],
+    [
+      "RRR",
+      "RRR",
+      "RtR"
+    ],
+    [
+      "RRR",
+      "RRR",
+      "RRR"
+    ],
+    [
+      "RRR",
+      "RRR",
+      "RRR"
+    ],
+    [
+      "RRR",
+      "RRR",
+      "RRR"
+    ],
+    [
+      "RRR",
+      "RRR",
+      "RRR"
+    ],
+    [
+      "   ",
+      " p ",
+      "   "
+    ]
+  ]
+}

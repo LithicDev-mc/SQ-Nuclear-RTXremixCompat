@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "nuclearsq:lead_ingot_sqc",
+    "nuclearsq:tin_ingot_sqc",
+    "nuclearsq:osmium_ingot_sqc",
+    "nuclearsq:steel_ingot_sqc",
+    "nuclearsq:lithium_ingot_sqc"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+ "variants": {
+  "layers=1": {
+   "model": "nuclearsq:block/nuclear_ash_1"
+  },
+  "layers=2": {
+   "model": "nuclearsq:block/nuclear_ash_2"
+  },
+  "layers=3": {
+   "model": "nuclearsq:block/nuclear_ash_3"
+  },
+  "layers=4": {
+   "model": "nuclearsq:block/nuclear_ash_4"
+  }
+ }
+}

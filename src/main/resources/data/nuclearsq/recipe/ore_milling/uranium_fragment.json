@@ -1,0 +1,24 @@
+{
+  "type": "nuclearsq:ore_milling",
+  "ingredient": {
+    "item": "nuclearsq:uranium_fragment_sqc"
+  },
+  "count": 1,
+  "time": 200,
+  "energy_per_tick": 120,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:yellowcake_sqc",
+        "count": 1
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:yellowcake_sqc",
+        "count": 1
+      },
+      "chance": 0.25
+    }
+  ]
+}

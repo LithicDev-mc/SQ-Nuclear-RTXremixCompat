@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "nuclearsq:block/decon_shower_sqc"
+    },
+    "active=true": {
+      "model": "nuclearsq:block/decon_shower_sqc"
+    }
+  }
+}

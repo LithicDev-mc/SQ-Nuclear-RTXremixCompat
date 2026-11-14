@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/reprocessing_plant_controller_sqc"
+    }
+  }
+}

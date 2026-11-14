@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "nuclearsq:storage_crate_sqc",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "nuclearsq:storage_crate_sqc",
+              "properties": {
+                "second": "false"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "source": "block_entity",
+              "include": [
+                "nuclearsq:storage_crate_contents",
+                "nuclearsq:storage_crate_upgrade"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "nuclearsq:blocks/storage_crate_sqc"
+}

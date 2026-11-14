@@ -1,0 +1,26 @@
+{
+  "type": "nuclearsq:pelleting",
+  "ingredient": {
+    "item": "nuclearsq:lithium_ingot_sqc"
+  },
+  "count": 4,
+  "time": 160,
+  "energy_per_tick": 1800,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:lithium_pellet_sqc",
+        "count": 8
+      }
+    }
+  ],
+  "aux": {
+    "type": "nuclearsq:optional",
+    "items": [
+      "mekanism:enriched_carbon",
+      "nuclearsq:enriched_carbon_sqc"
+    ],
+    "tags": []
+  },
+  "aux_count": 1
+}

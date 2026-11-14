@@ -1,0 +1,17 @@
+{
+  "type": "nuclearsq:pelleting",
+  "ingredient": {
+    "item": "nuclearsq:uranium_pellet_sqc"
+  },
+  "count": 2,
+  "time": 240,
+  "energy_per_tick": 2700,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:uranium_core_sqc",
+        "count": 1
+      }
+    }
+  ]
+}

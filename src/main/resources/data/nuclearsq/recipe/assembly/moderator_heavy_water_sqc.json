@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:moderator_fluorite_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:heavy_water_cell_sqc"
+      },
+      "count": 30
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:atomic_hull_plate_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:moderator_heavy_water_sqc",
+    "count": 1
+  }
+}

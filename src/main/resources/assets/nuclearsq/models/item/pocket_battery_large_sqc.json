@@ -1,0 +1,6 @@
+{
+ "parent": "minecraft:item/generated",
+ "textures": {
+  "layer0": "nuclearsq:item/pocket_battery_large_sqc"
+ }
+}

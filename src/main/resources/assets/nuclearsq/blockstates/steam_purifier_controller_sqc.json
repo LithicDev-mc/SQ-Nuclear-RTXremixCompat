@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/steam_purifier_controller_sqc"
+    }
+  }
+}

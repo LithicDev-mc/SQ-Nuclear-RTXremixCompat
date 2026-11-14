@@ -1,0 +1,11 @@
+{
+  "values": [
+    "nuclearsq:chip_3_sqc",
+    "nuclearsq:cpu_module_32_sqc",
+    "nuclearsq:cpu_module_64_sqc",
+    "nuclearsq:cpu_module_128_sqc",
+    "nuclearsq:ram_module_8gb_sqc",
+    "nuclearsq:ram_module_sqc",
+    "nuclearsq:ram_module_32gb_sqc"
+  ]
+}

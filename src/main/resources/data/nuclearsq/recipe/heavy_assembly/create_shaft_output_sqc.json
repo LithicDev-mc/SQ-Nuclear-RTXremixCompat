@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    " S ",
+    "AEA",
+    "SWS",
+    " K "
+  ],
+  "key": {
+    "A": {
+      "item": "nuclearsq:brass_bearing_sqc"
+    },
+    "E": {
+      "item": "create:andesite_casing"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    },
+    "W": {
+      "item": "create:shaft"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:create_shaft_output_sqc",
+    "count": 1
+  },
+  "time": 200,
+  "energy_per_tick": 5760
+}

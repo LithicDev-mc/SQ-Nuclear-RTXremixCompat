@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "nuclearsq:block/rod_gripper_sqc"
+    },
+    "facing=east": {
+      "model": "nuclearsq:block/rod_gripper_sqc",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "nuclearsq:block/rod_gripper_sqc",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nuclearsq:block/rod_gripper_sqc",
+      "y": 270
+    }
+  }
+}

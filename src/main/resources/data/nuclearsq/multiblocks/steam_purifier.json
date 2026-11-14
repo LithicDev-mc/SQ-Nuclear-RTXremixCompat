@@ -1,0 +1,106 @@
+{
+  "id": "steam_purifier",
+  "size": [
+    3,
+    5,
+    3
+  ],
+  "controller": [
+    1,
+    0,
+    0
+  ],
+  "anchor": [
+    1,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "steam_out",
+      "type": "steam",
+      "dir": "out",
+      "cell": [
+        1,
+        4,
+        1
+      ]
+    },
+    {
+      "name": "steam_in",
+      "type": "steam",
+      "dir": "in",
+      "cell": [
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "residue_out",
+      "type": "item",
+      "dir": "out",
+      "cell": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        2,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        2,
+        0,
+        2
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:steam_purifier_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "C": "nuclearsq:pressure_chamber_reinforced_sqc",
+    "d": "nuclearsq:machine_port_steam_sqc",
+    "i": "nuclearsq:machine_port_item_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "R@R",
+      "RRi",
+      "RRt"
+    ],
+    [
+      "   ",
+      " C ",
+      "  e"
+    ],
+    [
+      "   ",
+      "dC ",
+      "   "
+    ],
+    [
+      "   ",
+      " C ",
+      "   "
+    ],
+    [
+      "   ",
+      " d ",
+      "   "
+    ]
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "nuclearsq:block/bank_server_sqc_top",
+    "front": "nuclearsq:block/bank_server_sqc_front",
+    "side": "nuclearsq:block/bank_server_sqc_side"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:foundry",
+  "ingredient": {
+    "item": "minecraft:sand"
+  },
+  "count": 4,
+  "time": 200,
+  "energy_per_tick": 3000,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:silicon_raw_sqc",
+        "count": 2
+      }
+    }
+  ],
+  "aux": {
+    "tag": "minecraft:coals"
+  },
+  "aux_count": 1
+}

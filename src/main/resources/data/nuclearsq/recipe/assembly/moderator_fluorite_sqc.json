@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:moderator_obsidian_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:fluorite_gem"
+        ],
+        "tags": [
+          "c:gems/fluorite"
+        ]
+      },
+      "count": 122
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:atomic_hull_plate_sqc"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:moderator_fluorite_sqc",
+    "count": 1
+  }
+}

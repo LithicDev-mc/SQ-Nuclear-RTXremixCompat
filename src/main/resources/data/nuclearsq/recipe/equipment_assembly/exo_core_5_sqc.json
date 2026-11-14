@@ -1,0 +1,34 @@
+{
+  "type": "nuclearsq:equipment_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:exo_core_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:chip_3_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:ultimate_control_circuit",
+          "nuclearsq:ultimate_circuit_sqc"
+        ]
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:exo_core_sqc",
+    "count": 1,
+    "components": {
+      "nuclearsq:exo_tier": 5
+    }
+  }
+}

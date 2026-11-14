@@ -1,0 +1,38 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cSmSc",
+    "Se@eS",
+    "SKBKS",
+    "cSSSc"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:battery_small_controller_sqc"
+    },
+    "B": {
+      "item": "nuclearsq:control_board_1_sqc"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:battery_small_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

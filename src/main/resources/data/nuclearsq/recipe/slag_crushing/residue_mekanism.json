@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mekanism"
+    }
+  ],
+  "type": "nuclearsq:slag_crushing",
+  "ingredient": {
+    "item": "nuclearsq:filter_residue_sqc"
+  },
+  "count": 2,
+  "time": 120,
+  "energy_per_tick": 900,
+  "results": [
+    {
+      "item": {
+        "id": "mekanism:dust_lead",
+        "count": 1
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:zirconium_dust_sqc",
+        "count": 1
+      },
+      "chance": 0.5
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": [
+    {
+      "item": "nuclearsq:lithium_ore_sqc"
+    },
+    {
+      "item": "nuclearsq:deepslate_lithium_ore_sqc"
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:lithium_ingot_sqc"
+  },
+  "experience": 0.7,
+  "cookingtime": 200
+}

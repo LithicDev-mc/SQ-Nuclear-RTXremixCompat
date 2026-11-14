@@ -1,0 +1,50 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "cWHWc",
+    "cz@zc",
+    "%%Tec",
+    "cSASm"
+  ],
+  "key": {
+    "%": {
+      "item": "nuclearsq:machine_port_primary_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:high_pressure_pump_controller_sqc"
+    },
+    "A": {
+      "item": "nuclearsq:brass_bearing_sqc"
+    },
+    "H": {
+      "item": "nuclearsq:hdpe_seal_sqc"
+    },
+    "S": {
+      "item": "nuclearsq:steel_sheet_sqc"
+    },
+    "T": {
+      "item": "nuclearsq:control_board_3_sqc"
+    },
+    "W": {
+      "item": "nuclearsq:lubricant_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "z": {
+      "item": "nuclearsq:pump_sodium_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:high_pressure_pump_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

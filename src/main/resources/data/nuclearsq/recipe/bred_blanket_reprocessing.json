@@ -1,0 +1,29 @@
+{
+  "type": "nuclearsq:reprocessing",
+  "ingredient": {
+    "item": "nuclearsq:bred_blanket_sqc"
+  },
+  "count": 1,
+  "time": 600,
+  "energy_per_tick": 480,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:plutonium_oxide_sqc",
+        "count": 1
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:depleted_uranium_sqc",
+        "count": 2
+      }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:nuclear_ash_sqc",
+        "count": 1
+      }
+    }
+  ]
+}

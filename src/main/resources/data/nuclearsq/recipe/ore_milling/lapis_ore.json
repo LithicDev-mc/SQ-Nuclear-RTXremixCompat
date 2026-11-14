@@ -1,0 +1,24 @@
+{
+  "type": "nuclearsq:ore_milling",
+  "ingredient": {
+    "tag": "c:ores/lapis"
+  },
+  "count": 1,
+  "time": 200,
+  "energy_per_tick": 120,
+  "results": [
+    {
+      "item": {
+        "id": "minecraft:lapis_lazuli",
+        "count": 6
+      }
+    },
+    {
+      "item": {
+        "id": "minecraft:lapis_lazuli",
+        "count": 1
+      },
+      "chance": 0.05
+    }
+  ]
+}

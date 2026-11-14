@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/fast_breeder_controller_sqc"
+    }
+  }
+}

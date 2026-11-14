@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/distillation_column_controller_sqc"
+    }
+  }
+}

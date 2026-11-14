@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:reactor_plate_sqc"
+      },
+      "count": 16
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:uranium_core_sqc"
+      },
+      "count": 15
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:zircaloy_sheet_sqc"
+      },
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:fuel_rod_block_sqc",
+    "count": 1
+  }
+}

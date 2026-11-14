@@ -1,0 +1,75 @@
+{
+  "id": "oil_derrick",
+  "size": [
+    2,
+    4,
+    2
+  ],
+  "controller": [
+    0,
+    0,
+    0
+  ],
+  "anchor": [
+    0,
+    0,
+    0
+  ],
+  "ports": [
+    {
+      "name": "energy_in",
+      "type": "energy",
+      "dir": "in",
+      "cell": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "crude_out",
+      "type": "acid",
+      "dir": "out",
+      "cell": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "data",
+      "type": "terminal",
+      "dir": "both",
+      "cell": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "legend": {
+    "@": "nuclearsq:oil_derrick_controller_sqc",
+    "R": "nuclearsq:reactor_casing_sqc",
+    "e": "nuclearsq:machine_port_energy_sqc",
+    "a": "nuclearsq:machine_port_acid_sqc",
+    "t": "nuclearsq:machine_port_terminal_sqc"
+  },
+  "layers": [
+    [
+      "@t",
+      "ea"
+    ],
+    [
+      "  ",
+      "R "
+    ],
+    [
+      "  ",
+      "R "
+    ],
+    [
+      "  ",
+      "R "
+    ]
+  ]
+}

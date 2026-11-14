@@ -1,0 +1,652 @@
+{
+  "variants": {
+    "armed=false,part=0,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=0,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=0,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=0,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=1,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=1,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=1,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=1,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=2,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=2,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=2,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=2,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=3,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=3,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=3,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=3,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=4,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=4,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=4,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=4,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=5,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=5,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=5,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=5,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=6,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=6,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=6,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=6,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=7,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=7,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=7,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=7,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=8,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=8,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=8,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=8,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=9,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=9,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=9,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=9,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=10,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=10,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=10,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=10,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=11,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=11,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=11,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=11,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=12,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=12,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=12,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=12,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=13,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_lower"
+    },
+    "armed=false,part=13,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_lower"
+    },
+    "armed=true,part=13,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_lower_armed"
+    },
+    "armed=true,part=13,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_lower_armed"
+    },
+    "armed=false,part=14,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=14,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=14,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=14,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=15,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=15,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=15,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=15,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=16,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=16,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=16,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=16,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=17,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=17,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=17,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=17,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=18,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=18,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=18,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=18,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=19,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=19,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=19,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=19,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=20,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=20,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=20,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=20,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=21,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=21,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=21,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=21,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=22,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=22,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=22,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=22,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=23,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=23,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=23,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=23,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=24,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=24,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=24,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=24,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=25,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=25,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=25,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=25,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=26,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=26,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=26,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=26,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=27,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=27,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=27,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=27,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=28,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=28,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=28,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=28,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=29,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=29,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=29,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=29,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=30,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=30,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=30,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=30,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=31,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=31,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=31,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=31,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=32,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=32,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=32,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=32,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=33,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=33,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=33,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=33,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=34,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=34,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=34,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=34,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=35,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=35,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=35,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=35,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=36,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=36,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=36,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=36,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=37,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=37,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=37,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=37,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=38,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=38,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=38,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=38,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=39,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=39,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=39,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=39,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=40,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_upper"
+    },
+    "armed=false,part=40,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_upper"
+    },
+    "armed=true,part=40,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_upper_armed"
+    },
+    "armed=true,part=40,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_upper_armed"
+    },
+    "armed=false,part=41,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=41,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=41,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=41,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=42,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=42,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=42,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=42,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=43,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=43,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=43,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=43,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=44,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=44,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=44,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=44,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=45,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=45,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=45,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=45,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=46,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=46,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=46,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=46,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=47,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=47,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=47,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=47,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=48,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=48,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=48,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=48,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=49,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=49,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=49,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=49,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=50,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=50,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=50,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=50,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=51,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=51,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=51,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=51,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=52,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=52,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=52,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=52,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=53,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=false,part=53,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=53,powered=false": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    },
+    "armed=true,part=53,powered=true": {
+      "model": "nuclearsq:block/nuclear_bomb_tsar_sqc_part"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.neoforged.net/releases' }
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+rootProject.name = 'SQ-Nuclear'
+
+gradle.afterProject { project ->
+    project.tasks.matching { it.name in ['jar', 'jarJar'] }.configureEach {
+        exclude 'com/sqc/nuclearsq/gametest/**', 'data/nuclearsq/structure/floor.nbt'
+        exclude '**/*.md', '**/*.py', '**/*.bbmodel', '**/*.blend', '**/*.psd', '**/*.xcf', '**/*.bak', '**/*.orig', '**/*.rej',
+                '**/Thumbs.db', '**/desktop.ini', '**/.DS_Store'
+    }
+}

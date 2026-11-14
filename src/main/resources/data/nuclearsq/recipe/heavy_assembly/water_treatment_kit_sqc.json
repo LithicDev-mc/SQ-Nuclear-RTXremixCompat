@@ -1,0 +1,48 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "wcHcw",
+    "((@((",
+    "((GaG",
+    "((cec",
+    "ffffm"
+  ],
+  "key": {
+    "(": {
+      "item": "nuclearsq:machine_port_big_water_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:water_treatment_controller_sqc"
+    },
+    "G": {
+      "item": "nuclearsq:glass_seal_sqc"
+    },
+    "H": {
+      "item": "nuclearsq:hdpe_seal_sqc"
+    },
+    "a": {
+      "item": "nuclearsq:water_treatment_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "f": {
+      "item": "nuclearsq:machine_port_feedwater_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "w": {
+      "item": "nuclearsq:machine_port_water_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:water_treatment_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

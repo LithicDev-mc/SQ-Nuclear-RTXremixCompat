@@ -1,0 +1,47 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "ckkkc",
+    "ko@ok",
+    "sxdxw",
+    "ckekm"
+  ],
+  "key": {
+    "@": {
+      "item": "nuclearsq:condenser_controller_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "d": {
+      "item": "nuclearsq:condenser_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "k": {
+      "item": "nuclearsq:pressure_chamber_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "o": {
+      "item": "nuclearsq:machine_port_coolant_sqc"
+    },
+    "s": {
+      "item": "nuclearsq:machine_port_steam_sqc"
+    },
+    "w": {
+      "item": "nuclearsq:machine_port_water_sqc"
+    },
+    "x": {
+      "item": "nuclearsq:heat_exchanger_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:condenser_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 5760
+}

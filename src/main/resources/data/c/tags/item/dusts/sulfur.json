@@ -1,0 +1,9 @@
+{
+  "values": [
+    "nuclearsq:sulfur_dust_sqc",
+    {
+      "id": "mekanism:dust_sulfur",
+      "required": false
+    }
+  ]
+}

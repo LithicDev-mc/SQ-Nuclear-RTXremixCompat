@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:chemistry",
+  "ingredient": {
+    "item": "minecraft:dried_kelp"
+  },
+  "count": 6,
+  "time": 200,
+  "energy_per_tick": 2400,
+  "results": [],
+  "fluids": [
+    {
+      "port": "water_in",
+      "amount": 400
+    }
+  ],
+  "fluid_results": [
+    {
+      "port": "lye_out",
+      "fluid": "nuclearsq:lye",
+      "amount": 500
+    }
+  ]
+}

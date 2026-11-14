@@ -1,0 +1,76 @@
+{
+  "textures": {
+    "t": "nuclearsq:block/robot_arm_sqc",
+    "particle": "nuclearsq:block/robot_arm_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        2.5,
+        0.5
+      ],
+      "to": [
+        7.5,
+        6,
+        2.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            10,
+            7.5,
+            13.5
+          ],
+          "texture": "#t"
+        },
+        "south": {
+          "uv": [
+            6,
+            10,
+            7.5,
+            13.5
+          ],
+          "texture": "#t"
+        },
+        "east": {
+          "uv": [
+            0.5,
+            10,
+            2.5,
+            13.5
+          ],
+          "texture": "#t"
+        },
+        "west": {
+          "uv": [
+            0.5,
+            10,
+            2.5,
+            13.5
+          ],
+          "texture": "#t"
+        },
+        "up": {
+          "uv": [
+            6,
+            0.5,
+            7.5,
+            2.5
+          ],
+          "texture": "#t"
+        },
+        "down": {
+          "uv": [
+            6,
+            0.5,
+            7.5,
+            2.5
+          ],
+          "texture": "#t"
+        }
+      }
+    }
+  ]
+}

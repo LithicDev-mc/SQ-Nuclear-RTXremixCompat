@@ -1,0 +1,1277 @@
+{
+  "parts": {
+    "moderator_power_pct_1": 125, "moderator_power_pct_2": 150, "moderator_power_pct_3": 200, "moderator_power_pct_4": 300, "moderator_power_pct_5": 400,
+    "moderator_heat_pct_1": 120, "moderator_heat_pct_2": 140, "moderator_heat_pct_3": 220, "moderator_heat_pct_4": 360, "moderator_heat_pct_5": 420,
+    "cooler_add_milli_1": 300, "cooler_add_milli_2": 600, "cooler_add_milli_3": 1000,
+    "translator_fe_pct_1": 100, "translator_fe_pct_2": 110, "translator_fe_pct_3": 125, "translator_fe_pct_4": 150,
+    "translator_flow_pct_1": 100, "translator_flow_pct_2": 150, "translator_flow_pct_3": 200, "translator_flow_pct_4": 300
+  },
+  "machines": {
+    "cooling_tower_large": {
+      "energy": null,
+      "ports": {
+        "coolant_in": {"type": "coolant", "dir": "in", "rate": 960, "unit": "mB/t", "tank": 48000},
+        "coolant_out": {"type": "coolant", "dir": "out", "rate": 960, "unit": "mB/t", "tank": 48000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      },
+      "evaporation_mb_t": 20
+    },
+    "cooling_tower_xl": {
+      "energy": null,
+      "ports": {
+        "coolant_in": {"type": "coolant", "dir": "in", "rate": 3840, "unit": "mB/t", "tank": 192000},
+        "coolant_out": {"type": "coolant", "dir": "out", "rate": 3840, "unit": "mB/t", "tank": 192000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      },
+      "evaporation_mb_t": 80
+    },
+    "containment": {
+      "energy": {"capacity": 300000, "use": 150},
+      "ports": {
+        "airlock_items": {"type": "item", "dir": "both", "rate": 1, "unit": "Stapel/t", "slots": 27},
+        "feedwater_in": {"type": "feedwater", "dir": "in", "rate": 1280, "unit": "mB/t", "tank": 32000},
+        "feedwater_out": {"type": "feedwater", "dir": "out", "rate": 1280, "unit": "mB/t", "tank": 32000},
+        "wet_steam_in": {"type": "wet_steam", "dir": "in", "rate": 1280, "unit": "mB/t", "tank": 32000},
+        "wet_steam_out": {"type": "wet_steam", "dir": "out", "rate": 1280, "unit": "mB/t", "tank": 32000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 4000, "unit": "FE/t"},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 4000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"},
+        "data_inner": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"},
+        "relief_in": {"type": "primary", "dir": "in", "rate": 160, "unit": "mB/t", "tank": 16000},
+        "relief_out": {"type": "primary", "dir": "out", "rate": 160, "unit": "mB/t", "tank": 16000},
+        "hpi_in": {"type": "primary", "dir": "in", "rate": 320, "unit": "mB/t", "tank": 16000},
+        "hpi_out": {"type": "primary", "dir": "out", "rate": 320, "unit": "mB/t", "tank": 16000},
+        "emc_in": {"type": "primary", "dir": "in", "rate": 80, "unit": "mB/t", "tank": 16000},
+        "emc_out": {"type": "primary", "dir": "out", "rate": 80, "unit": "mB/t", "tank": 16000}
+      }
+    },
+    "steam_generator": {
+      "energy": null,
+      "ports": {
+        "primary_hot_in": {"type": "primary", "dir": "in", "rate": 2560, "unit": "mB/t", "tank": 64000},
+        "primary_cold_out": {"type": "primary", "dir": "out", "rate": 2560, "unit": "mB/t", "tank": 64000},
+        "feedwater_in": {"type": "feedwater", "dir": "in", "rate": 1280, "unit": "mB/t", "tank": 32000},
+        "wet_steam_out": {"type": "wet_steam", "dir": "out", "rate": 1280, "unit": "mB/t", "tank": 32000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "relief_tank": {
+      "energy": null,
+      "ports": {
+        "relief_in": {"type": "primary", "dir": "in", "rate": 160, "unit": "mB/t", "tank": 16000},
+        "coolant_in": {"type": "coolant", "dir": "in", "rate": 160, "unit": "mB/t", "tank": 16000},
+        "coolant_out": {"type": "coolant", "dir": "out", "rate": 160, "unit": "mB/t", "tank": 16000},
+        "primary_out": {"type": "primary", "dir": "out", "rate": 320, "unit": "mB/t", "tank": 128000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "high_pressure_injection": {
+      "energy": {"capacity": 300000, "use": 1800},
+      "ports": {
+        "primary_in": {"type": "primary", "dir": "in", "rate": 320, "unit": "mB/t", "tank": 16000},
+        "primary_out": {"type": "primary", "dir": "out", "rate": 320, "unit": "mB/t", "tank": 16000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "pressurizer": {
+      "energy": {"capacity": 180000, "use": 1200},
+      "ports": {
+        "primary_in": {"type": "primary", "dir": "in", "rate": 160, "unit": "mB/t", "tank": 16000},
+        "relief_out": {"type": "primary", "dir": "out", "rate": 160, "unit": "mB/t", "tank": 16000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "pressure_signal": {"type": "signal", "dir": "out", "rate": 15, "unit": "Signal 0-15"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "control_rod_drive": {
+      "energy": {"capacity": 60000, "use": 60},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 1500, "unit": "FE/t"},
+        "control_signal": {"type": "signal", "dir": "in", "rate": 15, "unit": "Signal 0-15"},
+        "rod_terminal": {"type": "terminal", "dir": "in", "rate": 0, "unit": "Bedienfeld"},
+        "hydraulic_in": {"type": "water", "dir": "in", "rate": 2, "unit": "mB/t", "tank": 4000},
+        "primary_cold_in": {"type": "primary", "dir": "in", "rate": 5120, "unit": "mB/t", "tank": 32000},
+        "primary_hot_out": {"type": "primary", "dir": "out", "rate": 5120, "unit": "mB/t", "tank": 32000},
+        "flux_signal": {"type": "signal", "dir": "out", "rate": 15, "unit": "Signal 0-15"}
+      },
+      "vessel_flow_mb_t": 640,
+      "meltdown_ticks": 250,
+      "heat_rise_pct": 80
+    },
+    "emergency_cooling": {
+      "energy": {"capacity": 180000, "use": 360},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "water_in": {"type": "water", "dir": "in", "rate": 80, "unit": "mB/t", "tank": 16000},
+        "primary_out": {"type": "primary", "dir": "out", "rate": 80, "unit": "mB/t", "tank": 16000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "steam_dryer": {
+      "energy": null,
+      "ports": {
+        "wet_steam_in": {"type": "wet_steam", "dir": "in", "rate": 1280, "unit": "mB/t", "tank": 64000},
+        "steam_out": {"type": "steam", "dir": "out", "rate": 1248, "unit": "mB/t", "tank": 64000},
+        "water_out": {"type": "water", "dir": "out", "rate": 32, "unit": "mB/t", "tank": 16000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "steam_separator": {
+      "energy": null,
+      "ports": {
+        "wet_steam_in": {"type": "wet_steam", "dir": "in", "rate": 1280, "unit": "mB/t", "tank": 64000},
+        "steam_out": {"type": "steam", "dir": "out", "rate": 1152, "unit": "mB/t", "tank": 64000},
+        "water_out": {"type": "water", "dir": "out", "rate": 128, "unit": "mB/t", "tank": 32000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "heavy_assembler": {
+      "energy": {"capacity": 1200000, "use": 0},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 12000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 26},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 26},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "main_coolant_pump": {
+      "energy": {"capacity": 480000, "use": 3600},
+      "ports": {
+        "primary_in": {"type": "primary", "dir": "in", "rate": 2560, "unit": "mB/t", "tank": 64000},
+        "primary_out": {"type": "primary", "dir": "out", "rate": 2560, "unit": "mB/t", "tank": 64000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 12000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "high_pressure_pump": {
+      "energy": {"capacity": 1200000, "use": 9600},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 24000, "unit": "FE/t"},
+        "primary_in": {"type": "primary", "dir": "in", "rate": 5120, "unit": "mB/t", "tank": 128000},
+        "primary_out": {"type": "primary", "dir": "out", "rate": 5120, "unit": "mB/t", "tank": 128000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "reprocessing_plant": {
+      "energy": {"capacity": 600000, "use": 0},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "shaft_generator": {
+      "energy": {"capacity": 64000000, "use": 0},
+      "ports": {
+        "energy_out": {"type": "energy", "dir": "out", "rate": 160000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      },
+      "efficiency_pct": 100
+    },
+    "waste_repository": {
+      "energy": {"capacity": 120000, "use": 600},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "items": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 9},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "ore_mill": {
+      "energy": {"capacity": 300000, "use": 0},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "enrichment_centrifuge": {
+      "energy": {"capacity": 300000, "use": 0},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "spent_fuel_rack": {
+      "cool_ticks": 6000,
+      "flow_mb_t": 10,
+      "column_min": 5,
+      "ports": {
+        "water_in": {"type": "water", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 2000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "coal_generator": {
+      "energy": {"capacity": 160, "use": 0},
+      "fe_per_tick": 160,
+      "burn_pct": 50,
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 1},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 1},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 640, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "solar_field": {
+      "energy": {"capacity": 440, "use": 0},
+      "fe_per_tick_peak": 440,
+      "ports": {
+        "energy_out": {"type": "energy", "dir": "out", "rate": 1600, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "wind_turbine_small": {
+      "energy": {"capacity": 88, "use": 0},
+      "fe_per_tick_peak": 88,
+      "hub_x": 3, "hub_y": 10, "hub_z": 2,
+      "ray_range": 20, "ray_skip": 4,
+      "ports": {
+        "energy_out": {"type": "energy", "dir": "out", "rate": 200, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "wind_turbine_medium": {
+      "energy": {"capacity": 440, "use": 0},
+      "fe_per_tick_peak": 440,
+      "hub_x": 8, "hub_y": 27, "hub_z": 3,
+      "ray_range": 40, "ray_skip": 6,
+      "ports": {
+        "energy_out": {"type": "energy", "dir": "out", "rate": 800, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "wind_turbine_large": {
+      "energy": {"capacity": 1760, "use": 0},
+      "fe_per_tick_peak": 1760,
+      "hub_x": 17, "hub_y": 55, "hub_z": 7,
+      "ray_range": 64, "ray_skip": 12,
+      "ports": {
+        "energy_out": {"type": "energy", "dir": "out", "rate": 4000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "control_desk": {
+      "energy": {"capacity": 60000, "use": 24},
+      "ports": {
+        "data": {"type": "terminal", "dir": "in", "rate": 0, "unit": "Datennetz"},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 600, "unit": "FE/t"}
+      }
+    },
+    "reheater": {
+      "energy": null,
+      "ports": {
+        "steam_in": {
+          "type": "steam",
+          "dir": "in",
+          "rate": 1280,
+          "unit": "mB/t",
+          "tank": 64000
+        },
+        "steam_out": {
+          "type": "steam",
+          "dir": "out",
+          "rate": 1024,
+          "unit": "mB/t",
+          "tank": 64000
+        },
+        "water_out": {
+          "type": "water",
+          "dir": "out",
+          "rate": 256,
+          "unit": "mB/t",
+          "tank": 32000
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "feedwater_heater": {
+      "energy": null,
+      "ports": {
+        "feedwater_in": {
+          "type": "feedwater",
+          "dir": "in",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 32000
+        },
+        "exhaust_in": {
+          "type": "steam",
+          "dir": "in",
+          "rate": 320,
+          "unit": "mB/t",
+          "tank": 32000
+        },
+        "feedwater_out": {
+          "type": "feedwater",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 32000
+        },
+        "water_out": {
+          "type": "water",
+          "dir": "out",
+          "rate": 320,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "battery_small": {
+      "energy": {
+        "capacity": 4000000,
+        "use": 0
+      },
+      "ports": {
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 4000,
+          "unit": "FE/t"
+        },
+        "energy_out": {
+          "type": "energy",
+          "dir": "out",
+          "rate": 4000,
+          "unit": "FE/t"
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "battery_medium": {
+      "energy": {
+        "capacity": 16000000,
+        "use": 0
+      },
+      "ports": {
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 16000,
+          "unit": "FE/t"
+        },
+        "energy_out": {
+          "type": "energy",
+          "dir": "out",
+          "rate": 16000,
+          "unit": "FE/t"
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "battery_large": {
+      "energy": {
+        "capacity": 64000000,
+        "use": 0
+      },
+      "ports": {
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 131072,
+          "unit": "FE/t"
+        },
+        "energy_in_2": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 131072,
+          "unit": "FE/t"
+        },
+        "energy_out": {
+          "type": "energy",
+          "dir": "out",
+          "rate": 131072,
+          "unit": "FE/t"
+        },
+        "energy_out_2": {
+          "type": "energy",
+          "dir": "out",
+          "rate": 131072,
+          "unit": "FE/t"
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "steam_purifier": {
+      "energy": {
+        "capacity": 480000,
+        "use": 960
+      },
+      "ports": {
+        "steam_in": {
+          "type": "steam",
+          "dir": "in",
+          "rate": 1280,
+          "unit": "mB/t",
+          "tank": 32000
+        },
+        "steam_out": {
+          "type": "steam",
+          "dir": "out",
+          "rate": 1280,
+          "unit": "mB/t",
+          "tank": 32000
+        },
+        "residue_out": {
+          "type": "item",
+          "dir": "out",
+          "rate": 1,
+          "unit": "Items",
+          "slots": 1
+        },
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 12000,
+          "unit": "FE/t"
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      },
+      "residue_every_mb": 512000,
+      "residue_max": 16
+    },
+    "condenser": {
+      "energy": {
+        "capacity": 120000,
+        "use": 240
+      },
+      "ports": {
+        "exhaust_in": {
+          "type": "steam",
+          "dir": "in",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "water_out": {
+          "type": "water",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "coolant_in": {
+          "type": "coolant",
+          "dir": "in",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "coolant_out": {
+          "type": "coolant",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 3000,
+          "unit": "FE/t"
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      },
+      "air_rate_mb_t": 40
+    },
+    "water_treatment": {
+      "energy": {
+        "capacity": 180000,
+        "use": 360
+      },
+      "ports": {
+        "water_in": {
+          "type": "big_water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "water_in_2": {
+          "type": "big_water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "water_in_3": {
+          "type": "big_water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "water_in_4": {
+          "type": "big_water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "water_in_5": {
+          "type": "big_water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "water_in_6": {
+          "type": "big_water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "water_in_7": {
+          "type": "big_water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "water_in_8": {
+          "type": "big_water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "water_in_9": {
+          "type": "water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "water_in_10": {
+          "type": "water",
+          "dir": "in",
+          "rate": 160,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "feedwater_out": {
+          "type": "feedwater",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "feedwater_out_2": {
+          "type": "feedwater",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "feedwater_out_3": {
+          "type": "feedwater",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "feedwater_out_4": {
+          "type": "feedwater",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 3000,
+          "unit": "FE/t"
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "feedwater_pump": {
+      "energy": {
+        "capacity": 240000,
+        "use": 480
+      },
+      "ports": {
+        "feedwater_in": {
+          "type": "feedwater",
+          "dir": "in",
+          "rate": 960,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "feedwater_out": {
+          "type": "feedwater",
+          "dir": "out",
+          "rate": 960,
+          "unit": "mB/t",
+          "tank": 16000
+        },
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 6000,
+          "unit": "FE/t"
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "reactor_assembler": {
+      "energy": {
+        "capacity": 600000,
+        "use": 0
+      },
+      "fe_per_tick": 1350,
+      "fe_per_tick_reactor": 3840,
+      "craft_ticks": 400,
+      "ports": {
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 12000,
+          "unit": "FE/t"
+        },
+        "item_in": {
+          "type": "item",
+          "dir": "in",
+          "rate": 1,
+          "unit": "Stapel/t",
+          "slots": 10
+        },
+        "item_out": {
+          "type": "item",
+          "dir": "out",
+          "rate": 1,
+          "unit": "Stapel/t",
+          "slots": 10
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "particle_assembler": {
+      "energy": {"capacity": 1200000, "use": 0},
+      "fe_per_tick": 3840,
+      "cycle_ticks": 160,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 12000, "unit": "FE/t"},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 14},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "small_parts_assembler": {
+      "energy": {"capacity": 300000, "use": 0},
+      "fe_per_tick": 960,
+      "craft_ticks": 100,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "clean_room": {
+      "energy": {"capacity": 1200000, "use": 0},
+      "fe_per_tick": 1920,
+      "craft_ticks": 200,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 12000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "micro_assembler": {
+      "energy": {"capacity": 120000, "use": 0},
+      "fe_per_tick": 360,
+      "craft_ticks": 100,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "equipment_assembler": {
+      "energy": {"capacity": 600000, "use": 0},
+      "fe_per_tick": 1350,
+      "craft_ticks": 400,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "exo_station": {
+      "energy": {"capacity": 40000, "use": 0},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 20000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "compute_cluster": {"energy": {"capacity": 600000, "use": 0}, "ports": {"energy_in": {"type": "energy", "dir": "in", "rate": 12000, "unit": "FE/t"}, "water_in": {"type": "water", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 4000}, "data": {"type": "terminal", "dir": "in", "rate": 0, "unit": "Datennetz"}}},
+    "server_rack_small": {
+      "energy": {"capacity": 60000, "use": 24},
+      "slots": 6,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 1200, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "in", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "server_rack": {
+      "energy": {"capacity": 60000, "use": 24},
+      "slots": 12,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 1200, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "in", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "server_rack_large": {
+      "energy": {"capacity": 60000, "use": 24},
+      "slots": 40,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 1200, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "in", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "pattern_rack": {
+      "energy": {"capacity": 12000, "use": 12},
+      "slots": 40,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 300, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "in", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "component_assembler": {
+      "energy": {"capacity": 3000000, "use": 0},
+      "fe_per_tick": 1440,
+      "cycle_ticks": 40,
+      "crafts_per_cycle": 4,
+      "max_jobs": 8,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 196608, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 9},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 9},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "compute_assembler": {
+      "energy": {"capacity": 3000000, "use": 0},
+      "fe_per_tick": 1350,
+      "fe_per_tick_reactor": 3840,
+      "craft_ticks": 400,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 196608, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 10},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "quantum_computer": {
+      "energy": {"capacity": 18000000, "use": 0},
+      "fe_per_tick": 106875,
+      "cycle_ticks": 20,
+      "crafts_per_cycle": 128,
+      "max_lanes": 8,
+      "max_jobs": 8,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3145728, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 9},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 9},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "substation": {
+      "line_rate": 262144,
+      "ports": {
+        "energy_in_0": {"type": "energy", "dir": "in", "rate": 131072, "unit": "FE/t"},
+        "energy_in_1": {"type": "energy", "dir": "in", "rate": 131072, "unit": "FE/t"},
+        "energy_out_0": {"type": "energy", "dir": "out", "rate": 131072, "unit": "FE/t"},
+        "energy_out_1": {"type": "energy", "dir": "out", "rate": 131072, "unit": "FE/t"},
+        "energy_out_2": {"type": "energy", "dir": "out", "rate": 131072, "unit": "FE/t"},
+        "energy_out_3": {"type": "energy", "dir": "out", "rate": 131072, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "fast_breeder": {
+      "energy": {"capacity": 150000, "use": 720},
+      "ports": {
+        "sodium_in": {"type": "coolant", "dir": "in", "rate": 320, "unit": "mB/t", "tank": 32000},
+        "feedwater_in": {"type": "feedwater", "dir": "in", "rate": 240, "unit": "mB/t", "tank": 16000},
+        "wet_steam_out": {"type": "wet_steam", "dir": "out", "rate": 240, "unit": "mB/t", "tank": 16000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 20},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 8},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      },
+      "steam_per_driver_mb_t": 60,
+      "driver_ticks": 14400,
+      "blanket_ticks": 4800,
+      "pu_breed_pct": 125,
+      "sodium_min_mb": 8000,
+      "sodium_leak_mb_t": 40
+    },
+    "leaching_plant": {
+      "energy": {
+        "capacity": 300000,
+        "use": 0
+      },
+      "ports": {
+        "item_in": {
+          "type": "item",
+          "dir": "in",
+          "rate": 1,
+          "unit": "Stapel/t",
+          "slots": 5
+        },
+        "item_out": {
+          "type": "item",
+          "dir": "out",
+          "rate": 1,
+          "unit": "Stapel/t",
+          "slots": 5
+        },
+        "water_in": {
+          "type": "water",
+          "dir": "in",
+          "rate": 200,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "acid_in": {
+          "type": "acid",
+          "dir": "in",
+          "rate": 100,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 3000,
+          "unit": "FE/t"
+        },
+        "data": {
+          "type": "terminal",
+          "dir": "both",
+          "rate": 0,
+          "unit": "Datennetz"
+        }
+      }
+    },
+    "uf6_converter": {
+      "energy": {
+        "capacity": 360000,
+        "use": 0
+      },
+      "ports": {
+        "item_in": {
+          "type": "item",
+          "dir": "in",
+          "rate": 1,
+          "unit": "Stapel/t",
+          "slots": 6
+        },
+        "item_out": {
+          "type": "item",
+          "dir": "out",
+          "rate": 1,
+          "unit": "Stapel/t",
+          "slots": 5
+        },
+        "hf_in": {
+          "type": "acid",
+          "dir": "in",
+          "rate": 50,
+          "unit": "mB/t",
+          "tank": 4000
+        },
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 6000,
+          "unit": "FE/t"
+        },
+        "data": {
+          "type": "terminal",
+          "dir": "both",
+          "rate": 0,
+          "unit": "Datennetz"
+        }
+      }
+    },
+    "pellet_factory": {
+      "energy": {"capacity": 450000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 6},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "foundry": {
+      "energy": {"capacity": 600000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 6},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 9000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "slag_crusher": {
+      "energy": {"capacity": 240000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "plate_mill": {
+      "energy": {"capacity": 180000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 6},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 1500, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "hammer_mill": {
+      "energy": {"capacity": 180000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 1500, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "oil_derrick": {
+      "energy": {"capacity": 300000, "use": 450},
+      "pump_mb_t": 40,
+      "ports": {
+        "crude_out": {"type": "acid", "dir": "out", "rate": 100, "unit": "mB/t", "tank": 8000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "distillation_column": {
+      "energy": {"capacity": 600000, "use": 1200},
+      "crude_mb_t": 20,
+      "naphtha_pm": 300,
+      "diesel_pm": 350,
+      "tar_pm": 250,
+      "crude_per_sulfur": 1000,
+      "ports": {
+        "crude_in": {"type": "acid", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 16000},
+        "naphtha_out": {"type": "acid", "dir": "out", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "diesel_out": {"type": "acid", "dir": "out", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "tar_out": {"type": "acid", "dir": "out", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 4},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "cracker": {
+      "energy": {"capacity": 600000, "use": 1800},
+      "naphtha_mb_t": 20,
+      "ethylene_pm": 400,
+      "ports": {
+        "naphtha_in": {"type": "acid", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 8000},
+        "ethylene_out": {"type": "gas", "dir": "out", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "electrolyzer": {
+      "energy": {"capacity": 900000, "use": 2400},
+      "h2_cmb_t": 200,
+      "ports": {
+        "water_in": {"type": "water", "dir": "in", "rate": 64, "unit": "mB/t", "tank": 8000},
+        "hydrogen_out": {"type": "gas", "dir": "out", "rate": 40, "unit": "mB/t", "tank": 8000},
+        "oxygen_out": {"type": "gas", "dir": "out", "rate": 40, "unit": "mB/t", "tank": 8000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "fuel_cell": {
+      "energy": {"capacity": 500, "use": 0},
+      "fe_per_tick": 500,
+      "h2_mb_t": 2,
+      "ports": {
+        "hydrogen_in": {"type": "gas", "dir": "in", "rate": 40, "unit": "mB/t", "tank": 8000},
+        "oxygen_in": {"type": "gas", "dir": "in", "rate": 40, "unit": "mB/t", "tank": 8000},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 1000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "gas_generator": {
+      "energy": {"capacity": 1200, "use": 0},
+      "fe_per_tick": 1200,
+      "ethylene_mb_t": 3,
+      "ports": {
+        "ethylene_in": {"type": "gas", "dir": "in", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 2400, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "fluid_buffer": {
+      "energy": null,
+      "ports": {
+        "fluid_io": {"type": "acid", "dir": "both", "rate": 200, "unit": "mB/t", "tank": 128000},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "decon_dock": {
+      "energy": {"capacity": 200000, "use": 0},
+      "charge_fe_t": 500,
+      "lye_mb_t": 10,
+      "diesel_mb_t": 5,
+      "diesel_fe_mb": 200,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 1000, "unit": "FE/t"},
+        "lye_in": {"type": "acid", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 4000},
+        "diesel_in": {"type": "acid", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 4000},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 4},
+        "item_out_back": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 4},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "acid_plant": {
+      "energy": {"capacity": 480000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "water_in": {"type": "water", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 8000},
+        "acid_out": {"type": "acid", "dir": "out", "rate": 100, "unit": "mB/t", "tank": 16000},
+        "hf_out": {"type": "acid", "dir": "out", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "heavy_water_plant": {
+      "energy": {"capacity": 600000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "water_in": {"type": "water", "dir": "in", "rate": 200, "unit": "mB/t", "tank": 16000},
+        "heavy_out": {"type": "water", "dir": "out", "rate": 50, "unit": "mB/t", "tank": 4000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "polymer_plant": {
+      "energy": {"capacity": 600000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 6},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "water_in": {"type": "water", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 8000},
+        "tar_in": {"type": "acid", "dir": "in", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "naphtha_in": {"type": "acid", "dir": "in", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "ethylene_in": {"type": "gas", "dir": "in", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "vitrification_plant": {
+      "energy": {"capacity": 900000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 6},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "acid_in": {"type": "acid", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 8000},
+        "nitric_in": {"type": "acid", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 4000},
+        "hlw_out": {"type": "acid", "dir": "out", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 9000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "chemical_lab": {
+      "energy": {"capacity": 600000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "water_in": {"type": "water", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 8000},
+        "acid_in": {"type": "acid", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 8000},
+        "hf_in": {"type": "acid", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 4000},
+        "lye_out": {"type": "acid", "dir": "out", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "nitric_out": {"type": "acid", "dir": "out", "rate": 50, "unit": "mB/t", "tank": 8000},
+        "diesel_in": {"type": "acid", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 4000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "boric_acid_plant": {
+      "energy": {"capacity": 300000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "water_in": {"type": "water", "dir": "in", "rate": 50, "unit": "mB/t", "tank": 4000},
+        "acid_in": {"type": "acid", "dir": "in", "rate": 50, "unit": "mB/t", "tank": 4000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "ion_exchanger": {
+      "energy": {"capacity": 300000, "use": 0},
+      "ports": {
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "primary_in": {"type": "primary", "dir": "in", "rate": 100, "unit": "mB/t", "tank": 4000},
+        "primary_out": {"type": "primary", "dir": "out", "rate": 100, "unit": "mB/t", "tank": 4000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "weapons_processing": {
+      "energy": {"capacity": 600000, "use": 0},
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 12000, "unit": "FE/t"},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 5},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "fusion_reactor": {
+      "energy": {"capacity": 8000000, "use": 0},
+      "burn_ticks": 200,
+      "return_pct": 75,
+      "ignition_fe": 1800000000,
+      "ignition_fe_t": 262144,
+      "fuel_cmb_t": 160,
+      "dd_pct": 12,
+      "dd_tritium_cmb_t": 80,
+      "pellet_ticks": 150,
+      "tritium_per_pellet_mb": 260,
+      "wall_wear_ticks": 144000,
+      "wall_heat_max": 400,
+      "radiation_pct": 40,
+      "plasma_optimizer_chance_permille": 50,
+      "plasma_optimizer_gross_pct": 5,
+      "plasma_optimizer_cost_pct": 5,
+      "plasma_optimizer_max": 6,
+      "out_buffer": 33554432,
+      "ports": {
+        "energy_in": {"type": "energy", "dir": "in", "rate": 131072, "unit": "FE/t"},
+        "energy_in_2": {"type": "energy", "dir": "in", "rate": 131072, "unit": "FE/t"},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 8388608, "unit": "FE/t"},
+        "energy_out_2": {"type": "energy", "dir": "out", "rate": 8388608, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"},
+        "coolant_in": {"type": "coolant", "dir": "in", "rate": 160, "unit": "mB/t", "tank": 32000},
+        "coolant_out": {"type": "coolant", "dir": "out", "rate": 160, "unit": "mB/t", "tank": 32000},
+        "deuterium_in": {"type": "gas", "dir": "in", "rate": 40, "unit": "mB/t", "tank": 16000},
+        "tritium_io": {"type": "gas", "dir": "both", "rate": 40, "unit": "mB/t", "tank": 16000},
+        "helium_out": {"type": "gas", "dir": "out", "rate": 40, "unit": "mB/t", "tank": 16000},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 8},
+        "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 8},
+        "control_signal": {"type": "signal", "dir": "in", "rate": 15, "unit": "Signal 0-15"},
+        "plasma_signal": {"type": "signal", "dir": "out", "rate": 15, "unit": "Signal 0-15"}
+      }
+    },
+    "deuterium_separator": {
+      "energy": {"capacity": 1200000, "use": 2400},
+      "water_ratio": 32,
+      "out_cmb_t": 200,
+      "heavy_factor": 20,
+      "ports": {
+        "water_in": {"type": "water", "dir": "in", "rate": 64, "unit": "mB/t", "tank": 8000},
+        "deuterium_out": {"type": "gas", "dir": "out", "rate": 40, "unit": "mB/t", "tank": 8000},
+        "energy_in": {"type": "energy", "dir": "in", "rate": 6000, "unit": "FE/t"},
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    },
+    "intake_pump": {
+      "energy": {
+        "capacity": 360000,
+        "use": 1200
+      },
+      "ports": {
+        "water_out_l_1": {
+          "type": "big_water",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "water_out_l_2": {
+          "type": "big_water",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "water_out_l_3": {
+          "type": "big_water",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "water_out_l_4": {
+          "type": "big_water",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "water_out_r_1": {
+          "type": "big_water",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "water_out_r_2": {
+          "type": "big_water",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "water_out_r_3": {
+          "type": "big_water",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "water_out_r_4": {
+          "type": "big_water",
+          "dir": "out",
+          "rate": 640,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "water_out_s_1": {
+          "type": "water",
+          "dir": "out",
+          "rate": 100,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "water_out_s_2": {
+          "type": "water",
+          "dir": "out",
+          "rate": 100,
+          "unit": "mB/t",
+          "tank": 8000
+        },
+        "energy_in": {
+          "type": "energy",
+          "dir": "in",
+          "rate": 3000,
+          "unit": "FE/t"
+        },
+        "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
+      }
+    }
+  },
+  "shaft": {
+    "create_max_rpm": 256,
+    "create_rpm_step": 16,
+    "create_su_per_fe": 32
+  }
+}

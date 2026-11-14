@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "nuclearsq:block/feedwater_pump_sqc",
+    "top": "nuclearsq:block/feedwater_pump_sqc_top",
+    "bottom": "nuclearsq:block/feedwater_pump_sqc_top"
+  }
+}

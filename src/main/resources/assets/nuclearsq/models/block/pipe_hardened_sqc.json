@@ -1,0 +1,1389 @@
+{
+  "loader": "nuclearsq:cable",
+  "textures": {
+    "particle": "nuclearsq:block/pipe_hardened_sqc"
+  },
+  "parts": [
+    {
+      "when": {
+        "OR": [
+          {
+            "north": "none",
+            "east": "none",
+            "south": "none",
+            "west": "none",
+            "up": "none",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "none",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "none",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "none",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "none"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "none",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "none",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "none"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "east": "on|pull|port",
+            "south": "on|pull|port",
+            "west": "on|pull|port",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_hub"
+      }
+    },
+    {
+      "when": {
+        "north": "on|pull|port",
+        "east": "none",
+        "south": "on|pull|port",
+        "west": "none",
+        "up": "none",
+        "down": "none",
+        "plain_north": "1",
+        "plain_south": "1"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid_full"
+      }
+    },
+    {
+      "when": {
+        "north": "on",
+        "east": "none",
+        "south": "on",
+        "west": "none",
+        "up": "none",
+        "down": "none",
+        "plain_north": "1",
+        "plain_south": "0"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid_ring",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "north": "on",
+        "east": "none",
+        "south": "on",
+        "west": "none",
+        "up": "none",
+        "down": "none",
+        "plain_north": "0",
+        "plain_south": "1"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid_ring"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "north": "on|pull|port",
+            "east": "none",
+            "south": "on|pull|port",
+            "west": "none",
+            "up": "none",
+            "down": "none"
+          },
+          {
+            "OR": [
+              {
+                "north": "pull|port"
+              },
+              {
+                "south": "pull|port"
+              },
+              {
+                "north": "on",
+                "south": "on",
+                "plain_north": "0",
+                "plain_south": "0"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid"
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "on|pull|port",
+        "south": "none",
+        "west": "on|pull|port",
+        "up": "none",
+        "down": "none",
+        "plain_east": "1",
+        "plain_west": "1"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid_full",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "on",
+        "south": "none",
+        "west": "on",
+        "up": "none",
+        "down": "none",
+        "plain_east": "1",
+        "plain_west": "0"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid_ring",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "on",
+        "south": "none",
+        "west": "on",
+        "up": "none",
+        "down": "none",
+        "plain_east": "0",
+        "plain_west": "1"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid_ring",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "north": "none",
+            "east": "on|pull|port",
+            "south": "none",
+            "west": "on|pull|port",
+            "up": "none",
+            "down": "none"
+          },
+          {
+            "OR": [
+              {
+                "east": "pull|port"
+              },
+              {
+                "west": "pull|port"
+              },
+              {
+                "east": "on",
+                "west": "on",
+                "plain_east": "0",
+                "plain_west": "0"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "none",
+        "west": "none",
+        "up": "on|pull|port",
+        "down": "on|pull|port",
+        "plain_up": "1",
+        "plain_down": "1"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid_full",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "none",
+        "west": "none",
+        "up": "on",
+        "down": "on",
+        "plain_up": "1",
+        "plain_down": "0"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid_ring",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "none",
+        "west": "none",
+        "up": "on",
+        "down": "on",
+        "plain_up": "0",
+        "plain_down": "1"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid_ring",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {
+            "north": "none",
+            "east": "none",
+            "south": "none",
+            "west": "none",
+            "up": "on|pull|port",
+            "down": "on|pull|port"
+          },
+          {
+            "OR": [
+              {
+                "up": "pull|port"
+              },
+              {
+                "down": "pull|port"
+              },
+              {
+                "up": "on",
+                "down": "on",
+                "plain_up": "0",
+                "plain_down": "0"
+              }
+            ]
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_mid",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "north": "on|pull|port",
+        "east": "none",
+        "south": "none",
+        "west": "none",
+        "up": "none",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_end"
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "on|pull|port",
+        "south": "none",
+        "west": "none",
+        "up": "none",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_end",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "on|pull|port",
+        "west": "none",
+        "up": "none",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_end",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "none",
+        "west": "on|pull|port",
+        "up": "none",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_end",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "none",
+        "west": "none",
+        "up": "on|pull|port",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_end",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "none",
+        "west": "none",
+        "up": "none",
+        "down": "on|pull|port"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_end",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "north": "on|pull|port",
+        "east": "on|pull|port",
+        "south": "none",
+        "west": "none",
+        "up": "none",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_h"
+      }
+    },
+    {
+      "when": {
+        "north": "on|pull|port",
+        "east": "none",
+        "south": "none",
+        "west": "none",
+        "up": "on|pull|port",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_u"
+      }
+    },
+    {
+      "when": {
+        "north": "on|pull|port",
+        "east": "none",
+        "south": "none",
+        "west": "none",
+        "up": "none",
+        "down": "on|pull|port"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_d"
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "on|pull|port",
+        "south": "on|pull|port",
+        "west": "none",
+        "up": "none",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_h",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "on|pull|port",
+        "south": "none",
+        "west": "none",
+        "up": "on|pull|port",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_u",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "on|pull|port",
+        "south": "none",
+        "west": "none",
+        "up": "none",
+        "down": "on|pull|port"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_d",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "on|pull|port",
+        "west": "on|pull|port",
+        "up": "none",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_h",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "on|pull|port",
+        "west": "none",
+        "up": "on|pull|port",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_u",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "on|pull|port",
+        "west": "none",
+        "up": "none",
+        "down": "on|pull|port"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_d",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "north": "on|pull|port",
+        "east": "none",
+        "south": "none",
+        "west": "on|pull|port",
+        "up": "none",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_h",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "none",
+        "west": "on|pull|port",
+        "up": "on|pull|port",
+        "down": "none"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_u",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "north": "none",
+        "east": "none",
+        "south": "none",
+        "west": "on|pull|port",
+        "up": "none",
+        "down": "on|pull|port"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_elbow_d",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "north": "on|pull|port",
+            "plain_north": "0",
+            "east": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "plain_north": "0",
+            "west": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "plain_north": "0",
+            "up": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "plain_north": "0",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on|pull|port",
+            "plain_north": "0",
+            "south": "none|pull|port"
+          },
+          {
+            "north": "pull|port",
+            "plain_north": "0",
+            "south": "on"
+          },
+          {
+            "north": "on",
+            "plain_north": "0",
+            "south": "on",
+            "plain_south": "0"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm"
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "north": "on",
+            "plain_north": "1",
+            "east": "on|pull|port"
+          },
+          {
+            "north": "on",
+            "plain_north": "1",
+            "west": "on|pull|port"
+          },
+          {
+            "north": "on",
+            "plain_north": "1",
+            "up": "on|pull|port"
+          },
+          {
+            "north": "on",
+            "plain_north": "1",
+            "down": "on|pull|port"
+          },
+          {
+            "north": "on",
+            "plain_north": "1",
+            "south": "none|pull|port"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm_plain"
+      }
+    },
+    {
+      "when": {
+        "north": "pull"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_valve"
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "east": "on|pull|port",
+            "plain_east": "0",
+            "north": "on|pull|port"
+          },
+          {
+            "east": "on|pull|port",
+            "plain_east": "0",
+            "south": "on|pull|port"
+          },
+          {
+            "east": "on|pull|port",
+            "plain_east": "0",
+            "up": "on|pull|port"
+          },
+          {
+            "east": "on|pull|port",
+            "plain_east": "0",
+            "down": "on|pull|port"
+          },
+          {
+            "east": "on|pull|port",
+            "plain_east": "0",
+            "west": "none|pull|port"
+          },
+          {
+            "east": "pull|port",
+            "plain_east": "0",
+            "west": "on"
+          },
+          {
+            "east": "on",
+            "plain_east": "0",
+            "west": "on",
+            "plain_west": "0"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "east": "on",
+            "plain_east": "1",
+            "north": "on|pull|port"
+          },
+          {
+            "east": "on",
+            "plain_east": "1",
+            "south": "on|pull|port"
+          },
+          {
+            "east": "on",
+            "plain_east": "1",
+            "up": "on|pull|port"
+          },
+          {
+            "east": "on",
+            "plain_east": "1",
+            "down": "on|pull|port"
+          },
+          {
+            "east": "on",
+            "plain_east": "1",
+            "west": "none|pull|port"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm_plain",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "east": "pull"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_valve",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "south": "on|pull|port",
+            "plain_south": "0",
+            "east": "on|pull|port"
+          },
+          {
+            "south": "on|pull|port",
+            "plain_south": "0",
+            "west": "on|pull|port"
+          },
+          {
+            "south": "on|pull|port",
+            "plain_south": "0",
+            "up": "on|pull|port"
+          },
+          {
+            "south": "on|pull|port",
+            "plain_south": "0",
+            "down": "on|pull|port"
+          },
+          {
+            "south": "on|pull|port",
+            "plain_south": "0",
+            "north": "none|pull|port"
+          },
+          {
+            "south": "pull|port",
+            "plain_south": "0",
+            "north": "on"
+          },
+          {
+            "south": "on",
+            "plain_south": "0",
+            "north": "on",
+            "plain_north": "0"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "south": "on",
+            "plain_south": "1",
+            "east": "on|pull|port"
+          },
+          {
+            "south": "on",
+            "plain_south": "1",
+            "west": "on|pull|port"
+          },
+          {
+            "south": "on",
+            "plain_south": "1",
+            "up": "on|pull|port"
+          },
+          {
+            "south": "on",
+            "plain_south": "1",
+            "down": "on|pull|port"
+          },
+          {
+            "south": "on",
+            "plain_south": "1",
+            "north": "none|pull|port"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm_plain",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "south": "pull"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_valve",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "west": "on|pull|port",
+            "plain_west": "0",
+            "north": "on|pull|port"
+          },
+          {
+            "west": "on|pull|port",
+            "plain_west": "0",
+            "south": "on|pull|port"
+          },
+          {
+            "west": "on|pull|port",
+            "plain_west": "0",
+            "up": "on|pull|port"
+          },
+          {
+            "west": "on|pull|port",
+            "plain_west": "0",
+            "down": "on|pull|port"
+          },
+          {
+            "west": "on|pull|port",
+            "plain_west": "0",
+            "east": "none|pull|port"
+          },
+          {
+            "west": "pull|port",
+            "plain_west": "0",
+            "east": "on"
+          },
+          {
+            "west": "on",
+            "plain_west": "0",
+            "east": "on",
+            "plain_east": "0"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "west": "on",
+            "plain_west": "1",
+            "north": "on|pull|port"
+          },
+          {
+            "west": "on",
+            "plain_west": "1",
+            "south": "on|pull|port"
+          },
+          {
+            "west": "on",
+            "plain_west": "1",
+            "up": "on|pull|port"
+          },
+          {
+            "west": "on",
+            "plain_west": "1",
+            "down": "on|pull|port"
+          },
+          {
+            "west": "on",
+            "plain_west": "1",
+            "east": "none|pull|port"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm_plain",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "west": "pull"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_valve",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "on|pull|port",
+            "plain_down": "0",
+            "north": "on|pull|port"
+          },
+          {
+            "down": "on|pull|port",
+            "plain_down": "0",
+            "east": "on|pull|port"
+          },
+          {
+            "down": "on|pull|port",
+            "plain_down": "0",
+            "south": "on|pull|port"
+          },
+          {
+            "down": "on|pull|port",
+            "plain_down": "0",
+            "west": "on|pull|port"
+          },
+          {
+            "down": "on|pull|port",
+            "plain_down": "0",
+            "up": "none|pull|port"
+          },
+          {
+            "down": "pull|port",
+            "plain_down": "0",
+            "up": "on"
+          },
+          {
+            "down": "on",
+            "plain_down": "0",
+            "up": "on",
+            "plain_up": "0"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "on",
+            "plain_down": "1",
+            "north": "on|pull|port"
+          },
+          {
+            "down": "on",
+            "plain_down": "1",
+            "east": "on|pull|port"
+          },
+          {
+            "down": "on",
+            "plain_down": "1",
+            "south": "on|pull|port"
+          },
+          {
+            "down": "on",
+            "plain_down": "1",
+            "west": "on|pull|port"
+          },
+          {
+            "down": "on",
+            "plain_down": "1",
+            "up": "none|pull|port"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm_plain",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "down": "pull"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_valve",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "on|pull|port",
+            "plain_up": "0",
+            "north": "on|pull|port"
+          },
+          {
+            "up": "on|pull|port",
+            "plain_up": "0",
+            "east": "on|pull|port"
+          },
+          {
+            "up": "on|pull|port",
+            "plain_up": "0",
+            "south": "on|pull|port"
+          },
+          {
+            "up": "on|pull|port",
+            "plain_up": "0",
+            "west": "on|pull|port"
+          },
+          {
+            "up": "on|pull|port",
+            "plain_up": "0",
+            "down": "none|pull|port"
+          },
+          {
+            "up": "pull|port",
+            "plain_up": "0",
+            "down": "on"
+          },
+          {
+            "up": "on",
+            "plain_up": "0",
+            "down": "on",
+            "plain_down": "0"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "on",
+            "plain_up": "1",
+            "north": "on|pull|port"
+          },
+          {
+            "up": "on",
+            "plain_up": "1",
+            "east": "on|pull|port"
+          },
+          {
+            "up": "on",
+            "plain_up": "1",
+            "south": "on|pull|port"
+          },
+          {
+            "up": "on",
+            "plain_up": "1",
+            "west": "on|pull|port"
+          },
+          {
+            "up": "on",
+            "plain_up": "1",
+            "down": "none|pull|port"
+          }
+        ]
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_arm_plain",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "up": "pull"
+      },
+      "apply": {
+        "model": "nuclearsq:block/pipe_hardened_sqc_valve",
+        "x": 270
+      }
+    }
+  ]
+}

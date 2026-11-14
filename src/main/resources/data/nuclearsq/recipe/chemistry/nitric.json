@@ -1,0 +1,23 @@
+{
+  "type": "nuclearsq:chemistry",
+  "ingredient": {
+    "item": "minecraft:gunpowder"
+  },
+  "count": 4,
+  "time": 240,
+  "energy_per_tick": 3000,
+  "results": [],
+  "fluids": [
+    {
+      "port": "acid_in",
+      "amount": 300
+    }
+  ],
+  "fluid_results": [
+    {
+      "port": "nitric_out",
+      "fluid": "nuclearsq:nitric_acid",
+      "amount": 400
+    }
+  ]
+}

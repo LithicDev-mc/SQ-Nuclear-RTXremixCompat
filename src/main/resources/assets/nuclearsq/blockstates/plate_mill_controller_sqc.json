@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/plate_mill_controller_sqc"
+    }
+  }
+}

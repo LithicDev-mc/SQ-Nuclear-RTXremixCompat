@@ -1,0 +1,30 @@
+{
+  "type": "nuclearsq:ion_exchange",
+  "ingredient": {
+    "item": "nuclearsq:ion_resin_sqc"
+  },
+  "count": 1,
+  "time": 400,
+  "energy_per_tick": 900,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:spent_resin_sqc",
+        "count": 1
+      }
+    }
+  ],
+  "fluids": [
+    {
+      "port": "primary_in",
+      "amount": 1000
+    }
+  ],
+  "fluid_results": [
+    {
+      "port": "primary_out",
+      "fluid": "nuclearsq:primary_water",
+      "amount": 1000
+    }
+  ]
+}

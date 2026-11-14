@@ -1,0 +1,54 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "eecee",
+    "oM@Mo",
+    "&JTJ&",
+    "iM&Mi",
+    "ghmhg"
+  ],
+  "key": {
+    "&": {
+      "item": "nuclearsq:machine_port_gas_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:fusion_reactor_controller_sqc"
+    },
+    "J": {
+      "item": "nuclearsq:first_wall_tile_sqc"
+    },
+    "M": {
+      "item": "nuclearsq:superconducting_coil_sqc"
+    },
+    "T": {
+      "item": "nuclearsq:control_board_3_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "g": {
+      "item": "nuclearsq:machine_port_signal_sqc"
+    },
+    "h": {
+      "item": "nuclearsq:pressure_chamber_hardened_sqc"
+    },
+    "i": {
+      "item": "nuclearsq:machine_port_item_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "o": {
+      "item": "nuclearsq:machine_port_coolant_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:fusion_reactor_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/heat_exchanger_sqc"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:equipment_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:leather"
+      },
+      "count": 15
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:yellow_wool"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:glass_pane"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:hazmat_1_helmet_sqc",
+    "count": 1
+  }
+}

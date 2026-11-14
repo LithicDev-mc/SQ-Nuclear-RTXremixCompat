@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nuclearsq:block/foundry_controller_sqc"
+    }
+  }
+}

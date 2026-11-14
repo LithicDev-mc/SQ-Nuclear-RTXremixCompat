@@ -1,0 +1,28 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:ingot_osmium"
+        ],
+        "tags": [
+          "c:ingots/osmium"
+        ]
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:redstone"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:basic_circuit_sqc",
+    "count": 1
+  },
+  "time": 100
+}

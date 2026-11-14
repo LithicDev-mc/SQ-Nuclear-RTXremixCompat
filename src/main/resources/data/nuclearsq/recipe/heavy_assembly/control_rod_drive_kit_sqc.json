@@ -1,0 +1,54 @@
+{
+  "type": "nuclearsq:heavy_assembly",
+  "pattern": [
+    "ccLcc",
+    "c%@%c",
+    "cwCgc",
+    "cmAec",
+    "gZKZc"
+  ],
+  "key": {
+    "%": {
+      "item": "nuclearsq:machine_port_primary_sqc"
+    },
+    "@": {
+      "item": "nuclearsq:control_rod_drive_controller_sqc"
+    },
+    "A": {
+      "item": "nuclearsq:brass_bearing_sqc"
+    },
+    "C": {
+      "item": "nuclearsq:control_board_2_sqc"
+    },
+    "K": {
+      "item": "nuclearsq:copper_coil_sqc"
+    },
+    "L": {
+      "item": "nuclearsq:lead_shielding_sqc"
+    },
+    "Z": {
+      "item": "nuclearsq:zircaloy_sheet_sqc"
+    },
+    "c": {
+      "item": "nuclearsq:reactor_casing_sqc"
+    },
+    "e": {
+      "item": "nuclearsq:machine_port_energy_sqc"
+    },
+    "g": {
+      "item": "nuclearsq:machine_port_signal_sqc"
+    },
+    "m": {
+      "item": "nuclearsq:machine_port_terminal_sqc"
+    },
+    "w": {
+      "item": "nuclearsq:machine_port_water_sqc"
+    }
+  },
+  "result": {
+    "id": "nuclearsq:control_rod_drive_kit_sqc",
+    "count": 1
+  },
+  "time": 400,
+  "energy_per_tick": 9600
+}

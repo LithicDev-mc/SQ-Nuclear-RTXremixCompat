@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "nuclearsq:block/wifi_adapter_sqc"
+    },
+    "facing=west": {
+      "model": "nuclearsq:block/wifi_adapter_sqc",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nuclearsq:block/wifi_adapter_sqc",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "nuclearsq:block/wifi_adapter_sqc",
+      "y": 270
+    }
+  }
+}
