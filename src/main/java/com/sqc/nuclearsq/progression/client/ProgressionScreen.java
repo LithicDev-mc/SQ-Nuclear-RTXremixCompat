@@ -713,6 +713,7 @@ public class ProgressionScreen extends Screen {
                         case 17 -> scopeLinks = !scopeLinks;
                         case 18 -> scopeNames = !scopeNames;
                         case 16 -> { if (!com.sqc.nuclearsq.client.RecipeLink.showRecipe(briefStack)) openRecipe(briefStack); }
+                        case 19 -> { ItemStack st = proofStack(com.sqc.nuclearsq.progression.AchievementTree.NODES.get(h.a())); if (!com.sqc.nuclearsq.client.RecipeLink.showRecipe(st)) openRecipe(st); }
                         default -> turn(1);
                     }
                     return true;
@@ -1327,7 +1328,7 @@ public class ProgressionScreen extends Screen {
             if (e != null && e.capacity() > 0) rows.add(new String[] {tr("compendium.brief.storage"), String.format("%,d FE", e.capacity())});
             if (!m.ports.isEmpty()) rows.add(new String[] {tr("compendium.brief.ports"), String.valueOf(m.ports.size())});
         }
-        briefStack = modItem(nd.item());
+        briefStack = proofStack(nd);
         var src = sources(briefStack.getItem());
         if (!src.isEmpty()) rows.add(new String[] {tr("compendium.brief.made"), whereName(src.get(0)).getString()});
         var line = lineOf(nd.key());
@@ -1362,6 +1363,15 @@ public class ProgressionScreen extends Screen {
         }
         briefButton(g, mx, my, lx, ly + 2, Math.min(120, font.width(tr("compendium.brief.recipe")) + 12));
         return Math.max(img + 4, ly + 18 - y);
+    }
+
+    private ItemStack proofStack(com.sqc.nuclearsq.progression.PlantOverview.Node nd) {
+        ItemStack st = ItemStack.EMPTY;
+        for (String id : com.sqc.nuclearsq.progression.AchievementTree.proofItems(nd)) {
+            st = modItem(id);
+            if (!sources(st.getItem()).isEmpty()) break;
+        }
+        return st;
     }
 
     private void briefValue(GuiGraphics g, int mx, int my, String[] r, int x0, int x1, int y) {
@@ -1412,8 +1422,9 @@ public class ProgressionScreen extends Screen {
                 if (cur) rrect(g, cx - 1, y + 3, cx + 20 + nw + 1, y + 19, CARD);
                 MachineThumbs.draw(g, o.item(), cx, y + 3, 16, 1f);
                 g.drawString(font, font.plainSubstrByWidth(n, nw), cx + 19, y + 7, cur ? 0xFFFFFFFF : hv ? ACCENT : TEXT, false);
-                int[] tgt = cur ? null : findPage(o.page());
+                int[] tgt = cur || o.page().equals(nd.page()) ? null : findPage(o.page());
                 if (tgt != null) hits.add(new Hit(cx, y, cx + 20 + nw, y + 22, 0, tgt[0], tgt[1]));
+                else if (!cur) hits.add(new Hit(cx, y, cx + 20 + nw, y + 22, 19, com.sqc.nuclearsq.progression.AchievementTree.index(o.key()), 0));
                 cx += 20 + nw + 6;
             }
             boolean ht = mx >= treeX && mx < treeX + font.width(tree) && my >= y && my < y + 22;
@@ -2330,7 +2341,7 @@ public class ProgressionScreen extends Screen {
 
     private com.sqc.nuclearsq.progression.ModScope scope;
     private List<ItemStack> scopeStacks = List.of();
-    private boolean scopeLinks = true, scopeNames = true, scopeFollow = true;
+    private boolean scopeLinks = false, scopeNames = true, scopeFollow = true;
     private long scopeFrame = 0;
     private boolean scopeReplay;
     private int scopePin = -1;
@@ -2344,9 +2355,15 @@ public class ProgressionScreen extends Screen {
         return bx - bw - 4;
     }
 
-    private static void scopeLine(GuiGraphics g, float ax, float ay, float bx, float by, float hw, int argb) {
+    private static void scopeLine(GuiGraphics g, float ax, float ay, float bx, float by, float hw, float cut, int argb) {
         float dx = bx - ax, dy = by - ay, len = (float) Math.sqrt(dx * dx + dy * dy);
         if (len < 0.01f) return;
+        float f = cut / Math.max(Math.abs(dx), Math.abs(dy));
+        if (f >= 0.5f) return;
+        ax += dx * f;
+        ay += dy * f;
+        bx -= dx * f;
+        by -= dy * f;
         float nx = -dy / len * hw, ny = dx / len * hw;
         var m = g.pose().last().pose();
         var vc = g.bufferSource().getBuffer(net.minecraft.client.renderer.RenderType.gui());
@@ -2441,27 +2458,6 @@ public class ProgressionScreen extends Screen {
             var b = sc.chapters.get(i);
             if (chapOn[i]) g.fill(b.x(), b.y(), b.x() + b.w(), b.y() + b.h(), CARD);
         }
-        float hw = 0.5f / z, mid = S / 2f;
-        if (scopeLinks) {
-            for (var e : sc.edges) {
-                if (sc.time[e.from()] > el || sc.time[e.to()] > el) continue;
-                var a = sc.nodes.get(e.from());
-                var b = sc.nodes.get(e.to());
-                if (Math.max(a.x(), b.x()) + S < vx0 || Math.min(a.x(), b.x()) > vx1 || Math.max(a.y(), b.y()) + S < vy0 || Math.min(a.y(), b.y()) > vy1) continue;
-                int al = (e.machine() ? 22 : 44) / (lit >= 0 ? 3 : 1);
-                scopeLine(g, a.x() + mid, a.y() + mid, b.x() + mid, b.y() + mid, hw, alpha(al, e.machine() ? ACCENT : CYAN));
-            }
-        }
-        if (lit >= 0) {
-            for (int ei : sc.adj.get(lit)) {
-                var e = sc.edges.get(ei);
-                if (sc.time[e.from()] > el || sc.time[e.to()] > el) continue;
-                var a = sc.nodes.get(e.from());
-                var b = sc.nodes.get(e.to());
-                scopeLine(g, a.x() + mid, a.y() + mid, b.x() + mid, b.y() + mid, hw * 1.6f, alpha(230, e.machine() ? ACCENT : CYAN));
-            }
-        }
-        g.flush();
         boolean icons = z * 16 * Minecraft.getInstance().getWindow().getGuiScale() >= 8;
         for (int k = 0; k < shown; k++) {
             int i = sc.order[k];
@@ -2479,6 +2475,27 @@ public class ProgressionScreen extends Screen {
                 g.fill(nd.x() + S + r - 1, nd.y() - r, nd.x() + S + r, nd.y() + S + r, c);
             }
         }
+        float hw = 0.5f / z, mid = S / 2f;
+        if (scopeLinks) {
+            for (var e : sc.edges) {
+                if (sc.time[e.from()] > el || sc.time[e.to()] > el) continue;
+                var a = sc.nodes.get(e.from());
+                var b = sc.nodes.get(e.to());
+                if (Math.max(a.x(), b.x()) + S < vx0 || Math.min(a.x(), b.x()) > vx1 || Math.max(a.y(), b.y()) + S < vy0 || Math.min(a.y(), b.y()) > vy1) continue;
+                int al = (e.machine() ? 22 : 44) / (lit >= 0 ? 3 : 1);
+                scopeLine(g, a.x() + mid, a.y() + mid, b.x() + mid, b.y() + mid, hw, mid, alpha(al, e.machine() ? ACCENT : CYAN));
+            }
+        }
+        if (lit >= 0) {
+            for (int ei : sc.adj.get(lit)) {
+                var e = sc.edges.get(ei);
+                if (sc.time[e.from()] > el || sc.time[e.to()] > el) continue;
+                var a = sc.nodes.get(e.from());
+                var b = sc.nodes.get(e.to());
+                scopeLine(g, a.x() + mid, a.y() + mid, b.x() + mid, b.y() + mid, hw * 1.6f, mid, alpha(230, e.machine() ? ACCENT : CYAN));
+            }
+        }
+        g.flush();
         g.pose().popPose();
         if (scopeNames) {
             for (int i = 0; i < secOn.length; i++) {

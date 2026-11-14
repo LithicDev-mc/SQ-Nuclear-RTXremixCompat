@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "nuclearsq:item/header_data_sqc"
+    "layer0": "nuclearsq:item/header_computing_sqc"
   }
 }

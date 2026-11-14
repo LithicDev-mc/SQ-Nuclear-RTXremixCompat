@@ -5,7 +5,6 @@ import com.sqc.nuclearsq.machine.big.BigMachine;
 import com.sqc.nuclearsq.machine.big.BigMachineBlockEntity;
 import com.sqc.nuclearsq.multiblock.MultiblockStructure;
 import com.sqc.nuclearsq.registry.ReactorRegistry;
-import com.sqc.nuclearsq.transport.CableBlock;
 import com.sqc.nuclearsq.transport.ConduitBlock;
 import com.sqc.nuclearsq.transport.ConduitBlockEntity;
 import com.sqc.nuclearsq.transport.ConduitSide;

@@ -31,7 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public class DoorBlockEntity extends BlockEntity {
-    public static final int MAX_SIDE = 15;
+    public static final int MAX_SIDE = 15, MIN_TRAVEL = 50;
     public static final int DATA = 6, FLAG_OPEN = 1, FLAG_MOVING = 2, FLAG_RAGGED = 4, FLAG_FOUND = 8, FLAG_LOCKED = 16;
 
     private final List<BlockPos> panels = new ArrayList<>();
@@ -144,7 +144,7 @@ public class DoorBlockEntity extends BlockEntity {
                 axis = s.getValue(DoorPanelBlock.AXIS);
                 kind = b.kind;
                 bounds();
-                travel = Math.max(1, b.ticksPerBlock * way());
+                travel = Math.max(MIN_TRAVEL, b.ticksPerBlock * way());
                 ragged = panels.size() != width() * height();
                 if (ragged) panels.clear();
                 return;

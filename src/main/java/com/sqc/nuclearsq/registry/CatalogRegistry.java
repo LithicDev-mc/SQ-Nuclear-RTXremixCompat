@@ -7,7 +7,6 @@ import com.sqc.nuclearsq.turbine.TurbinePartBlock;
 import com.sqc.nuclearsq.radiation.FalloutBlock;
 import com.sqc.nuclearsq.radiation.GeigerCounterItem;
 import com.sqc.nuclearsq.radiation.MedicineItem;
-import com.sqc.nuclearsq.radiation.RadiationManager;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;

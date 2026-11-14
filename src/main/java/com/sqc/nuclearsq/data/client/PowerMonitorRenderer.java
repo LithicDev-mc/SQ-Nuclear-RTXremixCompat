@@ -17,7 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.phys.AABB;
 
 public class PowerMonitorRenderer implements BlockEntityRenderer<PowerMonitorBlockEntity> {
-    private static final int GLASS = 0xFF040A06, FRAME = 0xFF1C2226, EDGE = 0xFF0E1A12, GREEN = 0xFF41FF7A, MID = 0xFF22B04E,
+    private static final int GLASS = 0xFF040A06, FRAME = 0xFF1C2226, EDGE = 0xFF0E1A12, GREEN = 0xFF41FF7A,
             DIM = 0xFF136B30, AMBER = 0xFFFFB23A, RED = 0xFFFF5A4E, CYAN = 0xFF5FE3FF, BAR_DIM = 0xFF0B3319;
     private static final float HEAD = 13;
 

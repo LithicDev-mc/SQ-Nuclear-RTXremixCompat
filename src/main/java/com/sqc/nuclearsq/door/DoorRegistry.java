@@ -28,17 +28,17 @@ public final class DoorRegistry {
     }
 
     public static final DeferredBlock<DoorPanelBlock> HANGAR_PANEL = BLOCKS.register("hangar_door_panel_sqc",
-            () -> new DoorPanelBlock(steel(3.0f, 12.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.HANGAR, 5));
+            () -> new DoorPanelBlock(steel(3.0f, 12.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.HANGAR, 10));
     public static final DeferredBlock<DoorPanelBlock> AIRLOCK_PANEL = BLOCKS.register("airlock_door_panel_sqc",
-            () -> new DoorPanelBlock(steel(5.0f, 30.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.AIRLOCK, 6));
+            () -> new DoorPanelBlock(steel(5.0f, 30.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.AIRLOCK, 25));
     public static final DeferredBlock<DoorPanelBlock> SECTIONAL_PANEL = BLOCKS.register("sectional_door_panel_sqc",
-            () -> new DoorPanelBlock(steel(3.0f, 12.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.SECTIONAL, 6));
+            () -> new DoorPanelBlock(steel(3.0f, 12.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.SECTIONAL, 12));
     public static final DeferredBlock<DoorPanelBlock> GRILLE_PANEL = BLOCKS.register("grille_door_panel_sqc",
-            () -> new DoorPanelBlock(steel(3.0f, 12.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.GRILLE, 5));
+            () -> new DoorPanelBlock(steel(3.0f, 12.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.GRILLE, 10));
     public static final DeferredBlock<DoorPanelBlock> FOLDING_PANEL = BLOCKS.register("folding_door_panel_sqc",
-            () -> new DoorPanelBlock(steel(3.0f, 12.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.FOLDING, 6));
+            () -> new DoorPanelBlock(steel(3.0f, 12.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.FOLDING, 12));
     public static final DeferredBlock<DoorPanelBlock> VAULT_PANEL = BLOCKS.register("vault_door_panel_sqc",
-            () -> new DoorPanelBlock(steel(8.0f, 1200.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.VAULT, 12));
+            () -> new DoorPanelBlock(steel(8.0f, 1200.0f).noOcclusion().pushReaction(PushReaction.BLOCK), DoorPanelBlock.Kind.VAULT, 24));
     public static final DeferredBlock<DoorControllerBlock> CONTROLLER = BLOCKS.register("door_control_sqc",
             () -> new DoorControllerBlock(steel(3.0f, 12.0f)));
 

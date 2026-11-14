@@ -8,7 +8,6 @@ import com.sqc.nuclearsq.NuclearSQ;
 import com.sqc.nuclearsq.nanobot.NanoSwarm;
 import com.sqc.nuclearsq.nanobot.NanoSwarms;
 import com.sqc.nuclearsq.nanobot.NanoTask;
-import com.sqc.nuclearsq.nanobot.NanobotRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;

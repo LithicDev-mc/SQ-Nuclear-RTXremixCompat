@@ -6,8 +6,6 @@ import com.sqc.nuclearsq.machine.big.BigMachine;
 import com.sqc.nuclearsq.machine.big.BigMachineBlockEntity;
 import com.sqc.nuclearsq.machine.big.BigPortKind;
 import com.sqc.nuclearsq.multiblock.MultiblockStructure;
-import com.sqc.nuclearsq.reactor.ReactorProps;
-import com.sqc.nuclearsq.registry.BigMachineRegistry;
 import com.sqc.nuclearsq.registry.CatalogRegistry;
 import com.sqc.nuclearsq.registry.ReactorRegistry;
 
@@ -16,7 +14,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestAssertException;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

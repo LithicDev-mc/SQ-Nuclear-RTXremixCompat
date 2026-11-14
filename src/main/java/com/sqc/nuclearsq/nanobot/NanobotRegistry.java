@@ -1,6 +1,5 @@
 package com.sqc.nuclearsq.nanobot;
 
-import com.mojang.serialization.Codec;
 import com.sqc.nuclearsq.NuclearSQ;
 
 import java.util.LinkedHashMap;

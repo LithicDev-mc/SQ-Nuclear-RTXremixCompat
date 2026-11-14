@@ -1560,17 +1560,17 @@ public final class NuclearGameTests {
             if (path.startsWith("header_")) { section = path; continue; }
             if (path.equals("spacer_sqc")) continue;
             boolean part = st.getItem() instanceof com.sqc.nuclearsq.multiblock.PartBlockItem;
-            if (section.equals("header_parts_sqc")) {
+            if (section.equals("header_manufacturing_sqc")) {
                 inParts.add(st.getItem());
                 if (part) parts++;
             } else if (part) {
                 throw new GameTestAssertException(path + " ist nur Bauteil, steht aber unter " + section);
             }
         }
-        if (parts < 30) throw new GameTestAssertException("Zu wenige Anlagenteile unter Bauteile: " + parts);
+        if (parts < 30) throw new GameTestAssertException("Zu wenige Anlagenteile unter Fertigung: " + parts);
         for (String id : List.of("steel_sheet_sqc", "glass_seal_sqc", "uranium_core_sqc", "control_board_1_sqc", "copper_coil_sqc")) {
             if (!inParts.contains(com.sqc.nuclearsq.registry.CatalogRegistry.ITEM_MAP.get(id).get()))
-                throw new GameTestAssertException(id + " fehlt unter Bauteile");
+                throw new GameTestAssertException(id + " fehlt unter Fertigung");
         }
         h.succeed();
     }

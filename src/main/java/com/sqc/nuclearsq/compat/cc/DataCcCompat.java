@@ -9,7 +9,6 @@ import com.sqc.nuclearsq.registry.MultiblockRegistry;
 import com.sqc.nuclearsq.registry.PowerRegistry;
 import com.sqc.nuclearsq.registry.SpentFuelRegistry;
 import com.sqc.nuclearsq.radiation.ProtectionRegistry;
-import com.sqc.nuclearsq.transport.TransportRegistry;
 
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.PeripheralCapability;

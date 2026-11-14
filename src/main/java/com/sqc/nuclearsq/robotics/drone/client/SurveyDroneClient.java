@@ -6,7 +6,6 @@ import com.sqc.nuclearsq.robotics.drone.DroneRegistry;
 import com.sqc.nuclearsq.robotics.drone.SurveyDroneEntity;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;

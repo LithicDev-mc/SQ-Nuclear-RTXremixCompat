@@ -2,7 +2,6 @@ package com.sqc.nuclearsq.gametest;
 
 import com.sqc.nuclearsq.NuclearSQ;
 import com.sqc.nuclearsq.machine.big.BigMachine;
-import com.sqc.nuclearsq.machine.big.BigMachineBlockEntity;
 import com.sqc.nuclearsq.multiblock.MultiblockStructure;
 import com.sqc.nuclearsq.transport.ConduitBlock;
 import com.sqc.nuclearsq.transport.ConduitBlockEntity;
@@ -18,7 +17,6 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 

@@ -1,7 +1,5 @@
 package com.sqc.nuclearsq.client;
 
-import com.sqc.nuclearsq.registry.ModCreativeTabs;
-
 import java.util.Map;
 
 import com.sqc.nuclearsq.NuclearSQ;
@@ -28,11 +26,10 @@ public final class CreativeTabBanners {
     private CreativeTabBanners() {}
 
     private static final Map<String, Integer> COLORS = Map.ofEntries(
-            Map.entry("fuel", 0xE6C828), Map.entry("hulls", 0xC8783C),
-            Map.entry("water", 0x3C6EE6), Map.entry("parts", 0xB48C50), Map.entry("modules", 0x9B6EDC),
-            Map.entry("machines", 0xE68228), Map.entry("ores", 0x64C864),
-            Map.entry("transport", 0x2F97C8), Map.entry("data", 0x34CF77),
-            Map.entry("protection", 0xE6C828));
+            Map.entry("manufacturing", 0xE68228), Map.entry("chemistry", 0x64C864),
+            Map.entry("robotics", 0x9B6EDC), Map.entry("computing", 0x34CFB4),
+            Map.entry("energy", 0x2F97C8), Map.entry("reactor", 0x3C6EE6),
+            Map.entry("protection", 0xE6C828), Map.entry("weapons", 0xD23C3C));
 
     private static String group(ItemStack st) {
         CustomData cd = st.get(DataComponents.CUSTOM_DATA);

@@ -53,9 +53,8 @@ public final class Exchange {
 
     private static final java.util.Set<String> NOT_TRADABLE = java.util.Set.of(
             "nuclearsq:creative_energy_source_sqc", "nuclearsq:creative_fluid_source_sqc", "nuclearsq:spacer_sqc",
-            "nuclearsq:header_data_sqc", "nuclearsq:header_fuel_sqc", "nuclearsq:header_hulls_sqc", "nuclearsq:header_machines_sqc",
-            "nuclearsq:header_modules_sqc", "nuclearsq:header_ores_sqc", "nuclearsq:header_parts_sqc", "nuclearsq:header_protection_sqc",
-            "nuclearsq:header_transport_sqc", "nuclearsq:header_water_sqc",
+            "nuclearsq:header_manufacturing_sqc", "nuclearsq:header_chemistry_sqc", "nuclearsq:header_robotics_sqc", "nuclearsq:header_computing_sqc",
+            "nuclearsq:header_energy_sqc", "nuclearsq:header_reactor_sqc", "nuclearsq:header_protection_sqc", "nuclearsq:header_weapons_sqc",
             "nuclearsq:radioactive_fallout_sqc", "nuclearsq:contaminated_rubble_sqc", "nuclearsq:reactor_detonator_sqc");
 
     public static List<String> goods() {

@@ -18,5 +18,7 @@ public final class CreateCompat {
         MovingInteractionBehaviour.REGISTRY.register(BombRegistry.LARGE_BOMB.get(), interaction);
         MovingInteractionBehaviour.REGISTRY.register(BombRegistry.TSAR_BOMB.get(), interaction);
         MovementBehaviour.REGISTRY.register(RoboticsRegistry.ROD_GRIPPER.get(), new RodGripperMovementBehaviour());
+        FuelRodAttachment.register();
+        BombAttachment.register();
     }
 }

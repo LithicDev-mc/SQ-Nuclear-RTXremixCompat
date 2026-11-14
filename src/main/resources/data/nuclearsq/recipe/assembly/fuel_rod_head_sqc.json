@@ -11,8 +11,11 @@
       "ingredient": {
         "type": "nuclearsq:optional",
         "items": [
-          "create:cogwheel",
-          "minecraft:stick"
+          "create:iron_sheet",
+          "minecraft:iron_ingot"
+        ],
+        "tags": [
+          "c:plates/iron"
         ]
       },
       "count": 30

@@ -1,6 +1,5 @@
 package com.sqc.nuclearsq.machine;
 
-import com.sqc.nuclearsq.machine.client.DeviceScreen;
 import com.sqc.nuclearsq.registry.MultiblockRegistry;
 
 import net.minecraft.core.BlockPos;

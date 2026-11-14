@@ -58,13 +58,13 @@ public final class DoorTests {
         }
     }
 
-    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 100)
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 220)
     public static void airlockDoorOpensAndCloses(GameTestHelper h) {
         DoorBlockEntity be = door(h, DoorRegistry.AIRLOCK_PANEL.get(), 3, 2);
         check(be.setOpen(true) == null, "Tor oeffnet nicht");
         check(be.panels().size() == 6 && be.width() == 3 && be.height() == 2 && be.kind() == DoorPanelBlock.Kind.AIRLOCK && be.way() == 3, "Tor falsch eingelesen: " + be.panels().size());
         expect(h, 3, 2, Phase.MOVING, "Fahrt auf");
-        h.runAfterDelay(25, () -> {
+        h.runAfterDelay(80, () -> {
             expect(h, 3, 2, Phase.OPEN, "offen");
             check(!be.moving() && be.open(), "Tor steht nicht offen");
             var stand = h.spawn(EntityType.ARMOR_STAND, CTRL.offset(2, 0, 0));
@@ -72,7 +72,7 @@ public final class DoorTests {
             stand.discard();
             check(be.setOpen(false) == null, "Tor schliesst nicht");
             expect(h, 3, 2, Phase.MOVING, "Fahrt zu");
-            h.runAfterDelay(25, () -> {
+            h.runAfterDelay(80, () -> {
                 expect(h, 3, 2, Phase.CLOSED, "zu");
                 check(be.closed(), "Tor steht nicht geschlossen");
                 h.succeed();
@@ -80,14 +80,14 @@ public final class DoorTests {
         });
     }
 
-    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 60)
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 100)
     public static void hangarDoorByDataAndRelease(GameTestHelper h) {
         DoorBlockEntity be = door(h, DoorRegistry.HANGAR_PANEL.get(), 2, 2);
         h.setBlock(CTRL.offset(3, 0, 0), DoorRegistry.AIRLOCK_PANEL.get().defaultBlockState().setValue(DoorPanelBlock.AXIS, Direction.Axis.Z));
         DataSource s = DataSources.at(h.getLevel(), h.absolutePos(CTRL));
         check(s != null && s.type().equals("door_control") && s.settable().contains("open"), "Datenanschluss fehlt: " + s);
         check(s.set("open", 1) == null && be.panels().size() == 4 && be.kind() == DoorPanelBlock.Kind.HANGAR && be.way() == 2, "Datennetz oeffnet nicht");
-        h.runAfterDelay(15, () -> {
+        h.runAfterDelay(DoorBlockEntity.MIN_TRAVEL + 5, () -> {
             expect(h, 2, 2, Phase.OPEN, "offen");
             check(s.value("open").value() == 1, "Wert open falsch");
             check(h.getBlockState(CTRL.offset(3, 0, 0)).getValue(DoorPanelBlock.PHASE) == Phase.RAW, "fremdes Segment faehrt mit");
@@ -133,11 +133,11 @@ public final class DoorTests {
         h.setBlock(side, Blocks.REDSTONE_BLOCK);
         DoorBlockEntity be = DoorBlockEntity.controllerOf(h.getLevel(), low);
         check(be != null && be.open(), "Redstone-Signal oeffnet nicht");
-        h.runAfterDelay(60, () -> {
+        h.runAfterDelay(70, () -> {
             expect(h, 2, 2, Phase.OPEN, "offen per Redstone");
             h.setBlock(side, Blocks.AIR);
             check(!be.open(), "ohne Redstone-Signal schliesst es nicht");
-            h.runAfterDelay(60, () -> {
+            h.runAfterDelay(70, () -> {
                 expect(h, 2, 2, Phase.CLOSED, "zu ohne Redstone");
                 h.succeed();
             });
@@ -185,7 +185,7 @@ public final class DoorTests {
         h.succeed();
     }
 
-    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 140)
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 240)
     public static void doorWithoutController(GameTestHelper h) {
         for (int x = 0; x < 2; x++) {
             for (int y = 0; y < 2; y++) h.setBlock(CTRL.offset(1 + x, y, 0), DoorRegistry.HANGAR_PANEL.get().defaultBlockState().setValue(DoorPanelBlock.AXIS, Direction.Axis.Z));
@@ -196,12 +196,12 @@ public final class DoorTests {
         check(be != null && be.master() && be.toggle() == null && be.panels().size() == 4, "Segment uebernimmt die Steuerung nicht");
         check(DoorBlockEntity.of(h.getLevel(), top) == be, "zweites Segment findet das Leitsegment nicht");
         expect(h, 2, 2, Phase.MOVING, "Fahrt auf");
-        h.runAfterDelay(15, () -> {
+        h.runAfterDelay(DoorBlockEntity.MIN_TRAVEL + 5, () -> {
             expect(h, 2, 2, Phase.OPEN, "offen");
             check(!h.getLevel().getBlockState(top).getShape(h.getLevel(), top).isEmpty() && h.getLevel().getBlockState(low).getShape(h.getLevel(), low).isEmpty(),
                     "offen ist nicht genau der Rollkasten anklickbar");
             check(be.toggle() == null, "Tor schliesst nicht");
-            h.runAfterDelay(15, () -> {
+            h.runAfterDelay(DoorBlockEntity.MIN_TRAVEL + 5, () -> {
                 expect(h, 2, 2, Phase.CLOSED, "zu");
                 h.setBlock(side, net.minecraft.world.level.block.Blocks.REDSTONE_BLOCK);
                 check(be.open() && be.moving(), "Redstone am Segment oeffnet nicht");

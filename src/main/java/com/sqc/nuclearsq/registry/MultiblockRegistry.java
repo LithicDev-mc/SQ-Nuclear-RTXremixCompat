@@ -1,7 +1,6 @@
 package com.sqc.nuclearsq.registry;
 
 import com.sqc.nuclearsq.machine.DeviceMenu;
-import com.sqc.nuclearsq.multiblock.MultiblockStructure;
 import com.sqc.nuclearsq.multiblock.PartBlockItem;
 import com.sqc.nuclearsq.turbine.TurbineControllerBlock;
 import com.sqc.nuclearsq.turbine.TurbineControllerBlockEntity;

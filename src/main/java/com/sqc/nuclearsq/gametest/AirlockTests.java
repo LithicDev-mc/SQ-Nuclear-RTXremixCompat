@@ -32,7 +32,7 @@ public final class AirlockTests {
         return be;
     }
 
-    @GameTest(template = "floor", batch = "airlock", timeoutTicks = 120)
+    @GameTest(template = "floor", batch = "airlock", timeoutTicks = 200)
     public static void airlockInterlocksAndCycles(GameTestHelper h) {
         BlockPos mid = new BlockPos(4, 2, 4);
         DoorBlockEntity one = door(h, mid.west(2)), two = door(h, mid.east(3));
@@ -47,9 +47,9 @@ public final class AirlockTests {
         h.runAfterDelay(10, () -> {
             check(lock.openDoor() == 1 && s.value("door").value() == 1, "Tor 1 steht nicht offen");
             check(s.set("cycle", 1) == null && lock.busy(), "Durchschleusen startet nicht");
-            h.runAfterDelay(12, () -> {
+            h.runAfterDelay(20, () -> {
                 check(one.closed() && two.closed() && lock.busy(), "Spuelzeit fehlt: Tor 2 schon in Fahrt");
-                h.runAfterDelay(AirlockBlockEntity.PURGE + 12, () -> {
+                h.runAfterDelay(AirlockBlockEntity.PURGE + DoorBlockEntity.MIN_TRAVEL + 10, () -> {
                     check(one.closed() && two.open() && !two.moving() && !lock.busy(), "Tor 2 steht nicht offen");
                     check(one.setOpen(true) != null, "Tor 1 ist nicht verriegelt");
                     lock.request(-1);

@@ -58,7 +58,7 @@ public final class BakedMachines {
         }
     }
 
-    private static final int MAX_ENTRIES = 1024, MAX_VERTICES = 2_500_000, RELIGHT_TICKS = 200;
+    private static final int MAX_ENTRIES = 1024, MAX_VERTICES = 2_500_000;
     private record Key(Object kind, int rot, boolean replay, int light, long variant) {}
 
     private static final java.util.HashMap<Key, Entry> CACHE = new java.util.HashMap<>();

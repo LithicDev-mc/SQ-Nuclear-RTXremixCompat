@@ -25,7 +25,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public final class ClientSwarm {
-    private static final float SPAN = 2f;
 
     private enum Mode { WANDER, EXPLORE, HUDDLE, FOLLOW, CIRCLE, CLEAN, WORK, STALK }
 

@@ -35,6 +35,7 @@ public final class MenuStyle {
     private static final String[] SHOTS = {"shot_01", "shot_02", "shot_03", "shot_04", "shot_05", "shot_06", "shot_07"};
     private static int shot = -1;
     private static long lastLoad;
+    private static boolean wasLoading;
 
     private static ResourceLocation rl(String name) {
         return ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, "menu/" + name);
@@ -55,19 +56,21 @@ public final class MenuStyle {
         });
     }
 
+    private static String pick() {
+        int n = SHOTS.length;
+        shot = shot < 0 ? ThreadLocalRandom.current().nextInt(n) : (shot + 1 + ThreadLocalRandom.current().nextInt(n - 1)) % n;
+        return SHOTS[shot];
+    }
+
     public static void background(GuiGraphics g, int w, int h) {
         Screen sc = Minecraft.getInstance().screen;
-        String name = "menu";
-        if (sc instanceof ConnectScreen || sc instanceof ReceivingLevelScreen || sc instanceof LevelLoadingScreen
-                || sc instanceof ProgressScreen || sc instanceof GenericMessageScreen) {
-            long now = Util.getMillis();
-            if (shot < 0 || now - lastLoad > 2000L) {
-                int n = SHOTS.length;
-                shot = shot < 0 ? ThreadLocalRandom.current().nextInt(n) : (shot + 1 + ThreadLocalRandom.current().nextInt(n - 1)) % n;
-            }
-            lastLoad = now;
-            name = SHOTS[shot];
-        }
+        boolean loading = sc instanceof ConnectScreen || sc instanceof ReceivingLevelScreen || sc instanceof LevelLoadingScreen
+                || sc instanceof ProgressScreen || sc instanceof GenericMessageScreen;
+        long now = Util.getMillis();
+        if (shot < 0 || (loading && !wasLoading) || (lastLoad > 0L && now - lastLoad > 2000L)) pick();
+        wasLoading = loading;
+        lastLoad = now;
+        String name = SHOTS[shot];
         int[] t = texture(name);
         if (t == null) {
             g.fill(0, 0, w, h, 0xFF000000);
@@ -79,12 +82,13 @@ public final class MenuStyle {
     }
 
     public static void startScreen(float progress, float fade) {
-        int[] t = texture("start");
-        if (t == null || fade <= 0f) return;
+        if (fade <= 0f) return;
+        int[] t = texture(shot < 0 ? pick() : SHOTS[shot]);
+        if (t == null) return;
         int w = Minecraft.getInstance().getWindow().getWidth(), h = Minecraft.getInstance().getWindow().getHeight();
         float sa = (float) w / h, ia = (float) t[1] / t[2];
         float du = sa < ia ? (1 - sa / ia) / 2 : 0, dv = sa > ia ? (1 - ia / sa) / 2 : 0;
-        float uw = (1 - 2 * du) / 1.25f, vh = (1 - 2 * dv) / 1.25f, u0 = (1 - uw) / 2, v0 = 1 - dv - vh;
+        float uw = 1 - 2 * du, vh = 1 - 2 * dv, u0 = du, v0 = dv;
         RenderSystem.disableDepthTest();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();

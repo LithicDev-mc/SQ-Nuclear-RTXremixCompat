@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "nuclearsq:item/header_modules_sqc"
-  }
-}

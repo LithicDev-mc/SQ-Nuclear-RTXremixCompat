@@ -17,7 +17,8 @@ public class FuelRodRenderer implements BlockEntityRenderer<FuelRodBlockEntity> 
     @Override
     public void render(FuelRodBlockEntity be, float partialTick, PoseStack pose, MultiBufferSource buffers, int light, int overlay) {
         if (com.sqc.nuclearsq.NuclearClientConfig.noShadow()) return;
-        if (!com.sqc.nuclearsq.NuclearClientConfig.inGlowRange(be.getBlockPos())) return;
+        if (!com.sqc.nuclearsq.NuclearClientConfig.inGlowRange(be.getBlockPos())
+                && !com.sqc.nuclearsq.NuclearClientConfig.inGlowRange(com.sqc.nuclearsq.compat.sable.SableCompat.toWorld(be.getLevel(), be.getBlockPos()))) return;
         BlockState st = be.getBlockState();
         if (!st.hasProperty(FuelRodBlock.CHARGE) || st.getValue(ReactorProps.DRIVEN) || st.getValue(FuelRodBlock.CHARGE) <= 0) return;
         if (!com.sqc.nuclearsq.client.OcclusionCull.visible(be.getLevel(), be.getBlockPos(), net.minecraft.world.phys.AABB.unitCubeFromLowerCorner(net.minecraft.world.phys.Vec3.atLowerCornerOf(be.getBlockPos())))) return;

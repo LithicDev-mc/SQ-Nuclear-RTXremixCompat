@@ -1,7 +1,5 @@
 package com.sqc.nuclearsq.registry;
 
-import com.sqc.nuclearsq.explosion.client.NukeDustParticle;
-
 import com.sqc.nuclearsq.NuclearSQ;
 
 import net.minecraft.core.particles.ParticleType;

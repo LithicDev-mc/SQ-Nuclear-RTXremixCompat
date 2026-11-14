@@ -21,7 +21,7 @@
       "type": "energy",
       "dir": "in",
       "cell": [
-        6,
+        4,
         0,
         0
       ]
@@ -31,7 +31,7 @@
       "type": "energy",
       "dir": "in",
       "cell": [
-        8,
+        16,
         0,
         0
       ]
@@ -41,9 +41,9 @@
       "type": "energy",
       "dir": "out",
       "cell": [
-        12,
+        20,
         0,
-        0
+        3
       ]
     },
     {
@@ -51,9 +51,9 @@
       "type": "energy",
       "dir": "out",
       "cell": [
-        14,
+        20,
         0,
-        0
+        17
       ]
     },
     {
@@ -73,7 +73,7 @@
       "cell": [
         20,
         0,
-        7
+        8
       ]
     },
     {
@@ -83,7 +83,7 @@
       "cell": [
         20,
         0,
-        13
+        12
       ]
     },
     {
@@ -93,7 +93,7 @@
       "cell": [
         0,
         0,
-        7
+        4
       ]
     },
     {
@@ -113,7 +113,7 @@
       "cell": [
         0,
         0,
-        13
+        16
       ]
     },
     {
@@ -121,7 +121,7 @@
       "type": "item",
       "dir": "in",
       "cell": [
-        8,
+        7,
         0,
         20
       ]
@@ -131,7 +131,7 @@
       "type": "item",
       "dir": "out",
       "cell": [
-        12,
+        13,
         0,
         20
       ]
@@ -141,7 +141,7 @@
       "type": "signal",
       "dir": "in",
       "cell": [
-        16,
+        17,
         0,
         20
       ]
@@ -151,7 +151,7 @@
       "type": "signal",
       "dir": "out",
       "cell": [
-        4,
+        3,
         0,
         20
       ]
@@ -171,27 +171,27 @@
   },
   "layers": [
     [
-      "CCCCCCeCeC@CeCeCCCCCC",
+      "CCCCeCCCCC@CCCCCeCCCC",
       "CCCCCCCCCCCCCCCCCCCCC",
       "CCCCCCCCCCCCCCCCCCCCC",
-      "CCCCCCCCCCCCCCCCCCCCC",
-      "CCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCe",
+      "gCCCCCCCCCCCCCCCCCCCC",
       "CCCCCCCCCCCCCCCCCCCCC",
       "CCCCCC         CCCCCC",
-      "gCCCCC         CCCCCk",
       "CCCCCC         CCCCCC",
+      "CCCCCC         CCCCCk",
       "CCCCCC   CCC   CCCCCC",
       "gCCCCC   CCC   CCCCCC",
       "CCCCCC   CCC   CCCCCC",
+      "CCCCCC         CCCCCk",
       "CCCCCC         CCCCCC",
-      "gCCCCC         CCCCCk",
       "CCCCCC         CCCCCC",
       "CCCCCCCCCCCCCCCCCCCCC",
+      "gCCCCCCCCCCCCCCCCCCCC",
+      "CCCCCCCCCCCCCCCCCCCCe",
       "CCCCCCCCCCCCCCCCCCCCC",
       "CCCCCCCCCCCCCCCCCCCCC",
-      "CCCCCCCCCCCCCCCCCCCCC",
-      "CCCCCCCCCCCCCCCCCCCCC",
-      "CCCCsCCCiCCCiCCCsCCCC"
+      "CCCsCCCiCCCCCiCCCsCCC"
     ],
     [
       "CCCCCCCCCCCtCCCCCCCCC",

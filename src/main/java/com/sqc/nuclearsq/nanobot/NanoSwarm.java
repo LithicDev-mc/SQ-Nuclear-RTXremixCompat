@@ -61,9 +61,6 @@ public final class NanoSwarm {
         return out.stream().mapToInt(Integer::intValue).toArray();
     }
     private static final int MAX_LOGS = 160, MAX_VEIN = 48, MAX_STONE = 32, TREE_SPREAD = 8, MAX_LEAVES = 400;
-    private static final double SPEED = 0.5;
-    private static final double BOT_SPEED = 0.6, CLIMB_UP = 0.35, CLIMB_DOWN = 0.5;
-    private static final double BOT_LIFT = 0.07;
     private static final int TRAVEL_TIMEOUT = 20 * 25;
     private static int cargoLimit() {
         return NuclearConfig.value(NuclearConfig.NANOBOT_CARGO_LIMIT);

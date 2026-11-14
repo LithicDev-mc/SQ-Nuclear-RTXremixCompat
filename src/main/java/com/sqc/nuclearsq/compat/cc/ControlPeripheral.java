@@ -6,7 +6,6 @@ import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class ControlPeripheral implements IPeripheral {
     private final DataControlBlockEntity be;

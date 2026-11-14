@@ -109,8 +109,8 @@ public class DoorRenderer implements BlockEntityRenderer<DoorBlockEntity> {
     }
 
     private void airlock(float f) {
-        float t = Mth.clamp(f / 0.25f, 0, 1), sl = Mth.clamp((f - 0.25f) / 0.75f, 0, 1), s = sl * sl * (3 - 2 * sl) * w;
-        float u0 = 2 * P - s, u1 = w - 2 * P - s, top = h - 4 * P, mid = w / 2f - s, vt = top + P / 2;
+        float t = Mth.clamp(f / 0.25f, 0, 1), sl = Mth.clamp((f - 0.25f) / 0.75f, 0, 1), swing = sl * sl * (3 - 2 * sl);
+        float u0 = 2 * P, u1 = w - 2 * P, top = h - 4 * P, mid = w / 2f, vt = top + P / 2;
         float rim = w == 1 ? 2 * P : 3 * P, a = u0 + P + rim, b = u1 - P - rim;
         boolean tall = h >= 2;
         float rw = P * Math.min(w == 1 ? 3.5f : w == 2 ? 5.5f : 6.5f, h == 1 ? 3.5f : h == 2 ? 4 : 6.5f);
@@ -129,6 +129,9 @@ public class DoorRenderer implements BlockEntityRenderer<DoorBlockEntity> {
         glow = true;
         box(w / 2f - P, h - 2.5f * P, P - 0.01f, w / 2f + P, h - 1.5f * P, 15 * P + 0.01f, 0, h - 2.5f * P + (f <= 0 ? 2 : f >= 1 ? 12 : 7) * P);
         glow = false;
+        use(LOCK_FRAME);
+        for (float y : tall ? new float[] {4 * P, top - 7 * P} : new float[] {2 * P, top - 5 * P}) box(P, y, P, 3 * P, y + 3 * P, 2 * P, 0, 0);
+        turn((be.axis() == Direction.Axis.Z ? 90 : -90) * swing, vDir, 2 * P, 0, 2 * P);
         use(LOCK_WEAR);
         box(u0, P, 6 * P, u1, tall ? P + 1 : vt, 10 * P, u0, P + 1);
         if (tall) {
@@ -188,6 +191,7 @@ public class DoorRenderer implements BlockEntityRenderer<DoorBlockEntity> {
         turn(spin, nDir, mid, cw, 0);
         box(mid - 1.5f * P, cw - 1.5f * P, 2.6f * P, mid + 1.5f * P, cw + 1.5f * P, 4.2f * P, mid - 8 * P, 0);
         box(mid - 1.5f * P, cw - 1.5f * P, 11.8f * P, mid + 1.5f * P, cw + 1.5f * P, 13.4f * P, mid - 8 * P, 0);
+        back();
         back();
     }
 

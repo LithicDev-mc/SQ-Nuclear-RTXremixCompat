@@ -222,12 +222,6 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         fusion = FusionCore.handles(machine) && energy != null ? new FusionCore(machine, this::setChanged) : null;
     }
 
-    private static boolean anySteam(FluidStack fs) {
-        return fs.is(ModFluids.STEAM.source.get()) || fs.is(ModFluids.CONTAMINATED_STEAM.source.get())
-                || fs.is(ModFluids.EXHAUST_STEAM.source.get()) || fs.is(ModFluids.WET_STEAM.source.get())
-                || fs.is(ModFluids.SUPERHEATED_STEAM.source.get());
-    }
-
     private Predicate<FluidStack> accepts(BigMachine.Port p) {
         return switch (p.kind()) {
             case WET_STEAM -> machine == BigMachine.STEAM_GENERATOR || machine == BigMachine.STEAM_SEPARATOR || machine == BigMachine.STEAM_DRYER || machine == BigMachine.CONTAINMENT

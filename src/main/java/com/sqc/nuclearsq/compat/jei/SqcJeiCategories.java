@@ -22,6 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -56,6 +57,12 @@ final class SqcJeiCategories {
         for (ItemStack s : ing.getItems()) out.add(s.copyWithCount(count));
         if (out.isEmpty()) out.add(new ItemStack(Items.BARRIER));
         return out;
+    }
+
+    private static IRecipeSlotBuilder noTags(IRecipeSlotBuilder slot) {
+        return slot.addRichTooltipCallback((view, tip) -> tip.getLines().removeIf(l -> l.left()
+                .map(f -> f instanceof Component c && c.getContents() instanceof TranslatableContents tc && tc.getKey().startsWith("jei.tooltip.recipe.tag"))
+                .orElse(false)));
     }
 
     private abstract static class Base<T> implements IRecipeCategory<T> {
@@ -101,7 +108,7 @@ final class SqcJeiCategories {
         @Override
         public void setRecipe(IRecipeLayoutBuilder b, Needs r, IFocusGroup f) {
             for (int i = 0; i < r.ingredients().size(); i++) {
-                b.addSlot(RecipeIngredientRole.INPUT, 1 + (i % 3) * 18, 1 + (i / 3) * 18)
+                noTags(b.addSlot(RecipeIngredientRole.INPUT, 1 + (i % 3) * 18, 1 + (i / 3) * 18))
                         .addItemStacks(counted(r.ingredients().get(i), r.counts().get(i)));
             }
             b.addSlot(RecipeIngredientRole.OUTPUT, 114, 19).setOutputSlotBackground().addItemStack(r.result());
@@ -126,7 +133,7 @@ final class SqcJeiCategories {
                     char c = r.pattern().get(y).charAt(x);
                     if (c == ' ') continue;
                     Ingredient ing = r.key().get(String.valueOf(c));
-                    b.addSlot(RecipeIngredientRole.INPUT, 1 + x * 18, 1 + y * 18).addItemStacks(counted(ing, 1));
+                    noTags(b.addSlot(RecipeIngredientRole.INPUT, 1 + x * 18, 1 + y * 18)).addItemStacks(counted(ing, 1));
                 }
             }
             b.addSlot(RecipeIngredientRole.OUTPUT, 128, 19).setOutputSlotBackground().addItemStack(r.result());
@@ -147,8 +154,8 @@ final class SqcJeiCategories {
         @Override
         public void setRecipe(IRecipeLayoutBuilder b, RecipeHolder<ReprocessingRecipe> h, IFocusGroup f) {
             ReprocessingRecipe r = h.value();
-            b.addSlot(RecipeIngredientRole.INPUT, 1, 1).addItemStacks(counted(r.ingredient(), r.count()));
-            if (r.hasAux()) b.addSlot(RecipeIngredientRole.INPUT, 1, 21).addItemStacks(counted(r.aux(), r.auxCount()));
+            noTags(b.addSlot(RecipeIngredientRole.INPUT, 1, 1)).addItemStacks(counted(r.ingredient(), r.count()));
+            if (r.hasAux()) noTags(b.addSlot(RecipeIngredientRole.INPUT, 1, 21)).addItemStacks(counted(r.aux(), r.auxCount()));
             int n = 0;
             for (ReprocessingRecipe.Result res : r.results()) {
                 IRecipeSlotBuilder s = b.addSlot(RecipeIngredientRole.OUTPUT, 80 + (n % 2) * 18, 1 + (n / 2) * 18)

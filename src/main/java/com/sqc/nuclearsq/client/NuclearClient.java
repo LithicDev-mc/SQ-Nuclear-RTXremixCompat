@@ -2,7 +2,6 @@ package com.sqc.nuclearsq.client;
 
 import com.sqc.nuclearsq.explosion.client.ExplosionFlash;
 import com.sqc.nuclearsq.machine.client.DeviceScreen;
-import com.sqc.nuclearsq.registry.AssemblyRegistry;
 import com.sqc.nuclearsq.registry.MultiblockRegistry;
 import com.sqc.nuclearsq.turbine.client.TurbineScreen;
 
