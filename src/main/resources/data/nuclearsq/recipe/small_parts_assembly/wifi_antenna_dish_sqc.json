@@ -1,0 +1,41 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:wifi_antenna_sector_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:gold_ingot"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:ender_eye"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_3_sqc"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:wifi_antenna_dish_sqc",
+    "count": 1
+  },
+  "time": 300,
+  "energy_per_tick": 960
+}

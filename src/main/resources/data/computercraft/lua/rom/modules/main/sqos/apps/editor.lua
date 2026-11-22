@@ -69,7 +69,8 @@ function M.run(ctx)
         local ok, err = pcall(function()
             local dir = fs.getDir(path)
             if dir ~= "" and not fs.exists(dir) then fs.makeDir(dir) end
-            local h = fs.open(path, "w")
+            local h, e = fs.open(path, "w")
+            if not h then error(e, 0) end
             h.write(table.concat(lines, "\n") .. "\n")
             h.close()
         end)

@@ -36,6 +36,12 @@
         "item": "nuclearsq:glass_seal_sqc"
       },
       "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sand"
+      },
+      "count": 8
     }
   ],
   "result": {

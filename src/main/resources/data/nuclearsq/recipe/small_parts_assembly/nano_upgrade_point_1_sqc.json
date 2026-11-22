@@ -18,6 +18,12 @@
         "item": "nuclearsq:steel_sheet_sqc"
       },
       "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:glowstone_dust"
+      },
+      "count": 2
     }
   ],
   "result": {

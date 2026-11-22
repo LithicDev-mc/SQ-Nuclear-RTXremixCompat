@@ -131,6 +131,7 @@ dependencies {
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}") { transitive = false }
     compileOnly("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1") { transitive = false }
     compileOnly("maven.modrinth:power-grid:${powergrid_version}") { transitive = false }
+    compileOnly("maven.modrinth:distanthorizonsapi:7.2.0") { transitive = false }
 
     jarJar(implementation("dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:[${sable_companion_version},)")) {
         version { prefer(sable_companion_version) }

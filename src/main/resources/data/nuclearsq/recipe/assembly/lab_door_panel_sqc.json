@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:white_dye"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:glass_pane"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:brass_bearing_sqc"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:lab_door_panel_sqc",
+    "count": 4
+  }
+}

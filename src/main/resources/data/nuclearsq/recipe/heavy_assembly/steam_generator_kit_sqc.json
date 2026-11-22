@@ -2,10 +2,10 @@
   "type": "nuclearsq:heavy_assembly",
   "pattern": [
     "ccccc",
-    "hL@Lh",
+    " L@L ",
     "%fCu%",
     "cZhZc",
-    "chhhm"
+    "ch hm"
   ],
   "key": {
     "%": {
@@ -44,5 +44,12 @@
     "count": 1
   },
   "time": 400,
-  "energy_per_tick": 9600
+  "energy_per_tick": 9600,
+  "hardcore_pattern": [
+    "ccccc",
+    "hL@Lh",
+    "%fCu%",
+    "cZhZc",
+    "chhhm"
+  ]
 }

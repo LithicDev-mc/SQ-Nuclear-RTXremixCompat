@@ -1,7 +1,8 @@
 {
  "parent": "minecraft:block/block",
  "textures": {
-  "all": "nuclearsq:block/radioactive_fallout_sqc"
+  "all": "nuclearsq:block/radioactive_fallout_sqc",
+  "particle": "#all"
  },
  "elements": [
   {

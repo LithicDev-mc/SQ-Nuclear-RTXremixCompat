@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "nuclearsq:block/machine_shell"
+      "model": "nuclearsq:block/reactor_assembler_shell_sqc"
     }
   }
 }

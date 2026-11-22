@@ -4,8 +4,8 @@
     "eecee",
     "oM@Mo",
     "&JTJ&",
-    "iM&Mi",
-    "ghmhg"
+    "i & i",
+    "ghm g"
   ],
   "key": {
     "&": {
@@ -50,5 +50,12 @@
     "count": 1
   },
   "time": 400,
-  "energy_per_tick": 9600
+  "energy_per_tick": 9600,
+  "hardcore_pattern": [
+    "eecee",
+    "oM@Mo",
+    "&JTJ&",
+    "iM&Mi",
+    "ghmhg"
+  ]
 }

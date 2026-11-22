@@ -19,5 +19,6 @@
       "fluid": "nuclearsq:hlw",
       "amount": 800
     }
-  ]
+  ],
+  "priority": 1
 }

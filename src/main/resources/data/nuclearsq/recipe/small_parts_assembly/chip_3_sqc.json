@@ -11,7 +11,7 @@
       "ingredient": {
         "item": "nuclearsq:silicon_pure_sqc"
       },
-      "count": 2
+      "count": 3
     },
     {
       "ingredient": {
@@ -46,5 +46,5 @@
     "id": "nuclearsq:chip_3_sqc",
     "count": 1
   },
-  "time": 240
+  "time": 280
 }

@@ -62,7 +62,17 @@ local function readAll(sources)
     while i <= #jobs do
         local chunk = {}
         for k = i, math.min(#jobs, i + 15) do chunk[#chunk + 1] = jobs[k] end
-        parallel.waitForAll(unpack(chunk))
+        local live, ev = #chunk, { n = 0 }
+        for k, job in ipairs(chunk) do chunk[k] = coroutine.create(job) end
+        while live > 0 do
+            for _, co in ipairs(chunk) do
+                if coroutine.status(co) ~= "dead" then
+                    coroutine.resume(co, unpack(ev, 1, ev.n))
+                    if coroutine.status(co) == "dead" then live = live - 1 end
+                end
+            end
+            if live > 0 then ev = table.pack(os.pullEvent("task_complete")) end
+        end
         i = i + 16
     end
     local seen, list = {}, {}

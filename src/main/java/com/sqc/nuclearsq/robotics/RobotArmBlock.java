@@ -121,6 +121,12 @@ public class RobotArmBlock extends HorizontalDirectionalBlock implements EntityB
     }
 
     @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide && player.isCreative()) popResource(level, pos, new ItemStack(this));
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
     protected boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
         BlockEntity be = level.getBlockEntity(pos);
         return be != null && be.triggerEvent(id, param);

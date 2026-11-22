@@ -39,7 +39,7 @@ public class RodGripperScreen extends AbstractContainerScreen<RodGripperMenu> {
     @Override
     protected void renderBg(GuiGraphics g, float pt, int mx, int my) {
         int x = leftPos, y = topPos, inner = W - 16;
-        TermKit.monitor(g, x - 4, y - 4, W + 8, H + 8);
+        TermKit.monitor(g, x - 4, y - 4, W + 8, H + 8, 20);
         TermKit.header(g, font, title, Component.empty(), x + 8, y + 7, inner, TermKit.MID);
 
         boolean on = menu.data(1) != 0;

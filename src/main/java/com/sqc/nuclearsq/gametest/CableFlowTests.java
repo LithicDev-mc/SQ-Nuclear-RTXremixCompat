@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sqc.nuclearsq.NuclearSQ;
+import com.sqc.nuclearsq.machine.big.BigMachine;
 import com.sqc.nuclearsq.machine.big.BigMachineBlockEntity;
+import com.sqc.nuclearsq.multiblock.MultiblockStructure;
+import com.sqc.nuclearsq.robotics.RobotArmBlockEntity;
+import com.sqc.nuclearsq.robotics.RoboticsRegistry;
 import com.sqc.nuclearsq.transport.ConduitBlockEntity;
 import com.sqc.nuclearsq.transport.TransportRegistry;
 import com.sqc.nuclearsq.transport.TransportTier;
@@ -114,6 +118,90 @@ public final class CableFlowTests {
                 if (avg < 36000) throw new GameTestAssertException("Ferne Akkus bekommen nur " + avg + " FE/t, erwartet mindestens 36000");
                 h.succeed();
             }
+        });
+    }
+
+    private static BigMachineBlockEntity battery(GameTestHelper h, BlockPos min) {
+        return battery(h, BigMachine.BATTERY_SMALL, min);
+    }
+
+    private static BigMachineBlockEntity battery(GameTestHelper h, BigMachine m, BlockPos min) {
+        MultiblockStructure s = m.structure;
+        BlockPos ctrl = h.absolutePos(min).subtract(s.world(BlockPos.ZERO, 0, 0, 0, 0));
+        for (MultiblockStructure.Cell c : s.cells(ctrl, 0)) h.getLevel().setBlockAndUpdate(c.pos(), c.block().defaultBlockState());
+        return (BigMachineBlockEntity) h.getLevel().getBlockEntity(ctrl);
+    }
+
+    private static void even(GameTestHelper h, BigMachineBlockEntity[] b, BlockPos src) {
+        int[] t = {0};
+        h.onEachTick(() -> {
+            for (BigMachineBlockEntity x : b) if (!x.isFormed()) return;
+            if (h.getLevel().getBlockEntity(h.absolutePos(src)) instanceof ConduitBlockEntity c) c.energySide(Direction.UP).receiveEnergy(3000, false);
+            if (++t[0] < 600) return;
+            int lo = Integer.MAX_VALUE, hi = 0;
+            for (BigMachineBlockEntity x : b) { lo = Math.min(lo, x.battery().fill()); hi = Math.max(hi, x.battery().fill()); }
+            System.out.println("CABLEFLOW even " + lo + ".." + hi);
+            if (lo < 10 || hi - lo > 2) throw new GameTestAssertException("Akkus laden ungleich: " + lo + " bis " + hi + " %");
+            h.succeed();
+        });
+    }
+
+    @GameTest(template = "floor", batch = "cableflow", timeoutTicks = 1200)
+    public static void parallelBatteriesChargeEvenly(GameTestHelper h) {
+        BigMachineBlockEntity[] b = {battery(h, new BlockPos(3, 2, 3)), battery(h, new BlockPos(3, 2, 6)), battery(h, new BlockPos(3, 2, 9))};
+        for (int z = 0; z <= 12; z++) put(h, h.absolutePos(new BlockPos(2, 2, z)));
+        even(h, b, new BlockPos(2, 2, 0));
+    }
+
+    @GameTest(template = "floor", batch = "cableflow", timeoutTicks = 1200)
+    public static void seriesBatteriesChargeEvenly(GameTestHelper h) {
+        BigMachineBlockEntity[] b = {battery(h, new BlockPos(3, 2, 3)), battery(h, new BlockPos(7, 2, 3)), battery(h, new BlockPos(11, 2, 3))};
+        for (int x : new int[]{1, 2, 5, 6, 9, 10}) put(h, h.absolutePos(new BlockPos(x, 2, 4)));
+        even(h, b, new BlockPos(1, 2, 4));
+    }
+
+    @GameTest(template = "floor", batch = "cableflow", timeoutTicks = 1500)
+    public static void largeSeriesBatteriesChargeTogether(GameTestHelper h) {
+        BigMachineBlockEntity[] b = new BigMachineBlockEntity[4];
+        for (int i = 0; i < 4; i++) {
+            b[i] = battery(h, BigMachine.BATTERY_LARGE, new BlockPos(3 + 5 * i, 2, 3));
+            put(h, h.absolutePos(new BlockPos(1 + 5 * i, 2, 4)));
+            put(h, h.absolutePos(new BlockPos(2 + 5 * i, 2, 4)));
+        }
+        int[] t = {0};
+        h.onEachTick(() -> {
+            for (BigMachineBlockEntity x : b) if (!x.isFormed()) return;
+            if (h.getLevel().getBlockEntity(h.absolutePos(new BlockPos(1, 2, 4))) instanceof ConduitBlockEntity c) c.energySide(Direction.UP).receiveEnergy(1500, false);
+            if (++t[0] < 800) return;
+            int lo = Integer.MAX_VALUE, hi = 0;
+            for (BigMachineBlockEntity x : b) { lo = Math.min(lo, x.energy().getEnergyStored()); hi = Math.max(hi, x.energy().getEnergyStored()); }
+            System.out.println("CABLEFLOW largeSeries " + lo + ".." + hi);
+            if (lo < 150000 || hi - lo > 64000) throw new GameTestAssertException("Grosse Akkus laden nacheinander: " + lo + " bis " + hi + " FE");
+            h.succeed();
+        });
+    }
+
+    @GameTest(template = "floor", batch = "cableflow", timeoutTicks = 1000)
+    public static void machinesFillTogether(GameTestHelper h) {
+        for (int z = 0; z <= 12; z++) put(h, h.absolutePos(new BlockPos(2, 2, z)));
+        BlockPos[] arms = new BlockPos[5];
+        for (int i = 0; i < 5; i++) {
+            arms[i] = h.absolutePos(new BlockPos(3, 2, 2 + 2 * i));
+            h.getLevel().setBlockAndUpdate(arms[i], RoboticsRegistry.ARM.get().defaultBlockState());
+        }
+        int[] t = {0};
+        h.onEachTick(() -> {
+            if (h.getLevel().getBlockEntity(h.absolutePos(new BlockPos(2, 2, 0))) instanceof ConduitBlockEntity c) c.energySide(Direction.UP).receiveEnergy(1000, false);
+            if (++t[0] < 150) return;
+            int lo = Integer.MAX_VALUE, hi = 0;
+            for (BlockPos p : arms) {
+                int e = ((RobotArmBlockEntity) h.getLevel().getBlockEntity(p)).energy().getEnergyStored();
+                lo = Math.min(lo, e);
+                hi = Math.max(hi, e);
+            }
+            System.out.println("CABLEFLOW machines " + lo + ".." + hi);
+            if (lo < 20000 || hi - lo > 3000) throw new GameTestAssertException("Maschinen laden nacheinander: " + lo + " bis " + hi + " FE");
+            h.succeed();
         });
     }
 }

@@ -11,17 +11,22 @@
       "ingredient": {
         "item": "nuclearsq:brass_bearing_sqc"
       },
-      "count": 8
+      "count": 2
     },
     {
       "ingredient": {
         "item": "nuclearsq:steel_sheet_sqc"
       },
-      "count": 8
+      "count": 4
     }
   ],
   "result": {
     "id": "nuclearsq:pressure_chamber_reinforced_sqc",
     "count": 1
-  }
+  },
+  "hardcore_counts": [
+    1,
+    8,
+    8
+  ]
 }

@@ -68,7 +68,7 @@ public class StorageCrateScreen extends AbstractContainerScreen<StorageCrateMenu
     @Override
     protected void renderBg(GuiGraphics g, float partial, int mx, int my) {
         int x = leftPos, y = topPos, w = imageWidth, h = imageHeight;
-        TermKit.monitor(g, x - 4, y - 4, w + 8, h + 8);
+        TermKit.monitor(g, x - 4, y - 4, w + 8, h + 8, 20);
         int used = 0;
         for (int i = 0; i < menu.capacity; i++) if (menu.slots.get(i).hasItem()) used++;
         TermKit.header(g, font, title, t("slots", used, menu.capacity), x + 8, y + 7, w - 16, TermKit.MID);

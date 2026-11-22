@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/fusion_reactor_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/fusion_reactor_shell_sqc"
     }
   }
 }

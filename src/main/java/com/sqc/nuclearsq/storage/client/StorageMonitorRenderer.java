@@ -39,8 +39,8 @@ public class StorageMonitorRenderer implements BlockEntityRenderer<StorageMonito
         return Component.translatable("gui.nuclearsq.storage.monitor." + key, args);
     }
 
-    private static int barColor(float f) {
-        return f >= 0.9f ? RED : f >= 0.75f ? AMBER : MID;
+    private static int barColor(float f, float warn) {
+        return f >= warn ? RED : f >= warn - 0.15f ? AMBER : MID;
     }
 
     @Override
@@ -57,8 +57,9 @@ public class StorageMonitorRenderer implements BlockEntityRenderer<StorageMonito
         d.layer();
         d.fill(2.5f, 2.5f, cw - 2.5f, ch - 2.5f, GLASS);
         d.layer();
-        List<StorageMonitorBlockEntity.Row> rows = be.rows();
-        if (rows.isEmpty()) {
+        List<StorageMonitorBlockEntity.Row> rows = be.sorted(false);
+        float warn = be.warnFrom();
+        if (be.rows().isEmpty()) {
             d.center(t("no_racks"), cw / 2, ch / 2 - 3, 0.3f, cw - 10, AMBER);
             d.pop();
             d.end();
@@ -67,17 +68,17 @@ public class StorageMonitorRenderer implements BlockEntityRenderer<StorageMonito
         long used = be.used(), cap = be.capacity();
         float f = cap <= 0 ? 0 : Math.min(1f, used / (float) cap);
         d.textFit(t("title"), 6, 6, 0.3f, right - 6, GREEN);
-        int on = be.online();
-        d.right(t("racks", on, rows.size()), right, 6, 0.26f, on < rows.size() ? AMBER : MID);
+        int on = be.online(), all = be.rows().size();
+        d.right(t("racks", on, all), right, 6, 0.26f, on < all ? AMBER : MID);
         d.textFit(t("total", StorageFormat.count(used), StorageFormat.count(cap)), 6, 12.5f, 0.26f, (right - 6) * 0.7f, GREEN);
         d.right(Component.literal(Math.round(f * 100) + " %"), right, 12.5f, 0.26f, MID);
         d.fill(6, 18.5f, right, 20.5f, BAR_BG);
         d.layer();
-        d.fill(6, 18.5f, 6 + (right - 6) * f, 20.5f, barColor(f));
+        d.fill(6, 18.5f, 6 + (right - 6) * f, 20.5f, barColor(f, warn));
         d.fill(4, HEAD - 1, cw - 4, HEAD - 0.6f, EDGE);
         int perPage = Math.max(1, (int) ((ch - HEAD - 4) / ROW));
-        int pages = (rows.size() + perPage - 1) / perPage;
-        int page = (int) (be.getLevel().getGameTime() / StorageMonitorBlock.PAGE_TICKS % pages);
+        int pages = Math.max(1, (rows.size() + perPage - 1) / perPage);
+        int page = (int) (be.getLevel().getGameTime() / be.pageTicks() % pages);
         float y = HEAD + 2;
         for (int i = page * perPage; i < Math.min(rows.size(), (page + 1) * perPage); i++) {
             StorageMonitorBlockEntity.Row r = rows.get(i);
@@ -90,7 +91,7 @@ public class StorageMonitorRenderer implements BlockEntityRenderer<StorageMonito
             d.right(amount, right, y, 0.24f, r.drives() == 0 ? DIM : MID);
             d.fill(11, y + 6, right, y + 7.5f, BAR_BG);
             d.layer();
-            if (rf > 0) d.fill(11, y + 6, 11 + (right - 11) * rf, y + 7.5f, barColor(rf));
+            if (rf > 0) d.fill(11, y + 6, 11 + (right - 11) * rf, y + 7.5f, barColor(rf, warn));
             y += ROW;
         }
         if (pages > 1) d.right(Component.literal((page + 1) + "/" + pages), right, ch - 7, 0.22f, DIM);

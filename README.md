@@ -90,6 +90,8 @@ Development remains a manual, creative process where AI helps overcome hurdles f
 ## Credits and licenses
 
 - SQ-Nuclear by SideQuestChris, released under the MIT License (see `LICENSE`).
+- Ore block textures by superhatosh, used with permission under the MIT License.
+- Translations: Ukrainian by zakharfsk, Simplified Chinese by yhk037.
 - Developed with the assistance of Claude.ai by Anthropic (see "Use of AI").
 - [GeckoLib](https://github.com/bernie-g/geckolib) (MIT) for animated machine models.
 - Sable Companion by RyanHCode and Ocelot (MIT), bundled in the jar with its license.

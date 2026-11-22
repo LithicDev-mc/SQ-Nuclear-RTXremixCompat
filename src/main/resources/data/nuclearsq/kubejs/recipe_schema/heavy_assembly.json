@@ -1,0 +1,69 @@
+{
+	"keys": [
+		{
+			"name": "result",
+			"role": "output",
+			"type": "item_stack"
+		},
+		{
+			"name": "pattern",
+			"type": {
+				"type": "list",
+				"component": "string",
+				"min": 1,
+				"max": 5
+			}
+		},
+		{
+			"name": "key",
+			"role": "input",
+			"type": {
+				"type": "pattern",
+				"component": "ingredient"
+			}
+		},
+		{
+			"name": "time",
+			"role": "other",
+			"type": "positive_int",
+			"optional": 200
+		},
+		{
+			"name": "energy_per_tick",
+			"role": "other",
+			"type": "non_negative_int",
+			"function_names": [
+				"energy",
+				"energyPerTick",
+				"energy_per_tick"
+			],
+			"optional": 100
+		},
+		{
+			"name": "hardcore_pattern",
+			"type": {
+				"type": "list",
+				"component": "string",
+				"min": 0,
+				"max": 5
+			},
+			"function_names": [
+				"hardcorePattern",
+				"hardcore_pattern"
+			],
+			"optional": []
+		}
+	],
+	"unique": [
+		"result"
+	],
+	"constructors": [
+		{
+			"keys": [
+				"result",
+				"pattern",
+				"key"
+			]
+		}
+	]
+}

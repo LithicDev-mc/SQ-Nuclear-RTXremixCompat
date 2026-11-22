@@ -77,7 +77,11 @@ public class StorageTerminalMenu extends AbstractContainerMenu {
     }
 
     protected StorageAccess access() {
-        return StorageNet.access(player.level(), pos);
+        return StorageNet.access(netLevel(), pos);
+    }
+
+    protected net.minecraft.world.level.Level netLevel() {
+        return player.level();
     }
 
     @Override
@@ -147,7 +151,7 @@ public class StorageTerminalMenu extends AbstractContainerMenu {
         craftTicks = 0;
         List<ItemStack> list = new ArrayList<>();
         int j = 0;
-        List<BigMachineBlockEntity> asm = StorageNet.assemblers(player.level(), pos);
+        List<BigMachineBlockEntity> asm = StorageNet.assemblers(netLevel(), pos);
         for (ItemKey key : book(asm).keySet()) list.add(key.stack(1));
         for (BigMachineBlockEntity be : asm) j += be.assembler().jobs().size();
         if (sentCraftables != null && sentJobs == j && sentMessageId == messageId && sameStacks(list, sentCraftables)) return;
@@ -172,7 +176,7 @@ public class StorageTerminalMenu extends AbstractContainerMenu {
     public static final int MAX_ORDER = 4096;
 
     public boolean order(ItemStack proto, int amount) {
-        Order r = placeOrder(player.level(), pos, proto, amount);
+        Order r = placeOrder(netLevel(), pos, proto, amount);
         if (!proto.isEmpty()) {
             message = r.message();
             messageId++;

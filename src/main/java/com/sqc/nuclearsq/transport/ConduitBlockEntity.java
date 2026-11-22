@@ -5,7 +5,9 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -32,9 +34,20 @@ public class ConduitBlockEntity extends BlockEntity {
     private int modes;
     private int recv, recvPrev;
     private final long[] recvAt = new long[6];
+    private final long[] sentAt = new long[6];
+    private int flow;
     private int rot;
     private int dist = FAR;
-    private static final int FAR = 1 << 20;
+    private int hops;
+    @Nullable private BlockPos tgt;
+    @Nullable private Direction tgtSide;
+    private boolean bat;
+    private int fillDist = FAR;
+    public static final int FAR = 1 << 20;
+    private static final int REACH_MAX = 4096;
+    private final int[] reach = new int[6];
+    private FluidStack probe = FluidStack.EMPTY;
+    private int probeAge = REACH_MAX;
     private int conn;
     private boolean sidesChecked;
     private boolean hotPrimary;
@@ -43,9 +56,12 @@ public class ConduitBlockEntity extends BlockEntity {
     private long fluidAt = -100;
     private boolean full;
     private int hold;
+    private boolean framed;
+    @Nullable private BlockState camo;
 
     public static final ModelProperty<Integer> CONN = new ModelProperty<>();
     public static final ModelProperty<Integer> POST = new ModelProperty<>();
+    public static final ModelProperty<BlockState> CAMO = new ModelProperty<>();
 
     private final IFluidHandler[] fluidSides = new IFluidHandler[7];
     private final IEnergyStorage[] energySides = new IEnergyStorage[7];
@@ -59,6 +75,7 @@ public class ConduitBlockEntity extends BlockEntity {
                 setChanged();
             }
         };
+        java.util.Arrays.fill(reach, REACH_MAX);
         for (int i = 0; i < 7; i++) {
             Direction d = i < 6 ? DIRS[i] : null;
             fluidSides[i] = new SideFluid(d);
@@ -85,6 +102,8 @@ public class ConduitBlockEntity extends BlockEntity {
 
     public int dist() { return dist; }
 
+    public int flow() { return flow; }
+
     public ConduitSide side(Direction d) {
         return ConduitSide.of(conn, d);
     }
@@ -107,6 +126,21 @@ public class ConduitBlockEntity extends BlockEntity {
         return true;
     }
 
+    public boolean framed() {
+        return framed;
+    }
+
+    @Nullable
+    public BlockState camo() {
+        return camo;
+    }
+
+    void setFrame(boolean framed, @Nullable BlockState camo) {
+        this.framed = framed;
+        this.camo = framed ? camo : null;
+        setChanged();
+    }
+
     public static final int HOLD_SHIFT = 24;
 
     public static final int PLAIN_SHIFT = 16;
@@ -123,8 +157,21 @@ public class ConduitBlockEntity extends BlockEntity {
 
     @Override
     public ModelData getModelData() {
-        return ModelData.builder().with(CONN, conn | plainMask() << PLAIN_SHIFT | (hold & 63) << HOLD_SHIFT)
-                .with(POST, hold >>> 6).build();
+        ModelData.Builder b = ModelData.builder().with(CONN, shownConn() | plainMask() << PLAIN_SHIFT | (hold & 63) << HOLD_SHIFT)
+                .with(POST, hold >>> 6);
+        if (framed) b.with(CAMO, camo != null ? camo : TransportRegistry.CONDUIT_FRAME.get().defaultBlockState());
+        return b.build();
+    }
+
+    private int shownConn() {
+        if (level == null || !(getBlockState().getBlock() instanceof CableBlock)) return conn;
+        int c = conn;
+        for (Direction d : Direction.values()) {
+            if (ConduitSide.of(c, d) == ConduitSide.ON && level.getBlockEntity(worldPosition.relative(d)) instanceof ConduitBlockEntity o && o.camo != null) {
+                c = ConduitSide.with(c, d, ConduitSide.PORT);
+            }
+        }
+        return c;
     }
 
     @Override
@@ -150,6 +197,7 @@ public class ConduitBlockEntity extends BlockEntity {
     public CompoundTag getUpdateTag(HolderLookup.Provider reg) {
         CompoundTag tag = saveCustomOnly(reg);
         tag.putBoolean("Full", full);
+        tag.putInt("Flow", flow);
         return tag;
     }
 
@@ -275,6 +323,7 @@ public class ConduitBlockEntity extends BlockEntity {
                 if (item.isEmpty()) item = stack.copyWithCount(n);
                 else item.grow(n);
                 if (side != null) itemRecv |= 1 << side.ordinal();
+                if (side != null && level != null) recvAt[side.ordinal()] = level.getGameTime();
                 setChanged();
             }
             return stack.copyWithCount(stack.getCount() - n);
@@ -288,7 +337,9 @@ public class ConduitBlockEntity extends BlockEntity {
         }
         BlockState state = level.getBlockState(worldPosition);
         if (!(state.getBlock() instanceof ConduitBlock) || block(state).data()) return;
-        showFill(block(state).items() ? !item.isEmpty() : block(state).fluid ? !tank.isEmpty() : energy > 0);
+        fillDist = (block(state).items() ? !item.isEmpty() : block(state).fluid ? !tank.isEmpty() : energy > 0) ? 0 : stauDist();
+        showFill(fillDist < 256);
+        if (Math.floorMod(level.getGameTime(), 10) == 0) updateFlow();
         if (block(state).items()) {
             if (Math.floorMod(level.getGameTime(), ITEM_INTERVAL) == 0) itemTick(state);
             return;
@@ -297,21 +348,23 @@ public class ConduitBlockEntity extends BlockEntity {
         if (!fluid) route();
         if (fluid) pull(state);
         if (fluid) radiateHotPrimary();
+        if (fluid) reachScan();
         if (fluid ? !tank.isEmpty() : energy > 0) {
-            if (fluid) neighbours();
             int budget = rate();
             for (int pass = 0; pass < (fluid ? 2 : 3) && budget > 0; pass++) {
                 if (pass == 2 && energy * 2 < rate()) break;
                 for (int i = 0; i < 6 && budget > 0; i++) {
                     Direction d = DIRS[(rot + i) % 6];
-                    if (side(d) == ConduitSide.NONE || (fluid ? cameFrom(d) : level.getGameTime() - recvAt[d.ordinal()] < 20)) continue;
+                    if (side(d) == ConduitSide.NONE || side(d) == ConduitSide.PULL || (fluid ? cameFrom(d) : level.getGameTime() - recvAt[d.ordinal()] < 20)) continue;
                     BlockPos n = worldPosition.relative(d);
                     BlockEntity nb = NB[d.ordinal()];
                     boolean conduit = nb instanceof ConduitBlockEntity;
                     if (conduit != (pass >= 1)) continue;
+                    if (fluid && conduit && reach[d.ordinal()] >= REACH_MAX) continue;
+                    if (!fluid && !conduit && need(n, d.getOpposite()) > dist && energy * 2 < rate()) continue;
                     if (!fluid && conduit) {
-                        int nd = ((ConduitBlockEntity) nb).dist;
-                        if (pass == 1 ? nd >= dist : (nd < dist || nd >= FAR)) continue;
+                        ConduitBlockEntity c = (ConduitBlockEntity) nb;
+                        if (pass == 1 ? c.dist >= dist : (c.dist < dist || c.dist >= FAR || c.energy >= energy)) continue;
                     }
                     budget -= fluid ? pushFluid(n, d, nb, budget) : pushEnergy(n, d, nb, budget);
                     if (fluid ? tank.isEmpty() : energy <= 0) break;
@@ -329,24 +382,98 @@ public class ConduitBlockEntity extends BlockEntity {
         for (Direction d : DIRS) NB[d.ordinal()] = side(d) == ConduitSide.NONE ? null : level.getBlockEntity(worldPosition.relative(d));
     }
 
+    private void reachScan() {
+        neighbours();
+        int age = tank.isEmpty() ? REACH_MAX : 0;
+        if (age == 0 && !FluidStack.isSameFluidSameComponents(probe, tank.getFluid())) probe = tank.getFluid().copyWithAmount(rate());
+        for (Direction d : DIRS) {
+            int i = d.ordinal();
+            reach[i] = REACH_MAX;
+            ConduitSide s = side(d);
+            if (s == ConduitSide.NONE || s == ConduitSide.PULL) continue;
+            if (NB[i] instanceof ConduitBlockEntity c) {
+                if (c.fluidSide(d.getOpposite()) == null) continue;
+                if (c.probeAge + 1 < age) {
+                    age = c.probeAge + 1;
+                    probe = c.probe;
+                }
+                int back = d.getOpposite().ordinal(), best = REACH_MAX;
+                for (int e = 0; e < 6; e++) if (e != back) best = Math.min(best, c.reach[e]);
+                reach[i] = Math.min(REACH_MAX, best + 1);
+                continue;
+            }
+            IFluidHandler h = level.getCapability(Capabilities.FluidHandler.BLOCK, worldPosition.relative(d), d.getOpposite());
+            if (h == null) continue;
+            if (probe.isEmpty() && h.getTanks() > 0 && !h.getFluidInTank(0).isEmpty()) probe = h.getFluidInTank(0).copyWithAmount(rate());
+            if (!probe.isEmpty() && h.fill(probe, IFluidHandler.FluidAction.SIMULATE) > 0) reach[i] = 0;
+        }
+        probeAge = age;
+    }
+
     private void route() {
         neighbours();
-        int best = FAR;
+        int best = FAR, hop = 0;
+        BlockPos to = null;
+        Direction toSide = null;
+        boolean toBat = false;
         for (Direction d : DIRS) {
             if (side(d) == ConduitSide.NONE) continue;
             BlockPos n = worldPosition.relative(d);
             if (NB[d.ordinal()] instanceof ConduitBlockEntity c) {
-                if (c.energySide(d.getOpposite()) != null) best = Math.min(best, c.dist + 1);
+                if (c.energySide(d.getOpposite()) != null && c.dist + 1 < best) {
+                    best = c.dist + 1;
+                    to = c.tgt;
+                    toSide = c.tgtSide;
+                    toBat = c.bat;
+                    hop = c.hops + 1;
+                }
                 continue;
             }
             IEnergyStorage s = level.getCapability(Capabilities.EnergyStorage.BLOCK, n, d.getOpposite());
             if (s != null && s.canReceive() && s.receiveEnergy(1, true) > 0) {
-                best = Math.min(best, NB[d.ordinal()] instanceof com.sqc.nuclearsq.machine.big.BigPortBlockEntity pb && pb.findController() != null
-                        && pb.findController().battery() != null ? (pb.findController().battery().fill() + 2) * 1024 : 0);
-                if (best == 0) break;
+                int v = need(n, d.getOpposite());
+                if (v < best) {
+                    best = v;
+                    to = n;
+                    toSide = d.getOpposite();
+                    toBat = NB[d.ordinal()] instanceof com.sqc.nuclearsq.machine.big.BigPortBlockEntity pb && pb.findController() != null && pb.findController().battery() != null;
+                    hop = 0;
+                }
             }
         }
+        if (to != null && hop > 0) best = level.isLoaded(to) ? Math.min(FAR, need(to, toSide) + hop) : FAR;
+        tgt = to;
+        tgtSide = toSide;
+        bat = toBat;
+        hops = hop;
         dist = Math.min(best, FAR);
+    }
+
+    public boolean toBattery() { return bat; }
+
+    @Nullable
+    public IEnergyStorage target() {
+        return tgt != null && tgtSide != null && level != null && level.isLoaded(tgt) ? level.getCapability(Capabilities.EnergyStorage.BLOCK, tgt, tgtSide) : null;
+    }
+
+    private int need(BlockPos p, Direction side) {
+        IEnergyStorage s = level.getCapability(Capabilities.EnergyStorage.BLOCK, p, side);
+        if (s == null || !s.canReceive()) return FAR;
+        long e = s.getEnergyStored(), max = s.getMaxEnergyStored();
+        if (max <= 0) return s.receiveEnergy(1, true) > 0 ? needFor(0, 1) : FAR;
+        return e < max ? needFor(e, max) : FAR;
+    }
+
+    public static int needFor(long e, long max) {
+        return (int) (Math.max(0, e) * 10000 / Math.max(1, max)) * 64 + 2048;
+    }
+
+    private int stauDist() {
+        int best = FAR;
+        for (Direction d : DIRS) {
+            if (side(d) != ConduitSide.NONE && level.getBlockEntity(worldPosition.relative(d)) instanceof ConduitBlockEntity c) best = Math.min(best, c.fillDist + 1);
+        }
+        return best;
     }
 
     private void showFill(boolean content) {
@@ -354,6 +481,22 @@ public class ConduitBlockEntity extends BlockEntity {
         boolean now = level.getGameTime() - fluidAt < 40;
         if (now == full) return;
         full = now;
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+    }
+
+    private void updateFlow() {
+        long t = level.getGameTime();
+        int now = 0;
+        for (int i = 0; i < 6; i++) {
+            if (t - recvAt[i] < 20) now |= 1 << i;
+            if (t - sentAt[i] < 20) now |= 1 << (i + 6);
+        }
+        if (now == 0) {
+            now = flow;
+            for (int i = 0; i < 6; i++) if (side(DIRS[i]) == ConduitSide.NONE) now &= ~(1 << i | 1 << (i + 6));
+        }
+        if (now == flow) return;
+        flow = now;
         level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
     }
 
@@ -373,7 +516,10 @@ public class ConduitBlockEntity extends BlockEntity {
         FluidStack out = tank.drain(budget, IFluidHandler.FluidAction.SIMULATE);
         if (out.isEmpty()) return 0;
         int took = h.fill(out, IFluidHandler.FluidAction.EXECUTE);
-        if (took > 0) tank.drain(took, IFluidHandler.FluidAction.EXECUTE);
+        if (took > 0) {
+            tank.drain(took, IFluidHandler.FluidAction.EXECUTE);
+            sentAt[d.ordinal()] = level.getGameTime();
+        }
         return took;
     }
 
@@ -384,6 +530,7 @@ public class ConduitBlockEntity extends BlockEntity {
         int took = s.receiveEnergy(Math.min(budget, energy), false);
         if (took > 0) {
             energy -= took;
+            sentAt[d.ordinal()] = level.getGameTime();
             setChanged();
         }
         return took;
@@ -410,6 +557,7 @@ public class ConduitBlockEntity extends BlockEntity {
                     item.shrink(moved);
                     if (item.isEmpty()) item = ItemStack.EMPTY;
                     budget -= moved;
+                    sentAt[d.ordinal()] = level.getGameTime();
                     setChanged();
                 }
             }
@@ -468,7 +616,10 @@ public class ConduitBlockEntity extends BlockEntity {
         tag.putInt("Modes", modes);
         tag.putInt("Conn", conn);
         if (hold != 0) tag.putInt("Hold", hold);
+        if (flow != 0) tag.putInt("Flow", flow);
         if (!item.isEmpty()) tag.put("Item", item.save(reg));
+        if (framed) tag.putBoolean("Framed", true);
+        if (camo != null) tag.put("Camo", NbtUtils.writeBlockState(camo));
     }
 
     @Override
@@ -478,14 +629,27 @@ public class ConduitBlockEntity extends BlockEntity {
         energy = Math.min(tag.getInt("Energy"), rate());
         modes = tag.getInt("Modes");
         int old = conn, oldHold = hold;
-        boolean wasFull = full;
+        boolean wasFull = full, wasFramed = framed;
+        BlockState oldCamo = camo;
         conn = tag.getInt("Conn");
         hold = tag.getInt("Hold");
         full = tag.getBoolean("Full");
-        if ((conn != old || hold != oldHold || full != wasFull) && level != null && level.isClientSide) {
+        flow = tag.getInt("Flow");
+        framed = tag.getBoolean("Framed");
+        camo = framed && tag.contains("Camo") ? NbtUtils.readBlockState(BuiltInRegistries.BLOCK.asLookup(), tag.getCompound("Camo")) : null;
+        if (camo != null && camo.isAir()) camo = null;
+        if ((conn != old || hold != oldHold || full != wasFull || framed != wasFramed || camo != oldCamo) && level != null && level.isClientSide) {
             requestModelDataUpdate();
             BlockState st = getBlockState();
             level.sendBlockUpdated(worldPosition, st, st, Block.UPDATE_IMMEDIATE);
+        }
+        if (camo != oldCamo && level != null && level.isClientSide) {
+            for (Direction d : Direction.values()) {
+                if (level.getBlockEntity(worldPosition.relative(d)) instanceof ConduitBlockEntity o) {
+                    o.requestModelDataUpdate();
+                    level.sendBlockUpdated(o.worldPosition, o.getBlockState(), o.getBlockState(), Block.UPDATE_IMMEDIATE);
+                }
+            }
         }
         item = tag.contains("Item") ? ItemStack.parseOptional(reg, tag.getCompound("Item")) : ItemStack.EMPTY;
     }

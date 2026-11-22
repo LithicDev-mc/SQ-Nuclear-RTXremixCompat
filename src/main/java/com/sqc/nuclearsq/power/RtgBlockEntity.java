@@ -16,12 +16,12 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class RtgBlockEntity extends BlockEntity {
-    public static final int PEAK = 400;
+    public static final int PEAK = 3600;
     public static final int STEP_TICKS = 60;
     public static final int HALF_LIFE_STEPS = 1200;
     public static final int CAPSULE_STEPS = 4 * HALF_LIFE_STEPS;
-    public static final int PEAK_PU238 = 1000, STEP_TICKS_PU238 = 4 * STEP_TICKS;
-    public static final int PEAK_SR = 700, STEP_TICKS_SR = 2 * STEP_TICKS;
+    public static final int PEAK_PU238 = 9000, STEP_TICKS_PU238 = 4 * STEP_TICKS;
+    public static final int PEAK_SR = 6400, STEP_TICKS_SR = 2 * STEP_TICKS;
 
     private static final IEnergyStorage PORT = new IEnergyStorage() {
         @Override public int receiveEnergy(int max, boolean simulate) { return 0; }

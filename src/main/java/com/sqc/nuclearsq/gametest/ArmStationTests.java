@@ -48,7 +48,7 @@ public final class ArmStationTests {
         be.items().insertItem(0, new ItemStack(item("chip_1_sqc")), false);
         be.items().insertItem(1, new ItemStack(item("silicon_pure_sqc")), false);
         be.items().insertItem(2, new ItemStack(item("rubber_sqc")), false);
-        be.items().insertItem(4, new ItemStack(item("photoresist_sqc")), false);
+        be.items().insertItem(4, new ItemStack(item("photoresist_sqc"), 2), false);
         be.items().insertItem(3, new ItemStack(Items.GOLD_INGOT, 2), false);
     }
 
@@ -60,6 +60,7 @@ public final class ArmStationTests {
             chipTwoIngredients(be);
             h.runAfterDelay(50, () -> {
                 if (be.crafter().partsRecipe() != null) throw new GameTestAssertException("Chip II ohne Greifarm erkannt");
+                if (be.crafter().status() != com.sqc.nuclearsq.machine.big.BigCrafter.NO_ARM) throw new GameTestAssertException("Zustand " + be.crafter().status() + " statt GREIFARM FEHLT");
                 h.succeed();
             });
         });

@@ -11,7 +11,23 @@
       "ingredient": {
         "item": "nuclearsq:chip_3_sqc"
       },
-      "count": 1
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_3_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:ultimate_control_circuit",
+          "nuclearsq:ultimate_circuit_sqc"
+        ]
+      },
+      "count": 2
     }
   ],
   "result": {

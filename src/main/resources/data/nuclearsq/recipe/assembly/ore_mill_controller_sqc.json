@@ -36,6 +36,12 @@
         "item": "nuclearsq:copper_coil_sqc"
       },
       "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:grindstone"
+      },
+      "count": 1
     }
   ],
   "result": {

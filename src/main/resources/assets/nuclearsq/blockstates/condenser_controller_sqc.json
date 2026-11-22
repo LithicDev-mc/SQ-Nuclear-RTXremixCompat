@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/condenser_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/condenser_shell_sqc"
     }
   }
 }

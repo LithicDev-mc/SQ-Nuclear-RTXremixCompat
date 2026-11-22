@@ -1,1 +1,1 @@
-shell.run("/rom/modules/main/sqos/start.lua", "-con", ...)
+shell.run("sqos", "-con", ...)

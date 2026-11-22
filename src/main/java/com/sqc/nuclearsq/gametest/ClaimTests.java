@@ -9,6 +9,8 @@ import com.sqc.nuclearsq.NuclearSQ;
 import com.sqc.nuclearsq.explosion.NuclearExplosion;
 import com.sqc.nuclearsq.kit.KitRegistry;
 import com.sqc.nuclearsq.kit.MachineKits;
+import com.sqc.nuclearsq.machine.MachineAccess;
+import com.sqc.nuclearsq.machine.TeamData;
 import com.sqc.nuclearsq.machine.big.BigMachineBlockEntity;
 
 import net.minecraft.core.BlockPos;
@@ -58,6 +60,34 @@ public final class ClaimTests {
             MachineKits.dismantle(h.getLevel(), pl, false);
             h.succeed();
         });
+    }
+
+    @GameTest(template = FLOOR, batch = "claim_team", timeoutTicks = 20)
+    public static void foreignMachineWithoutTeam(GameTestHelper h) {
+        ServerPlayer owner = FakePlayerFactory.get(h.getLevel(), new GameProfile(UUID.nameUUIDFromBytes("claim_team_owner".getBytes()), "claim_team_owner"));
+        ServerPlayer other = FakePlayerFactory.get(h.getLevel(), new GameProfile(UUID.nameUUIDFromBytes("claim_team_other".getBytes()), "claim_team_other"));
+        MachineAccess acc = new MachineAccess();
+        if (!acc.can(owner, owner.getUUID(), MachineAccess.ADMIN)) throw new GameTestAssertException("Besitzer hat keine vollen Rechte");
+        if (acc.can(other, owner.getUUID(), MachineAccess.USE)) throw new GameTestAssertException("Spieler ohne gemeinsames FTB-Team darf die Maschine nutzen");
+        acc.set("p:claim_team_other", MachineAccess.USE);
+        if (!acc.can(other, owner.getUUID(), MachineAccess.USE) || acc.can(other, owner.getUUID(), MachineAccess.ADMIN))
+            throw new GameTestAssertException("Eintrag im Rechte-Fenster wirkt falsch");
+        h.succeed();
+    }
+
+    @GameTest(template = FLOOR, batch = "claim_nsqteam", timeoutTicks = 20)
+    public static void nsqTeamMayDismantle(GameTestHelper h) {
+        ServerPlayer owner = FakePlayerFactory.get(h.getLevel(), new GameProfile(UUID.nameUUIDFromBytes("claim_nsq_owner".getBytes()), "claim_nsq_owner"));
+        ServerPlayer other = FakePlayerFactory.get(h.getLevel(), new GameProfile(UUID.nameUUIDFromBytes("claim_nsq_other".getBytes()), "claim_nsq_other"));
+        TeamData teams = TeamData.get(h.getLevel().getServer());
+        teams.create("claim_nsq_team", owner.getUUID());
+        MachineAccess acc = new MachineAccess();
+        acc.set("g:claim_nsq_team", MachineAccess.USE);
+        if (acc.canBuild(other, owner.getUUID())) throw new GameTestAssertException("Spieler ausserhalb der Gruppe darf abbauen");
+        teams.team("claim_nsq_team").members.add(other.getUUID());
+        if (!acc.canBuild(other, owner.getUUID())) throw new GameTestAssertException("Gruppenmitglied darf nicht abbauen");
+        teams.delete("claim_nsq_team");
+        h.succeed();
     }
 
     @GameTest(template = FLOOR, batch = "claim_nuke", timeoutTicks = 200)

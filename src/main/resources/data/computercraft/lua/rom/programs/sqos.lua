@@ -24,8 +24,6 @@ while i <= #args do
     i = i + 1
 end
 
-if not con then printError("No such program") return end
-
 if not term.isColor() then
     printError("SQ-OS needs an Advanced Computer (colour).")
     return

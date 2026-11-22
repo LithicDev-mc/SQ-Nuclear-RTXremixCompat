@@ -169,6 +169,8 @@ public final class ModCreativeTabs {
                         com.sqc.nuclearsq.storage.StorageRegistry.CRAFTING_TERMINAL.get(), com.sqc.nuclearsq.storage.StorageRegistry.ITEM_PORT.get(),
                         com.sqc.nuclearsq.crate.CrateRegistry.ITEM.get(), com.sqc.nuclearsq.crate.CrateRegistry.UPGRADE_1.get(), com.sqc.nuclearsq.crate.CrateRegistry.UPGRADE_2.get(),
                         com.sqc.nuclearsq.storage.StorageRegistry.WIFI_ADAPTER.get(), com.sqc.nuclearsq.storage.StorageRegistry.WIFI_ANTENNA.get(),
+                        com.sqc.nuclearsq.storage.StorageRegistry.WIFI_ANTENNA_SECTOR.get(), com.sqc.nuclearsq.storage.StorageRegistry.WIFI_ANTENNA_DISH.get(),
+                        com.sqc.nuclearsq.storage.StorageRegistry.WIFI_ANTENNA_QUANTUM.get(),
                         com.sqc.nuclearsq.storage.StorageRegistry.WIFI_TERMINAL.get(), com.sqc.nuclearsq.storage.StorageRegistry.ASSEMBLER_TEMPO.get()));
                 groups(out, H_COMPUTING, java.util.List.of(
                         java.util.List.of(kit("chemical_lab"), i("silicon_raw_sqc"), i("silicon_pure_sqc"), i("silicon_wafer_sqc"), i("chip_1_sqc"), i("chip_2_sqc"), i("chip_3_sqc"),
@@ -176,7 +178,8 @@ public final class ModCreativeTabs {
                                 kit("compute_assembler"), kit("quantum_computer")),
                         data, storage,
                         java.util.List.of(com.sqc.nuclearsq.economy.EconomyRegistry.TERMINAL.get(), com.sqc.nuclearsq.economy.EconomyRegistry.SERVER.get(),
-                                com.sqc.nuclearsq.economy.EconomyRegistry.MODEM.get())));
+                                com.sqc.nuclearsq.economy.EconomyRegistry.MODEM.get(), com.sqc.nuclearsq.apps.AppRegistry.LOGIN_MONITOR.get(),
+                                com.sqc.nuclearsq.apps.AppRegistry.AUCTION_MONITOR.get())));
                 java.util.List<ItemLike> grid = new java.util.ArrayList<>();
                 com.sqc.nuclearsq.transport.TransportRegistry.BLOCK_ITEMS.forEach(d -> grid.add(d.get()));
                 grid.addAll(java.util.List.of(kit("battery_small"), kit("battery_medium"), kit("battery_large")));
@@ -186,7 +189,8 @@ public final class ModCreativeTabs {
                         net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(com.sqc.nuclearsq.NuclearSQ.MODID, "powergrid_terminal_sqc"));
                 if (pgTerminal != net.minecraft.world.item.Items.AIR) grid.add(pgTerminal);
                 groups(out, H_ENERGY, java.util.List.of(
-                        java.util.List.of(kit("coal_generator"), PowerRegistry.SOLAR_PANEL_ITEM.get(), PowerRegistry.SOLAR_COLLECTOR_ITEM.get(), kit("solar_field"),
+                        java.util.List.of(kit("coal_generator"), PowerRegistry.COAL_CARDS.get(0).get(), PowerRegistry.COAL_CARDS.get(1).get(),
+                                PowerRegistry.COAL_CARDS.get(2).get(), PowerRegistry.SOLAR_PANEL_ITEM.get(), PowerRegistry.SOLAR_COLLECTOR_ITEM.get(), kit("solar_field"),
                                 kit("wind_turbine_small"), kit("wind_turbine_medium"), kit("wind_turbine_large"),
                                 PowerRegistry.RTG_ITEM.get(), PowerRegistry.ISOTOPE_CAPSULE.get(), PowerRegistry.PLUTONIUM_CAPSULE.get(), PowerRegistry.STRONTIUM_CAPSULE.get()),
                         grid));
@@ -220,7 +224,7 @@ public final class ModCreativeTabs {
                         com.sqc.nuclearsq.data.DataRegistry.AREA_MONITOR.get(), com.sqc.nuclearsq.data.DataRegistry.AREA_SENSOR.get(),
                         CatalogRegistry.ANTI_RAD.get()));
                 prot.addAll(com.sqc.nuclearsq.radiation.ProtectionRegistry.tabItems());
-                prot.addAll(java.util.List.of(com.sqc.nuclearsq.door.DoorRegistry.CONTROLLER_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.HANGAR_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.AIRLOCK_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.VAULT_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.SECTIONAL_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.GRILLE_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.FOLDING_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.AIRLOCK_ITEM.get()));
+                prot.addAll(java.util.List.of(com.sqc.nuclearsq.door.DoorRegistry.CONTROLLER_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.HANGAR_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.AIRLOCK_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.VAULT_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.SECTIONAL_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.GRILLE_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.FOLDING_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.LAB_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.GLASS_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.SHIELD_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.COLD_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.CAGE_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.SLIDE_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.INDUSTRIAL_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.PERFORATED_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.SPEED_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.LIFT_PANEL_ITEM.get(), com.sqc.nuclearsq.door.DoorRegistry.AIRLOCK_ITEM.get()));
                 section(out, H_PROTECTION, prot.toArray(new ItemLike[0]));
                 section(out, H_WEAPONS, kit("weapons_processing"), i("plutonium_metal_sqc"), i("weapons_plutonium_core_sqc"),
                         BombRegistry.BOMB_ITEM.get(), BombRegistry.LARGE_BOMB_ITEM.get(), BombRegistry.TSAR_BOMB_ITEM.get(), AssemblyRegistry.DETONATOR_ITEM.get());

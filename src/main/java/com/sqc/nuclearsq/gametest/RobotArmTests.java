@@ -1,8 +1,11 @@
 package com.sqc.nuclearsq.gametest;
 
+import com.mojang.authlib.GameProfile;
 import com.sqc.nuclearsq.NuclearSQ;
 import com.sqc.nuclearsq.robotics.RobotArmBlockEntity;
 import com.sqc.nuclearsq.robotics.RoboticsRegistry;
+
+import java.util.UUID;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -10,9 +13,12 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestAssertException;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -52,6 +58,20 @@ public final class RobotArmTests {
 
     private static void fill(GameTestHelper h, BlockPos rel, int slot, ItemStack st) {
         ((Container) h.getLevel().getBlockEntity(h.absolutePos(rel))).setItem(slot, st);
+    }
+
+    @GameTest(template = FLOOR, batch = "robot_arm_drop", timeoutTicks = 20)
+    public static void dropsItemWhenBroken(GameTestHelper h) {
+        for (GameType mode : new GameType[] {GameType.SURVIVAL, GameType.CREATIVE}) {
+            BlockPos pos = h.absolutePos(mode == GameType.SURVIVAL ? new BlockPos(2, 4, 2) : new BlockPos(8, 4, 8));
+            h.getLevel().setBlockAndUpdate(pos, RoboticsRegistry.HEAVY_ARM.get().defaultBlockState());
+            var p = FakePlayerFactory.get(h.getLevel(), new GameProfile(UUID.nameUUIDFromBytes(("arm_drop_" + mode).getBytes()), "arm_drop_" + mode));
+            p.setGameMode(mode);
+            p.gameMode.destroyBlock(pos);
+            if (h.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(1.5), e -> e.getItem().is(RoboticsRegistry.HEAVY_ARM_ITEM.get())).size() != 1)
+                throw new GameTestAssertException("Greifarm liegt nach dem Abbauen nicht am Boden (" + mode + ")");
+        }
+        h.succeed();
     }
 
     @GameTest(template = FLOOR, batch = "robot_arm", timeoutTicks = 60)

@@ -17,12 +17,12 @@
       "ingredient": {
         "item": "minecraft:redstone"
       },
-      "count": 1
+      "count": 2
     }
   ],
   "result": {
     "id": "nuclearsq:chip_1_sqc",
     "count": 1
   },
-  "time": 80
+  "time": 92
 }

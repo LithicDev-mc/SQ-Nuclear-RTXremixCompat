@@ -46,8 +46,8 @@ public final class NuclearClientConfig {
 
     public static final ModConfigSpec.BooleanValue BAKED_MACHINES = BUILDER
             .comment("Draw big static machines (cooling towers, fusion reactor, containment) from a pre-built vertex buffer",
-                    "instead of recomputing every cube each frame. Much faster; turn off if a machine looks wrong.")
-            .define("bakedMachines", true);
+                    "instead of recomputing every cube each frame. Off by default; much faster when on, turn off again if a machine looks wrong.")
+            .define("bakedMachineBuffers", false);
 
     public static final ModConfigSpec.BooleanValue CHUNK_BAKING = BUILDER
             .comment("Put the static parts of simple machines (batteries, solar field and most other machines) into the world's chunk meshes instead of drawing",
@@ -161,7 +161,7 @@ public final class NuclearClientConfig {
         try {
             return BAKED_MACHINES.get();
         } catch (IllegalStateException e) {
-            return true;
+            return false;
         }
     }
 

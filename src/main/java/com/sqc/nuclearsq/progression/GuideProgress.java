@@ -93,14 +93,16 @@ public final class GuideProgress {
     public static boolean scan(ServerPlayer p) {
         if (!(p.level() instanceof ServerLevel level)) return false;
         Set<String> found = new LinkedHashSet<>();
+        boolean shared = TeamProgress.shared(p);
         int pcx = SectionPos.blockToSectionCoord(p.getBlockX()), pcz = SectionPos.blockToSectionCoord(p.getBlockZ());
         for (int cx = pcx - SCAN_CHUNKS; cx <= pcx + SCAN_CHUNKS; cx++) {
             for (int cz = pcz - SCAN_CHUNKS; cz <= pcz + SCAN_CHUNKS; cz++) {
                 LevelChunk chunk = level.getChunkSource().getChunkNow(cx, cz);
                 if (chunk == null) continue;
                 for (BlockEntity be : List.copyOf(chunk.getBlockEntities().values())) {
-                    if (be instanceof BigMachineBlockEntity m) look(m, found);
-                    else if (be instanceof TurbineControllerBlockEntity t && t.isFormed()) {
+                    if (be instanceof BigMachineBlockEntity m) {
+                        if (TeamProgress.counts(p, m.owner(), shared)) look(m, found);
+                    } else if (be instanceof TurbineControllerBlockEntity t && t.isFormed()) {
                         found.add("formed:turbine");
                         if (t.lastFe() > 0) found.add("power:turbine");
                     }

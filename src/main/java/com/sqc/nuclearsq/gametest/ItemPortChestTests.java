@@ -108,7 +108,7 @@ public final class ItemPortChestTests {
         });
     }
 
-    @GameTest(template = FLOOR, batch = "item_port_b", timeoutTicks = 160)
+    @GameTest(template = FLOOR, batch = "item_port_b", timeoutTicks = 220)
     public static void itemPortExportsFilterItems(GameTestHelper h) {
         Setup s = build(h, new BlockPos(2, 2, 2));
         IItemHandler inv = chest(h, s);
@@ -116,17 +116,44 @@ public final class ItemPortChestTests {
             var access = StorageNet.access(h.getLevel(), s.port());
             access.insert(ItemKey.of(new ItemStack(Items.COBBLESTONE)), 100, false);
             access.insert(ItemKey.of(new ItemStack(Items.DIAMOND)), 7, false);
+            s.be().toggleFilter(new ItemStack(Items.COBBLESTONE));
             s.be().setMode(ItemPortBlockEntity.EXPORT);
         });
-        h.runAfterDelay(50, () -> {
-            if (inChest(inv, Items.COBBLESTONE) != 0 || !"no_filter".equals(s.be().problem())) throw new GameTestAssertException("ohne Filter ausgelagert: " + s.be().problem());
-            s.be().toggleFilter(new ItemStack(Items.COBBLESTONE));
-        });
-        h.runAfterDelay(120, () -> {
+        h.runAfterDelay(90, () -> {
             int c = inChest(inv, Items.COBBLESTONE);
             if (c < 64) throw new GameTestAssertException("zu wenig ausgelagert: " + c);
             if (c + net(h, s, new ItemStack(Items.COBBLESTONE)) != 100) throw new GameTestAssertException("Bruchstein verloren oder verdoppelt");
-            if (inChest(inv, Items.DIAMOND) != 0) throw new GameTestAssertException("Diamanten ohne Filter ausgelagert");
+            if (inChest(inv, Items.DIAMOND) != 0) throw new GameTestAssertException("Diamanten trotz Filter ausgelagert");
+            s.be().clearFilters();
+        });
+        h.runAfterDelay(200, () -> {
+            if (inChest(inv, Items.COBBLESTONE) != 100 || inChest(inv, Items.DIAMOND) != 7) {
+                throw new GameTestAssertException("ohne Filter nicht alles ausgelagert: " + inChest(inv, Items.COBBLESTONE) + " Bruchstein, "
+                        + inChest(inv, Items.DIAMOND) + " Diamanten (" + s.be().problem() + ")");
+            }
+            h.succeed();
+        });
+    }
+
+    @GameTest(template = FLOOR, batch = "item_port_c", timeoutTicks = 60)
+    public static void itemPortWindowSetsModeAndGhostFilter(GameTestHelper h) {
+        Setup s = build(h, new BlockPos(2, 2, 2));
+        h.runAfterDelay(5, () -> {
+            net.minecraft.world.entity.player.Player p = net.neoforged.neoforge.common.util.FakePlayerFactory.get(h.getLevel(),
+                    new com.mojang.authlib.GameProfile(java.util.UUID.fromString("5b0f0c3e-6a1d-4c1e-9e0b-1f2a3b4c5d6e"), "port_window"));
+            com.sqc.nuclearsq.storage.ItemPortMenu m = new com.sqc.nuclearsq.storage.ItemPortMenu(1, p.getInventory(), s.port(), s.be().filters(), s.be().menuData());
+            ItemStack held = new ItemStack(Items.REDSTONE, 12);
+            m.setCarried(held);
+            m.clicked(2, 0, net.minecraft.world.inventory.ClickType.PICKUP, p);
+            if (!s.be().filters().getItem(2).is(Items.REDSTONE) || s.be().filters().getItem(2).getCount() != 1) throw new GameTestAssertException("Filterfeld nicht gesetzt");
+            if (m.getCarried().getCount() != 12) throw new GameTestAssertException("Item beim Filtersetzen verbraucht");
+            m.setCarried(ItemStack.EMPTY);
+            m.clicked(2, 0, net.minecraft.world.inventory.ClickType.PICKUP, p);
+            if (!s.be().filters().getItem(2).isEmpty() || !m.getCarried().isEmpty()) throw new GameTestAssertException("Filterfeld nicht geloescht oder Item herausgenommen");
+            if (s.be().exporting() || !m.clickMenuButton(p, com.sqc.nuclearsq.storage.ItemPortMenu.BTN_MODE) || !s.be().exporting()) throw new GameTestAssertException("Modus-Knopf schaltet nicht");
+            if (!m.clickMenuButton(p, com.sqc.nuclearsq.storage.ItemPortMenu.BTN_ENABLE) || s.be().enabled()) throw new GameTestAssertException("Ein/Aus-Knopf schaltet nicht");
+            s.be().toggleFilter(new ItemStack(Items.STONE));
+            if (!m.clickMenuButton(p, com.sqc.nuclearsq.storage.ItemPortMenu.BTN_CLEAR) || s.be().filterCount() != 0) throw new GameTestAssertException("Leeren-Knopf loescht nicht");
             h.succeed();
         });
     }

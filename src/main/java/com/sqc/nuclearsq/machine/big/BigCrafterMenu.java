@@ -23,7 +23,7 @@ public class BigCrafterMenu extends AbstractContainerMenu {
     public static final int PART_OX = 160, PART_OY = 40, PART_UY = 62, PART_CARD_X = 93;
     public static final int GX = 14, GY = 30, ASM_OX = 196, ASM_OY = 66, ASM_INV_Y = 134, PART_INV_Y = 150;
     public static final int SMALL_GX = GX + 18, SMALL_GY = GY + 18;
-    public static final int IN_X = 50, IN_Y = 58, OUT_X = 160, OUT_Y = 49, PLANT_INV_Y = 110;
+    public static final int IN_X = 50, IN_Y = 58, OUT_X = 160, OUT_Y = 49, PLANT_INV_Y = 110, GEN_CARD_X = 166;
     public static final int AUX_X = 22, AUX_Y = 58, FLUID_Y = 100, FLUID_INV_Y = 132;
     public static final int SHAFT_Y = 72, SHAFT_W = 72, SHAFT_H = 26, SHAFT_DY = 30, RACK_INV_Y = SHAFT_Y + 3 * SHAFT_DY + 10;
     public static final int PLACE_STATE_SHIFT = 7, PLACE_LOCKED = 1 << 9, PLACE_IN = 1 << 10, PLACE_RELEASED = 1 << 11, PLACE_MOVING = 1 << 12;
@@ -48,7 +48,7 @@ public class BigCrafterMenu extends AbstractContainerMenu {
         boolean asm = machine == BigMachine.HEAVY_ASSEMBLER, small = machine.smallGrid();
         if (items == null) items = new ItemStackHandler(asm ? BigCrafter.GRID + 1 : small ? BigCrafter.SMALL_GRID + 1
                 : machine == BigMachine.PARTICLE_ASSEMBLER ? com.sqc.nuclearsq.particle.ParticleClasses.SLOTS
-                : machine == BigMachine.COAL_GENERATOR ? 1 : machine.hasAuxSlot() ? 2 + BigCrafter.PLANT_OUTPUTS : 1 + BigCrafter.PLANT_OUTPUTS);
+                : machine == BigMachine.COAL_GENERATOR ? 4 : machine.hasAuxSlot() ? 2 + BigCrafter.PLANT_OUTPUTS : 1 + BigCrafter.PLANT_OUTPUTS);
         if (machine == BigMachine.SPENT_FUEL_RACK) {
         } else if (machine == BigMachine.COAL_GENERATOR) {
             addSlot(new SlotItemHandler(items, 0, IN_X, IN_Y) {
@@ -57,6 +57,15 @@ public class BigCrafterMenu extends AbstractContainerMenu {
                     return BigCrafter.isFuel(stack);
                 }
             });
+            for (int k = 1; k < 4; k++) {
+                var card = com.sqc.nuclearsq.registry.PowerRegistry.COAL_CARDS.get(k - 1);
+                addSlot(new SlotItemHandler(items, k, GEN_CARD_X + (k - 1) * 20, IN_Y) {
+                    @Override
+                    public boolean mayPlace(ItemStack stack) {
+                        return stack.is(card.get());
+                    }
+                });
+            }
         } else if (machine == BigMachine.PARTICLE_ASSEMBLER) {
             for (int i = 0; i < com.sqc.nuclearsq.particle.ParticleClasses.OUTPUTS; i++) {
                 addSlot(takeOnly(items, i, PART_OX + (i % 3) * 18, PART_OY + (i / 3) * 18));
@@ -233,7 +242,7 @@ public class BigCrafterMenu extends AbstractContainerMenu {
             if (!moveItemStackTo(stack, own, own + 36, true)) return ItemStack.EMPTY;
         } else {
             int end = machine == BigMachine.HEAVY_ASSEMBLER ? BigCrafter.GRID : machine.smallGrid() ? BigCrafter.SMALL_GRID
-                    : machine == BigMachine.SPENT_FUEL_RACK ? 0 : 1;
+                    : machine == BigMachine.SPENT_FUEL_RACK ? 0 : machine == BigMachine.COAL_GENERATOR ? 4 : 1;
             int start = machine == BigMachine.PARTICLE_ASSEMBLER ? com.sqc.nuclearsq.particle.ParticleClasses.OUTPUTS : 0;
             if (machine == BigMachine.PARTICLE_ASSEMBLER) end = com.sqc.nuclearsq.particle.ParticleClasses.SLOTS;
             if (machine.hasAuxSlot() && BigCrafter.findAux(player.level(), machine, stack)

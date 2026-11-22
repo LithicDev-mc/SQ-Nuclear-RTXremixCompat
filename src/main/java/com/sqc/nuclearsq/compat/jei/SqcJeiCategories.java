@@ -6,6 +6,8 @@ import java.util.List;
 import com.sqc.nuclearsq.assembler.AssemblyRecipe;
 import com.sqc.nuclearsq.assembler.HeavyAssemblyRecipe;
 import com.sqc.nuclearsq.assembler.SmallPartsRecipe;
+import com.sqc.nuclearsq.machine.big.BigMachine;
+import com.sqc.nuclearsq.machine.big.BigMachineBlockEntity;
 import com.sqc.nuclearsq.particle.ParticleClasses;
 import com.sqc.nuclearsq.reprocessing.ReprocessingRecipe;
 
@@ -14,6 +16,7 @@ import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
@@ -29,6 +32,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 final class SqcJeiCategories {
     private SqcJeiCategories() {}
@@ -147,13 +151,44 @@ final class SqcJeiCategories {
     }
 
     static final class Machine extends Base<RecipeHolder<ReprocessingRecipe>> {
-        Machine(IGuiHelper gui, RecipeType<RecipeHolder<ReprocessingRecipe>> type, ReprocessingRecipe.Kind kind, ItemStack icon) {
-            super(gui, type, Component.translatable("compendium.made_in." + kind.id), icon, 150, 66);
+        private final BigMachine machine;
+        private final java.util.Map<ReprocessingRecipe.FluidCost, List<FluidStack>> fluidCache = new java.util.HashMap<>();
+
+        Machine(IGuiHelper gui, RecipeType<RecipeHolder<ReprocessingRecipe>> type, BigMachine machine, ItemStack icon) {
+            super(gui, type, Component.translatable("compendium.made_in." + machine.recipeKind().id), icon, 150, 66);
+            this.machine = machine;
+        }
+
+        private List<FluidStack> fluidsFor(ReprocessingRecipe.FluidCost c) {
+            return fluidCache.computeIfAbsent(c, this::lookup);
+        }
+
+        private List<FluidStack> lookup(ReprocessingRecipe.FluidCost c) {
+            List<FluidStack> out = new ArrayList<>();
+            for (BigMachine.Port p : machine.ports) {
+                if (!p.name().equals(c.port()) || !p.kind().isFluid()) continue;
+                var ok = BigMachineBlockEntity.accepts(machine, p);
+                for (Fluid fl : BuiltInRegistries.FLUID) {
+                    if (fl == Fluids.EMPTY || !fl.isSource(fl.defaultFluidState())) continue;
+                    FluidStack fs = new FluidStack(fl, c.amount());
+                    if (ok.test(fs)) out.add(fs);
+                }
+                break;
+            }
+            return out;
         }
 
         @Override
         public void setRecipe(IRecipeLayoutBuilder b, RecipeHolder<ReprocessingRecipe> h, IFocusGroup f) {
             ReprocessingRecipe r = h.value();
+            int fin = 0;
+            for (ReprocessingRecipe.FluidCost c : r.fluids()) {
+                List<FluidStack> in = fluidsFor(c);
+                if (in.isEmpty()) continue;
+                b.addSlot(RecipeIngredientRole.INPUT, 21, 1 + fin * 20).setFluidRenderer(c.amount(), false, 16, 16)
+                        .addIngredients(NeoForgeTypes.FLUID_STACK, in);
+                fin++;
+            }
             noTags(b.addSlot(RecipeIngredientRole.INPUT, 1, 1)).addItemStacks(counted(r.ingredient(), r.count()));
             if (r.hasAux()) noTags(b.addSlot(RecipeIngredientRole.INPUT, 1, 21)).addItemStacks(counted(r.aux(), r.auxCount()));
             int n = 0;
@@ -184,6 +219,7 @@ final class SqcJeiCategories {
             if (r.energyPerTick() > 0) line(g, t("energy", r.energyPerTick()), 75, 42);
             int y = 52;
             for (ReprocessingRecipe.FluidCost c : r.fluids()) {
+                if (!fluidsFor(c).isEmpty()) continue;
                 line(g, t("fluid_in", c.amount(), c.port()), 1, y);
                 y += 10;
             }

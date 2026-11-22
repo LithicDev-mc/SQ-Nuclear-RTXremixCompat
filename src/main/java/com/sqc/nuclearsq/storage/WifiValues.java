@@ -20,6 +20,12 @@ public final class WifiValues {
         public int rangeFor(int antennas) {
             return range[Math.max(0, Math.min(antennas, range.length - 1))];
         }
+
+        public int maxFinite() {
+            int m = 0;
+            for (int r : range) m = Math.max(m, r);
+            return m;
+        }
     }
 
     public record Terminal(int capacity, int openCost, int craftCost, int maxReceive) {}

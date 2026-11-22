@@ -5,7 +5,13 @@
     "side": "nuclearsq:block/data_device_side",
     "front": "nuclearsq:block/wifi_adapter_sqc_front",
     "top": "nuclearsq:block/wifi_adapter_sqc_top",
-    "antenna": "nuclearsq:block/wifi_adapter_sqc_antenna"
+    "antenna": "nuclearsq:block/wifi_adapter_sqc_antenna",
+    "case": "nuclearsq:block/wifi_adapter_sqc_case",
+    "metal": "nuclearsq:block/wifi_adapter_sqc_metal",
+    "lamp": "nuclearsq:block/wifi_adapter_sqc_lamp",
+    "panel": "nuclearsq:block/wifi_adapter_sqc_panel",
+    "dish": "nuclearsq:block/wifi_adapter_sqc_dish",
+    "quantum": "nuclearsq:block/wifi_adapter_sqc_quantum"
   },
   "elements": [
     {
@@ -95,7 +101,7 @@
             12,
             14
           ],
-          "texture": "#side"
+          "texture": "#case"
         },
         "south": {
           "uv": [
@@ -113,7 +119,7 @@
             12,
             14
           ],
-          "texture": "#side"
+          "texture": "#case"
         },
         "west": {
           "uv": [
@@ -122,7 +128,7 @@
             12,
             14
           ],
-          "texture": "#side"
+          "texture": "#case"
         },
         "up": {
           "uv": [
@@ -140,55 +146,123 @@
             12,
             12
           ],
-          "texture": "#side"
+          "texture": "#case"
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        10,
+        6.5
+      ],
+      "to": [
+        9.5,
+        11,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6.5,
+            5,
+            9.5,
+            6
+          ],
+          "texture": "#metal"
+        },
+        "south": {
+          "uv": [
+            6.5,
+            5,
+            9.5,
+            6
+          ],
+          "texture": "#metal"
+        },
+        "east": {
+          "uv": [
+            6.5,
+            5,
+            9.5,
+            6
+          ],
+          "texture": "#metal"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            5,
+            9.5,
+            6
+          ],
+          "texture": "#metal"
+        },
+        "up": {
+          "uv": [
+            6.5,
+            6.5,
+            9.5,
+            9.5
+          ],
+          "texture": "#metal"
+        },
+        "down": {
+          "uv": [
+            6.5,
+            6.5,
+            9.5,
+            9.5
+          ],
+          "texture": "#metal"
         }
       }
     },
     {
       "from": [
         7.5,
-        10,
+        11,
         7.5
       ],
       "to": [
         8.5,
-        15,
+        13,
         8.5
       ],
       "faces": {
         "north": {
           "uv": [
             7.5,
-            1,
+            3,
             8.5,
-            6
+            5
           ],
           "texture": "#antenna"
         },
         "south": {
           "uv": [
             7.5,
-            1,
+            3,
             8.5,
-            6
+            5
           ],
           "texture": "#antenna"
         },
         "east": {
           "uv": [
             7.5,
-            1,
+            3,
             8.5,
-            6
+            5
           ],
           "texture": "#antenna"
         },
         "west": {
           "uv": [
             7.5,
-            1,
+            3,
             8.5,
-            6
+            5
           ],
           "texture": "#antenna"
         },
@@ -215,50 +289,50 @@
     {
       "from": [
         7,
-        15,
+        13,
         7
       ],
       "to": [
         9,
-        16,
+        14,
         9
       ],
       "faces": {
         "north": {
           "uv": [
             7,
-            0,
+            2,
             9,
-            1
+            3
           ],
-          "texture": "#antenna"
+          "texture": "#metal"
         },
         "south": {
           "uv": [
             7,
-            0,
+            2,
             9,
-            1
+            3
           ],
-          "texture": "#antenna"
+          "texture": "#metal"
         },
         "east": {
           "uv": [
             7,
-            0,
+            2,
             9,
-            1
+            3
           ],
-          "texture": "#antenna"
+          "texture": "#metal"
         },
         "west": {
           "uv": [
             7,
-            0,
+            2,
             9,
-            1
+            3
           ],
-          "texture": "#antenna"
+          "texture": "#metal"
         },
         "up": {
           "uv": [
@@ -267,7 +341,7 @@
             9,
             9
           ],
-          "texture": "#antenna"
+          "texture": "#metal"
         },
         "down": {
           "uv": [
@@ -276,7 +350,7 @@
             9,
             9
           ],
-          "texture": "#antenna"
+          "texture": "#metal"
         }
       }
     }

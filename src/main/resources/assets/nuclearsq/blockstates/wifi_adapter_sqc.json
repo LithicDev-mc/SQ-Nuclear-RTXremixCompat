@@ -1,18 +1,93 @@
 {
   "variants": {
-    "facing=south": {
+    "antennas=0,facing=south": {
       "model": "nuclearsq:block/wifi_adapter_sqc"
     },
-    "facing=west": {
+    "antennas=0,facing=west": {
       "model": "nuclearsq:block/wifi_adapter_sqc",
       "y": 90
     },
-    "facing=north": {
+    "antennas=0,facing=north": {
       "model": "nuclearsq:block/wifi_adapter_sqc",
       "y": 180
     },
-    "facing=east": {
+    "antennas=0,facing=east": {
       "model": "nuclearsq:block/wifi_adapter_sqc",
+      "y": 270
+    },
+    "antennas=1,facing=south": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_1"
+    },
+    "antennas=1,facing=west": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_1",
+      "y": 90
+    },
+    "antennas=1,facing=north": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_1",
+      "y": 180
+    },
+    "antennas=1,facing=east": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_1",
+      "y": 270
+    },
+    "antennas=2,facing=south": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_2"
+    },
+    "antennas=2,facing=west": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_2",
+      "y": 90
+    },
+    "antennas=2,facing=north": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_2",
+      "y": 180
+    },
+    "antennas=2,facing=east": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_2",
+      "y": 270
+    },
+    "antennas=3,facing=south": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_3"
+    },
+    "antennas=3,facing=west": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_3",
+      "y": 90
+    },
+    "antennas=3,facing=north": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_3",
+      "y": 180
+    },
+    "antennas=3,facing=east": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_3",
+      "y": 270
+    },
+    "antennas=4,facing=south": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_4"
+    },
+    "antennas=4,facing=west": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_4",
+      "y": 90
+    },
+    "antennas=4,facing=north": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_4",
+      "y": 180
+    },
+    "antennas=4,facing=east": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_4",
+      "y": 270
+    },
+    "antennas=5,facing=south": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_5"
+    },
+    "antennas=5,facing=west": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_5",
+      "y": 90
+    },
+    "antennas=5,facing=north": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_5",
+      "y": 180
+    },
+    "antennas=5,facing=east": {
+      "model": "nuclearsq:block/wifi_adapter_sqc_5",
       "y": 270
     }
   }

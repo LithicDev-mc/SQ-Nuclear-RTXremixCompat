@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/fluid_buffer_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/fluid_buffer_shell_sqc"
     }
   }
 }

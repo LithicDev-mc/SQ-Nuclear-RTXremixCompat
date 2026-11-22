@@ -59,12 +59,16 @@ public class BigMachineControllerBlock extends Block implements EntityBlock, Sim
 
     @Override
     protected boolean useShapeForLightOcclusion(BlockState state) {
-        return state.getValue(ReactorProps.FORMED);
+        return lightTight(state);
+    }
+
+    private boolean lightTight(BlockState state) {
+        return machine == BigMachine.CONTAINMENT && state.getValue(ReactorProps.FORMED);
     }
 
     @Override
     protected int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.getValue(ReactorProps.FORMED) ? 15 : super.getLightBlock(state, level, pos);
+        return lightTight(state) ? 15 : super.getLightBlock(state, level, pos);
     }
 
     @Override
@@ -114,7 +118,8 @@ public class BigMachineControllerBlock extends Block implements EntityBlock, Sim
     protected net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack stack, BlockState state, Level level,
             BlockPos pos, Player player, net.minecraft.world.InteractionHand hand, BlockHitResult hit) {
         if (machine == BigMachine.WASTE_REPOSITORY && com.sqc.nuclearsq.spent.SpentFuel.isWaste(stack)
-                || machine == BigMachine.SPENT_FUEL_RACK && com.sqc.nuclearsq.spent.SpentFuel.isSpentRod(stack)) {
+                || machine == BigMachine.SPENT_FUEL_RACK && com.sqc.nuclearsq.spent.SpentFuel.isSpentRod(stack)
+                || machine == BigMachine.FLUID_BUFFER && net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(stack).isPresent()) {
             if (!level.isClientSide && level.getBlockEntity(pos) instanceof BigMachineBlockEntity be) be.acceptHeld(player, hand);
             return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
         }

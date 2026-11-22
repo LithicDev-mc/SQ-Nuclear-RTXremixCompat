@@ -46,7 +46,7 @@ function M.run(ctx)
             local y = 2 + i
             local isSel = n.path == sel
             local bg, fg = isSel and C.sel or C.face, isSel and C.selText or C.text
-            local meta = n.lines .. " Z"
+            local meta = T("nt_lines", n.lines)
             ui.put(term, 1, y, " " .. ui.fit(n.title or T("nt_untitled"), math.max(1, w - #meta - 4)) .. " " .. meta .. " ", n.title and fg or C.dim, bg)
             hits:add(1, y, w - 1, 1, "item", n.path)
         end

@@ -12,6 +12,12 @@
         "item": "nuclearsq:reactor_plate_sqc"
       },
       "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:copper_ingot"
+      },
+      "count": 4
     }
   ],
   "result": {

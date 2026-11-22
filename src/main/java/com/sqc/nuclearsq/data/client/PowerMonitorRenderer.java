@@ -109,7 +109,7 @@ public class PowerMonitorRenderer implements BlockEntityRenderer<PowerMonitorBlo
             pose.translate(c.getX() - be.getBlockPos().getX() + 0.5, c.getY() - be.getBlockPos().getY() + 0.5, c.getZ() - be.getBlockPos().getZ() + 0.5);
             pose.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-f.toYRot()));
             pose.translate(-0.5, -0.5, -0.5);
-            box(pose, buffers, light, 7, 7, -6.5f, 9, 9, 3.2f);
+            box(pose, buffers, light, 7, 7, -6.5f, 9, 9, 1);
             box(pose, buffers, light, 5.5f, 5.5f, -9.5f, 10.5f, 10.5f, -6.5f);
             pose.popPose();
         }

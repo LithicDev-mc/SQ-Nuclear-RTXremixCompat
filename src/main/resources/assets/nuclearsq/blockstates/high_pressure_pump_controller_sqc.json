@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/high_pressure_pump_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/high_pressure_pump_shell_sqc"
     }
   }
 }

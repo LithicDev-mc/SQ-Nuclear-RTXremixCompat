@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -104,7 +105,9 @@ public class ConduitBlock extends Block implements EntityBlock, SimpleWaterlogge
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
-        int conn = connOf(level, pos);
+        ConduitBlockEntity be = level.getBlockEntity(pos) instanceof ConduitBlockEntity c ? c : null;
+        if (be != null && be.framed()) return Shapes.block();
+        int conn = be == null ? 0 : be.conn();
         int key = conn | shapeKey(state) << 12;
         VoxelShape s = shapes[key];
         if (s == null) shapes[key] = s = shape(state, conn);
@@ -190,7 +193,7 @@ public class ConduitBlock extends Block implements EntityBlock, SimpleWaterlogge
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
                                               InteractionHand hand, BlockHitResult hit) {
-        if (!(stack.getItem() instanceof WrenchItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!(stack.getItem() instanceof WrenchItem)) return ConduitFrameBlock.useOnConduit(stack, level, pos, player);
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
         if (!WrenchItem.mayUse(level, pos, player)) return ItemInteractionResult.FAIL;
         if (player.isShiftKeyDown()) {
@@ -206,6 +209,25 @@ public class ConduitBlock extends Block implements EntityBlock, SimpleWaterlogge
         player.displayClientMessage(Component.translatable("message.nuclearsq.conduit." + key,
                 Component.translatable("direction.nuclearsq." + d.getName())), true);
         return ItemInteractionResult.SUCCESS;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        return ConduitFrameBlock.clearCamo(level, pos, player);
+    }
+
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (player.isCreative() && level.getBlockEntity(pos) instanceof ConduitBlockEntity be) be.setFrame(false, null);
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState now, boolean moved) {
+        if (!state.is(now.getBlock()) && level.getBlockEntity(pos) instanceof ConduitBlockEntity be && be.framed()) {
+            Block.popResource(level, pos, new ItemStack(TransportRegistry.CONDUIT_FRAME_ITEM.get()));
+        }
+        super.onRemove(state, level, pos, now, moved);
     }
 
     public Direction clickedSide(BlockState state, int conn, BlockPos pos, BlockHitResult hit) {

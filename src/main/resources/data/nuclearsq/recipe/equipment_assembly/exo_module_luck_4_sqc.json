@@ -11,6 +11,22 @@
       "ingredient": {
         "item": "nuclearsq:chip_2_sqc"
       },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_2_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:elite_control_circuit",
+          "nuclearsq:elite_circuit_sqc"
+        ]
+      },
       "count": 2
     }
   ],

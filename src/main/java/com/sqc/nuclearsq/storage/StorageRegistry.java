@@ -73,6 +73,9 @@ public final class StorageRegistry {
     public static final DeferredItem<WifiTerminalItem> WIFI_TERMINAL = ITEMS.register("wifi_terminal_sqc",
             () -> new WifiTerminalItem(new Item.Properties()));
     public static final DeferredItem<Item> WIFI_ANTENNA = ITEMS.register("wifi_antenna_sqc", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> WIFI_ANTENNA_SECTOR = ITEMS.register("wifi_antenna_sector_sqc", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> WIFI_ANTENNA_DISH = ITEMS.register("wifi_antenna_dish_sqc", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> WIFI_ANTENNA_QUANTUM = ITEMS.register("wifi_antenna_quantum_sqc", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<DriveItem> HARD_DRIVE_1 = drive("hard_drive_1_sqc", 1, "hard_drive_1");
     public static final DeferredItem<DriveItem> HARD_DRIVE_2 = drive("hard_drive_2_sqc", 2, "hard_drive_2");
@@ -122,6 +125,10 @@ public final class StorageRegistry {
             MENUS.register("server_rack", () -> IMenuTypeExtension.create(ServerRackMenu::new));
     public static final DeferredHolder<MenuType<?>, MenuType<ComponentAssemblerMenu>> ASSEMBLER_MENU =
             MENUS.register("component_assembler", () -> IMenuTypeExtension.create(ComponentAssemblerMenu::new));
+    public static final DeferredHolder<MenuType<?>, MenuType<ItemPortMenu>> ITEM_PORT_MENU =
+            MENUS.register("item_port", () -> IMenuTypeExtension.create(ItemPortMenu::new));
+    public static final DeferredHolder<MenuType<?>, MenuType<StorageMonitorMenu>> MONITOR_MENU =
+            MENUS.register("storage_monitor", () -> IMenuTypeExtension.create(StorageMonitorMenu::new));
 
     public static List<DeferredItem<DriveItem>> drives() {
         return List.of(HARD_DRIVE_1, HARD_DRIVE_2, HARD_DRIVE_3, SOLID_STATE_DRIVE);

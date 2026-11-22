@@ -5,13 +5,13 @@
       "ingredient": {
         "item": "nuclearsq:control_board_1_sqc"
       },
-      "count": 2
+      "count": 1
     },
     {
       "ingredient": {
         "item": "nuclearsq:reactor_casing_sqc"
       },
-      "count": 10
+      "count": 4
     },
     {
       "ingredient": {
@@ -35,17 +35,26 @@
       "ingredient": {
         "item": "nuclearsq:steel_sheet_sqc"
       },
-      "count": 8
+      "count": 4
     },
     {
       "ingredient": {
         "item": "nuclearsq:brass_bearing_sqc"
       },
-      "count": 4
+      "count": 1
     }
   ],
   "result": {
     "id": "nuclearsq:plate_mill_kit_sqc",
     "count": 1
-  }
+  },
+  "hardcore_counts": [
+    2,
+    10,
+    1,
+    2,
+    1,
+    8,
+    4
+  ]
 }

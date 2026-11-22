@@ -2,9 +2,9 @@
   "type": "nuclearsq:heavy_assembly",
   "pattern": [
     "crrrc",
-    "ru@sr",
-    "rwBGr",
-    "crrrm"
+    " u@s ",
+    " wBG ",
+    "cr rm"
   ],
   "key": {
     "@": {
@@ -40,5 +40,11 @@
     "count": 1
   },
   "time": 400,
-  "energy_per_tick": 9600
+  "energy_per_tick": 9600,
+  "hardcore_pattern": [
+    "crrrc",
+    "ru@sr",
+    "rwBGr",
+    "crrrm"
+  ]
 }

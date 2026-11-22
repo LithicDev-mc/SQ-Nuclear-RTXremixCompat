@@ -19,11 +19,14 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Transformation;
 import com.sqc.nuclearsq.NuclearSQ;
 import com.sqc.nuclearsq.transport.CableBlock;
+import com.sqc.nuclearsq.transport.ConduitBlock;
 import com.sqc.nuclearsq.transport.ConduitBlockEntity;
+import com.sqc.nuclearsq.transport.ConduitFrameBlock;
 import com.sqc.nuclearsq.transport.ConduitSide;
 import com.sqc.nuclearsq.transport.ItemPipeBlock;
 import com.sqc.nuclearsq.transport.TransportRegistry;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -33,6 +36,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelBaker;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.core.Direction;
@@ -69,16 +73,53 @@ public final class CableModel implements IUnbakedGeometry<CableModel> {
     }
 
     @SubscribeEvent
+    public static void onRegisterModels(ModelEvent.RegisterAdditional event) {
+        for (Direction d : Direction.values()) {
+            event.register(port(false, d));
+            event.register(port(true, d));
+        }
+    }
+
+    private static ModelResourceLocation port(boolean items, Direction d) {
+        return ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID,
+                "block/conduit_port_" + (items ? "item_pipe" : "pipe") + "_" + d.getName()));
+    }
+
+    private static List<BakedModel> ports(BlockState state, ModelData data) {
+        Integer c = data.get(ConduitBlockEntity.CONN);
+        List<BakedModel> out = new ArrayList<>();
+        if (c == null || !(state.getBlock() instanceof ConduitBlock b) || !b.fluid && !b.items()) return out;
+        for (Direction d : Direction.values()) {
+            if (ConduitSide.of(c, d) != ConduitSide.NONE) out.add(Minecraft.getInstance().getModelManager().getModel(port(b.items(), d)));
+        }
+        return out;
+    }
+
+    @SubscribeEvent
     public static void onBlockColors(RegisterColorHandlersEvent.Block event) {
-        event.register((state, level, pos, tint) -> !full(level, pos) ? 0xFFFFFF : state.getBlock() instanceof ItemPipeBlock ? 0xFFC040 : 0x6FA8FF,
+        event.register((state, level, pos, tint) -> camo(level, pos) != null ? camoColor(level, pos, tint)
+                        : !full(level, pos) ? 0xFFFFFF : state.getBlock() instanceof ItemPipeBlock ? 0xFFC040 : 0x6FA8FF,
                 java.util.stream.Stream.concat(TransportRegistry.PIPES.values().stream(), TransportRegistry.ITEM_PIPES.values().stream())
                         .map(b -> b.get()).toArray(net.minecraft.world.level.block.Block[]::new));
-        event.register((state, level, pos, tint) -> full(level, pos) ? 0xFFFFFF : 0x707070,
+        event.register((state, level, pos, tint) -> camo(level, pos) != null ? camoColor(level, pos, tint) : full(level, pos) ? 0xFFFFFF : 0x707070,
                 TransportRegistry.CABLES.values().stream().map(b -> b.get()).toArray(net.minecraft.world.level.block.Block[]::new));
     }
 
     private static boolean full(@Nullable net.minecraft.world.level.BlockAndTintGetter level, @Nullable net.minecraft.core.BlockPos pos) {
         return level != null && pos != null && level.getBlockEntity(pos) instanceof ConduitBlockEntity c && c.full();
+    }
+
+    @Nullable
+    private static BlockState camo(@Nullable net.minecraft.world.level.BlockAndTintGetter level, @Nullable net.minecraft.core.BlockPos pos) {
+        return level != null && pos != null && level.getBlockEntity(pos) instanceof ConduitBlockEntity c ? c.camo() : null;
+    }
+
+    private static int camoColor(net.minecraft.world.level.BlockAndTintGetter level, net.minecraft.core.BlockPos pos, int tint) {
+        return Minecraft.getInstance().getBlockColors().getColor(camo(level, pos), level, pos, tint);
+    }
+
+    private static BakedModel look(BlockState camo) {
+        return Minecraft.getInstance().getBlockRenderer().getBlockModel(camo);
     }
 
     record Part(Rule when, ResourceLocation model, int x, int y, int dy) {}
@@ -108,7 +149,7 @@ public final class CableModel implements IUnbakedGeometry<CableModel> {
             Part p = parts.get(i);
             rules[i] = p.when();
             ModelState st = p.dy() == 0 ? BlockModelRotation.by(p.x(), p.y())
-                    : new SimpleModelState(new Transformation(new Vector3f(0, p.dy(), 0), null, null, null));
+                    : new SimpleModelState(new Transformation(new Vector3f(0, p.dy(), 0), null, null, null).compose(BlockModelRotation.by(p.x(), p.y()).getRotation()));
             models[i] = baker.bake(p.model(), st, spriteGetter);
         }
         return new Baked(rules, models);
@@ -145,9 +186,24 @@ public final class CableModel implements IUnbakedGeometry<CableModel> {
         public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand, ModelData data,
                                         @Nullable RenderType renderType) {
             if (state == null) return List.of();
-            BakedModel[] sel = select(state, data);
-            List<List<BakedQuad>> lists = new ArrayList<>(sel.length);
+            BlockState camo = data.get(ConduitBlockEntity.CAMO);
+            List<List<BakedQuad>> lists = new ArrayList<>();
             long seed = rand.nextLong();
+            if (camo != null) {
+                BakedModel m = look(camo);
+                if (renderType == null || m.getRenderTypes(camo, rand, ModelData.EMPTY).contains(renderType)) {
+                    lists.add(m.getQuads(camo, side, RandomSource.create(seed), ModelData.EMPTY, renderType));
+                }
+                if (!(camo.getBlock() instanceof ConduitFrameBlock)) {
+                    for (BakedModel p : ports(state, data)) {
+                        if (renderType == null || p.getRenderTypes(state, rand, ModelData.EMPTY).contains(renderType)) {
+                            lists.add(p.getQuads(state, side, RandomSource.create(seed), ModelData.EMPTY, renderType));
+                        }
+                    }
+                    return ConcatenatedListView.of(lists);
+                }
+            }
+            BakedModel[] sel = select(state, data);
             for (BakedModel m : sel) {
                 if (renderType == null || m.getRenderTypes(state, rand, data).contains(renderType)) {
                     lists.add(m.getQuads(state, side, RandomSource.create(seed), data, renderType));
@@ -160,6 +216,12 @@ public final class CableModel implements IUnbakedGeometry<CableModel> {
         public ChunkRenderTypeSet getRenderTypes(BlockState state, RandomSource rand, ModelData data) {
             if (state == null) return ChunkRenderTypeSet.none();
             List<ChunkRenderTypeSet> sets = new ArrayList<>();
+            BlockState camo = data.get(ConduitBlockEntity.CAMO);
+            if (camo != null) sets.add(look(camo).getRenderTypes(camo, rand, ModelData.EMPTY));
+            if (camo != null && !(camo.getBlock() instanceof ConduitFrameBlock)) {
+                for (BakedModel p : ports(state, data)) sets.add(p.getRenderTypes(state, rand, ModelData.EMPTY));
+                return ChunkRenderTypeSet.union(sets);
+            }
             for (BakedModel m : select(state, data)) sets.add(m.getRenderTypes(state, rand, data));
             return ChunkRenderTypeSet.union(sets);
         }
@@ -171,6 +233,8 @@ public final class CableModel implements IUnbakedGeometry<CableModel> {
 
         @Override
         public TriState useAmbientOcclusion(BlockState state, ModelData data, RenderType renderType) {
+            BlockState camo = data.get(ConduitBlockEntity.CAMO);
+            if (camo != null && !(camo.getBlock() instanceof ConduitFrameBlock)) return look(camo).useAmbientOcclusion(camo, ModelData.EMPTY, renderType);
             return first.useAmbientOcclusion(state, data, renderType);
         }
 
@@ -197,6 +261,8 @@ public final class CableModel implements IUnbakedGeometry<CableModel> {
 
         @Override
         public TextureAtlasSprite getParticleIcon(ModelData data) {
+            BlockState camo = data.get(ConduitBlockEntity.CAMO);
+            if (camo != null && !(camo.getBlock() instanceof ConduitFrameBlock)) return look(camo).getParticleIcon(ModelData.EMPTY);
             return first.getParticleIcon(data);
         }
 

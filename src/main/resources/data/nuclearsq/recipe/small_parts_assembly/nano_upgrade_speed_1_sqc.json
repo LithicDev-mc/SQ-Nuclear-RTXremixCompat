@@ -18,6 +18,12 @@
         "item": "nuclearsq:steel_sheet_sqc"
       },
       "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
+      "count": 2
     }
   ],
   "result": {

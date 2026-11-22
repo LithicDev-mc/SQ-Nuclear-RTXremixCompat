@@ -5,25 +5,25 @@
       "ingredient": {
         "item": "nuclearsq:steel_sheet_sqc"
       },
-      "count": 2
+      "count": 4
     },
     {
       "ingredient": {
         "item": "nuclearsq:control_board_1_sqc"
       },
-      "count": 1
+      "count": 2
     },
     {
       "ingredient": {
         "item": "minecraft:lapis_lazuli"
       },
-      "count": 4
+      "count": 8
     },
     {
       "ingredient": {
         "item": "nuclearsq:chip_1_sqc"
       },
-      "count": 1
+      "count": 2
     }
   ],
   "result": {

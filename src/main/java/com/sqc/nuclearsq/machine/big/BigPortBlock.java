@@ -79,6 +79,13 @@ public class BigPortBlock extends TurbinePartBlock implements EntityBlock {
                 return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
         }
+        if (kind.isFluid() && net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(stack).isPresent() && level.getBlockEntity(pos) instanceof BigPortBlockEntity pb) {
+            BigMachineBlockEntity c = pb.findController();
+            if (c != null && c.machine() == BigMachine.FLUID_BUFFER) {
+                if (!level.isClientSide) c.acceptHeld(player, hand);
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
+            }
+        }
         return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
     }
 }

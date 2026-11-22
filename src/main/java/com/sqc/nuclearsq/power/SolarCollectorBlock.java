@@ -56,7 +56,7 @@ public class SolarCollectorBlock extends Block implements EntityBlock {
             Component route = d >= SolarCollectorBlockEntity.NO_ROUTE ? Component.translatable("message.nuclearsq.solar_collector.no_route")
                     : d == 0 ? Component.translatable("message.nuclearsq.solar_collector.direct")
                     : Component.translatable("message.nuclearsq.solar_collector.route", d);
-            player.displayClientMessage(Component.translatable("message.nuclearsq.solar_collector.status", be.rate(), be.peak(), be.delivered(), route), true);
+            player.displayClientMessage(Component.translatable("message.nuclearsq.solar_collector.status", be.rate(), be.peak(), be.delivered(), route, be.stored(), be.capacity()), true);
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
     }

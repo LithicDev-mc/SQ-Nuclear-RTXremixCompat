@@ -81,6 +81,17 @@ public final class MenuStyle {
         g.blit(rl(name), 0, 0, w, h, (t[1] - uw) / 2f, (t[2] - vh) / 2f, uw, vh, t[1], t[2]);
     }
 
+    public static void titleLogo(GuiGraphics g, int w, float alpha) {
+        int[] t = texture("title_logo");
+        if (t == null) return;
+        int lw = Math.min(256, w / 3), lh = Math.round(lw * (float) t[2] / t[1]);
+        RenderSystem.enableBlend();
+        g.setColor(1f, 1f, 1f, alpha);
+        g.blit(rl("title_logo"), 7, 7, lw, lh, 0f, 0f, t[1], t[2], t[1], t[2]);
+        g.setColor(1f, 1f, 1f, 1f);
+        RenderSystem.disableBlend();
+    }
+
     public static void startScreen(float progress, float fade) {
         if (fade <= 0f) return;
         int[] t = texture(shot < 0 ? pick() : SHOTS[shot]);

@@ -24,6 +24,12 @@
         "item": "nuclearsq:data_cable_sqc"
       },
       "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:compass"
+      },
+      "count": 1
     }
   ],
   "result": {

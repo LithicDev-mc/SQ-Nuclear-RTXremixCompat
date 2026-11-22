@@ -13,9 +13,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestAssertException;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -64,6 +67,7 @@ public final class DoorTests {
         check(be.setOpen(true) == null, "Tor oeffnet nicht");
         check(be.panels().size() == 6 && be.width() == 3 && be.height() == 2 && be.kind() == DoorPanelBlock.Kind.AIRLOCK && be.way() == 3, "Tor falsch eingelesen: " + be.panels().size());
         expect(h, 3, 2, Phase.MOVING, "Fahrt auf");
+        h.runAfterDelay(45, () -> expect(h, 3, 2, Phase.OPEN, "halb offen begehbar"));
         h.runAfterDelay(80, () -> {
             expect(h, 3, 2, Phase.OPEN, "offen");
             check(!be.moving() && be.open(), "Tor steht nicht offen");
@@ -95,6 +99,27 @@ public final class DoorTests {
             expect(h, 2, 2, Phase.RAW, "nach Abbau");
             h.succeed();
         });
+    }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 20)
+    public static void doorOpensAwayFromPlacer(GameTestHelper h) {
+        Player p = h.makeMockPlayer(GameType.SURVIVAL);
+        BlockPos at = h.absolutePos(CTRL.offset(1, 0, 0));
+        for (float yaw : new float[] {0, 90, 180, 270}) {
+            p.setYRot(yaw);
+            p.setYHeadRot(yaw);
+            p.setXRot(0);
+            BlockState s = DoorRegistry.LAB_PANEL.get().getStateForPlacement(new BlockPlaceContext(p, InteractionHand.MAIN_HAND,
+                    new ItemStack(DoorRegistry.LAB_PANEL.get()), new BlockHitResult(Vec3.atCenterOf(at), Direction.UP, at.below(), false)));
+            check(s.getValue(DoorPanelBlock.AXIS) == (yaw % 180 == 0 ? Direction.Axis.Z : Direction.Axis.X)
+                    && s.getValue(DoorPanelBlock.FLIP) == (yaw == 0 || yaw == 270), "Oeffnungsrichtung falsch bei Blick " + yaw + ": " + s);
+        }
+        h.setBlock(CTRL, DoorRegistry.CONTROLLER.get());
+        h.setBlock(CTRL.offset(1, 0, 0), DoorRegistry.LAB_PANEL.get().defaultBlockState().setValue(DoorPanelBlock.FLIP, true));
+        if (!(h.getBlockEntity(CTRL) instanceof DoorBlockEntity be)) throw new GameTestAssertException("keine Torsteuerung");
+        be.adopt();
+        check(be.flip() && be.panels().size() == 1, "Torsteuerung uebernimmt Oeffnungsrichtung nicht");
+        h.succeed();
     }
 
     @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 20)
@@ -162,6 +187,36 @@ public final class DoorTests {
     @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
     public static void redstoneVault(GameTestHelper h) { redstoneDrives(h, DoorRegistry.VAULT_PANEL.get()); }
 
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstoneLab(GameTestHelper h) { redstoneDrives(h, DoorRegistry.LAB_PANEL.get()); }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstoneGlass(GameTestHelper h) { redstoneDrives(h, DoorRegistry.GLASS_PANEL.get()); }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstoneShield(GameTestHelper h) { redstoneDrives(h, DoorRegistry.SHIELD_PANEL.get()); }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstoneCold(GameTestHelper h) { redstoneDrives(h, DoorRegistry.COLD_PANEL.get()); }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstoneCage(GameTestHelper h) { redstoneDrives(h, DoorRegistry.CAGE_PANEL.get()); }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstoneSlide(GameTestHelper h) { redstoneDrives(h, DoorRegistry.SLIDE_PANEL.get()); }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstoneIndustrial(GameTestHelper h) { redstoneDrives(h, DoorRegistry.INDUSTRIAL_PANEL.get()); }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstonePerforated(GameTestHelper h) { redstoneDrives(h, DoorRegistry.PERFORATED_PANEL.get()); }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstoneSpeed(GameTestHelper h) { redstoneDrives(h, DoorRegistry.SPEED_PANEL.get()); }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 200)
+    public static void redstoneLift(GameTestHelper h) { redstoneDrives(h, DoorRegistry.LIFT_PANEL.get()); }
+
     @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 40)
     public static void doorBuiltWithSneakLeftClick(GameTestHelper h) {
         for (int x = 0; x < 2; x++) {
@@ -227,6 +282,20 @@ public final class DoorTests {
         for (int k = 0; k < panels.length; k++) {
             DoorBlockEntity be = door(h, panels[k], 3, 2);
             check(be.setOpen(true) == null && be.panels().size() == 6 && be.way() == way[k] && be.kind().up() == (k < 2), "Bauart " + k + " falsch eingelesen");
+            h.destroyBlock(CTRL);
+        }
+        h.succeed();
+    }
+
+    @GameTest(template = FLOOR, batch = "doors", timeoutTicks = 20)
+    public static void moreKindsKnowTheirWay(GameTestHelper h) {
+        Block[] panels = {DoorRegistry.LAB_PANEL.get(), DoorRegistry.GLASS_PANEL.get(), DoorRegistry.SHIELD_PANEL.get(), DoorRegistry.COLD_PANEL.get(), DoorRegistry.CAGE_PANEL.get(),
+                DoorRegistry.SLIDE_PANEL.get(), DoorRegistry.INDUSTRIAL_PANEL.get(), DoorRegistry.PERFORATED_PANEL.get(), DoorRegistry.SPEED_PANEL.get(), DoorRegistry.LIFT_PANEL.get()};
+        for (int k = 0; k < panels.length; k++) {
+            DoorBlockEntity be = door(h, panels[k], 3, 2);
+            boolean up = k >= 6;
+            check(be.setOpen(true) == null && be.panels().size() == 6 && be.way() == (up ? 2 : 3) && be.kind().up() == up
+                    && be.kind() == ((DoorPanelBlock) panels[k]).kind, "Bauart " + be.kind() + " falsch eingelesen");
             h.destroyBlock(CTRL);
         }
         h.succeed();

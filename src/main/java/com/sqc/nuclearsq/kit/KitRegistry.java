@@ -41,7 +41,9 @@ public final class KitRegistry {
         ITEMS.register(modBus);
         KitMarks.ATTACHMENTS.register(modBus);
         NeoForge.EVENT_BUS.addListener((ServerTickEvent.Post e) -> KitMarks.tick());
+        NeoForge.EVENT_BUS.addListener((ServerTickEvent.Post e) -> LegacyResize.tick());
         NeoForge.EVENT_BUS.addListener((ServerStoppedEvent e) -> KitMarks.clear());
+        NeoForge.EVENT_BUS.addListener((ServerStoppedEvent e) -> LegacyResize.clear());
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, false, BlockEvent.BreakEvent.class, KitRegistry::onBreak);
     }
 

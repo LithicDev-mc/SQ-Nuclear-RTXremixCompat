@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public final class StorageAccess {
-    private record Drive(BigMachineBlockEntity rack, int slot, DriveContents contents, StorageValues.Drive limits) {}
+    private record Drive(BigMachineBlockEntity rack, int slot, DriveContents contents, StorageValues.Drive limits, int priority) {}
 
     private final MinecraftServer server;
     private final List<Drive> drives = new ArrayList<>();
@@ -38,7 +38,7 @@ public final class StorageAccess {
                 on++;
                 for (int i = 0; i < r.slots(); i++) {
                     DriveContents c = r.contents(server, i);
-                    if (c != null && seen.add(c)) drives.add(new Drive(be, i, c, r.limits(i)));
+                    if (c != null && seen.add(c)) drives.add(new Drive(be, i, c, r.limits(i), r.priority()));
                 }
             }
         }
@@ -141,13 +141,17 @@ public final class StorageAccess {
     public long insert(ItemKey key, long n, boolean simulate) {
         if (key == null || n <= 0) return 0;
         long left = n;
-        for (int pass = 0; pass < 2 && left > 0; pass++) {
-            for (Drive d : drives) {
-                if ((d.contents.count(key) > 0) != (pass == 0)) continue;
-                long got = d.contents.insert(key, left, d.limits, simulate);
-                if (got > 0 && !simulate) changed(d);
-                left -= got;
-                if (left <= 0) break;
+        for (int from = 0, to; from < drives.size() && left > 0; from = to) {
+            int prio = drives.get(from).priority;
+            for (to = from; to < drives.size() && drives.get(to).priority == prio; to++) {}
+            for (int pass = 0; pass < 2 && left > 0; pass++) {
+                for (int i = from; i < to && left > 0; i++) {
+                    Drive d = drives.get(i);
+                    if ((d.contents.count(key) > 0) != (pass == 0)) continue;
+                    long got = d.contents.insert(key, left, d.limits, simulate);
+                    if (got > 0 && !simulate) changed(d);
+                    left -= got;
+                }
             }
         }
         return n - left;

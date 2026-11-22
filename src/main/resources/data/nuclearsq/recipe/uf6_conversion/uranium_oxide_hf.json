@@ -19,5 +19,6 @@
       "port": "hf_in",
       "amount": 300
     }
-  ]
+  ],
+  "priority": 1
 }

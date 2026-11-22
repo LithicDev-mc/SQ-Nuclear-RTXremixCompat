@@ -52,7 +52,11 @@
        "anim": "GUIDE"
       },
       {
-       "id": "guide_control",
+       "id": "guide_chem",
+       "anim": "GUIDE"
+      },
+      {
+       "id": "guide_chips",
        "anim": "GUIDE"
       },
       {
@@ -60,11 +64,7 @@
        "anim": "GUIDE"
       },
       {
-       "id": "guide_chem",
-       "anim": "GUIDE"
-      },
-      {
-       "id": "guide_chips",
+       "id": "guide_control",
        "anim": "GUIDE"
       },
       {
@@ -408,6 +408,10 @@
        "anim": "NONE"
       },
       {
+       "id": "robot_arm_dock",
+       "anim": "NONE"
+      },
+      {
        "id": "rod_gripper",
        "anim": "NONE"
       },
@@ -641,6 +645,14 @@
        "anim": "NONE"
       },
       {
+       "id": "bank_login",
+       "anim": "NONE"
+      },
+      {
+       "id": "bank_auction_monitor",
+       "anim": "NONE"
+      },
+      {
        "id": "bank_coins",
        "anim": "NONE"
       },
@@ -724,6 +736,10 @@
        "anim": "NONE"
       },
       {
+       "id": "transport_frame",
+       "anim": "NONE"
+      },
+      {
        "id": "transport_battery",
        "anim": "NONE"
       },
@@ -789,6 +805,18 @@
       {
        "id": "reactor_pwr_loop",
        "anim": "PRIMARY"
+      },
+      {
+       "id": "reactor_pwr_extended",
+       "anim": "PRIMARY_EXT"
+      },
+      {
+       "id": "reactor_pwr_full",
+       "anim": "PRIMARY_FULL"
+      },
+      {
+       "id": "reactor_fluids",
+       "anim": "FLUIDS"
       },
       {
        "id": "energy_loop",

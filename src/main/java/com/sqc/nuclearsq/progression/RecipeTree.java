@@ -13,6 +13,7 @@ import javax.annotation.Nullable;
 import com.sqc.nuclearsq.NuclearSQ;
 import com.sqc.nuclearsq.progression.RecipeSources.Need;
 import com.sqc.nuclearsq.progression.RecipeSources.Source;
+import com.sqc.nuclearsq.progression.RecipeSources.Where;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -41,7 +42,8 @@ public final class RecipeTree {
                              Map<Item, Integer> choice, Map<Item, List<Source>> cache, Set<Item> path, int depth) {
         Item item = stack.getItem();
         List<Source> all = path.contains(item) || depth >= MAX_DEPTH ? List.of()
-                : cache.computeIfAbsent(item, i -> sources(recipes, regs, i));
+                : depth == 0 ? sources(recipes, regs, item, true)
+                : cache.computeIfAbsent(item, i -> sources(recipes, regs, i, false));
         if (all.isEmpty()) return new Part(stack, count, null, List.of(), List.of(), true, need);
         int pick = choice.getOrDefault(item, 0);
         if (pick < 0 || pick >= all.size()) pick = 0;
@@ -61,10 +63,13 @@ public final class RecipeTree {
         return new Part(stack, count, src, List.copyOf(alt), List.copyOf(kids), kids.isEmpty(), need);
     }
 
-    private static List<Source> sources(RecipeManager recipes, HolderLookup.Provider regs, Item item) {
-        List<Source> all = RecipeSources.forItem(recipes, regs, item);
-        if (BuiltInRegistries.ITEM.getKey(item).getNamespace().equals(NuclearSQ.MODID)) return all;
-        return all.stream().filter(s -> s.type().getNamespace().equals(NuclearSQ.MODID)).toList();
+    private static List<Source> sources(RecipeManager recipes, HolderLookup.Provider regs, Item item, boolean top) {
+        boolean mod = BuiltInRegistries.ITEM.getKey(item).getNamespace().equals(NuclearSQ.MODID);
+        return RecipeSources.forItem(recipes, regs, item).stream()
+                .filter(s -> mod || s.type().getNamespace().equals(NuclearSQ.MODID))
+                .filter(s -> top || !(s.where() == Where.FURNACE || s.where() == Where.BLAST_FURNACE
+                        || !mod && s.where() == Where.ORE_MILLING))
+                .toList();
     }
 
     public static Map<Item, Integer> rawTotals(Part root) {

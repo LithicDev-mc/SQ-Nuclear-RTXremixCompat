@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/intake_pump_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/intake_pump_shell_sqc"
     }
   }
 }

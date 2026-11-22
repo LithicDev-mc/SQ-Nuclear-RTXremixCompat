@@ -1,30 +1,38 @@
 local args = { ... }
 
-local mon = args[1] and peripheral.wrap(args[1]) or (peripheral.find and peripheral.find("sqc_image_monitor"))
-if not mon or not mon.batch then
-    printError("Kein Bildmonitor (sqc_image_monitor) gefunden.")
-    printError("Benutzung: kurstafel [monitorname]")
-    return
-end
-local bank = peripheral.find and peripheral.find("sqc_bank")
-if not bank or not bank.exchangeTicker then
-    printError("Kein Bank-Terminal (sqc_bank) am Computer. Computer neben ein Terminal oder ein Bank-Modem stellen.")
-    return
-end
-
 local lang = "en"
 pcall(function() lang = require("sqos.config").load().lang or "en" end)
 
 local TXT = {
     de = { title = "BOERSE KURSE", good = "Ware", last = "Kurs", change = "Aend.", high = "Hoch", low = "Tief", chart = "Verlauf",
-           none = "-", error = "Keine Verbindung: %s", page = "Seite %d/%d" },
+           none = "-", error = "Keine Verbindung: %s", page = "Seite %d/%d",
+           nomon = "Kein Bildmonitor (sqc_image_monitor) gefunden.", usage = "Benutzung: kurstafel [monitorname]",
+           nobank = "Kein Bank-Terminal (sqc_bank) am Computer. Computer neben ein Terminal oder ein Bank-Modem stellen.",
+           running = "Kurstafel laeuft auf dem Bildmonitor. Strg+T beendet.",
+           logfile = "Der volle Text steht in sqos_error.log (edit sqos_error.log)." },
     en = { title = "EXCHANGE PRICES", good = "Good", last = "Price", change = "Chg.", high = "High", low = "Low", chart = "Trend",
-           none = "-", error = "No connection: %s", page = "Page %d/%d" },
+           none = "-", error = "No connection: %s", page = "Page %d/%d",
+           nomon = "No image monitor (sqc_image_monitor) found.", usage = "Usage: kurstafel [monitor name]",
+           nobank = "No bank terminal (sqc_bank) at this computer. Place the computer next to a terminal or a bank modem.",
+           running = "The price board runs on the image monitor. Ctrl+T quits.",
+           logfile = "The full text is in sqos_error.log (edit sqos_error.log)." },
 }
 local function T(key, ...)
     local s = (TXT[lang] or TXT.de)[key] or TXT.de[key] or key
     if select("#", ...) > 0 then return s:format(...) end
     return s
+end
+
+local mon = args[1] and peripheral.wrap(args[1]) or (peripheral.find and peripheral.find("sqc_image_monitor"))
+if not mon or not mon.batch then
+    printError(T("nomon"))
+    printError(T("usage"))
+    return
+end
+local bank = peripheral.find and peripheral.find("sqc_bank")
+if not bank or not bank.exchangeTicker then
+    printError(T("nobank"))
+    return
 end
 
 local BG, HEAD, ROWA, ROWB = 0x0D1016, 0x252934, 0x14171E, 0x1A1D26
@@ -141,8 +149,8 @@ local function errorScreen(msg)
 end
 
 local page, rows = 1, nil
-local refresh = os.startTimer(0)
-local flip = os.startTimer(8)
+local tick = os.startTimer(0)
+local nextRefresh, nextFlip = 0, os.clock() + 8
 local function draw()
     if not rows then return end
     local w, h = mon.getResolution()
@@ -156,23 +164,27 @@ local function draw()
 end
 
 local function main()
-  print("Kurstafel laeuft auf dem Bildmonitor. Strg+T beendet.")
+  print(T("running"))
   while true do
     local ev = { os.pullEvent() }
-    if ev[1] == "timer" and ev[2] == refresh then
-        local ok, res = pcall(bank.exchangeTicker)
-        if ok then
-            rows = res
-            draw()
-        else
-            rows = nil
-            errorScreen(res)
+    if ev[1] == "timer" and ev[2] == tick then
+        if os.clock() >= nextFlip then
+            page = page + 1
+            nextFlip = os.clock() + 8
+            if os.clock() < nextRefresh then draw() end
         end
-        refresh = os.startTimer(5)
-    elseif ev[1] == "timer" and ev[2] == flip then
-        page = page + 1
-        draw()
-        flip = os.startTimer(8)
+        if os.clock() >= nextRefresh then
+            local ok, res = pcall(bank.exchangeTicker)
+            if ok then
+                rows = res
+                draw()
+            else
+                rows = nil
+                errorScreen(res)
+            end
+            nextRefresh = os.clock() + 5
+        end
+        tick = os.startTimer(0.5)
     elseif ev[1] == "sqc_resize" then
         draw()
     end
@@ -183,7 +195,7 @@ local ok, err = pcall(main)
 if not ok and not tostring(err):find("Terminated", 1, true) then
     if errlog then errlog.write("kurstafel", err) end
     printError(tostring(err))
-    print("Der volle Text steht in sqos_error.log (edit sqos_error.log).")
+    print(T("logfile"))
 elseif not ok then
     error(err, 0)
 end

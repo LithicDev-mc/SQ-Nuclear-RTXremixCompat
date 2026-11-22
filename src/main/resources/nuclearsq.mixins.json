@@ -3,6 +3,6 @@
   "minVersion": "0.8",
   "package": "com.sqc.nuclearsq.mixin",
   "compatibilityLevel": "JAVA_21",
-  "client": ["NeoForgeLoadingOverlayMixin", "PanoramaRendererMixin", "TitleScreenMixin"],
+  "client": ["NeoForgeLoadingOverlayMixin", "PanoramaRendererMixin", "TitleScreenMixin", "MinecraftFitScaleMixin"],
   "injectors": {"defaultRequire": 1}
 }

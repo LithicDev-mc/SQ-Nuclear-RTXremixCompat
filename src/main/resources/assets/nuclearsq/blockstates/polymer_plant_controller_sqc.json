@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/polymer_plant_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/polymer_plant_shell_sqc"
     }
   }
 }

@@ -37,6 +37,7 @@ public final class ModRegistries {
         com.sqc.nuclearsq.module.ModuleRegistry.register(modBus);
         com.sqc.nuclearsq.monitor.ImageMonitorRegistry.register(modBus);
         com.sqc.nuclearsq.economy.EconomyRegistry.register(modBus);
+        com.sqc.nuclearsq.apps.AppRegistry.register(modBus);
         com.sqc.nuclearsq.futurechest.FutureChestRegistry.register(modBus);
         com.sqc.nuclearsq.crate.CrateRegistry.register(modBus);
         com.sqc.nuclearsq.robotics.RoboticsRegistry.register(modBus);

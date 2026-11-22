@@ -192,7 +192,7 @@ end
 function Hits:toggle(t, x, y, w, label, on, id, data)
     local pillW = 4
     M.put(t, x, y, M.fit(label, math.max(0, w - pillW - 1)), C.text, C.face)
-    M.put(t, x + w - pillW, y, on and " An " or " -- ", on and C.selText or C.dim, on and C.sel or C.light)
+    M.put(t, x + w - pillW, y, on and (" " .. require("sqos.lang").t("se_on") .. " "):sub(1, 4) or " -- ", on and C.selText or C.dim, on and C.sel or C.light)
     self:add(x, y, w, 1, id, data)
 end
 

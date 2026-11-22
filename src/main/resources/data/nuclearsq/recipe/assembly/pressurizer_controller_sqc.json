@@ -36,6 +36,12 @@
         "item": "nuclearsq:glass_seal_sqc"
       },
       "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:cauldron"
+      },
+      "count": 1
     }
   ],
   "result": {

@@ -11,19 +11,19 @@
       "ingredient": {
         "item": "minecraft:quartz"
       },
-      "count": 2
+      "count": 8
     },
     {
       "ingredient": {
         "item": "minecraft:redstone"
       },
-      "count": 4
+      "count": 12
     },
     {
       "ingredient": {
         "item": "minecraft:copper_ingot"
       },
-      "count": 2
+      "count": 4
     },
     {
       "ingredient": {
@@ -42,5 +42,5 @@
     "id": "nuclearsq:ram_module_8gb_sqc",
     "count": 1
   },
-  "time": 160
+  "time": 460
 }

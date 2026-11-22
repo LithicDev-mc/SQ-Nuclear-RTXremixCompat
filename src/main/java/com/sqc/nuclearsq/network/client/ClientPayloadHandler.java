@@ -68,6 +68,18 @@ public final class ClientPayloadHandler {
         DosimeterHud.receive(p);
     }
 
+    public static void appLogin(com.sqc.nuclearsq.apps.AppPayloads.State p) {
+        com.sqc.nuclearsq.apps.client.LoginMonitorScreen.receive(p);
+    }
+
+    public static void appAuction(com.sqc.nuclearsq.apps.AuctionPayloads.State p) {
+        com.sqc.nuclearsq.apps.client.AuctionMonitorScreen.receive(p);
+    }
+
+    public static void appSession(com.sqc.nuclearsq.apps.AppPayloads.Session p) {
+        com.sqc.nuclearsq.apps.client.ClientAppSession.receive(p);
+    }
+
     public static void access(com.sqc.nuclearsq.machine.AccessPayloads.State p) {
         com.sqc.nuclearsq.machine.client.AccessScreen.receive(p);
     }

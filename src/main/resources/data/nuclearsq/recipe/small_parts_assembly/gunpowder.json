@@ -1,0 +1,21 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:sulfur_dust_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:charcoal"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "minecraft:gunpowder",
+    "count": 2
+  }
+}

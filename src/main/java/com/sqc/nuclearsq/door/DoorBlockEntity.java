@@ -37,7 +37,7 @@ public class DoorBlockEntity extends BlockEntity {
     private final List<BlockPos> panels = new ArrayList<>();
     private Direction.Axis axis = Direction.Axis.Z;
     private DoorPanelBlock.Kind kind = DoorPanelBlock.Kind.HANGAR;
-    private boolean open, powered, ragged;
+    private boolean open, powered, ragged, flip;
     private int progress, travel = 1, clientPrev;
     private BlockPos min = BlockPos.ZERO, max = BlockPos.ZERO;
     @Nullable
@@ -49,6 +49,7 @@ public class DoorBlockEntity extends BlockEntity {
 
     public List<BlockPos> panels() { return panels; }
     public Direction.Axis axis() { return axis; }
+    public boolean flip() { return flip; }
     public DoorPanelBlock.Kind kind() { return kind; }
     public boolean open() { return open; }
     public boolean moving() { return open ? progress < travel : progress > 0; }
@@ -142,6 +143,7 @@ public class DoorBlockEntity extends BlockEntity {
             if (s.getBlock() instanceof DoorPanelBlock b && (s.getValue(DoorPanelBlock.PHASE) == Phase.RAW || s.getValue(DoorPanelBlock.PHASE) == Phase.CLOSED)) {
                 panels.addAll(connected(level, n));
                 axis = s.getValue(DoorPanelBlock.AXIS);
+                flip = s.getValue(DoorPanelBlock.FLIP);
                 kind = b.kind;
                 bounds();
                 travel = Math.max(MIN_TRAVEL, b.ticksPerBlock * way());
@@ -190,7 +192,7 @@ public class DoorBlockEntity extends BlockEntity {
             adopt();
             if (panels.isEmpty()) return Component.translatable(ragged ? "message.nuclearsq.door.ragged" : "message.nuclearsq.door.no_panels");
             phase(Phase.MOVING);
-        } else if (!want && progress >= travel) {
+        } else if (!want && progress >= half()) {
             if (!level.getEntitiesOfClass(LivingEntity.class, AABB.encapsulatingFullBlocks(min, max)).isEmpty()) {
                 return Component.translatable("message.nuclearsq.door.blocked");
             }
@@ -205,6 +207,10 @@ public class DoorBlockEntity extends BlockEntity {
     @Nullable
     public Component toggle() {
         return setOpen(!open);
+    }
+
+    private int half() {
+        return (travel + 1) / 2;
     }
 
     public void redstone() {
@@ -228,6 +234,7 @@ public class DoorBlockEntity extends BlockEntity {
         }
         if (open ? progress >= travel : progress <= 0) return;
         progress += open ? 1 : -1;
+        if (!level.isClientSide && open && progress == half() && moving()) phase(Phase.OPEN);
         if (level.isClientSide || moving()) return;
         phase(open ? Phase.OPEN : Phase.CLOSED);
         level.playSound(null, worldPosition, SoundEvents.IRON_DOOR_CLOSE, SoundSource.BLOCKS, 0.4f, 0.6f);
@@ -276,6 +283,7 @@ public class DoorBlockEntity extends BlockEntity {
         super.saveAdditional(tag, reg);
         tag.putLongArray("Panels", panels.stream().mapToLong(BlockPos::asLong).toArray());
         tag.putInt("Axis", axis.ordinal());
+        tag.putBoolean("Flip", flip);
         tag.putBoolean("Open", open);
         tag.putInt("Kind", kind.ordinal());
         tag.putBoolean("Powered", powered);
@@ -290,6 +298,7 @@ public class DoorBlockEntity extends BlockEntity {
         panels.clear();
         for (long l : tag.getLongArray("Panels")) panels.add(BlockPos.of(l));
         axis = Direction.Axis.values()[Math.floorMod(tag.getInt("Axis"), 3)];
+        flip = tag.getBoolean("Flip");
         open = tag.getBoolean("Open");
         kind = DoorPanelBlock.Kind.values()[Math.floorMod(tag.getInt("Kind"), DoorPanelBlock.Kind.values().length)];
         powered = tag.getBoolean("Powered");

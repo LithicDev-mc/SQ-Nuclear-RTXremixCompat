@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "nuclearsq:block/machine_shell"
+      "model": "nuclearsq:block/battery_large_shell_sqc"
     }
   }
 }

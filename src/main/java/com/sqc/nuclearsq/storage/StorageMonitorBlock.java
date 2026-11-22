@@ -9,6 +9,9 @@ import com.sqc.nuclearsq.data.DataPanelBlock;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
@@ -16,10 +19,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class StorageMonitorBlock extends DataPanelBlock implements EntityBlock {
     public static final int MAX_W = 4, MAX_H = 4;
-    public static final int PAGE_TICKS = 100;
 
     public StorageMonitorBlock(Properties props) {
         super(props, true, 0, 0, 0, 16, 16, 3);
@@ -59,6 +62,12 @@ public class StorageMonitorBlock extends DataPanelBlock implements EntityBlock {
             }
         }
         return new Layout(o, w, h, right);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        if (!level.isClientSide && player instanceof ServerPlayer sp) StorageMonitorMenu.open(sp, layout(level, pos).origin());
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Nullable

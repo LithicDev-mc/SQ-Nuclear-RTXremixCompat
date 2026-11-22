@@ -26,11 +26,12 @@ public final class WifiLink {
     public static Status check(ServerPlayer player, ItemStack terminal) {
         GlobalPos link = WifiTerminalItem.link(terminal);
         if (link == null) return Status.NOT_LINKED;
-        if (!link.dimension().equals(player.level().dimension())) return Status.OTHER_DIMENSION;
-        WifiAdapterBlockEntity a = WifiAdapterBlockEntity.at(player.serverLevel(), link.pos());
-        if (a == null) return Status.ADAPTER_GONE;
+        boolean away = !link.dimension().equals(player.level().dimension());
+        ServerLevel level = player.server.getLevel(link.dimension());
+        WifiAdapterBlockEntity a = level == null ? null : WifiAdapterBlockEntity.at(level, link.pos());
+        if (a == null) return away ? Status.OTHER_DIMENSION : Status.ADAPTER_GONE;
         if (!a.online()) return Status.ADAPTER_OFFLINE;
-        if (!a.reaches(player.position())) return Status.OUT_OF_RANGE;
+        if (!a.reaches(player.level(), player.position())) return away ? Status.OTHER_DIMENSION : Status.OUT_OF_RANGE;
         return Status.OK;
     }
 
@@ -50,7 +51,7 @@ public final class WifiLink {
             player.displayClientMessage(Component.translatable("message.nuclearsq.wifi.err.no_energy", WifiValues.terminal().openCost()), true);
             return;
         }
-        if (!ComputeNet.allow(player, player.serverLevel(), adapter)) return;
+        if (!ComputeNet.allow(player, player.server.getLevel(WifiTerminalItem.link(stack).dimension()), adapter)) return;
         WifiTerminalItem.drain(stack, WifiValues.terminal().openCost());
         CraftingTerminalMenu.openWireless(player, adapter, slotOf(player, hand));
     }

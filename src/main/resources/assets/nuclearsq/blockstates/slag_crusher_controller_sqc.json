@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/slag_crusher_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/slag_crusher_shell_sqc"
     }
   }
 }

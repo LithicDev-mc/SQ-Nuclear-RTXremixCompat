@@ -185,7 +185,7 @@ public final class MachineKits {
 
     public static boolean mayTake(Level level, Placement pl, @Nullable Player player) {
         return !(player instanceof net.minecraft.server.level.ServerPlayer sp) || !(level.getBlockEntity(pl.anchor()) instanceof BigMachineBlockEntity be)
-                || be.access().can(sp, be.owner(), com.sqc.nuclearsq.machine.MachineAccess.ADMIN);
+                || be.access().canBuild(sp, be.owner());
     }
 
     public static void dismantle(ServerLevel level, Placement pl, boolean dropKit) {

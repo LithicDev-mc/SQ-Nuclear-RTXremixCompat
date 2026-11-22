@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/emergency_cooling_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/emergency_cooling_shell_sqc"
     }
   }
 }

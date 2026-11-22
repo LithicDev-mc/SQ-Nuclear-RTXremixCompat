@@ -30,6 +30,12 @@
         "item": "nuclearsq:steel_sheet_sqc"
       },
       "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:redstone_block"
+      },
+      "count": 2
     }
   ],
   "result": {

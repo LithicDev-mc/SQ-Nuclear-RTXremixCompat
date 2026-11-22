@@ -9,20 +9,30 @@
     },
     {
       "ingredient": {
-        "item": "minecraft:diamond"
+        "type": "nuclearsq:optional",
+        "items": [
+          "mekanism:ingot_refined_obsidian",
+          "nuclearsq:refined_obsidian_ingot_sqc"
+        ]
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:chip_2_sqc"
       },
       "count": 1
     },
     {
       "ingredient": {
-        "item": "minecraft:lapis_lazuli"
+        "item": "minecraft:netherite_scrap"
       },
-      "count": 4
+      "count": 1
     }
   ],
   "result": {
     "id": "nuclearsq:ultimate_circuit_sqc",
     "count": 1
   },
-  "time": 100
+  "time": 400
 }

@@ -14,7 +14,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public final class ContainmentCull {
-    private static final double INNER_RADIUS = 14.6;
+    private static final double INNER_RADIUS = 14.6, HATCH_TOP = 32, HATCH_REACH = 3;
     private static final Map<BlockPos, Hull> HULLS = new HashMap<>();
     private static Level hullLevel;
     private static final Method DOOR_OPEN = findDoorOpen();
@@ -67,8 +67,14 @@ public final class ContainmentCull {
             AABB b = h.box();
             if (p.getX() + 0.5 <= b.minX || p.getX() + 0.5 >= b.maxX || p.getZ() + 0.5 <= b.minZ || p.getZ() + 0.5 >= b.maxZ
                     || p.getY() < b.minY || p.getY() >= b.maxY) continue;
-            return !cameraInside(b, cam) && !doorOpen(h.be());
+            return !cameraInside(b, cam) && !doorOpen(h.be()) && !throughHatch(h.be(), b, p, cam);
         }
         return false;
+    }
+
+    private static boolean throughHatch(BigMachineBlockEntity hull, AABB b, BlockPos p, Vec3 cam) {
+        double cx = (b.minX + b.maxX) / 2, cz = (b.minZ + b.maxZ) / 2;
+        return cam.y >= hull.getBlockPos().getY() + HATCH_TOP - 1
+                && Math.abs(p.getX() + 0.5 - cx) < HATCH_REACH && Math.abs(p.getZ() + 0.5 - cz) < HATCH_REACH;
     }
 }

@@ -271,6 +271,36 @@ public final class CraftingTerminalTests {
         });
     }
 
+    @GameTest(template = FLOOR, batch = "ct_unlimited", timeoutTicks = 60)
+    public static void wifiAntennaStagesReachUnlimited(GameTestHelper h) {
+        Net n = rack(h, new BlockPos(2, 2, 2), true);
+        h.getLevel().setBlockAndUpdate(n.port(), StorageRegistry.WIFI_ADAPTER.get().defaultBlockState());
+        h.runAfterDelay(5, () -> {
+            WifiAdapterBlockEntity a = WifiAdapterBlockEntity.at(h.getLevel(), n.port());
+            if (a == null) throw new GameTestAssertException("kein Adapter-BlockEntity");
+            a.energy().receiveEnergy(a.capacity(), false);
+            int max = com.sqc.nuclearsq.storage.WifiValues.adapter().maxAntennas(), last = a.range();
+            if (max != com.sqc.nuclearsq.storage.WifiAdapterBlock.MAX_SHOWN) throw new GameTestAssertException("Stufen " + max + " statt " + com.sqc.nuclearsq.storage.WifiAdapterBlock.MAX_SHOWN);
+            for (int i = 1; i <= max; i++) {
+                if (!WifiAdapterBlockEntity.isModule(new ItemStack(WifiAdapterBlockEntity.module(i)))) throw new GameTestAssertException("Stufe " + i + " ohne Modul");
+                if (!a.addAntenna()) throw new GameTestAssertException("Stufe " + i + " nicht einsetzbar");
+                if (i < max && (a.unlimited() || a.range() <= last)) throw new GameTestAssertException("Stufe " + i + " erhoeht die Reichweite nicht: " + a.range());
+                last = a.range();
+            }
+            if (!a.unlimited()) throw new GameTestAssertException("letzte Stufe nicht unbegrenzt: " + a.range());
+            if (a.addAntenna()) throw new GameTestAssertException("mehr Module als Stufen");
+            tickAll(h, a);
+            if (a.getBlockState().getValue(com.sqc.nuclearsq.storage.WifiAdapterBlock.ANTENNAS) != max) throw new GameTestAssertException("Modell zeigt die Stufe nicht");
+            ServerPlayer p = player(h, "wifiAntennaStagesReachUnlimited");
+            ItemStack t = new ItemStack(StorageRegistry.WIFI_TERMINAL.get());
+            WifiTerminalItem.setLink(t, GlobalPos.of(h.getLevel().dimension(), n.port()));
+            p.setPos(Vec3.atCenterOf(n.port()).add(250000, 0, 0));
+            if (WifiLink.check(p, t) != WifiLink.Status.OK) throw new GameTestAssertException("unbegrenzt, aber " + WifiLink.check(p, t));
+            if (!a.reaches(null, Vec3.ZERO)) throw new GameTestAssertException("unbegrenzt erreicht andere Dimension nicht");
+            h.succeed();
+        });
+    }
+
     @GameTest(template = FLOOR, batch = "ct_a1", timeoutTicks = 40)
     public static void wifiAdapterIsDataPortWithDemand(GameTestHelper h) {
         Net n = rack(h, new BlockPos(2, 2, 2), true);

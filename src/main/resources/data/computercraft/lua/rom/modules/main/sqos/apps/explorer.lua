@@ -64,7 +64,7 @@ function M.run(ctx)
     local function openEntry(e, forceEdit)
         if e.dir then
             path = e.full
-            sel, top = nil, 1
+            sel, top, confirm = nil, 1, false
             reload()
         elseif not forceEdit and e.name:match("%.lua$") then
             ctx.open("runner", { cmd = "/" .. e.full, title = e.name })
@@ -126,7 +126,7 @@ function M.run(ctx)
         if id == "up" then
             if path ~= "" then
                 path = fs.getDir(path)
-                sel, top = nil, 1
+                sel, top, confirm = nil, 1, false
                 reload()
             end
         elseif id == "item" then
@@ -184,7 +184,6 @@ function M.run(ctx)
     end
 
     while true do
-        ensureVisible()
         draw()
         local ev = { os.pullEvent() }
         local e = ev[1]
@@ -195,12 +194,13 @@ function M.run(ctx)
             top = math.max(1, math.min(math.max(1, #entries), top + ev[2] * 3))
         elseif e == "key" then
             local k = ev[2]
-            if k == keys.up and #entries > 0 then sel = math.max(1, (sel or 2) - 1)
-            elseif k == keys.down and #entries > 0 then sel = math.min(#entries, (sel or 0) + 1)
+            if k == keys.up and #entries > 0 then sel, confirm = math.max(1, (sel or 2) - 1), false
+            elseif k == keys.down and #entries > 0 then sel, confirm = math.min(#entries, (sel or 0) + 1), false
             elseif k == keys.enter and sel then openEntry(entries[sel])
             elseif k == keys.backspace then act("up")
             elseif k == keys.delete and sel then confirm = true
             elseif k == keys.f5 then reload() end
+            ensureVisible()
         elseif e == "term_resize" then
             ensureVisible()
         end

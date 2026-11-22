@@ -20,9 +20,9 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 public final class ExoJetpack {
     private ExoJetpack() {}
 
-    public static final int UP = 1, DOWN = 2, HOVER = 4, CLAW = 8, COST = 20;
+    public static final int UP = 1, DOWN = 2, HOVER = 4, CLAW = 8, BOOST = 16, COST = 100;
     private static final double[] UP_MAX = {0, 0.35, 0.45, 0.55, 0.65, 0.75};
-    private static final double GLIDE = -0.1, DIVE = -0.45;
+    private static final double GLIDE = -0.1, DIVE = -0.45, BOOST_GAIN = 1.1, BOOST_MAX = 0.6;
 
     private static final Map<UUID, long[]> INPUT = new ConcurrentHashMap<>();
     private static final Field FLYING_TICKS = flyingTicks();
@@ -61,7 +61,17 @@ public final class ExoJetpack {
         else if ((bits & HOVER) != 0 && level >= 2) y = 0;
         else if ((bits & DOWN) != 0) y = Math.min(y, DIVE);
         else if (y < GLIDE) y = GLIDE;
-        p.setDeltaMovement(v.x, y, v.z);
+        double x = v.x, z = v.z;
+        if ((bits & BOOST) != 0 && !p.onGround()) {
+            x *= BOOST_GAIN;
+            z *= BOOST_GAIN;
+            double h = Math.sqrt(x * x + z * z);
+            if (h > BOOST_MAX) {
+                x *= BOOST_MAX / h;
+                z *= BOOST_MAX / h;
+            }
+        }
+        p.setDeltaMovement(x, y, z);
         p.resetFallDistance();
     }
 
@@ -79,6 +89,7 @@ public final class ExoJetpack {
         int bits = in != null && sp.level().getGameTime() - in[1] <= 2 ? (int) in[0] : 0;
         if (lvl > 0) {
             if ((bits & (UP | HOVER)) != 0 && !ExoCoreItem.drain(sp, COST)) bits &= ~(UP | HOVER);
+            if ((bits & BOOST) != 0 && !hasEnergy(sp)) bits &= ~BOOST;
             apply(sp, lvl, bits);
         }
         if (claws && (bits & CLAW) != 0) {

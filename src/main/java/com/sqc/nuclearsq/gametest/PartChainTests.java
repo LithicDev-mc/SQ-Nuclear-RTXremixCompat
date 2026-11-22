@@ -244,8 +244,8 @@ public final class PartChainTests {
     public static void dryVesselHeatIsDividedByTheModerator(GameTestHelper h) {
         BigMachineBlockEntity drive = fourRodDrive(h, false);
         runPhases(h, drive, 800, List.of(
-                dryRisePhase(drive, 0, 1.68, "Aufheizen ohne Moderator je Tick"),
-                dryRisePhase(drive, 4, 3.136, "Aufheizen mit Fluorit-Moderator je Tick")));
+                dryRisePhase(drive, 0, 1.84, "Aufheizen ohne Moderator je Tick"),
+                dryRisePhase(drive, 4, 3.296, "Aufheizen mit Fluorit-Moderator je Tick")));
     }
 
     @GameTest(template = FLOOR, batch = "part_chain_countdown", timeoutTicks = 900)

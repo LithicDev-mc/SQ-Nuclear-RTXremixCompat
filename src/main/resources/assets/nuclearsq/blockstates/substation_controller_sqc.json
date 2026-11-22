@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/substation_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/substation_shell_sqc"
     }
   }
 }

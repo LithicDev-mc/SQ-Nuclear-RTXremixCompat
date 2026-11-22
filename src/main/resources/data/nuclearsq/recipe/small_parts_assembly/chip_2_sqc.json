@@ -23,7 +23,7 @@
       "ingredient": {
         "item": "nuclearsq:photoresist_sqc"
       },
-      "count": 1
+      "count": 2
     },
     {
       "ingredient": {
@@ -36,5 +36,5 @@
     "id": "nuclearsq:chip_2_sqc",
     "count": 1
   },
-  "time": 140
+  "time": 160
 }

@@ -36,6 +36,12 @@
         "item": "nuclearsq:hdpe_seal_sqc"
       },
       "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:brewing_stand"
+      },
+      "count": 1
     }
   ],
   "result": {

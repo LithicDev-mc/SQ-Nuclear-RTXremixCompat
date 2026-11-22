@@ -13,7 +13,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 
 public class SurveyMapScreen extends Screen {
-    private static final int W = 200, H = 222, MAP = 176;
+    private static final int W = 200, H = 240, MAP = 176, BTN_W = 120, BTN_H = 14;
     private static final int[] STOPS = {0xFF1E8A3C, 0xFFE8D03A, 0xFFF08A2A, 0xFFE8332E, 0xFFB04CE8};
     private final InteractionHand hand;
 
@@ -72,16 +72,25 @@ public class SurveyMapScreen extends Screen {
                         b == 0 ? Component.translatable("gui.nuclearsq.survey_tablet.unmeasured") : Component.literal(RadiationManager.fmtRate(SurveyMap.decode(b))));
             }
         }
-        int ly = y + H - 26;
+        int ly = y + H - 44;
         for (int k = 0; k < MAP; k++) g.fill(ax + k, ly, ax + k + 1, ly + 5, color(41 + k * 184 / MAP));
         TermKit.text(g, font, Component.literal(RadiationManager.fmtRate(SurveyMap.decode(41))), ax, ly + 8, TermKit.DIM);
         TermKit.right(g, font, Component.literal(RadiationManager.fmtRate(SurveyMap.decode(225))), ax + MAP, ly + 8, TermKit.DIM);
+        int bx = x + (W - BTN_W) / 2, by = y + H - 22;
+        TermKit.button(g, font, bx, by, BTN_W, BTN_H, Component.translatable("gui.nuclearsq.survey_tablet.fly"), TermKit.GREEN, true,
+                mx >= bx && my >= by && mx < bx + BTN_W && my < by + BTN_H, false);
         TermKit.renderTip(g, font, mx, my);
         TermKit.scanlines(g, x, y, W, H);
     }
 
     @Override
     public boolean mouseClicked(double mx, double my, int button) {
+        int bx = (width - W) / 2 + (W - BTN_W) / 2, by = (height - H) / 2 + H - 22;
+        if (button == 0 && mx >= bx && my >= by && mx < bx + BTN_W && my < by + BTN_H) {
+            net.neoforged.neoforge.network.PacketDistributor.sendToServer(new com.sqc.nuclearsq.robotics.drone.DronePayloads.Fly(hand == InteractionHand.MAIN_HAND));
+            onClose();
+            return true;
+        }
         return button == 0 && TermKit.styleClick(mx, my) || super.mouseClicked(mx, my, button);
     }
 

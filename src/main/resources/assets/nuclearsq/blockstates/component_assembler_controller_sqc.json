@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/component_assembler_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/component_assembler_shell_sqc"
     }
   }
 }

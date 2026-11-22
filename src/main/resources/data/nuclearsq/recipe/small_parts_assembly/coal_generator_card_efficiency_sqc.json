@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_1_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:coal_block"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 15
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:lapis_lazuli"
+      },
+      "count": 15
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:coal_generator_card_efficiency_sqc",
+    "count": 1
+  }
+}

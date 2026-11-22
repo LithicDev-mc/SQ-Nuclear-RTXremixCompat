@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "nuclearsq:block/machine_shell"
+      "model": "nuclearsq:block/cracker_shell_sqc"
     }
   }
 }

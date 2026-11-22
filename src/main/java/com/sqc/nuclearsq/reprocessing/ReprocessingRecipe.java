@@ -11,6 +11,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -23,13 +24,13 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 
 public record ReprocessingRecipe(Ingredient ingredient, int count, int time, int energyPerTick, List<Result> results, Kind kind,
-                                 @Nullable Ingredient aux, int auxCount, List<FluidCost> fluids, List<FluidOut> fluidResults)
+                                 @Nullable Ingredient aux, int auxCount, List<FluidCost> fluids, List<FluidOut> fluidResults, int priority)
         implements Recipe<SingleRecipeInput> {
 
     public static final int AUX_SLOT = 5;
 
     public ReprocessingRecipe(Ingredient ingredient, int count, int time, int energyPerTick, List<Result> results, Kind kind) {
-        this(ingredient, count, time, energyPerTick, results, kind, null, 0, List.of(), List.of());
+        this(ingredient, count, time, energyPerTick, results, kind, null, 0, List.of(), List.of(), 0);
     }
 
     public enum Kind {
@@ -102,9 +103,10 @@ public record ReprocessingRecipe(Ingredient ingredient, int count, int time, int
                 Ingredient.CODEC_NONEMPTY.optionalFieldOf("aux").forGetter(r -> Optional.ofNullable(r.aux())),
                 Codec.intRange(1, 64).optionalFieldOf("aux_count", 1).forGetter(ReprocessingRecipe::auxCount),
                 FluidCost.CODEC.listOf().optionalFieldOf("fluids", List.of()).forGetter(ReprocessingRecipe::fluids),
-                FluidOut.CODEC.listOf().optionalFieldOf("fluid_results", List.of()).forGetter(ReprocessingRecipe::fluidResults)
-        ).apply(i, (ing, count, time, fe, results, aux, auxCount, fluids, fluidOut) ->
-                new ReprocessingRecipe(ing, count, time, fe, results, kind, aux.orElse(null), aux.isPresent() ? auxCount : 0, fluids, fluidOut)));
+                FluidOut.CODEC.listOf().optionalFieldOf("fluid_results", List.of()).forGetter(ReprocessingRecipe::fluidResults),
+                Codec.INT.optionalFieldOf("priority", 0).forGetter(ReprocessingRecipe::priority)
+        ).apply(i, (ing, count, time, fe, results, aux, auxCount, fluids, fluidOut, priority) ->
+                new ReprocessingRecipe(ing, count, time, fe, results, kind, aux.orElse(null), aux.isPresent() ? auxCount : 0, fluids, fluidOut, priority)));
     }
 
     public static StreamCodec<RegistryFriendlyByteBuf, ReprocessingRecipe> streamCodec(Kind kind) {
@@ -118,7 +120,8 @@ public record ReprocessingRecipe(Ingredient ingredient, int count, int time, int
                 int auxCount = buf.readVarInt();
                 List<FluidCost> fluids = FluidCost.STREAM_CODEC.apply(ByteBufCodecs.list()).decode(buf);
                 List<FluidOut> fluidOut = FluidOut.STREAM_CODEC.apply(ByteBufCodecs.list()).decode(buf);
-                return new ReprocessingRecipe(ing, count, time, fe, results, kind, aux, auxCount, fluids, fluidOut);
+                int priority = buf.readVarInt();
+                return new ReprocessingRecipe(ing, count, time, fe, results, kind, aux, auxCount, fluids, fluidOut, priority);
             }
 
             @Override
@@ -133,6 +136,7 @@ public record ReprocessingRecipe(Ingredient ingredient, int count, int time, int
                 buf.writeVarInt(r.auxCount());
                 FluidCost.STREAM_CODEC.apply(ByteBufCodecs.list()).encode(buf, r.fluids());
                 FluidOut.STREAM_CODEC.apply(ByteBufCodecs.list()).encode(buf, r.fluidResults());
+                buf.writeVarInt(r.priority());
             }
         };
     }
@@ -162,6 +166,14 @@ public record ReprocessingRecipe(Ingredient ingredient, int count, int time, int
     @Override
     public boolean canCraftInDimensions(int width, int height) {
         return true;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> out = NonNullList.create();
+        out.add(ingredient);
+        if (aux != null) out.add(aux);
+        return out;
     }
 
     @Override

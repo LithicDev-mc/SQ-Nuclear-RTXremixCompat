@@ -47,12 +47,13 @@ public class DoorPanelBlock extends Block implements EntityBlock {
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
     public static final EnumProperty<Phase> PHASE = EnumProperty.create("phase", Phase.class);
     public static final BooleanProperty MASTER = BooleanProperty.create("master");
+    public static final BooleanProperty FLIP = BooleanProperty.create("flip");
     private static final VoxelShape X = box(5, 0, 0, 11, 16, 16), Y = box(0, 5, 0, 16, 11, 16), Z = box(0, 0, 5, 16, 16, 11);
 
     public enum Kind {
-        HANGAR, AIRLOCK, VAULT, SECTIONAL, GRILLE, FOLDING;
+        HANGAR, AIRLOCK, VAULT, SECTIONAL, GRILLE, FOLDING, LAB, GLASS, SHIELD, COLD, CAGE, SLIDE, INDUSTRIAL, PERFORATED, SPEED, LIFT;
 
-        public boolean up() { return this == HANGAR || this == SECTIONAL || this == GRILLE; }
+        public boolean up() { return this == HANGAR || this == SECTIONAL || this == GRILLE || this == INDUSTRIAL || this == PERFORATED || this == SPEED || this == LIFT; }
     }
 
     public final Kind kind;
@@ -62,19 +63,20 @@ public class DoorPanelBlock extends Block implements EntityBlock {
         super(props);
         this.kind = kind;
         this.ticksPerBlock = ticksPerBlock;
-        registerDefaultState(stateDefinition.any().setValue(AXIS, Direction.Axis.Z).setValue(PHASE, Phase.RAW).setValue(MASTER, false));
+        registerDefaultState(stateDefinition.any().setValue(AXIS, Direction.Axis.Z).setValue(PHASE, Phase.RAW).setValue(MASTER, false).setValue(FLIP, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> b) {
-        b.add(AXIS, PHASE, MASTER);
+        b.add(AXIS, PHASE, MASTER, FLIP);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState on = ctx.getLevel().getBlockState(ctx.getClickedPos().relative(ctx.getClickedFace().getOpposite()));
-        Direction.Axis axis = on.is(this) ? on.getValue(AXIS) : ctx.getNearestLookingDirection().getAxis();
-        return defaultBlockState().setValue(AXIS, axis);
+        if (on.is(this)) return defaultBlockState().setValue(AXIS, on.getValue(AXIS)).setValue(FLIP, on.getValue(FLIP));
+        Direction look = ctx.getNearestLookingDirection();
+        return defaultBlockState().setValue(AXIS, look.getAxis()).setValue(FLIP, look.getAxisDirection() == Direction.AxisDirection.POSITIVE);
     }
 
     @Override

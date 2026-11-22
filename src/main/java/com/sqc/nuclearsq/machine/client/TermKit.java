@@ -67,7 +67,8 @@ public final class TermKit {
     }
 
     public static MutableComponent mono(Component c) {
-        return modern ? c.copy() : c.copy().withStyle(s -> s.withFont(Minecraft.UNIFORM_FONT));
+        if (modern || Minecraft.getInstance().getWindow().getGuiScale() < 2) return c.copy();
+        return c.copy().withStyle(s -> s.withFont(Minecraft.UNIFORM_FONT));
     }
 
     public static MutableComponent mono(String s) {
@@ -141,14 +142,18 @@ public final class TermKit {
     private static int tabX, tabY;
 
     public static void monitor(GuiGraphics g, int x, int y, int w, int h) {
+        monitor(g, x, y, w, h, 24);
+    }
+
+    public static void monitor(GuiGraphics g, int x, int y, int w, int h, int head) {
         modern = NuclearClientConfig.modern();
         TIPS.clear();
         if (modern) {
             g.fill(x + 1, y, x + w - 1, y + h, M_EDGE);
             g.fill(x, y + 1, x + w, y + h - 1, M_EDGE);
             g.fill(x + 1, y + 1, x + w - 1, y + h - 1, M_BG);
-            g.fill(x + 1, y + 1, x + w - 1, y + 24, M_HEAD);
-            g.fill(x + 1, y + 24, x + w - 1, y + 25, M_EDGE);
+            g.fill(x + 1, y + 1, x + w - 1, y + head, M_HEAD);
+            g.fill(x + 1, y + head, x + w - 1, y + head + 1, M_EDGE);
         } else {
             g.fill(x, y, x + w, y + h, BEZEL_LO);
             g.fill(x + 1, y + 1, x + w - 1, y + h - 1, BEZEL);
@@ -331,8 +336,16 @@ public final class TermKit {
         }
     }
 
+    private static Component clip(Font font, Component c, int w) {
+        if (width(font, c) <= w) return c;
+        String l = c.getString();
+        while (l.length() > 1 && width(font, Component.literal(l + "..")) > w) l = l.substring(0, l.length() - 1);
+        return Component.literal(l + "..").withStyle(c.getStyle());
+    }
+
     public static void button(GuiGraphics g, Font font, int x, int y, int w, int h, Component label, int color,
                               boolean enabled, boolean hover, boolean active) {
+        label = clip(font, label, w - 4);
         if (modern) {
             int cc = col(color);
             boolean on = enabled && active;
@@ -364,8 +377,9 @@ public final class TermKit {
                 if (on || hv) g.fill(sx + 1, y + 1, ex - 1, y + h - 1, on ? M_HI : M_CARD);
                 if (on) g.fill(sx + 1, y + h - 3, ex - 1, y + h - 1, col(color));
                 if (i > 0) g.fill(sx, y + 4, sx + 1, y + h - 4, M_EDGE);
-                int tw = font.width(labels[i]);
-                g.drawString(font, labels[i], (sx + ex) / 2 - tw / 2, y + (h - 8) / 2 - (on ? 1 : 0), on ? M_WHITE : hv ? M_TEXT : M_MUTED, false);
+                Component lb = clip(font, labels[i], ex - sx - 4);
+                int tw = font.width(lb);
+                g.drawString(font, lb, (sx + ex) / 2 - tw / 2, y + (h - 8) / 2 - (on ? 1 : 0), on ? M_WHITE : hv ? M_TEXT : M_MUTED, false);
             }
             return;
         }
@@ -376,7 +390,7 @@ public final class TermKit {
             if (on) g.fill(sx + 1, y + 1, ex - 1, y + h - 1, color);
             else if (hv) g.fill(sx + 1, y + 1, ex - 1, y + h - 1, FAINT);
             if (i > 0) g.fill(sx, y + 3, sx + 1, y + h - 3, DIM);
-            center(g, font, labels[i], (sx + ex) / 2, y + (h - 8) / 2, on ? SCREEN : hv ? GREEN : MID);
+            center(g, font, clip(font, labels[i], ex - sx - 4), (sx + ex) / 2, y + (h - 8) / 2, on ? SCREEN : hv ? GREEN : MID);
         }
     }
 

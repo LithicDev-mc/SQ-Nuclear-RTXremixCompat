@@ -12,6 +12,13 @@
         "id": "nuclearsq:copper_dust_sqc",
         "count": 1
       }
+    },
+    {
+      "item": {
+        "id": "nuclearsq:copper_dust_sqc",
+        "count": 1
+      },
+      "chance": 0.25
     }
   ]
 }

@@ -86,6 +86,9 @@ public final class SubstationTests {
             formed(b);
             if (a.substation().targets().size() != 2) throw new GameTestAssertException("Umspannwerk A findet " + a.substation().targets().size() + " Ziele statt 2");
             if (sink.energy().getEnergyStored() <= 0) throw new GameTestAssertException("Strom kommt nicht ueber die Leitung am Akku an");
+            if (b.substation().lineInRate() <= 0) throw new GameTestAssertException("Umspannwerk B zeigt keinen Strom von der Leitung");
+            if (a.substation().lineInRate() != 0) throw new GameTestAssertException("Umspannwerk A zaehlt den eigenen Anteil als Leitungsstrom");
+            if (a.substation().feedPermille() <= 0 && b.substation().supplyPermille() <= 0) throw new GameTestAssertException("Puffer-Anzeige bleibt leer");
             if (GridNode.at(h.getLevel(), port(b, "energy_out_3")) != b.substation()) throw new GameTestAssertException("GridNode.at findet das Umspannwerk nicht ueber einen Port");
             h.destroyBlock(base.above(5));
             h.runAfterDelay(2, () -> {

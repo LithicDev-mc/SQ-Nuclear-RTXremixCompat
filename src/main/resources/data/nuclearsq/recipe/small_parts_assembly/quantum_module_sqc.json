@@ -5,13 +5,13 @@
       "ingredient": {
         "item": "nuclearsq:cpu_module_sqc"
       },
-      "count": 4
+      "count": 2
     },
     {
       "ingredient": {
         "item": "nuclearsq:ram_module_sqc"
       },
-      "count": 4
+      "count": 2
     },
     {
       "ingredient": {
@@ -36,5 +36,12 @@
     "id": "nuclearsq:quantum_module_sqc",
     "count": 1
   },
-  "time": 200
+  "time": 200,
+  "hardcore_counts": [
+    4,
+    4,
+    1,
+    2,
+    4
+  ]
 }

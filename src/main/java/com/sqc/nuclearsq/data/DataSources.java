@@ -154,7 +154,7 @@ public final class DataSources {
             return b.lastIn() > b.lastOut() ? "charging" : b.lastOut() > b.lastIn() ? "discharging" : "idle";
         }
 
-        private static final String[] CRAFTER_STATES = {"ok", "incomplete", "noinput", "needmore", "outfull", "nopower", "off", "nowater", "nofeed", "shallow", "noacid", "noaux"};
+        private static final String[] CRAFTER_STATES = {"ok", "incomplete", "noinput", "needmore", "outfull", "nopower", "off", "nowater", "nofeed", "shallow", "noacid", "noaux", "noarm"};
 
         @Override
         public int state() {

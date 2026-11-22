@@ -4,6 +4,8 @@ import com.sqc.nuclearsq.registry.PowerRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -11,7 +13,8 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class SolarPanelBlockEntity extends BlockEntity {
-    public static final int PEAK = 18;
+    public static final int PEAK = 69;
+    public static final int BUFFER_TICKS = 400;
     public static final Direction[] SIDES = {Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST, Direction.DOWN};
 
     private static final IEnergyStorage PORT = new IEnergyStorage() {
@@ -26,6 +29,7 @@ public class SolarPanelBlockEntity extends BlockEntity {
     private final int peak;
     private int timer, rate;
     protected int delivered;
+    private int stored;
 
     public SolarPanelBlockEntity(BlockPos pos, BlockState state) {
         this(PowerRegistry.SOLAR_PANEL_BE.get(), pos, state, PEAK);
@@ -46,17 +50,38 @@ public class SolarPanelBlockEntity extends BlockEntity {
 
     public int delivered() { return delivered; }
 
+    public int stored() { return stored; }
+
+    public int capacity() { return peak * BUFFER_TICKS; }
+
     public void serverTick() {
         if (level == null) return;
         if (timer-- <= 0) {
             timer = 20;
-            rate = Math.round(peak * SolarMath.factor(level, worldPosition.above()));
+            rate = Math.round(peak * SolarMath.factor(level, worldPosition.above(), tracks()));
             onSecond();
+            setChanged();
         }
-        delivered = rate > 0 ? deliver(rate) : 0;
+        int offer = rate + Math.min(stored, peak);
+        delivered = offer > 0 ? deliver(offer) : 0;
+        stored = Math.max(0, Math.min(capacity(), stored + rate - delivered));
     }
 
     protected void onSecond() {}
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        tag.putInt("fe", stored);
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        stored = tag.getInt("fe");
+    }
+
+    protected boolean tracks() { return false; }
 
     public int deliver(int amount) {
         return pushToSinks(amount, amount);

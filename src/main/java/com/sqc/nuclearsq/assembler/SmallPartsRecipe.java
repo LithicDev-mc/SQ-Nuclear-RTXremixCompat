@@ -7,9 +7,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.sqc.nuclearsq.NuclearConfig;
 import com.sqc.nuclearsq.registry.SmallPartsRegistry;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,7 +23,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public record SmallPartsRecipe(List<Need> ingredients, ItemStack result, int time, int energyPerTick)
+public record SmallPartsRecipe(List<Need> ingredients, ItemStack result, int time, int energyPerTick, List<Integer> hardcoreCounts)
         implements Recipe<SmallPartsRecipe.Input> {
 
     public record Need(Ingredient ingredient, int count) {
@@ -52,29 +54,54 @@ public record SmallPartsRecipe(List<Need> ingredients, ItemStack result, int tim
         }
     }
 
-    public static final MapCodec<SmallPartsRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+    public static final MapCodec<SmallPartsRecipe> CODEC = RecordCodecBuilder.<SmallPartsRecipe>mapCodec(i -> i.group(
             Need.CODEC.listOf().validate(l -> l.isEmpty() || l.size() > 9
                     ? DataResult.error(() -> "ingredients: 1 bis 9 Zutaten") : DataResult.success(l))
-                    .fieldOf("ingredients").forGetter(SmallPartsRecipe::ingredients),
+                    .fieldOf("ingredients").forGetter((SmallPartsRecipe r) -> r.ingredients),
             ItemStack.CODEC.fieldOf("result").forGetter(SmallPartsRecipe::result),
             Codec.intRange(0, 72000).optionalFieldOf("time", 0).forGetter(SmallPartsRecipe::time),
-            Codec.intRange(0, 100000).optionalFieldOf("energy_per_tick", 0).forGetter(SmallPartsRecipe::energyPerTick)
-    ).apply(i, SmallPartsRecipe::new));
+            Codec.intRange(0, 100000).optionalFieldOf("energy_per_tick", 0).forGetter(SmallPartsRecipe::energyPerTick),
+            Codec.intRange(1, 576).listOf().optionalFieldOf("hardcore_counts", List.of()).forGetter(SmallPartsRecipe::hardcoreCounts)
+    ).apply(i, SmallPartsRecipe::new)).validate((SmallPartsRecipe r) -> r.hardcoreCounts.isEmpty() || r.hardcoreCounts.size() == r.ingredients.size()
+            ? DataResult.success(r) : DataResult.error(() -> "hardcore_counts: so viele Zahlen wie Zutaten"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SmallPartsRecipe> STREAM_CODEC = StreamCodec.composite(
-            Need.STREAM_CODEC.apply(ByteBufCodecs.list()), SmallPartsRecipe::ingredients,
+            Need.STREAM_CODEC.apply(ByteBufCodecs.list()), (SmallPartsRecipe r) -> r.ingredients,
             ItemStack.STREAM_CODEC, SmallPartsRecipe::result,
             ByteBufCodecs.VAR_INT, SmallPartsRecipe::time,
             ByteBufCodecs.VAR_INT, SmallPartsRecipe::energyPerTick,
+            ByteBufCodecs.VAR_INT.apply(ByteBufCodecs.list()), SmallPartsRecipe::hardcoreCounts,
             SmallPartsRecipe::new);
+
+    public SmallPartsRecipe(List<Need> ingredients, ItemStack result, int time, int energyPerTick) {
+        this(ingredients, result, time, energyPerTick, List.of());
+    }
+
+    @Override
+    public List<Need> ingredients() {
+        if (hardcoreCounts.isEmpty() || !NuclearConfig.hardcoreCosts()) return ingredients;
+        List<Need> out = new ArrayList<>(ingredients.size());
+        for (int i = 0; i < ingredients.size(); i++) out.add(new Need(ingredients.get(i).ingredient(), hardcoreCounts.get(i)));
+        return out;
+    }
+
+    public int weight() {
+        int sum = 0;
+        for (Need n : ingredients()) sum += n.count();
+        return sum;
+    }
+
+    public static final java.util.Comparator<SmallPartsRecipe> SPECIFIC_FIRST =
+            java.util.Comparator.comparingInt((SmallPartsRecipe r) -> r.ingredients().size()).thenComparingInt(SmallPartsRecipe::weight).reversed();
 
     @javax.annotation.Nullable
     public int[][] plan(List<ItemStack> grid) {
         if (result.isEmpty()) return null;
         List<java.util.function.Predicate<ItemStack>> needs = new ArrayList<>();
-        int[] counts = new int[ingredients.size()];
+        List<Need> l = ingredients();
+        int[] counts = new int[l.size()];
         for (int i = 0; i < counts.length; i++) {
-            Need n = ingredients.get(i);
+            Need n = l.get(i);
             needs.add(n::matches);
             counts[i] = n.count();
         }
@@ -101,7 +128,14 @@ public record SmallPartsRecipe(List<Need> ingredients, ItemStack result, int tim
 
     @Override
     public boolean canCraftInDimensions(int width, int height) {
-        return width * height >= ingredients.size();
+        return width * height >= ingredients().size();
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> out = NonNullList.create();
+        for (Need n : ingredients()) out.add(n.ingredient());
+        return out;
     }
 
     @Override

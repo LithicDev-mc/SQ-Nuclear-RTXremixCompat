@@ -9,7 +9,7 @@
           "minecraft:andesite"
         ]
       },
-      "count": 61
+      "count": 16
     },
     {
       "ingredient": {
@@ -22,11 +22,15 @@
           "c:plates/iron"
         ]
       },
-      "count": 15
+      "count": 4
     }
   ],
   "result": {
     "id": "nuclearsq:andesite_housing_sqc",
     "count": 1
-  }
+  },
+  "hardcore_counts": [
+    61,
+    15
+  ]
 }

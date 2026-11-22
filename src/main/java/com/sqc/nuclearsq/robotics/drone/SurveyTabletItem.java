@@ -68,6 +68,21 @@ public class SurveyTabletItem extends Item {
         return InteractionResultHolder.consume(st);
     }
 
+    public static void fly(net.minecraft.server.level.ServerPlayer sp, boolean mainHand) {
+        ItemStack st = sp.getItemInHand(mainHand ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
+        if (!st.is(DroneRegistry.TABLET.get()) || com.sqc.nuclearsq.robotics.decon.DeconRobotEntity.controlledBy(sp) != null) return;
+        UUID id = st.get(DroneRegistry.BOUND.get());
+        if (id == null) {
+            sp.displayClientMessage(Component.translatable("message.nuclearsq.survey_tablet.unbound"), true);
+            return;
+        }
+        if (!(sp.serverLevel().getEntity(id) instanceof SurveyDroneEntity drone) || !drone.isAlive()) {
+            sp.displayClientMessage(Component.translatable("message.nuclearsq.survey_tablet.missing"), true);
+            return;
+        }
+        drone.startControl(sp, st);
+    }
+
     private static void send(Player player, ItemStack st, SurveyDroneEntity drone) {
         String r = drone.busy() ? "recall" : drone.start(st.getOrDefault(DroneRegistry.ZONE.get(), List.of()));
         if (r.equals("recall")) drone.recall();

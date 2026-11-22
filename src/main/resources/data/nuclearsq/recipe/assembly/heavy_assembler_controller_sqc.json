@@ -36,6 +36,12 @@
         "item": "nuclearsq:copper_coil_sqc"
       },
       "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:anvil"
+      },
+      "count": 1
     }
   ],
   "result": {

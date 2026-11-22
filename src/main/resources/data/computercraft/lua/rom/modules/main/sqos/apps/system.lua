@@ -67,6 +67,7 @@ function M.run(ctx)
             local d = list[top + i]
             if not d then break end
             local app = OPENS[d.type]
+            if app and not ctx.wm.byId[app] then app = nil end
             local line = " " .. ui.fit(d.name, math.max(6, math.floor((w - 4) / 2))) .. " " .. d.type
             ui.put(term, 1, y + i, ui.fit(line, w - 1), app and C.text or C.dim, C.face)
             if app then

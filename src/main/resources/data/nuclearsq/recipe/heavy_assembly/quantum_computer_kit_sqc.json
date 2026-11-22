@@ -1,10 +1,10 @@
 {
   "type": "nuclearsq:heavy_assembly",
   "pattern": [
-    "cWcWc",
+    "cWc c",
     "cF@Ec",
     "ciTic",
-    "cWeWm"
+    "c e m"
   ],
   "key": {
     "@": {
@@ -40,5 +40,11 @@
     "count": 1
   },
   "time": 400,
-  "energy_per_tick": 5760
+  "energy_per_tick": 5760,
+  "hardcore_pattern": [
+    "cWcWc",
+    "cF@Ec",
+    "ciTic",
+    "cWeWm"
+  ]
 }

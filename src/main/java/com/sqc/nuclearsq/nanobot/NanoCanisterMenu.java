@@ -52,7 +52,7 @@ public class NanoCanisterMenu extends AbstractContainerMenu {
         canister().getOrDefault(NanobotRegistry.UPGRADES.get(), ItemContainerContents.EMPTY).copyInto(list);
         for (int i = 0; i < UP_SLOTS; i++) upgrades.setItem(i, list.get(i));
         loading = false;
-        for (int i = 0; i < UP_SLOTS; i++) addSlot(new UpgradeSlot(upgrades, i, 180 + 22 * i, 98));
+        for (int i = 0; i < UP_SLOTS; i++) addSlot(new UpgradeSlot(upgrades, i, 204 + 22 * i, 95));
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 9; c++) addSlot(lockable(inv, 9 + r * 9 + c, 8 + c * 18, 168 + r * 18));
         }

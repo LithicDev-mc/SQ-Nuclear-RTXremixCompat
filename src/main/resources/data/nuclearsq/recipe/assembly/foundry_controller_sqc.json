@@ -30,6 +30,12 @@
         "item": "nuclearsq:copper_coil_sqc"
       },
       "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:blast_furnace"
+      },
+      "count": 1
     }
   ],
   "result": {

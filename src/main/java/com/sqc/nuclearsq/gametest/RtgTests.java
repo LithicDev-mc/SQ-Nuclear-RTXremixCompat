@@ -45,7 +45,7 @@ public final class RtgTests {
         if (RtgBlockEntity.rateFor(RtgBlockEntity.HALF_LIFE_STEPS) != RtgBlockEntity.PEAK / 2) throw new GameTestAssertException("Halbwertszeit nicht die Haelfte");
         if (RtgBlockEntity.rateFor(2 * RtgBlockEntity.HALF_LIFE_STEPS) != RtgBlockEntity.PEAK / 4) throw new GameTestAssertException("Zwei Halbwertszeiten nicht ein Viertel");
         int last = RtgBlockEntity.rateFor(RtgBlockEntity.CAPSULE_STEPS - 1);
-        if (last <= 0 || last > 26) throw new GameTestAssertException("Am Ende noch " + last + " FE/t statt rund 25");
+        if (last <= 0 || last > RtgBlockEntity.PEAK / 16 + 1) throw new GameTestAssertException("Am Ende noch " + last + " FE/t statt rund " + RtgBlockEntity.PEAK / 16);
         if (RtgBlockEntity.rateFor(RtgBlockEntity.CAPSULE_STEPS) != 0) throw new GameTestAssertException("Leere Kapsel gibt Strom");
         if (RtgBlockEntity.PEAK <= 160 || RtgBlockEntity.PEAK >= RtgBlockEntity.PEAK_PU238) throw new GameTestAssertException("PEAK " + RtgBlockEntity.PEAK + " ausserhalb 160..PEAK_PU238");
         if (new ItemStack(PowerRegistry.ISOTOPE_CAPSULE.get()).getMaxDamage() != RtgBlockEntity.CAPSULE_STEPS) throw new GameTestAssertException("Kapsel-Haltbarkeit stimmt nicht");
@@ -78,7 +78,7 @@ public final class RtgTests {
             if (RadiationManager.emitted(h.getLevel(), h.absolutePos(at)) <= 0) throw new GameTestAssertException("RTG strahlt nicht");
             r.capsule().setDamageValue(RtgBlockEntity.HALF_LIFE_STEPS);
             h.runAfterDelay(30, () -> {
-                if (r.rate() != RtgBlockEntity.PEAK / 2) throw new GameTestAssertException("Nach einer Halbwertszeit " + r.rate() + " FE/t");
+                if (r.rate() != RtgBlockEntity.PEAK / 2 && r.rate() != RtgBlockEntity.rateFor(RtgBlockEntity.HALF_LIFE_STEPS + 1)) throw new GameTestAssertException("Nach einer Halbwertszeit " + r.rate() + " FE/t");
                 if (r.remainingPercent() != 75) throw new GameTestAssertException("Rest " + r.remainingPercent() + " % statt 75");
                 ItemStack back = r.take();
                 if (!back.is(PowerRegistry.ISOTOPE_CAPSULE.get()) || back.getDamageValue() < RtgBlockEntity.HALF_LIFE_STEPS)

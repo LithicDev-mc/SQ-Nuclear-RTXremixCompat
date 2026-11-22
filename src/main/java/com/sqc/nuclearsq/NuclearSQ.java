@@ -40,6 +40,9 @@ public class NuclearSQ {
         if (ModList.get().isLoaded("flywheel") && net.neoforged.fml.loading.FMLEnvironment.dist.isClient()) {
             com.sqc.nuclearsq.compat.flywheel.FlywheelSwarmCompat.register();
         }
+        if (ModList.get().isLoaded("distanthorizons") && net.neoforged.fml.loading.FMLEnvironment.dist.isClient()) {
+            com.sqc.nuclearsq.compat.dh.DhCompat.register();
+        }
         if (ModList.get().isLoaded("powergrid")) {
             com.sqc.nuclearsq.compat.powergrid.PowerGridRegistry.register(modEventBus);
         }

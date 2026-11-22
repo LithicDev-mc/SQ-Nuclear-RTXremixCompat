@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/battery_large_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/battery_large_shell_sqc"
     }
   }
 }

@@ -150,6 +150,7 @@ public class BankPeripheral implements IPeripheral {
     public final List<Map<String, Object>> chatFetch(IArguments args) throws LuaException {
         BankTerminalBlockEntity t = terminal();
         int after = args.optInt(0, 0);
+        long shift = t.getLevel().getDayTime() - t.getLevel().getGameTime();
         return run(() -> {
             UUID me = t.requireUser().getUUID();
             EconomyData d = t.data();
@@ -160,7 +161,7 @@ public class BankPeripheral implements IPeripheral {
                 o.put("from", nameOf(d, m.from()));
                 o.put("to", m.to() == null ? "" : nameOf(d, m.to()));
                 o.put("text", m.text());
-                o.put("time", m.time());
+                o.put("time", m.time() + shift);
                 out.add(o);
             }
             return out;
@@ -219,6 +220,7 @@ public class BankPeripheral implements IPeripheral {
             t.requireUser();
             t.requireConfirmation("transfer|" + name.trim().toLowerCase() + "|" + amount, act("transfer", amount, name.trim()));
             t.data().transfer(t.requireUser().getUUID(), name, amount, now(t));
+            com.sqc.nuclearsq.progression.Titles.mark(t.requireUser(), "rank:bank");
             return null;
         });
     }

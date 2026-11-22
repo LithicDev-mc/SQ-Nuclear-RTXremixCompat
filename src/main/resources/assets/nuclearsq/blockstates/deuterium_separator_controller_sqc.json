@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/deuterium_separator_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/deuterium_separator_shell_sqc"
     }
   }
 }

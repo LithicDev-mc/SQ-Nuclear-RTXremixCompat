@@ -39,7 +39,7 @@ public class ExoStationScreen extends AbstractContainerScreen<ExoStationMenu> {
     @Override
     protected void renderBg(GuiGraphics g, float pt, int mx, int my) {
         int x = leftPos, y = topPos, inner = W - 16;
-        TermKit.monitor(g, x - 4, y - 4, W + 8, H + 8);
+        TermKit.monitor(g, x - 4, y - 4, W + 8, H + 8, 20);
         int tier = menu.data(6), slots = menu.data(7);
         TermKit.header(g, font, title, tier > 0 ? t("tier", tier) : Component.empty(), x + 8, y + 7, inner, TermKit.MID);
 
@@ -51,10 +51,10 @@ public class ExoStationScreen extends AbstractContainerScreen<ExoStationMenu> {
         TermKit.field(g, font, x + 8, y + 41, inner, t("core_charge"), tier > 0 ? t("energy", stored, max) : Component.literal("-"), TermKit.CYAN);
         TermKit.bar(g, x + 8, y + 52, inner, 4, max > 0 ? Math.min(1f, stored / (float) max) : 0f, TermKit.CYAN);
         tip(8, 40, inner, 17, t("core_charge.title"), t("core_charge.tip"));
-        TermKit.field(g, font, x + 8, y + 62, inner, t("buffer"), t("energy", menu.data32(0), ExoChamber.BUFFER), TermKit.MID);
-        tip(8, 61, inner, 11, t("buffer.title"), t("buffer.tip"));
+        TermKit.field(g, font, x + 8, y + 59, inner, t("buffer"), t("energy", menu.data32(0), ExoChamber.BUFFER), TermKit.MID);
+        tip(8, 58, inner, 11, t("buffer.title"), t("buffer.tip"));
 
-        TermKit.rule(g, x + 8, y + 74 - 3, inner, TermKit.FAINT);
+        TermKit.rule(g, x + 8, y + 69, inner, TermKit.FAINT);
         TermKit.fit(g, font, t("piece"), x + 8, y + ExoStationMenu.PIECE_Y - 10, 24, TermKit.MID);
         TermKit.fit(g, font, t("core"), x + ExoStationMenu.CORE_X, y + ExoStationMenu.PIECE_Y - 10, 40, TermKit.MID);
         slotFrame(g, menu.getSlot(ExoStationMenu.PIECE), piece ? TermKit.GREEN : TermKit.MID);

@@ -259,7 +259,7 @@ public class StorageTerminalScreen<M extends StorageTerminalMenu> extends Abstra
     protected void renderBg(GuiGraphics g, float pt, int mx, int my) {
         refresh();
         int x = leftPos, y = topPos;
-        TermKit.monitor(g, x - 4, y - 4, imageWidth + 8, imageHeight + 8);
+        TermKit.monitor(g, x - 4, y - 4, imageWidth + 8, imageHeight + 8, 20);
         TermKit.text(g, font, title, x + 8, y + 7, TermKit.GREEN);
         TermKit.frame(g, font, x + GX - 1, y + 18, COLS * 18 - SORT_W - 3, 12, null, search.isFocused() ? TermKit.MID : TermKit.FAINT);
         int sx = x + GX + COLS * 18 - SORT_W - 1, sy = y + 18;

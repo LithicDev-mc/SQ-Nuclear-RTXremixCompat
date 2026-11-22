@@ -18,6 +18,15 @@ public final class SolarMath {
 
     public static final float TRACK_MAX = Mth.PI / 4f;
 
+    public static float trackedDaylight(Level level) {
+        float a = level.getTimeOfDay(1f) * Mth.TWO_PI;
+        if (a > Mth.PI) a -= Mth.TWO_PI;
+        float off = Math.abs(a);
+        if (off >= Mth.HALF_PI) return 0f;
+        if (off <= TRACK_MAX) return 1f;
+        return Mth.sqrt(Mth.cos((off - TRACK_MAX) * Mth.HALF_PI / (Mth.HALF_PI - TRACK_MAX)));
+    }
+
     public static float track(Level level, float partialTick) {
         if (!level.dimensionType().hasSkyLight()) return 0f;
         float a = level.getTimeOfDay(partialTick) * Mth.TWO_PI;
@@ -35,7 +44,11 @@ public final class SolarMath {
     }
 
     public static float factor(Level level, BlockPos sky) {
+        return factor(level, sky, false);
+    }
+
+    public static float factor(Level level, BlockPos sky, boolean tracked) {
         if (!level.dimensionType().hasSkyLight() || level.dimensionType().hasCeiling() || !level.canSeeSky(sky)) return 0f;
-        return daylight(level) * weather(level) * height(sky.getY());
+        return (tracked ? trackedDaylight(level) : daylight(level)) * weather(level) * height(sky.getY());
     }
 }

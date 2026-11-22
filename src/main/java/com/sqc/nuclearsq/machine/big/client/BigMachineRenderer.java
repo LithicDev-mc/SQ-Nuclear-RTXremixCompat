@@ -111,7 +111,7 @@ public class BigMachineRenderer extends GeoBlockRenderer<BigMachineBlockEntity> 
             renderParticleHalos(be, partialTick, poseStack, bufferSource);
             renderParticleResult(be, partialTick, poseStack, bufferSource, light, packedOverlay);
         }
-        if (be.exo() != null && !be.exo().piece().getItem(0).isEmpty()) renderExoPiece(be, rot, poseStack, bufferSource, light, packedOverlay);
+        if (be.exo() != null && !be.exo().piece().getItem(0).isEmpty()) renderExoPiece(be, rot, anchor.subtract(pos), poseStack, bufferSource, light, packedOverlay);
         if (m == BigMachine.CONTROL_DESK && com.sqc.nuclearsq.NuclearClientConfig.cameraDistSq(pos) <= com.sqc.nuclearsq.client.PanelCull.MAX_DIST * com.sqc.nuclearsq.client.PanelCull.MAX_DIST) com.sqc.nuclearsq.data.client.DeskScreens.render(be, rot, partialTick, poseStack, bufferSource);
         if (be.substation() != null) com.sqc.nuclearsq.transport.client.GridWireRenderer.renderLinks(be.getLevel(), be.substation(), pos, poseStack, bufferSource);
         for (RodShaft s : be.shafts()) {
@@ -233,12 +233,12 @@ public class BigMachineRenderer extends GeoBlockRenderer<BigMachineBlockEntity> 
         pose.popPose();
     }
 
-    private void renderExoPiece(BigMachineBlockEntity be, int rot, PoseStack pose, MultiBufferSource buffers, int light, int overlay) {
+    private void renderExoPiece(BigMachineBlockEntity be, int rot, BlockPos off, PoseStack pose, MultiBufferSource buffers, int light, int overlay) {
         pose.pushPose();
-        pose.translate(0.5, 0.78, 0.5);
+        pose.translate(off.getX() + 0.5, off.getY(), off.getZ() + 0.5);
         pose.mulPose(Axis.YP.rotationDegrees(-90f * rot));
-        pose.mulPose(Axis.XP.rotationDegrees(90f));
-        pose.scale(0.9f, 0.9f, 0.9f);
+        pose.translate(0.5, 1.05, 0.5);
+        pose.scale(0.85f, 0.85f, 0.85f);
         Minecraft.getInstance().getItemRenderer().renderStatic(be.exo().piece().getItem(0), net.minecraft.world.item.ItemDisplayContext.FIXED,
                 light, overlay, pose, buffers, be.getLevel(), 0);
         pose.popPose();
@@ -310,6 +310,11 @@ public class BigMachineRenderer extends GeoBlockRenderer<BigMachineBlockEntity> 
         float clip = rack ? RACK_GLOW_CLIP : 0f;
         com.sqc.nuclearsq.reactor.client.RodGlow.rod(pose, buffers, be.getLevel(), base.above(headY), shown, be.cherenkov(), clip);
         pose.popPose();
+    }
+
+    @Override
+    public RenderType getRenderType(BigMachineBlockEntity be, net.minecraft.resources.ResourceLocation texture, MultiBufferSource buffers, float partialTick) {
+        return be.machine() == BigMachine.EXO_STATION ? RenderType.entityTranslucent(texture) : super.getRenderType(be, texture, buffers, partialTick);
     }
 
     @Override

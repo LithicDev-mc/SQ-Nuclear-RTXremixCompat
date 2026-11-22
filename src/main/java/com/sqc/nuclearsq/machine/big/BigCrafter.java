@@ -37,7 +37,7 @@ public final class BigCrafter {
     public static final int GRID = HeavyAssemblyRecipe.SIZE * HeavyAssemblyRecipe.SIZE, ASM_OUT = GRID, PLANT_OUTPUTS = 4;
     public static final int SMALL_GRID = 9, SMALL_OUT = SMALL_GRID;
     public static final int OK = 0, INCOMPLETE = 1, NO_INPUT = 2, NEED_MORE = 3, OUTPUT_FULL = 4, NO_POWER = 5, OFF = 6, NO_WATER = 7,
-            NO_FEED = 8, SHALLOW = 9, NO_ACID = 10, NO_AUX = 11;
+            NO_FEED = 8, SHALLOW = 9, NO_ACID = 10, NO_AUX = 11, NO_ARM = 12;
     public static final int SHAFTS = 9;
 
     public interface RackView {
@@ -142,6 +142,9 @@ public final class BigCrafter {
     }
 
     private int runs;
+    @Nullable
+    private net.minecraft.resources.ResourceLocation current;
+    private boolean advance;
 
     public int takeRuns() {
         int n = runs;
@@ -170,18 +173,28 @@ public final class BigCrafter {
         return !stack.isEmpty() && stack.getBurnTime(RecipeType.SMELTING) > 0;
     }
 
+    public static final List<String> COAL_CARDS = List.of("output", "efficiency", "buffer");
+
     private int generate(boolean formed, boolean enabled) {
-        int fe = Math.max(1, machine.extra("fe_per_tick"));
+        int up = 8000 + items.getStackInSlot(1).getCount() * machine.extra("card_output_max_pct");
+        int eff = 8000 + items.getStackInSlot(2).getCount() * machine.extra("card_efficiency_max_pct");
+        int fe = Math.max(1, machine.extra("fe_per_tick") * up / 8000);
+        needed = 0;
+        for (int i = 4; i < items.getSlots(); i++) {
+            ItemStack s = items.extractItem(i, 64, true);
+            int moved = s.getCount() - items.insertItem(0, s, true).getCount();
+            if (moved > 0) items.insertItem(0, items.extractItem(i, moved, false), false);
+            needed += items.getStackInSlot(i).getCount();
+        }
         ItemStack fuel = items.getStackInSlot(0);
         energyPerTick = fe;
-        needed = 0;
         if (!formed) status = INCOMPLETE;
         else if (!enabled) status = OFF;
         else if (energy.getEnergyStored() > 0) status = OUTPUT_FULL;
         else if (burn <= 0 && !isFuel(fuel)) status = NO_INPUT;
         else status = OK;
         if (status == OK && burn <= 0) {
-            burnTotal = burn = Math.max(1, fuel.getBurnTime(RecipeType.SMELTING) * Math.max(1, machine.extra("burn_pct")) / 100);
+            burnTotal = burn = (int) Math.max(1, (long) fuel.getBurnTime(RecipeType.SMELTING) * Math.max(1, machine.extra("burn_pct")) * eff / (100L * up));
             ItemStack rest = fuel.getCraftingRemainingItem();
             items.extractItem(0, 1, false);
             if (!rest.isEmpty() && items.getStackInSlot(0).isEmpty()) items.setStackInSlot(0, rest);
@@ -352,7 +365,7 @@ public final class BigCrafter {
         needed = 0;
         if (!formed) status = INCOMPLETE;
         else if (!enabled) status = OFF;
-        else if (result == null) status = NO_INPUT;
+        else if (result == null) status = armBlocked ? NO_ARM : NO_INPUT;
         else if (!items.insertItem(SMALL_OUT, result.copy(), true).isEmpty()) status = OUTPUT_FULL;
         else if (energy.getEnergyStored() < fe) status = NO_POWER;
         else status = OK;
@@ -415,18 +428,20 @@ public final class BigCrafter {
             return null;
         }
         boolean micro = machine == BigMachine.MICRO_ASSEMBLER, clean = machine == BigMachine.CLEAN_ROOM;
+        SmallPartsRecipe best = null;
         for (RecipeHolder<SmallPartsRecipe> h : level.getRecipeManager().getAllRecipesFor(SmallPartsRegistry.TYPE.get())) {
             boolean isMicro = h.value().result().is(MICRO_PRODUCTS), isClean = h.value().result().is(CLEAN_ROOM_PRODUCTS);
             if (micro != isMicro || clean != isClean) continue;
+            if (best != null && SmallPartsRecipe.SPECIFIC_FIRST.compare(h.value(), best) >= 0) continue;
             if (h.value().matches(in, level)) {
                 if ((clean || (!micro && h.value().result().is(ARM_PRODUCTS))) && !armDocked(level)) {
                     armBlocked = true;
                     continue;
                 }
-                return h.value();
+                best = h.value();
             }
         }
-        return null;
+        return best;
     }
 
     private int assembleParts(Level level, boolean formed, boolean enabled) {
@@ -551,27 +566,46 @@ public final class BigCrafter {
     }
 
     @Nullable
-    private ReprocessingRecipe pickReprocessing(Level level, ItemStack in) {
+    private ReprocessingRecipe pickReprocessing(Level level, ItemStack in, boolean fromAux) {
         if (in.isEmpty() || machine.recipeKind() == null) return null;
         ReprocessingRecipe first = null;
+        List<RecipeHolder<ReprocessingRecipe>> ready = new ArrayList<>();
+        int best = Integer.MIN_VALUE;
         for (RecipeHolder<ReprocessingRecipe> h : level.getRecipeManager().getAllRecipesFor(machine.recipeKind().type())) {
             ReprocessingRecipe c = h.value();
-            if (!c.accepts(in)) continue;
+            if (!c.accepts(in) || fromAux && c.hasAux()) continue;
             if (first == null || c.hasAux() && !first.hasAux()) first = c;
-            if (in.getCount() >= c.count() && auxOk(c) && missingFluid(c) == null) return c;
+            if (in.getCount() >= c.count() && auxOk(c) && missingFluid(c) == null) {
+                if (c.priority() > best) {
+                    best = c.priority();
+                    ready.clear();
+                }
+                if (c.priority() == best) ready.add(h);
+            }
         }
-        return first;
+        if (ready.isEmpty()) return fromAux ? null : first;
+        int at = -1;
+        for (int i = 0; i < ready.size(); i++) if (ready.get(i).id().equals(current)) at = i;
+        RecipeHolder<ReprocessingRecipe> pick = at < 0 ? ready.get(0) : ready.get(advance ? (at + 1) % ready.size() : at);
+        current = pick.id();
+        advance = false;
+        return pick.value();
     }
 
     private int reprocess(Level level, BlockPos pos, boolean formed, boolean enabled) {
         if (machine == BigMachine.LEACHING_PLANT) recycleOwnInput(level);
         ItemStack in = items.getStackInSlot(0);
+        int src = 0;
+        if (in.isEmpty() && machine.hasAuxSlot() && items.getSlots() > ReprocessingRecipe.AUX_SLOT) {
+            in = items.getStackInSlot(ReprocessingRecipe.AUX_SLOT);
+            src = ReprocessingRecipe.AUX_SLOT;
+        }
         if (timer-- <= 0) {
             timer = 20;
             double sv = machine == BigMachine.REPROCESSING_PLANT || machine == BigMachine.WEAPONS_PROCESSING ? in.getCount() * com.sqc.nuclearsq.radiation.RadiationValues.RESIDUE_SV_H : 0;
             if (sv > 0 && level instanceof ServerLevel sl) RadiationManager.emit(sl, pos, sv);
         }
-        ReprocessingRecipe r = pickReprocessing(level, in);
+        ReprocessingRecipe r = pickReprocessing(level, in, src == ReprocessingRecipe.AUX_SLOT);
         needed = r == null ? 0 : r.count();
         maxProgress = r == null ? 0 : r.time();
         energyPerTick = r == null ? 0 : fe(r.energyPerTick());
@@ -593,14 +627,15 @@ public final class BigCrafter {
         energy.drain(energyPerTick);
         if ((progress += steps()) >= r.time()) {
             progress = 0;
-            items.extractItem(0, r.count(), false);
+            advance = true;
+            items.extractItem(src, r.count(), false);
             if (r.hasAux()) items.extractItem(ReprocessingRecipe.AUX_SLOT, r.auxCount(), false);
             for (ReprocessingRecipe.FluidCost c : r.fluids()) {
                 FluidTank tank = tanks.get(c.port());
                 if (tank != null) tank.drain(c.amount(), IFluidHandler.FluidAction.EXECUTE);
             }
             for (ReprocessingRecipe.Result res : r.results()) {
-                float ch = machine == BigMachine.ORE_MILL && res.chance() == 0.05f ? 0.05f * (1 << modules.activeOverclocks()) : res.chance();
+                float ch = machine == BigMachine.ORE_MILL && res.chance() == 0.05f || machine == BigMachine.HAMMER_MILL && res.chance() < 1f ? Math.min(1f, res.chance() * (1 << modules.activeOverclocks())) : res.chance();
                 if (ch >= 1f || level.random.nextFloat() < ch) insertOutputs(items, res.stack().copy());
             }
             runs++;
@@ -706,7 +741,7 @@ public final class BigCrafter {
 
             @Override
             public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                boolean out = gen ? !isFuel(items.getStackInSlot(slot))
+                boolean out = gen ? slot == 0 && !isFuel(items.getStackInSlot(slot))
                         : part ? slot < ParticleClasses.OUTPUTS
                         : asm ? slot == ASM_OUT : small ? slot == SMALL_OUT : slot >= 1 && slot <= PLANT_OUTPUTS;
                 if (out && machine == BigMachine.LEACHING_PLANT && findReprocessing(level, machine, items.getStackInSlot(slot)) != null) out = false;
@@ -724,9 +759,9 @@ public final class BigCrafter {
                 }
                 if (small) return slot < SMALL_GRID;
                 if (part) return slot >= ParticleClasses.OUTPUTS && items.isItemValid(slot, stack);
-                if (gen) return slot == 0 && isFuel(stack);
+                if (gen) return (slot == 0 || slot >= 4 && slot < 4 + items.getStackInSlot(3).getCount()) && isFuel(stack);
                 if (slot == ReprocessingRecipe.AUX_SLOT) return findAux(level, machine, stack);
-                return slot == 0 && findReprocessing(level, machine, stack) != null;
+                return slot == 0 && findReprocessing(level, machine, stack) != null && !findAux(level, machine, stack);
             }
         };
     }

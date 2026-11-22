@@ -5,25 +5,25 @@
       "ingredient": {
         "item": "minecraft:iron_ingot"
       },
-      "count": 2
+      "count": 4
     },
     {
       "ingredient": {
         "item": "minecraft:gold_ingot"
       },
-      "count": 2
+      "count": 4
     },
     {
       "ingredient": {
         "item": "minecraft:redstone"
       },
-      "count": 8
+      "count": 12
     },
     {
       "ingredient": {
         "item": "minecraft:quartz"
       },
-      "count": 2
+      "count": 6
     },
     {
       "ingredient": {
@@ -36,5 +36,5 @@
     "id": "nuclearsq:hard_drive_2_sqc",
     "count": 1
   },
-  "time": 160
+  "time": 200
 }

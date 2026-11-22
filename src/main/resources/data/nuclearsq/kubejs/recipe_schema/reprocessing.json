@@ -1,0 +1,122 @@
+{
+	"keys": [
+		{
+			"name": "ingredient",
+			"role": "input",
+			"type": "ingredient"
+		},
+		{
+			"name": "time",
+			"role": "other",
+			"type": "positive_int"
+		},
+		{
+			"name": "energy_per_tick",
+			"role": "other",
+			"type": "non_negative_int",
+			"function_names": [
+				"energy",
+				"energyPerTick",
+				"energy_per_tick"
+			]
+		},
+		{
+			"name": "results",
+			"role": "output",
+			"type": {
+				"type": "list",
+				"component": {
+					"type": "custom_object",
+					"keys": [
+						{
+							"name": "item",
+							"component": "item_stack"
+						},
+						{
+							"name": "chance",
+							"component": "float",
+							"optional": true
+						}
+					]
+				},
+				"min": 0,
+				"max": 4
+			},
+			"optional": []
+		},
+		{
+			"name": "count",
+			"role": "other",
+			"type": "positive_int",
+			"optional": 1
+		},
+		{
+			"name": "fluids",
+			"role": "other",
+			"type": {
+				"type": "list",
+				"component": {
+					"type": "custom_object",
+					"keys": [
+						{
+							"name": "port",
+							"component": "string"
+						},
+						{
+							"name": "amount",
+							"component": "positive_int"
+						}
+					]
+				},
+				"min": 0
+			},
+			"optional": []
+		},
+		{
+			"name": "fluid_results",
+			"role": "other",
+			"type": {
+				"type": "list",
+				"component": {
+					"type": "custom_object",
+					"keys": [
+						{
+							"name": "port",
+							"component": "string"
+						},
+						{
+							"name": "fluid",
+							"component": "id"
+						},
+						{
+							"name": "amount",
+							"component": "positive_int"
+						}
+					]
+				},
+				"min": 0
+			},
+			"function_names": [
+				"fluidResults",
+				"fluid_results"
+			],
+			"optional": []
+		},
+		{
+			"name": "priority",
+			"role": "other",
+			"type": "int",
+			"optional": 0
+		}
+	],
+	"constructors": [
+		{
+			"keys": [
+				"results",
+				"ingredient",
+				"time",
+				"energy_per_tick"
+			]
+		}
+	]
+}

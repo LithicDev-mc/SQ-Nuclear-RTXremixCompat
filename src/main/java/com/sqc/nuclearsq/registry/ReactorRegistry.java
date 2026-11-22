@@ -44,7 +44,7 @@ public final class ReactorRegistry {
     }
 
     public static final DeferredBlock<ReactorCasingBlock> CASING =
-            BLOCKS.register("reactor_casing_sqc", () -> new ReactorCasingBlock(casingProps()));
+            BLOCKS.register("reactor_casing_sqc", () -> new ReactorCasingBlock(casingProps().isValidSpawn((st, l, p, e) -> !st.getValue(ReactorCasingBlock.SKY) && st.isFaceSturdy(l, p, net.minecraft.core.Direction.UP))));
     public static final DeferredItem<BlockItem> CASING_ITEM = ITEMS.register("reactor_casing_sqc",
             () -> new com.sqc.nuclearsq.multiblock.PartBlockItem(CASING.get(), new net.minecraft.world.item.Item.Properties()));
 

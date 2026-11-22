@@ -18,6 +18,12 @@
         "item": "nuclearsq:copper_coil_sqc"
       },
       "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:piston"
+      },
+      "count": 1
     }
   ],
   "result": {

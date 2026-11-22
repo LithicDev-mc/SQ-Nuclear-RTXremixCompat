@@ -142,6 +142,7 @@ function M.run(ctx)
             if #racks == 0 and loaded then ui.empty(term, 1, 5, w, rows, tr("noRacks")) end
             local per = 3
             local shownRacks = math.floor(rows / per)
+            if top > #racks then top = math.max(1, #racks) end
             for i = 0, shownRacks - 1 do
                 local r = racks[top + i]
                 if not r then break end

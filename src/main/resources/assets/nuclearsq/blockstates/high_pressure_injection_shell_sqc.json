@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "nuclearsq:block/machine_shell"
+      "model": "nuclearsq:block/high_pressure_injection_shell_sqc"
     }
   }
 }

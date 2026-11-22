@@ -50,12 +50,12 @@ public final class MicroAssemblerTests {
             if (be.items() == null || be.items().getSlots() != 10) throw new GameTestAssertException("Kein 3x3-Raster mit Ergebnisfeld");
             be.items().insertItem(0, new ItemStack(item("silicon_wafer_sqc")), false);
             be.items().insertItem(1, new ItemStack(Items.COPPER_INGOT), false);
-            be.items().insertItem(2, new ItemStack(Items.REDSTONE), false);
+            be.items().insertItem(2, new ItemStack(Items.REDSTONE, 2), false);
             charge(be);
             h.runAfterDelay(5, () -> {
                 if (c.partsRecipe() == null) throw new GameTestAssertException("Rezept fuer Chip I nicht erkannt");
                 if (c.energyPerTick() != M.extra("fe_per_tick")) throw new GameTestAssertException("360 FE/t ohne Rechenstufe erwartet, ist " + c.energyPerTick());
-                h.runAfterDelay(100, () -> {
+                h.runAfterDelay(120, () -> {
                     if (!be.items().getStackInSlot(9).is(item("chip_1_sqc"))) throw new GameTestAssertException("Kein Chip I im Ergebnisfeld: " + be.items().getStackInSlot(9));
                     h.succeed();
                 });
@@ -71,7 +71,7 @@ public final class MicroAssemblerTests {
             be.items().insertItem(0, new ItemStack(item("chip_1_sqc")), false);
             be.items().insertItem(1, new ItemStack(item("silicon_pure_sqc")), false);
             be.items().insertItem(2, new ItemStack(item("rubber_sqc")), false);
-            be.items().insertItem(4, new ItemStack(item("photoresist_sqc")), false);
+            be.items().insertItem(4, new ItemStack(item("photoresist_sqc"), 2), false);
             be.items().insertItem(3, new ItemStack(Items.GOLD_INGOT, 2), false);
             charge(be);
             h.runAfterDelay(5, () -> {

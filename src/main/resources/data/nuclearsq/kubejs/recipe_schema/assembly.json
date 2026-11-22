@@ -1,0 +1,61 @@
+{
+	"keys": [
+		{
+			"name": "result",
+			"role": "output",
+			"type": "item_stack"
+		},
+		{
+			"name": "ingredients",
+			"role": "input",
+			"type": {
+				"type": "list",
+				"component": "sized_ingredient",
+				"min": 1,
+				"max": 9
+			}
+		},
+		{
+			"name": "time",
+			"role": "other",
+			"type": "non_negative_int",
+			"optional": 0
+		},
+		{
+			"name": "energy_per_tick",
+			"role": "other",
+			"type": "non_negative_int",
+			"function_names": [
+				"energy",
+				"energyPerTick",
+				"energy_per_tick"
+			],
+			"optional": 0
+		},
+		{
+			"name": "hardcore_counts",
+			"role": "other",
+			"type": {
+				"type": "list",
+				"component": "positive_int",
+				"min": 0
+			},
+			"function_names": [
+				"hardcoreCounts",
+				"hardcore_counts"
+			],
+			"optional": []
+		}
+	],
+	"unique": [
+		"result"
+	],
+	"constructors": [
+		{
+			"keys": [
+				"result",
+				"ingredients"
+			]
+		}
+	]
+}

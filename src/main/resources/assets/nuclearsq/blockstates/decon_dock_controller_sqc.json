@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/decon_dock_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/decon_dock_shell_sqc"
     }
   }
 }

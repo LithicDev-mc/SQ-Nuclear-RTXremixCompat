@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/ion_exchanger_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/ion_exchanger_shell_sqc"
     }
   }
 }

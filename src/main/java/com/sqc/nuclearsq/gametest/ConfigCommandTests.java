@@ -159,11 +159,41 @@ public final class ConfigCommandTests {
     }
 
     @GameTest(template = FLOOR, batch = "cfg_server_config", timeoutTicks = 20)
+    public static void hardcoreCostsMore(GameTestHelper h) {
+        var rm = h.getLevel().getRecipeManager();
+        var bearing = com.sqc.nuclearsq.assembler.SmallPartsRecipe.forItem(rm, h.getLevel().registryAccess().registryOrThrow(Registries.ITEM).get(ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, "brass_bearing_sqc")));
+        var quantum = com.sqc.nuclearsq.assembler.AssemblyRecipe.forItem(rm, h.getLevel().registryAccess().registryOrThrow(Registries.ITEM).get(ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, "quantum_computer_controller_sqc")));
+        var fusion = rm.byKey(ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, "heavy_assembly/fusion_reactor_kit_sqc")).map(r -> (com.sqc.nuclearsq.assembler.HeavyAssemblyRecipe) r.value()).orElseThrow();
+        if (bearing == null || quantum == null) throw new GameTestAssertException("Rezepte fehlen");
+        var old = NuclearConfig.DIFFICULTY.get();
+        try {
+            NuclearConfig.DIFFICULTY.set(NuclearConfig.Difficulty.NORMAL);
+            int b = bearing.weight(), q = quantum.weight();
+            String f = String.join("", fusion.pattern());
+            NuclearConfig.DIFFICULTY.set(NuclearConfig.Difficulty.HARDCORE);
+            if (bearing.weight() <= b || quantum.weight() <= q) throw new GameTestAssertException("Hardcore nicht teurer");
+            if (String.join("", fusion.pattern()).replace(" ", "").length() <= f.replace(" ", "").length()) throw new GameTestAssertException("Hardcore-Muster fehlt");
+            NuclearConfig.DIFFICULTY.set(NuclearConfig.Difficulty.RELAXED);
+            if (bearing.weight() != b || !String.join("", fusion.pattern()).equals(f)) throw new GameTestAssertException("Entspannt nicht wie Normal");
+        } finally {
+            NuclearConfig.DIFFICULTY.set(old);
+        }
+        h.succeed();
+    }
+
+    @GameTest(template = FLOOR, batch = "cfg_server_config", timeoutTicks = 20)
     public static void titlesFollowProgress(GameTestHelper h) {
         var sp = AuditFixTests.testPlayer(h);
         sp.setData(com.sqc.nuclearsq.progression.Discovered.ITEMS.get(), new java.util.LinkedHashSet<>());
         sp.setData(com.sqc.nuclearsq.progression.GuideProgress.MILESTONES.get(), new java.util.LinkedHashSet<>());
         sp.setData(com.sqc.nuclearsq.progression.Titles.SELECTED.get(), "");
+        sp.setData(com.sqc.nuclearsq.progression.Streak.TICKS.get(), 0);
+        sp.setData(com.sqc.nuclearsq.progression.Streak.TOTAL.get(), 0);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.CLEAN.get(), 0);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.FOSSIL.get(), 0);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.POWER_FE.get(), 0L);
+        sp.setData(com.sqc.nuclearsq.radiation.RadiationAttachments.DOSE.get(), 0.0);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.HIGH_DOSE.get(), false);
         if (com.sqc.nuclearsq.progression.Titles.check(sp)) throw new GameTestAssertException("Titel ohne Fortschritt");
         com.sqc.nuclearsq.progression.GuideProgress.award(sp, "power:coal_generator");
         if (!com.sqc.nuclearsq.progression.Titles.check(sp) || !com.sqc.nuclearsq.progression.Titles.has(sp, "first_power")) throw new GameTestAssertException("Erster Strom fehlt");
@@ -176,6 +206,113 @@ public final class ConfigCommandTests {
         for (var l : com.sqc.nuclearsq.progression.LineTrees.LINES)
             if (!com.sqc.nuclearsq.progression.Titles.has(sp, "line_" + l.key())) throw new GameTestAssertException("Linien-Titel fehlt: " + l.key());
         if (!sp.getData(com.sqc.nuclearsq.progression.Titles.SELECTED.get()).equals("first_power")) throw new GameTestAssertException("Erster Titel nicht gewaehlt");
+        h.succeed();
+    }
+
+    private static net.minecraft.world.level.block.Block nsqBlock(String id) {
+        return net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, id));
+    }
+
+    @GameTest(template = FLOOR, batch = "cfg_server_config", timeoutTicks = 20)
+    public static void newRanksFollowBuilding(GameTestHelper h) {
+        var sp = AuditFixTests.testPlayer(h);
+        sp.setData(com.sqc.nuclearsq.progression.Discovered.ITEMS.get(), new java.util.LinkedHashSet<>());
+        sp.setData(com.sqc.nuclearsq.progression.Streak.TICKS.get(), 0);
+        sp.setData(com.sqc.nuclearsq.progression.Streak.TOTAL.get(), 0);
+        sp.setData(com.sqc.nuclearsq.progression.GuideProgress.MILESTONES.get(), new java.util.LinkedHashSet<>());
+        sp.setData(com.sqc.nuclearsq.progression.Titles.SELECTED.get(), "");
+        sp.setData(com.sqc.nuclearsq.progression.Titles.CLEAN.get(), 0);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.FOSSIL.get(), 0);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.POWER_FE.get(), 0L);
+        sp.setData(com.sqc.nuclearsq.radiation.RadiationAttachments.DOSE.get(), 0.0);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.HIGH_DOSE.get(), false);
+        if (com.sqc.nuclearsq.progression.Titles.check(sp)) throw new GameTestAssertException("Titel ohne Fortschritt");
+        if (!com.sqc.nuclearsq.progression.Titles.join(sp) || com.sqc.nuclearsq.progression.Titles.join(sp)) throw new GameTestAssertException("Beitritts-Rang falsch");
+        if (!sp.getData(com.sqc.nuclearsq.progression.Titles.SELECTED.get()).equals("upcoming_engineer")) throw new GameTestAssertException("Beitritts-Rang nicht gewaehlt");
+        com.sqc.nuclearsq.progression.GuideProgress.award(sp, "formed:coal_generator");
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        if (!com.sqc.nuclearsq.progression.Titles.has(sp, "constructor") || com.sqc.nuclearsq.progression.Titles.has(sp, "chemist")) throw new GameTestAssertException("Constructor falsch");
+        var coal = nsqBlock("coal_generator_controller_sqc");
+        var gas = nsqBlock("gas_generator_controller_sqc");
+        var solar = nsqBlock("solar_panel_sqc");
+        if (com.sqc.nuclearsq.progression.Titles.placed(sp, solar)) throw new GameTestAssertException("Zaehlt vor erstem Strom");
+        com.sqc.nuclearsq.progression.GuideProgress.award(sp, "power:coal_generator");
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        for (int i = 0; i < 4; i++) com.sqc.nuclearsq.progression.Titles.placed(sp, coal);
+        if (com.sqc.nuclearsq.progression.Titles.has(sp, "coal_mogul")) throw new GameTestAssertException("Coal Mogul vor der 5. Maschine");
+        if (!com.sqc.nuclearsq.progression.Titles.placed(sp, gas) || !com.sqc.nuclearsq.progression.Titles.has(sp, "coal_mogul")) throw new GameTestAssertException("Coal Mogul fehlt");
+        for (int i = 0; i < 5; i++) com.sqc.nuclearsq.progression.Titles.placed(sp, solar);
+        if (com.sqc.nuclearsq.progression.Titles.has(sp, "environmental_engineer")) throw new GameTestAssertException("Gleichstand reicht nicht");
+        com.sqc.nuclearsq.progression.Titles.placed(sp, nsqBlock("wind_turbine_small_controller_sqc"));
+        if (!com.sqc.nuclearsq.progression.Titles.has(sp, "environmental_engineer")) throw new GameTestAssertException("Environmental Engineer fehlt");
+        com.sqc.nuclearsq.progression.Titles.select(sp, "environmental_engineer");
+        com.sqc.nuclearsq.progression.Titles.placed(sp, coal);
+        com.sqc.nuclearsq.progression.Titles.placed(sp, coal);
+        if (!sp.getData(com.sqc.nuclearsq.progression.Titles.SELECTED.get()).equals("coal_mogul")) throw new GameTestAssertException("Rang schwingt nicht zu Kohle");
+        com.sqc.nuclearsq.progression.Titles.placed(sp, solar);
+        com.sqc.nuclearsq.progression.Titles.placed(sp, solar);
+        if (!sp.getData(com.sqc.nuclearsq.progression.Titles.SELECTED.get()).equals("environmental_engineer")) throw new GameTestAssertException("Rang schwingt nicht zu Solar");
+        com.sqc.nuclearsq.progression.Titles.select(sp, "upcoming_engineer");
+        if (sp.getData(com.sqc.nuclearsq.progression.Titles.CLEAN.get()) != 8 || sp.getData(com.sqc.nuclearsq.progression.Titles.FOSSIL.get()) != 7) throw new GameTestAssertException("Zaehlung falsch");
+        if (com.sqc.nuclearsq.progression.Titles.placed(sp, nsqBlock("acid_plant_controller_sqc")) || com.sqc.nuclearsq.progression.Titles.placed(sp, net.minecraft.world.level.block.Blocks.STONE))
+            throw new GameTestAssertException("Keine Strommaschine gezaehlt");
+        com.sqc.nuclearsq.progression.GuideProgress.award(sp, "formed:acid_plant");
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        if (!com.sqc.nuclearsq.progression.Titles.has(sp, "chemist")) throw new GameTestAssertException("Chemist fehlt");
+        if (!sp.getData(com.sqc.nuclearsq.progression.Titles.SELECTED.get()).equals("upcoming_engineer")) throw new GameTestAssertException("Gewaehlter Rang ueberschrieben");
+        com.sqc.nuclearsq.progression.GuideProgress.award(sp, "reactor_power");
+        for (int i = 0; i < 6000 / com.sqc.nuclearsq.progression.Streak.STEP - 1; i++) com.sqc.nuclearsq.progression.Streak.apply(sp, i % 50 == 0, true);
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        if (!com.sqc.nuclearsq.progression.Titles.has(sp, "reactor_start") || com.sqc.nuclearsq.progression.Titles.has(sp, "reactor_newcomer")) throw new GameTestAssertException("Reactor Newcomer zu frueh");
+        com.sqc.nuclearsq.progression.Streak.apply(sp, true, true);
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        if (!com.sqc.nuclearsq.progression.Titles.has(sp, "reactor_newcomer") || com.sqc.nuclearsq.progression.Titles.has(sp, "reactor_operator")) throw new GameTestAssertException("Reactor Newcomer falsch");
+        sp.setData(com.sqc.nuclearsq.progression.Streak.TOTAL.get(), 72000);
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        if (!com.sqc.nuclearsq.progression.Titles.has(sp, "reactor_operator")) throw new GameTestAssertException("Reactor Operator fehlt");
+        h.succeed();
+    }
+
+    @GameTest(template = FLOOR, batch = "cfg_server_config", timeoutTicks = 20)
+    public static void moreRanksFollowProgress(GameTestHelper h) {
+        var sp = AuditFixTests.testPlayer(h);
+        sp.setData(com.sqc.nuclearsq.progression.GuideProgress.MILESTONES.get(), new java.util.LinkedHashSet<>());
+        sp.setData(com.sqc.nuclearsq.progression.Titles.POWER_FE.get(), 0L);
+        sp.setData(com.sqc.nuclearsq.radiation.RadiationAttachments.DOSE.get(), 0.0);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.HIGH_DOSE.get(), false);
+        for (var slot : net.minecraft.world.entity.EquipmentSlot.values()) if (slot.isArmor()) sp.setItemSlot(slot, net.minecraft.world.item.ItemStack.EMPTY);
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        String[] marks = {"oil", "fusion", "waste", "breeder", "chip", "storage", "bank", "decon"};
+        String[] ranks = {"oil_baron", "fusion_pioneer", "waste_manager", "breeder", "chip_maker", "data_hoarder", "banker", "decon_specialist", "iron_man", "survivor", "power_baron"};
+        for (String r : ranks) if (com.sqc.nuclearsq.progression.Titles.has(sp, r)) throw new GameTestAssertException("Rang zu frueh: " + r);
+        for (String m : marks) if (!com.sqc.nuclearsq.progression.Titles.mark(sp, "rank:" + m) || com.sqc.nuclearsq.progression.Titles.mark(sp, "rank:" + m)) throw new GameTestAssertException("Marke falsch: " + m);
+        com.sqc.nuclearsq.progression.Titles.power(sp, com.sqc.nuclearsq.progression.Titles.POWER_BARON_FE - 1);
+        sp.setData(com.sqc.nuclearsq.radiation.RadiationAttachments.DOSE.get(), com.sqc.nuclearsq.radiation.RadiationValues.SV_DAMAGE - 0.1);
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        for (int i = 0; i < 8; i++) if (!com.sqc.nuclearsq.progression.Titles.has(sp, ranks[i])) throw new GameTestAssertException("Rang fehlt: " + ranks[i]);
+        if (com.sqc.nuclearsq.progression.Titles.has(sp, "iron_man") || com.sqc.nuclearsq.progression.Titles.has(sp, "survivor") || com.sqc.nuclearsq.progression.Titles.has(sp, "power_baron"))
+            throw new GameTestAssertException("Rang ohne Bedingung");
+        com.sqc.nuclearsq.progression.Titles.power(sp, 1);
+        sp.setData(com.sqc.nuclearsq.radiation.RadiationAttachments.DOSE.get(), com.sqc.nuclearsq.radiation.RadiationValues.SV_DAMAGE);
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        if (com.sqc.nuclearsq.progression.Titles.has(sp, "survivor")) throw new GameTestAssertException("Survivor schon bei 3 Sv");
+        sp.setData(com.sqc.nuclearsq.radiation.RadiationAttachments.DOSE.get(), 0.01);
+        for (var holder : com.sqc.nuclearsq.exo.ExoRegistry.ARMOR) {
+            var item = holder.get();
+            var stack = new net.minecraft.world.item.ItemStack(item);
+            var mods = new java.util.ArrayList<com.sqc.nuclearsq.exo.ModuleEntry>();
+            for (var k : com.sqc.nuclearsq.exo.ExoModule.Kind.values())
+                if (k.piece == ((net.minecraft.world.item.ArmorItem) item).getType()) mods.add(new com.sqc.nuclearsq.exo.ModuleEntry("exo_module_" + k.id + "_1_sqc", 1));
+            stack.set(com.sqc.nuclearsq.exo.ExoRegistry.MODULES.get(), mods);
+            stack.set(com.sqc.nuclearsq.exo.ExoRegistry.ACTIVE.get(), true);
+            sp.setItemSlot(((net.minecraft.world.item.ArmorItem) item).getType().getSlot(), stack);
+        }
+        com.sqc.nuclearsq.progression.Titles.check(sp);
+        for (String r : ranks) if (!com.sqc.nuclearsq.progression.Titles.has(sp, r)) throw new GameTestAssertException("Rang fehlt: " + r);
+        for (var slot : net.minecraft.world.entity.EquipmentSlot.values()) if (slot.isArmor()) sp.setItemSlot(slot, net.minecraft.world.item.ItemStack.EMPTY);
+        sp.setData(com.sqc.nuclearsq.radiation.RadiationAttachments.DOSE.get(), 0.0);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.POWER_FE.get(), 0L);
+        sp.setData(com.sqc.nuclearsq.progression.Titles.HIGH_DOSE.get(), false);
         h.succeed();
     }
 

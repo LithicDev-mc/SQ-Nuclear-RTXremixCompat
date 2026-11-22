@@ -151,7 +151,7 @@ public final class ComputeNet {
     public static boolean allow(ServerPlayer sp, Level level, BlockPos pos) {
         Status s = status(level, pos);
         if (s.served()) return true;
-        sp.displayClientMessage(missing(s), true);
+        sp.displayClientMessage(missing(s), false);
         return false;
     }
 

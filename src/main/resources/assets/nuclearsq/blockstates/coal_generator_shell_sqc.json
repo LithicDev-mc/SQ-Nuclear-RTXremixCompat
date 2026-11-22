@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "nuclearsq:block/machine_shell"
+      "model": "nuclearsq:block/coal_generator_shell_sqc"
     }
   }
 }

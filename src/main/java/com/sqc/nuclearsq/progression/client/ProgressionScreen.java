@@ -34,11 +34,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 public class ProgressionScreen extends Screen {
-    private enum Anim { NONE, WELCOME, ROD, ENERGY, HEAT, BOOM, MACHINE, TREE, CATALOG, ROADMAP, PANEL, LOOP, PRIMARY, PLANT, ASSEMBLY, ACHIEVE, WEAPONS, GUIDE, LINE, LINES, SCOPE }
+    private enum Anim { NONE, WELCOME, ROD, ENERGY, HEAT, BOOM, MACHINE, TREE, CATALOG, ROADMAP, PANEL, LOOP, PRIMARY, PRIMARY_EXT, PRIMARY_FULL, FLUIDS, PLANT, ASSEMBLY, ACHIEVE, WEAPONS, GUIDE, LINE, LINES, SCOPE }
 
-    private static boolean isLoop(Anim a) { return a == Anim.LOOP || a == Anim.PRIMARY; }
+    private static boolean isLoop(Anim a) { return a == Anim.LOOP || a == Anim.PRIMARY || a == Anim.PRIMARY_EXT || a == Anim.PRIMARY_FULL; }
     private static boolean isNet(Anim a) { return a == Anim.PLANT || a == Anim.ASSEMBLY || a == Anim.WEAPONS || a == Anim.LINE; }
-    private static boolean zoomable(Anim a) { return isNet(a) || a == Anim.TREE || a == Anim.SCOPE; }
+    private static boolean zoomable(Anim a) { return isNet(a) || isLoop(a) || a == Anim.TREE || a == Anim.SCOPE; }
     private boolean zoomNow() { return !recipeOf.isEmpty() || zoomable(current().anim()); }
 
     private static int animH(Anim a) {
@@ -169,6 +169,7 @@ public class ProgressionScreen extends Screen {
             com.sqc.nuclearsq.NuclearSQ.MODID, "textures/gui/compendium/logo_small.png");
     private static final int LOGO_W = 512, LOGO_H = 288, LOGO_SMALL_W = 256, LOGO_SMALL_H = 144;
     private static final int SIDE_HEAD = 76;
+    public static final int FULL_W = 760, FULL_H = 440;
 
     private static final int GBAR = 76, SIDEBAR = 136, ANIM_H = 100, CELL = 24, COL_W = 52, ROW_H = 30, LABEL_W = 100, LINE_H = 11;
 
@@ -198,7 +199,6 @@ public class ProgressionScreen extends Screen {
     private List<Ico> icons = new ArrayList<>();
     private final java.util.Set<String> openDrops = new java.util.HashSet<>();
     private ItemStack hover = ItemStack.EMPTY;
-    private long loopStart = 0;
     private List<FormattedCharSequence> loopTip = null;
     private long plantStart = 0;
     private float plantZoom = 0, plantPanX, plantPanY, plantFit = 1;
@@ -286,8 +286,8 @@ public class ProgressionScreen extends Screen {
 
     @Override
     protected void init() {
-        pw = Math.min(width - 8, 760);
-        ph = Math.min(height - 8, 440);
+        pw = Math.min(width - 8, FULL_W);
+        ph = Math.min(height - 8, FULL_H);
         px = (width - pw) / 2;
         py = (height - ph) / 2;
         buildLinks();
@@ -446,12 +446,12 @@ public class ProgressionScreen extends Screen {
 
     private void show(int c, int p) {
         recipeOf = ItemStack.EMPTY;
+        pick = null;
         tab = 0;
         chapter = c;
         page = p;
         scroll = 0;
         sideFollow = true;
-        if (isLoop(current().anim())) loopStart = System.currentTimeMillis();
         achFollow = current().anim() == Anim.ACHIEVE;
         guideFollow = current().anim() == Anim.GUIDE;
         if (zoomable(current().anim())) {
@@ -486,6 +486,7 @@ public class ProgressionScreen extends Screen {
         all.addAll(com.sqc.nuclearsq.progression.AssemblyTree.NODES);
         all.addAll(com.sqc.nuclearsq.progression.AchievementTree.NODES);
         all.addAll(com.sqc.nuclearsq.progression.SecretWeaponsTree.NODES);
+        all.add(new com.sqc.nuclearsq.progression.PlantOverview.Node("robot_arm_dock", "robot_arm_sqc", "robot_arm_dock", com.sqc.nuclearsq.progression.PlantOverview.Group.ASSEMBLY, 0, 0));
         for (var nd : all) {
             if (findPage(nd.page()) == null) continue;
             String base = "compendium.plant." + nd.key();
@@ -651,7 +652,7 @@ public class ProgressionScreen extends Screen {
         String key = "compendium." + p.id();
         int tw = contentW() - 12 - (machineOf(p) != null && sideBrief() ? SB_W + 10 : 0);
         tabs = List.of();
-        if (p.anim() != Anim.TREE && p.anim() != Anim.CATALOG && p.anim() != Anim.ACHIEVE && p.anim() != Anim.GUIDE && !isLoop(p.anim()) && !isNet(p.anim()) && p.anim() != Anim.SCOPE && p.anim() != Anim.WELCOME && has(key + ".text")) {
+        if (p.anim() != Anim.TREE && p.anim() != Anim.CATALOG && p.anim() != Anim.ACHIEVE && p.anim() != Anim.GUIDE && !isLoop(p.anim()) && p.anim() != Anim.FLUIDS && !isNet(p.anim()) && p.anim() != Anim.SCOPE && p.anim() != Anim.WELCOME && has(key + ".text")) {
             String[] paras = tr(key + ".text").split("\n");
             var secs = sections(paras);
             if (secs.size() > 1 && secs.size() <= 4) {
@@ -713,6 +714,8 @@ public class ProgressionScreen extends Screen {
                         case 17 -> scopeLinks = !scopeLinks;
                         case 18 -> scopeNames = !scopeNames;
                         case 16 -> { if (!com.sqc.nuclearsq.client.RecipeLink.showRecipe(briefStack)) openRecipe(briefStack); }
+                        case 20 -> { fluidSel = h.a(); scroll = 0; }
+                        case 21 -> { var o = com.sqc.nuclearsq.progression.AchievementTree.NODES.get(h.a()); int[] t = findPage(o.page()); go(t[0], t[1]); pick = o.key(); }
                         case 19 -> { ItemStack st = proofStack(com.sqc.nuclearsq.progression.AchievementTree.NODES.get(h.a())); if (!com.sqc.nuclearsq.client.RecipeLink.showRecipe(st)) openRecipe(st); }
                         default -> turn(1);
                     }
@@ -863,6 +866,8 @@ public class ProgressionScreen extends Screen {
             drawGuide(g, mx, my, x, y, w, bottom - y, p);
         } else if (isLoop(p.anim())) {
             drawLoop(g, mx, my, x, y, w, bottom - y, p);
+        } else if (p.anim() == Anim.FLUIDS) {
+            drawFluids(g, mx, my, x, y, w, bottom - y, p);
         } else if (isNet(p.anim())) {
             drawPlant(g, mx, my, x, y, w, bottom - y, p);
         } else if (p.anim() == Anim.LINES) {
@@ -873,6 +878,7 @@ public class ProgressionScreen extends Screen {
             headOff = 0;
             int tx = x, tw = w;
             var nd = machineOf(p);
+            for (var o : com.sqc.nuclearsq.progression.AchievementTree.NODES) if (nd != null && o.key().equals(pick) && o.page().equals(p.id())) nd = o;
             if (nd != null) {
                 if (sideBrief()) {
                     drawBrief(g, mx, my, nd, x, y, SB_W, true);
@@ -1268,6 +1274,7 @@ public class ProgressionScreen extends Screen {
     private static final int SB_W = 128;
     private List<List<String>> tabs = List.of();
     private int tab = 0;
+    private String pick;
     private int fitH = -1;
     private ItemStack briefStack = ItemStack.EMPTY;
 
@@ -1367,7 +1374,7 @@ public class ProgressionScreen extends Screen {
 
     private ItemStack proofStack(com.sqc.nuclearsq.progression.PlantOverview.Node nd) {
         ItemStack st = ItemStack.EMPTY;
-        for (String id : com.sqc.nuclearsq.progression.AchievementTree.proofItems(nd)) {
+        for (String id : com.sqc.nuclearsq.progression.AchievementTree.proofItems(nd).reversed()) {
             st = modItem(id);
             if (!sources(st.getItem()).isEmpty()) break;
         }
@@ -1422,8 +1429,8 @@ public class ProgressionScreen extends Screen {
                 if (cur) rrect(g, cx - 1, y + 3, cx + 20 + nw + 1, y + 19, CARD);
                 MachineThumbs.draw(g, o.item(), cx, y + 3, 16, 1f);
                 g.drawString(font, font.plainSubstrByWidth(n, nw), cx + 19, y + 7, cur ? 0xFFFFFFFF : hv ? ACCENT : TEXT, false);
-                int[] tgt = cur || o.page().equals(nd.page()) ? null : findPage(o.page());
-                if (tgt != null) hits.add(new Hit(cx, y, cx + 20 + nw, y + 22, 0, tgt[0], tgt[1]));
+                int[] tgt = cur ? null : findPage(o.page());
+                if (tgt != null) hits.add(new Hit(cx, y, cx + 20 + nw, y + 22, 21, com.sqc.nuclearsq.progression.AchievementTree.index(o.key()), 0));
                 else if (!cur) hits.add(new Hit(cx, y, cx + 20 + nw, y + 22, 19, com.sqc.nuclearsq.progression.AchievementTree.index(o.key()), 0));
                 cx += 20 + nw + 6;
             }
@@ -1996,7 +2003,7 @@ public class ProgressionScreen extends Screen {
     }
 
     private static final float LOOP_STEP = 0.4f;
-    private static final int LOOP_CARD = 30, PLANT_CARD = 36, STRIP_CARD = 44, MIN_HEAD_ANIM_W = 150;
+    private static final int PLANT_CARD = 36, STRIP_CARD = 44, MIN_HEAD_ANIM_W = 150;
     private static final int LOOP_RING = 0xFF3A8FB0, LOOP_BRANCH = 0xFF9A7020;
 
     private static int[] findPage(String id) {
@@ -2018,82 +2025,194 @@ public class ProgressionScreen extends Screen {
     }
 
     private void drawLoop(GuiGraphics g, int mx, int my, int x, int y, int w, int h, Page p) {
-        if (has("compendium." + p.id() + ".text")) {
-            g.drawString(font, tr("compendium." + p.id() + ".text").split("\n")[0], x, y, MUTED, false);
-            y += 14;
-            h -= 14;
-        }
-        if (loopStart == 0) loopStart = System.currentTimeMillis();
-        float el = (System.currentTimeMillis() - loopStart) / 1000f;
-        boolean primary = p.anim() == Anim.PRIMARY;
-        var nodes = primary ? com.sqc.nuclearsq.progression.PrimaryLoop.NODES : com.sqc.nuclearsq.progression.ReactorLoop.NODES;
-        int[] order = primary ? com.sqc.nuclearsq.progression.PrimaryLoop.ORDER : com.sqc.nuclearsq.progression.ReactorLoop.ORDER;
-        int n = nodes.size(), ring = primary ? com.sqc.nuclearsq.progression.PrimaryLoop.RING : com.sqc.nuclearsq.progression.ReactorLoop.RING;
-        float sx = Math.min(1f, w / 440f), sy = Math.min(1f, h / 250f);
-        int cx = x + w / 2 - (int) (14 * sx), cy = y + (int) (h * 0.56f);
-        int rx = (int) (132 * sx), ry = (int) (70 * sy);
-        int[] nx = new int[n], ny = new int[n];
-        int top = primary ? com.sqc.nuclearsq.progression.PrimaryLoop.TOP : 2;
-        double a0 = 1.5 * Math.PI - top * (2 * Math.PI / ring);
-        for (int k = 0; k < n; k++) {
-            var nd = nodes.get(k);
-            if (nd.parent() < 0) {
-                double a = a0 + k * 2 * Math.PI / ring;
-                nx[k] = cx + (int) Math.round(Math.cos(a) * rx);
-                ny[k] = cy + (int) Math.round(Math.sin(a) * ry);
-            } else {
-                nx[k] = nx[nd.parent()] + Math.round(nd.dx() * sx);
-                ny[k] = ny[nd.parent()] + Math.round(nd.dy() * sy);
-            }
-        }
-        float[] grow = new float[n], shown = new float[n];
-        for (int s = 0; s < order.length; s++) {
-            float t0 = s * LOOP_STEP;
-            grow[order[s]] = ease((el - t0) / 0.25f);
-            shown[order[s]] = ease((el - t0 - 0.12f) / 0.28f);
-        }
-        float tClose = order.length * LOOP_STEP;
-        float close = ease((el - tClose) / 0.35f);
+        if (plantStart == 0) plantStart = System.currentTimeMillis();
+        drawPrimary(g, mx, my, x, y, w, h, p, (System.currentTimeMillis() - plantStart) / 1000f,
+                switch (p.anim()) {
+                    case PRIMARY -> com.sqc.nuclearsq.progression.PrimaryLoop.DIAGRAM;
+                    case PRIMARY_EXT -> com.sqc.nuclearsq.progression.PlantLoops.EXTENDED;
+                    case PRIMARY_FULL -> com.sqc.nuclearsq.progression.PlantLoops.FULL;
+                    default -> com.sqc.nuclearsq.progression.ReactorLoop.DIAGRAM;
+                });
+    }
 
-        for (int k = 1; k < ring; k++) segment(g, nx[k - 1], ny[k - 1], nx[k], ny[k], grow[k], LOOP_RING);
-        segment(g, nx[ring - 1], ny[ring - 1], nx[0], ny[0], close, LOOP_RING);
-        for (int k = ring; k < n; k++) {
-            int par = nodes.get(k).parent();
-            segment(g, nx[par], ny[par], nx[k], ny[k], grow[k], nodes.get(k).key().equals("tower") ? LOOP_RING : LOOP_BRANCH);
-        }
-        if (close >= 1f) {
-            float u = ((el - tClose - 0.35f) * 0.18f) % 1f;
-            for (int d = 0; d < 2; d++) {
-                float v = (u + d * 0.5f) % 1f * ring;
-                int s = (int) v, e = (s + 1) % ring;
-                float f = v - s;
-                circle(g, nx[s] + Math.round((nx[e] - nx[s]) * f), ny[s] + Math.round((ny[e] - ny[s]) * f), 2, ACCENT);
+    private static final int PRIMARY_HOT = 0xFFD86A3A, PRIMARY_FILL = 0xFF8AA8D0, PRIMARY_WATER = 0xFF5A9FE0,
+            PRIMARY_FEED = 0xFF6FC8B8, PRIMARY_STEAM = 0xFFC8C8CC, PRIMARY_HULL = 0xFF6A6A70;
+
+    private static int flowColor(String kind) {
+        return switch (kind) {
+            case "hot", "relief" -> PRIMARY_HOT;
+            case "cold" -> LOOP_RING;
+            case "fill" -> PRIMARY_FILL;
+            case "water", "bigpipe", "hydraulic" -> PRIMARY_WATER;
+            case "feedwater" -> PRIMARY_FEED;
+            case "coolant" -> 0xFF8FD6E8;
+            case "power" -> ACCENT;
+            case "shaft" -> 0xFFB8A48C;
+            case "rods" -> 0xFFC89A40;
+            default -> PRIMARY_STEAM;
+        };
+    }
+
+    private static double pathLength(int[] pts) {
+        double l = 0;
+        for (int i = 2; i < pts.length; i += 2) l += Math.hypot(pts[i] - pts[i - 2], pts[i + 1] - pts[i - 1]);
+        return l;
+    }
+
+    private static int[] pathPoint(int[] pts, double d) {
+        for (int i = 2; i < pts.length; i += 2) {
+            double s = Math.hypot(pts[i] - pts[i - 2], pts[i + 1] - pts[i - 1]);
+            if (d <= s || i == pts.length - 2) {
+                double f = s <= 0 ? 0 : Math.min(1, d / s);
+                return new int[] {(int) Math.round(pts[i - 2] + (pts[i] - pts[i - 2]) * f), (int) Math.round(pts[i - 1] + (pts[i + 1] - pts[i - 1]) * f)};
             }
-            int ca = (int) (255 * ease((el - tClose - 0.2f) / 0.5f));
-            if (ca > 8) {
-                g.drawCenteredString(font, tr("compendium.loop.closed"), cx, cy - 8, alpha(ca, ACCENT));
-                g.drawCenteredString(font, tr("compendium.loop.replay"), cx, cy + 4, alpha(ca, MUTED));
-                int hw = font.width(tr("compendium.loop.closed")) / 2 + 4;
-                hits.add(new Hit(cx - hw, cy - 10, cx + hw, cy + 14, 0, chapter, page));
+            d -= s;
+        }
+        return new int[] {pts[0], pts[1]};
+    }
+
+    private static void thickPath(GuiGraphics g, int[] pts, float f, int r, int argb) {
+        double len = pathLength(pts) * f;
+        for (double d = 0; d <= len; d += 1) {
+            int[] q = pathPoint(pts, d);
+            g.fill(q[0] - r, q[1] - r, q[0] + r + (r == 0 ? 1 : 0), q[1] + r + (r == 0 ? 1 : 0), argb);
+        }
+    }
+
+    private static void flowArrow(GuiGraphics g, int[] pts, int argb) { flowArrow(g, pts, argb, false); }
+
+    private static void flowArrow(GuiGraphics g, int[] pts, int argb, boolean atEnd) {
+        int best = pts.length - 2;
+        double bl = Math.hypot(pts[best] - pts[best - 2], pts[best + 1] - pts[best - 1]);
+        if (!atEnd) {
+            bl = -1;
+            for (int i = 2; i < pts.length; i += 2) {
+                double s = Math.hypot(pts[i] - pts[i - 2], pts[i + 1] - pts[i - 1]);
+                if (s > bl) { bl = s; best = i; }
+            }
+        }
+        double ux = (pts[best] - pts[best - 2]) / Math.max(1e-6, bl), uy = (pts[best + 1] - pts[best - 1]) / Math.max(1e-6, bl);
+        double cx = atEnd ? pts[best] - ux * (PLANT_CARD / 2 + 6) : (pts[best] + pts[best - 2]) / 2.0, cy = atEnd ? pts[best + 1] - uy * (PLANT_CARD / 2 + 6) : (pts[best + 1] + pts[best - 1]) / 2.0;
+        for (int t = 0; t <= 4; t++) {
+            int half = 4 - t;
+            for (int s = -half; s <= half; s++) {
+                int px = (int) Math.round(cx + ux * (t - 2) - uy * s), py = (int) Math.round(cy + uy * (t - 2) + ux * s);
+                g.fill(px, py, px + 1, py + 1, argb);
+            }
+        }
+    }
+
+    private void drawPrimary(GuiGraphics g, int mx, int my, int x, int y, int w, int h, Page p, float el, com.sqc.nuclearsq.progression.PrimaryLoop.Diagram d) {
+        var nodes = d.nodes();
+        var flows = d.flows();
+        int[] order = d.order();
+        int n = nodes.size();
+        int bx = plantButton(g, mx, my, x + w, y, tr("compendium.plant.reset"), 4);
+        bx = plantButton(g, mx, my, bx, y, tr("compendium.plant.replay"), 3);
+        if (has("compendium." + p.id() + ".text"))
+            g.drawString(font, font.plainSubstrByWidth(tr("compendium." + p.id() + ".text").split("\n")[0], bx - x - 4), x, y + 3, MUTED, false);
+        y += 17;
+        h -= 17;
+        g.fillGradient(x, y, x + w, y + h, 0xFF161618, 0xFF1C1C20);
+        g.fill(x, y, x + w, y + 1, EDGE);
+        g.fill(x, y + h - 1, x + w, y + h, EDGE);
+        g.fill(x, y, x + 1, y + h, EDGE);
+        g.fill(x + w - 1, y, x + w, y + h, EDGE);
+
+        plantAX = x;
+        plantAY = y;
+        plantAW = w;
+        plantAH = h;
+        plantFit = Math.min(1f, Math.min((w - 8) / (float) d.width(), (h - 8) / (float) d.height()));
+        if (plantZoom <= 0) {
+            plantZoom = plantFit;
+            plantPanX = (w - d.width() * plantZoom) / 2;
+            plantPanY = (h - d.height() * plantZoom) / 2;
+        }
+        float z = plantZoom, ox = x + plantPanX, oy = y + plantPanY;
+        float wmx = (mx - ox) / z, wmy = (my - oy) / z;
+        boolean in = inPlant(mx, my);
+        int[] step = new int[n];
+        for (int s = 0; s < order.length; s++) step[order[s]] = s;
+        float[] shown = new float[n];
+        for (int k = 0; k < n; k++) shown[k] = ease((el - step[k] * LOOP_STEP - 0.12f) / 0.28f);
+        float done = order.length * LOOP_STEP + 0.4f;
+
+        g.enableScissor(x + 1, y + 1, x + w - 1, y + h - 1);
+        g.pose().pushPose();
+        g.pose().translate(ox, oy, 0);
+        g.pose().scale(z, z, 1f);
+
+        int hull = d.hull();
+        if (hull >= 0) hullFrame(g, d.hullRect(), (int) (255 * shown[hull]));
+
+        for (var fl : flows) {
+            int[] q = fl.path();
+            float t0 = Math.max(step[fl.from()], step[fl.to()]) * LOOP_STEP;
+            float grow = ease((el - t0) / 0.35f);
+            if (grow <= 0) continue;
+            int col = flowColor(fl.kind());
+            if (fl.kind().equals("bigpipe")) {
+                thickPath(g, q, grow, 3, 0xFF55585E);
+                thickPath(g, q, grow, 2, 0xFF7A7E86);
+                thickPath(g, q, grow, 0, 0xFF303236);
+            } else {
+                thickPath(g, q, grow, 1, col);
+            }
+            if (grow >= 1f) flowArrow(g, q, col);
+            int la = (int) (255 * ease((el - t0 - 0.2f) / 0.4f));
+            if (la > 8) {
+                var rows = font.split(Component.literal(tr("compendium.loop.pwr_flow." + fl.kind())), fl.lw());
+                int lc = rows.size();
+                for (int r = 0; r < lc; r++) {
+                    int lw = font.width(rows.get(r));
+                    int left = fl.align() < 0 ? fl.lx() : fl.align() > 0 ? fl.lx() - lw : fl.lx() - lw / 2;
+                    int ly = fl.align() == 0 ? fl.ly() - 4 - (lc - 1 - r) * 10 : fl.ly() - 4 - (lc - 1) * 5 + r * 10;
+                    g.drawString(font, rows.get(r), left, ly, alpha(la, fl.kind().equals("bigpipe") ? TEXT : col), false);
+                    if (in && fl.kind().equals("hydraulic") && wmx >= left - 1 && wmx < left + lw + 1 && wmy >= ly - 1 && wmy < ly + 9) loopTip = hydraulicTip();
+                }
+            }
+        }
+        if (el > done) {
+            float u = ((el - done) * 0.25f) % 1f;
+            for (var fl : flows) {
+                int[] pt = pathPoint(fl.path(), pathLength(fl.path()) * u);
+                circle(g, pt[0], pt[1], 2, flowColor(fl.kind()) | 0xFF000000);
             }
         }
 
         for (int k = 0; k < n; k++) {
             if (shown[k] <= 0.02f) continue;
             var nd = nodes.get(k);
+            boolean isHull = k == hull;
+            int size = isHull ? 22 : PLANT_CARD;
+            int cx = nd.x(), cy = nd.y();
             int a = (int) (255 * shown[k]);
-            int x0 = nx[k] - LOOP_CARD / 2, y0 = ny[k] - LOOP_CARD / 2;
-            boolean over = shown[k] > 0.6f && mx >= x0 && mx < x0 + LOOP_CARD && my >= y0 && my < y0 + LOOP_CARD;
-            int border = over ? ACCENT : nd.parent() < 0 ? LOOP_RING : LOOP_BRANCH;
-            rrect(g, x0, y0, x0 + LOOP_CARD, y0 + LOOP_CARD, alpha(a, border));
-            rrect(g, x0 + 1, y0 + 1, x0 + LOOP_CARD - 1, y0 + LOOP_CARD - 1, alpha(a, over ? HOVER_BG : CARD));
-            if (shown[k] > 0.45f) MachineThumbs.draw(g, nd.item(), x0 + 1, y0 + 1, LOOP_CARD - 2, 1f);
+            int x0 = cx - size / 2, y0 = cy - size / 2;
+            boolean over = in && shown[k] > 0.6f && wmx >= x0 && wmx < x0 + size && wmy >= y0 && wmy < y0 + size;
+            int border = over ? ACCENT : isHull ? PRIMARY_HULL : k < d.ring() ? LOOP_RING : LOOP_BRANCH;
+            rrect(g, x0 - 1, y0 - 1, x0 + size + 1, y0 + size + 1, alpha(a, border));
+            rrect(g, x0, y0, x0 + size, y0 + size, alpha(a, over ? ACTIVE_BG : CARD));
+            if (shown[k] > 0.45f) MachineThumbs.draw(g, nd.item(), x0 + 1, y0 + 1, size - 2, z);
             String base = "compendium.loop." + nd.key();
             if (a > 8) {
-                int bg = alpha(a * 9 / 10, BG);
-                int nw = font.width(tr(base + ".name")) / 2 + 2;
-                g.fill(nx[k] - nw, y0 + LOOP_CARD + 1, nx[k] + nw, y0 + LOOP_CARD + 11, bg);
-                g.drawCenteredString(font, tr(base + ".name"), nx[k], y0 + LOOP_CARD + 2, alpha(a, over ? 0xFFFFFF : TEXT));
+                String num = String.valueOf(step[k] + 1);
+                g.pose().pushPose();
+                g.pose().translate(x0 - 3, y0 - 4, 200);
+                g.fill(-2, -1, font.width(num) + 1, 9, alpha(a, border));
+                g.drawString(font, num, 0, 0, alpha(a, 0x14171D), false);
+                g.pose().popPose();
+                if (isHull) {
+                    g.drawString(font, tr(base + ".name"), x0 + size + 4, cy - 4, alpha(a, over ? 0xFFFFFF : MUTED), false);
+                } else {
+                    int bg = alpha(a * 9 / 10, BG), ny = y0 + size + 2;
+                    for (var row : font.split(Component.literal(tr(base + ".name")), nd.nameW())) {
+                        int hw = font.width(row) / 2 + 2;
+                        g.fill(cx - hw, ny, cx + hw, ny + 10, bg);
+                        g.drawString(font, row, cx - font.width(row) / 2, ny + 1, alpha(a, over ? 0xFFFFFF : TEXT), false);
+                        ny += 10;
+                    }
+                }
             }
             if (over) {
                 List<FormattedCharSequence> tip = new ArrayList<>();
@@ -2103,15 +2222,176 @@ public class ProgressionScreen extends Screen {
                 int[] target = findPage(nd.page());
                 if (target != null) {
                     tip.add(Component.literal(tr("compendium.loop.open")).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-                    hits.add(new Hit(x0, y0, x0 + LOOP_CARD, y0 + LOOP_CARD, 0, target[0], target[1]));
+                    hits.add(new Hit(Math.max(x, (int) (ox + x0 * z)), Math.max(y, (int) (oy + y0 * z)), Math.min(x + w, (int) Math.ceil(ox + (x0 + size) * z)), Math.min(y + h, (int) Math.ceil(oy + (y0 + size) * z)), 0, target[0], target[1]));
                 }
                 loopTip = tip;
             }
         }
+        g.pose().popPose();
+        if (el > done) {
+            int ca = (int) (255 * ease((el - done) / 0.6f));
+            String closed = tr("compendium.plant.closed");
+            if (ca > 8) g.drawString(font, closed, x + w - font.width(closed) - 6, y + h - 12, alpha(ca, ACCENT), false);
+        }
+        g.disableScissor();
+    }
+
+    private static void hullFrame(GuiGraphics g, int[] r, int ha) {
+        if (ha <= 8) return;
+        int x0 = r[0], y0 = r[1], x1 = r[2], y1 = r[3], c = alpha(ha, PRIMARY_HULL);
+        g.fill(x0 + 3, y0, x1 - 3, y0 + 1, c);
+        g.fill(x0 + 3, y1 - 1, x1 - 3, y1, c);
+        g.fill(x0, y0 + 3, x0 + 1, y1 - 3, c);
+        g.fill(x1 - 1, y0 + 3, x1, y1 - 3, c);
+        g.fill(x0 + 1, y0 + 1, x0 + 3, y0 + 3, c);
+        g.fill(x1 - 3, y0 + 1, x1 - 1, y0 + 3, c);
+        g.fill(x0 + 1, y1 - 3, x0 + 3, y1 - 1, c);
+        g.fill(x1 - 3, y1 - 3, x1 - 1, y1 - 1, c);
+    }
+
+    private List<FormattedCharSequence> hydraulicTip() {
+        var drive = com.sqc.nuclearsq.machine.big.BigMachine.CONTROL_ROD_DRIVE;
+        var port = drive.port("hydraulic_in");
+        List<FormattedCharSequence> tip = new ArrayList<>();
+        tip.add(Component.literal(tr("compendium.loop.pwr_flow.hydraulic")).withStyle(ChatFormatting.BOLD).getVisualOrderText());
+        tip.addAll(font.split(Component.literal(tr("compendium.loop.pwr_flow.hydraulic.hint").formatted(
+                port.rate() * com.sqc.nuclearsq.machine.big.BigMachineBlockEntity.ROD_STEP_TICKS, port.tank())), 220));
+        tip.addAll(font.split(Component.literal(tr("compendium.fluids.accepts").formatted(acceptedFluids(drive, port))).withStyle(ChatFormatting.GRAY), 220));
+        return tip;
+    }
+
+    private static String acceptedFluids(com.sqc.nuclearsq.machine.big.BigMachine machine, com.sqc.nuclearsq.machine.big.BigMachine.Port port) {
+        var ok = com.sqc.nuclearsq.machine.big.BigMachineBlockEntity.accepts(machine, port);
+        List<String> names = new ArrayList<>();
+        for (var f : com.sqc.nuclearsq.progression.ReactorFluids.FLUIDS) {
+            var fluid = net.minecraft.core.registries.BuiltInRegistries.FLUID.get(net.minecraft.resources.ResourceLocation.parse(f.fluid()));
+            if (fluid != net.minecraft.world.level.material.Fluids.EMPTY && ok.test(new net.neoforged.neoforge.fluids.FluidStack(fluid, 1))) names.add(tr(f.nameKey()));
+        }
+        return String.join(", ", names);
+    }
+
+    private int fluidSel = 0;
+    private static final int FLUID_ROW = 22, FLUID_GAP = 8, FLUID_THUMB = 18;
+
+    private void drawFluids(GuiGraphics g, int mx, int my, int x, int y, int w, int h, Page p) {
+        var fluids = com.sqc.nuclearsq.progression.ReactorFluids.FLUIDS;
+        fluidSel = Math.max(0, Math.min(fluidSel, fluids.size() - 1));
+        int bottom = y + h;
+        if (has("compendium." + p.id() + ".text")) {
+            for (FormattedCharSequence ln : font.split(rich(tr("compendium." + p.id() + ".text")), w)) {
+                g.drawString(font, ln, x, y, MUTED, false);
+                y += 10;
+            }
+            y += 4;
+        }
+        int lw = Math.min(118, w / 4), ly = y;
+        for (int i = 0; i < fluids.size(); i++) {
+            var f = fluids.get(i);
+            boolean sel = i == fluidSel, over = mx >= x && mx < x + lw && my >= ly && my < ly + 13;
+            if (sel || over) rrect(g, x, ly, x + lw, ly + 13, sel ? ACTIVE_BG : HOVER_BG);
+            g.fill(x + 3, ly + 3, x + 10, ly + 10, f.color() | 0xFF000000);
+            String name = font.plainSubstrByWidth(tr(f.nameKey()), lw - 16);
+            g.drawString(font, name, x + 14, ly + 3, sel ? ACCENT : over ? 0xFFFFFFFF : TEXT, false);
+            hits.add(new Hit(x, ly, x + lw, ly + 13, 20, i, 0));
+            ly += 14;
+        }
+
+        var f = fluids.get(fluidSel);
+        int rx = x + lw + 10, rw = w - lw - 10, col = f.color() | 0xFF000000;
+        g.fill(rx - 6, y, rx - 5, bottom, EDGE);
+        g.fill(rx, y + 1, rx + 8, y + 9, col);
+        g.drawString(font, Component.literal(tr(f.nameKey())).withStyle(ChatFormatting.BOLD), rx + 12, y + 1, 0xFFFFFFFF, false);
+        y += 13;
+        String dk = "compendium.fluids." + f.key() + ".text";
+        if (has(dk)) {
+            for (FormattedCharSequence ln : font.split(rich(tr(dk)), rw - 6)) {
+                g.drawString(font, ln, rx, y, TEXT, false);
+                y += 10;
+            }
+        }
+        y += 4;
+        int cw = (rw - 46) / 2, tx = rx + cw + 40;
+        g.drawString(font, tr("compendium.fluids.from"), rx, y, MUTED, false);
+        g.drawString(font, tr("compendium.fluids.to"), tx, y, MUTED, false);
+        y += 12;
+        int top = y, vh = bottom - top, total = 0;
+        for (var link : f.links()) total += Math.max(1, link.to().size()) * FLUID_ROW + FLUID_GAP;
+        scroll = Math.max(0, Math.min(scroll, Math.max(0, total - vh)));
+        g.enableScissor(rx, top, rx + rw, bottom);
+        int cy = top - scroll;
+        for (var link : f.links()) {
+            int n = Math.max(1, link.to().size()), gh = n * FLUID_ROW;
+            int sy = cy + (gh - FLUID_ROW) / 2;
+            fluidCard(g, mx, my, link.from(), rx, sy, cw, top, bottom, f);
+            int sx1 = rx + cw, bx = sx1 + 14, mid = sy + FLUID_ROW / 2 - 1;
+            g.fill(sx1, mid, bx, mid + 2, col);
+            int first = cy + FLUID_ROW / 2 - 1, last = cy + (n - 1) * FLUID_ROW + FLUID_ROW / 2 - 1;
+            if (n > 1) g.fill(bx - 1, first, bx + 1, last + 2, col);
+            for (int k = 0; k < link.to().size(); k++) {
+                int ty = cy + k * FLUID_ROW, ay = ty + FLUID_ROW / 2 - 1;
+                g.fill(bx - 1, ay, tx - 5, ay + 2, col);
+                for (int t = 0; t < 4; t++) g.fill(tx - 5 + t, ay - 3 + t, tx - 4 + t, ay + 5 - t, col);
+                fluidCard(g, mx, my, link.to().get(k), tx, ty, cw, top, bottom, f);
+            }
+            cy += gh + FLUID_GAP;
+            if (cy - FLUID_GAP / 2 < bottom) g.fill(rx, cy - FLUID_GAP / 2 - 1, rx + rw - 6, cy - FLUID_GAP / 2, 0xFF2C2C30);
+        }
+        g.disableScissor();
+        scrollBar(g, rx, top, rw, vh, total);
+    }
+
+    private void fluidCard(GuiGraphics g, int mx, int my, com.sqc.nuclearsq.progression.ReactorFluids.End e, int x, int y, int w, int top, int bottom,
+            com.sqc.nuclearsq.progression.ReactorFluids.Fluid f) {
+        if (y + FLUID_ROW <= top || y >= bottom) return;
+        boolean over = my >= Math.max(y, top) && my < Math.min(y + FLUID_ROW - 2, bottom) && mx >= x && mx < x + w;
+        rrect(g, x, y, x + w, y + FLUID_ROW - 2, over ? ACCENT : EDGE);
+        rrect(g, x + 1, y + 1, x + w - 1, y + FLUID_ROW - 3, over ? HOVER_BG : CARD);
+        MachineThumbs.draw(g, com.sqc.nuclearsq.progression.ReactorFluids.controllerItem(e.machine()), x + 1, y + 1, FLUID_THUMB, 1f);
+        String mk = "compendium.fluids.m." + e.machine();
+        String port = tr(com.sqc.nuclearsq.progression.ReactorFluids.portKey(e.machine(), e.port()));
+        if (e.ports().size() > 1) port += " +" + (e.ports().size() - 1);
+        int tw = w - FLUID_THUMB - 6;
+        g.drawString(font, font.plainSubstrByWidth(tr(mk), tw), x + FLUID_THUMB + 4, y + 2, over ? 0xFFFFFFFF : TEXT, false);
+        g.drawString(font, font.plainSubstrByWidth(port, tw), x + FLUID_THUMB + 4, y + 11, MUTED, false);
+        if (!over) return;
+        List<FormattedCharSequence> tip = new ArrayList<>();
+        tip.add(Component.literal(tr(mk)).withStyle(ChatFormatting.BOLD).getVisualOrderText());
+        for (String pn : e.ports())
+            tip.addAll(font.split(Component.literal(tr(com.sqc.nuclearsq.progression.ReactorFluids.portKey(e.machine(), pn))).withStyle(ChatFormatting.GRAY), 220));
+        if (!com.sqc.nuclearsq.progression.ReactorFluids.TURBINE.equals(e.machine())) {
+            try {
+                var bm = com.sqc.nuclearsq.machine.big.BigMachine.valueOf(e.machine().toUpperCase(java.util.Locale.ROOT));
+                var bp = bm.port(e.port());
+                if (bp != null) {
+                    String acc = acceptedFluids(bm, bp);
+                    if (!acc.isEmpty()) tip.addAll(font.split(Component.literal(tr("compendium.fluids.accepts").formatted(acc)).withStyle(ChatFormatting.GRAY), 220));
+                }
+            } catch (IllegalArgumentException ex) {
+            }
+        }
+        int rate = fluidRate(e);
+        if (rate > 0) tip.add(Component.literal(tr("compendium.fluids.rate").formatted(String.valueOf(rate))).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+        int[] target = findPage(com.sqc.nuclearsq.progression.ReactorFluids.PAGES.getOrDefault(e.machine(), ""));
+        if (target != null) {
+            tip.add(Component.literal(tr("compendium.loop.open")).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+            hits.add(0, new Hit(x, Math.max(y, top), x + w, Math.min(y + FLUID_ROW - 2, bottom), 0, target[0], target[1]));
+        }
+        loopTip = tip;
+    }
+
+    private static int fluidRate(com.sqc.nuclearsq.progression.ReactorFluids.End e) {
+        if (com.sqc.nuclearsq.progression.ReactorFluids.TURBINE.equals(e.machine())) return 0;
+        try {
+            var port = com.sqc.nuclearsq.machine.big.BigMachine.valueOf(e.machine().toUpperCase(java.util.Locale.ROOT)).port(e.port());
+            return port == null ? 0 : port.rate();
+        } catch (IllegalArgumentException ex) {
+            return 0;
+        }
     }
 
     private static final int PLANT_CW = 104, PLANT_RH = 78, PLANT_PAD = 40;
-    private static final int PLANT_NAME_W = PLANT_CW - 8;
+    private static final int LINE_CW = 128;
+    private int plantCw = PLANT_CW, plantPad = PLANT_PAD;
     private static final float PLANT_STEP = 0.22f, PLANT_ZOOM_MIN = 0.35f, PLANT_ZOOM_MAX = 2.5f;
     private static final int PLANT_RING = 0xFF3A8FB0;
     private static final int[] PLANT_COLORS = {0xFF8A93A3, 0xFF9CCB3A, 0xFFE07A2E, 0xFFD24A4A, 0xFF3A8FB0, 0xFF46C46A, 0xFFA070D8, 0xFFE0B040, 0xFF4FC3F7, 0xFFE05A5A};
@@ -2135,7 +2415,7 @@ public class ProgressionScreen extends Screen {
     }
 
     private List<String> plantNameLines(String name) {
-        if (font.width(name) <= PLANT_NAME_W) return List.of(name);
+        if (font.width(name) <= plantCw - 8) return List.of(name);
         int best = -1;
         for (int i = 1; i < name.length() - 1; i++) {
             char c = name.charAt(i);
@@ -2146,8 +2426,16 @@ public class ProgressionScreen extends Screen {
         return List.of(name.substring(0, name.charAt(best) == '-' ? best + 1 : best), name.substring(best + 1));
     }
 
-    private static int plantX(com.sqc.nuclearsq.progression.PlantOverview.Node n) { return PLANT_PAD + n.col() * PLANT_CW; }
+    private int plantX(com.sqc.nuclearsq.progression.PlantOverview.Node n) { return plantPad + n.col() * plantCw; }
     private static int plantY(com.sqc.nuclearsq.progression.PlantOverview.Node n) { return PLANT_PAD / 2 + n.row() * PLANT_RH; }
+
+    private int[] lineRoute(com.sqc.nuclearsq.progression.PlantOverview.Node a, com.sqc.nuclearsq.progression.PlantOverview.Node b) {
+        int ax = plantX(a), ay = plantY(a), bx = plantX(b), by = plantY(b), gx = bx - LINE_CW / 2 + 3;
+        if (ay == by) return new int[] {ax, ay, bx, by};
+        if (bx > ax) return new int[] {ax, ay, gx, ay, gx, by, bx, by};
+        int ex = ax + LINE_CW / 2 - 3, cy = by - PLANT_CARD / 2 - (by - ay == PLANT_RH ? 10 : 44);
+        return new int[] {ax, ay, ex, ay, ex, cy, gx, cy, gx, by, bx, by};
+    }
 
     private static boolean showTips() { return com.sqc.nuclearsq.NuclearClientConfig.compendiumTips(); }
 
@@ -2168,7 +2456,7 @@ public class ProgressionScreen extends Screen {
         int n = nodes.size();
         int bx = plantButton(g, mx, my, x + w, y, tr("compendium.plant.reset"), 4);
         bx = plantButton(g, mx, my, bx, y, tr("compendium.plant.replay"), 3);
-        var line = p.anim() == Anim.LINE ? com.sqc.nuclearsq.progression.LineTrees.byPage(p.id()) : null;
+        var line = p.anim() == Anim.LINE ? com.sqc.nuclearsq.progression.LineTrees.byPage(p.id()) : p.anim() == Anim.ASSEMBLY ? com.sqc.nuclearsq.progression.AssemblyTree.LINE : null;
         int goal = line != null ? nextGoal() : -1;
         if (line != null) {
             int done = 0;
@@ -2201,9 +2489,11 @@ public class ProgressionScreen extends Screen {
             maxCol = Math.max(maxCol, nd.col());
             maxRow = Math.max(maxRow, nd.row());
         }
-        int top = line != null ? 16 : 0, prodY = PLANT_PAD + maxRow * PLANT_RH + 50;
-        int worldW = 2 * PLANT_PAD + maxCol * PLANT_CW, worldH = PLANT_PAD + maxRow * PLANT_RH + 44 + top + (line != null && !line.products().isEmpty() ? 40 : 0);
-        plantFit = Math.min(1.2f, Math.min((w - 8) / (float) worldW, (h - 8) / (float) worldH));
+        plantCw = line != null ? LINE_CW : PLANT_CW;
+        plantPad = line != null ? LINE_CW / 2 : PLANT_PAD;
+        int top = line != null ? 36 : 0, prodY = PLANT_PAD + maxRow * PLANT_RH + 50;
+        int worldW = 2 * plantPad + maxCol * plantCw, worldH = PLANT_PAD + maxRow * PLANT_RH + 44 + top + (line != null && !line.products().isEmpty() ? 40 : 0);
+        plantFit = line != null ? Math.min(1f, (w - 8) / (float) worldW) : Math.min(1f, Math.min((w - 8) / (float) worldW, (h - 8) / (float) worldH));
         if (plantZoom <= 0) {
             plantZoom = plantFit;
             plantPanX = (w - worldW * plantZoom) / 2;
@@ -2236,15 +2526,27 @@ public class ProgressionScreen extends Screen {
             var nb = nodes.get(b);
             boolean lit = plantHover == e.from() || plantHover == e.to();
             int col = lit ? ACCENT : e.ring() ? PLANT_RING : alpha(150, PLANT_COLORS[nodes.get(e.from()).group().ordinal()]);
-            segment(g, plantX(na), plantY(na), plantX(nb), plantY(nb), grow, col);
+            if (line == null) segment(g, plantX(na), plantY(na), plantX(nb), plantY(nb), grow, col);
+            else {
+                int[] q = lineRoute(nodes.get(e.from()), nodes.get(e.to()));
+                thickPath(g, q, grow, 1, col | 0xFF000000);
+                if (grow >= 1f) flowArrow(g, q, col | 0xFF000000, true);
+            }
         }
         if (line != null) {
             var mids = lineMids(line, nodes, edges);
+            float tDone = n * PLANT_STEP + 0.4f;
             for (int i = 0; i < edges.size(); i++) {
-                ItemStack st = mids.get(i);
                 var e = edges.get(i);
+                int[] q = lineRoute(nodes.get(e.from()), nodes.get(e.to()));
+                if (el > tDone) {
+                    int[] pt = pathPoint(q, pathLength(q) * (((el - tDone) * 0.4f) % 1f));
+                    circle(g, pt[0], pt[1], 2, ACCENT);
+                }
+                ItemStack st = mids.get(i);
                 if (st.isEmpty() || ease((el - Math.max(e.from(), e.to()) * PLANT_STEP) / 0.3f) < 0.99f) continue;
-                int ix = (plantX(nodes.get(e.from())) + plantX(nodes.get(e.to()))) / 2 - 8, iy = (plantY(nodes.get(e.from())) + plantY(nodes.get(e.to()))) / 2 - 8;
+                int[] mid = pathPoint(q, pathLength(q) / 2);
+                int ix = mid[0] - 8, iy = mid[1] - 8;
                 rrect(g, ix - 2, iy - 2, ix + 18, iy + 18, EDGE);
                 rrect(g, ix - 1, iy - 1, ix + 17, iy + 17, PANEL_BG);
                 MachineThumbs.drawStack(g, st, ix, iy);
@@ -2292,11 +2594,17 @@ public class ProgressionScreen extends Screen {
             }
         }
         if (line != null) {
-            int[] bc = com.sqc.nuclearsq.progression.LineTrees.blockCols(line);
-            for (int i = 0; i < bc.length; i++) {
-                int st = line.blocks().get(i).stage(), lx = PLANT_PAD + bc[i] * PLANT_CW - PLANT_CARD / 2;
-                String lab = tr("compendium.lines.stage").formatted(st) + "  " + tr("compendium.ach.stage." + com.sqc.nuclearsq.progression.AchievementTree.STAGES.get(st - 1).key());
-                g.drawString(font, font.plainSubstrByWidth(lab, Math.max(PLANT_CW - 8, Math.min(line.blocks().get(i).cols(), line.blocks().get(i).keys().size()) * PLANT_CW - 8)), lx, -12, 0xFFFFFFFF, false);
+            int[][] bp = com.sqc.nuclearsq.progression.LineTrees.blockPos(line);
+            for (int i = 0, first = 0; i < bp.length; first += line.blocks().get(i).keys().size(), i++) {
+                var blk = line.blocks().get(i);
+                int fx0 = bp[i][0] * LINE_CW + 6, fx1 = (bp[i][0] + bp[i][2]) * LINE_CW - 6;
+                int fy0 = PLANT_PAD / 2 + bp[i][1] * PLANT_RH - PLANT_CARD / 2 - 30, fy1 = PLANT_PAD / 2 + (bp[i][1] + bp[i][3] - 1) * PLANT_RH + PLANT_CARD / 2 + 26;
+                int fa = (int) (255 * shown[first]);
+                String lab = blk.made() != null ? tr("compendium.made_in") + " " + tr("compendium.made_in." + blk.made())
+                        : tr("compendium.lines.stage").formatted(blk.stage()) + "  " + tr("compendium.ach.stage." + com.sqc.nuclearsq.progression.AchievementTree.STAGES.get(blk.stage() - 1).key());
+                if (blk.made() != null) fx1 = Math.max(fx1, fx0 + font.width(lab) + 10);
+                hullFrame(g, new int[] {fx0, fy0, fx1, fy1}, fa);
+                if (fa > 8) g.drawString(font, font.plainSubstrByWidth(lab, fx1 - fx0 - 10), fx0 + 5, fy0 + 4, alpha(fa, MUTED), false);
             }
             if (!line.products().isEmpty()) {
                 g.drawString(font, tr("compendium.lines.products"), PLANT_PAD - PLANT_CARD / 2, prodY, 0xFFFFFFFF, false);

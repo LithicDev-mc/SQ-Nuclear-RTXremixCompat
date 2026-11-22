@@ -22,8 +22,9 @@ local nullTerm = setmetatable({
 
 local PASS_FOCUS = { key = true, key_up = true, char = true, paste = true }
 local NO_BROADCAST = { mouse_click = true, mouse_up = true, mouse_drag = true, mouse_scroll = true, monitor_touch = true,
-    monitor_resize = true, term_resize = true, sqc_touch = true, sqc_resize = true, terminate = true }
-local QUEUED = { mouse_click = true, mouse_up = true, mouse_scroll = true, key = true, char = true, paste = true }
+    monitor_resize = true, term_resize = true, sqc_touch = true, sqc_resize = true, sqc_move = true, sqc_up = true,
+    sqc_drag = true, sqc_scroll = true, sqc_key = true, sqc_key_up = true, sqc_char = true, terminate = true }
+local QUEUED = { mouse_click = true, mouse_up = true, mouse_scroll = true, key = true, char = true, paste = true, timer = true }
 local MIN_W, MIN_H = 14, 4
 local TOAST_SECONDS = 5
 local HISTORY_MAX = 20
@@ -278,7 +279,7 @@ function WM:resume(w, ev)
     if ev and w.filter and ev[1] ~= w.filter and ev[1] ~= "terminate" then
         if QUEUED[ev[1]] then
             w.queue = w.queue or {}
-            if #w.queue < 32 then w.queue[#w.queue + 1] = ev end
+            if #w.queue < (ev[1] == "timer" and 16 or 32) then w.queue[#w.queue + 1] = ev end
         end
         return
     end
@@ -1104,8 +1105,9 @@ function WM:run()
     end
     self:render()
     local flushPending = false
+    local held = self.drv.hold and self.drv.hold(coroutine.running())
     while self.running do
-        local ev = table.pack(os.pullEventRaw())
+        local ev = held and held() or table.pack(os.pullEventRaw())
         if ev[1] == "sqos_flush" then
             flushPending = false
             self:render()

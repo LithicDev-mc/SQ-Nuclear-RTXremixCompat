@@ -4,12 +4,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sqc.nuclearsq.NuclearSQ;
 import com.sqc.nuclearsq.assembler.AssemblyRecipe;
+import com.sqc.nuclearsq.assembler.SmallPartsRecipe;
 import com.sqc.nuclearsq.gamedata.GameData;
+import com.sqc.nuclearsq.machine.big.BigCrafter;
 import com.sqc.nuclearsq.machine.big.BigMachine;
 import com.sqc.nuclearsq.multiblock.MultiblockStructure;
+import com.sqc.nuclearsq.registry.EquipmentRegistry;
 import com.sqc.nuclearsq.registry.ModDataComponents;
 import com.sqc.nuclearsq.registry.ModFluids;
 import com.sqc.nuclearsq.registry.ReactorRegistry;
+import com.sqc.nuclearsq.registry.SmallPartsRegistry;
 import com.sqc.nuclearsq.reactor.FuelRodBlockItem;
 import com.sqc.nuclearsq.reprocessing.ReprocessingRecipe;
 import com.sqc.nuclearsq.turbine.ShaftValues;
@@ -35,6 +39,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.LevelResource;
@@ -48,7 +53,7 @@ public final class DataPackTests {
     private DataPackTests() {}
 
     private static final String FLOOR = "floor";
-    public static final int ASSEMBLY_RECIPES = 217, MEKANISM_ONLY = 1, NO_MEKANISM = 0, POWERGRID_ONLY = 1;
+    public static final int ASSEMBLY_RECIPES = 230, MEKANISM_ONLY = 1, NO_MEKANISM = 0, POWERGRID_ONLY = 1;
 
     private static boolean onlyAbsentMods(AssemblyRecipe.Need n) {
         if (!(n.ingredient().getCustomIngredient() instanceof com.sqc.nuclearsq.assembler.OptionalIngredient o) || !o.fallback().isEmpty()) return false;
@@ -103,6 +108,55 @@ public final class DataPackTests {
         if (!bad.isEmpty()) throw new GameTestAssertException("Nicht baubar: " + String.join(", ", bad));
         if (needMod >= all.size() / 2) throw new GameTestAssertException(needMod + " Rezepte nur mit fremden Mods");
         NuclearSQ.LOGGER.info("Assembler-Rezepte: {} ohne Mods baubar, {} brauchen eine fehlende Mod", all.size() - needMod, needMod);
+        h.succeed();
+    }
+
+    private static List<ItemStack> fullStacks(List<Ingredient> ingredients, List<Integer> counts) {
+        List<ItemStack> out = new ArrayList<>();
+        for (int i = 0; i < ingredients.size(); i++) {
+            ItemStack[] items = ingredients.get(i).getItems();
+            if (items.length == 0) return null;
+            out.add(items[0].copyWithCount(Math.max(counts.get(i), items[0].getMaxStackSize())));
+        }
+        while (out.size() < 9) out.add(ItemStack.EMPTY);
+        return out;
+    }
+
+    private static String path(ItemStack s) {
+        return BuiltInRegistries.ITEM.getKey(s.getItem()).getPath();
+    }
+
+    private static boolean sameMachine(SmallPartsRecipe a, SmallPartsRecipe b) {
+        return a.result().is(BigCrafter.MICRO_PRODUCTS) == b.result().is(BigCrafter.MICRO_PRODUCTS)
+                && a.result().is(BigCrafter.CLEAN_ROOM_PRODUCTS) == b.result().is(BigCrafter.CLEAN_ROOM_PRODUCTS);
+    }
+
+    @GameTest(template = FLOOR, batch = "s6_recipes", timeoutTicks = 20)
+    public static void fullStacksBuildTheirOwnRecipe(GameTestHelper h) {
+        var rm = h.getLevel().getRecipeManager();
+        List<String> bad = new ArrayList<>();
+        for (RecipeHolder<AssemblyRecipe> holder : AssemblyRecipe.all(rm)) {
+            AssemblyRecipe r = holder.value();
+            List<ItemStack> g = fullStacks(r.ingredients().stream().map(AssemblyRecipe.Need::ingredient).toList(),
+                    r.ingredients().stream().map(AssemblyRecipe.Need::count).toList());
+            if (g == null) continue;
+            AssemblyRecipe found = AssemblyRecipe.find(rm, g);
+            if (found != r) bad.add(path(r.result()) + " -> " + (found == null ? "nichts" : path(found.result())));
+        }
+        List<SmallPartsRecipe> parts = rm.getAllRecipesFor(SmallPartsRegistry.TYPE.get()).stream().map(RecipeHolder::value).toList();
+        List<SmallPartsRecipe> equipment = rm.getAllRecipesFor(EquipmentRegistry.TYPE.get()).stream().map(x -> x.value().base()).toList();
+        for (List<SmallPartsRecipe> group : List.of(parts, equipment)) {
+            for (SmallPartsRecipe r : group) {
+                List<ItemStack> g = fullStacks(r.ingredients().stream().map(SmallPartsRecipe.Need::ingredient).toList(),
+                        r.ingredients().stream().map(SmallPartsRecipe.Need::count).toList());
+                if (g == null) continue;
+                SmallPartsRecipe.Input in = new SmallPartsRecipe.Input(g);
+                for (SmallPartsRecipe o : group) {
+                    if (o != r && sameMachine(r, o) && o.matches(in, h.getLevel())) bad.add(path(r.result()) + " -> " + path(o.result()));
+                }
+            }
+        }
+        if (!bad.isEmpty()) throw new GameTestAssertException("Volle Stapel ergeben ein anderes Rezept: " + String.join(", ", bad));
         h.succeed();
     }
 

@@ -8,9 +8,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.sqc.nuclearsq.NuclearConfig;
 import com.sqc.nuclearsq.registry.HeavyAssemblyRegistry;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -22,7 +24,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public record HeavyAssemblyRecipe(List<String> pattern, Map<String, Ingredient> key, ItemStack result, int time, int energyPerTick)
+public record HeavyAssemblyRecipe(List<String> pattern, Map<String, Ingredient> key, ItemStack result, int time, int energyPerTick,
+                                  List<String> hardcorePattern)
         implements Recipe<HeavyAssemblyRecipe.Grid> {
 
     public static final int SIZE = 5;
@@ -54,15 +57,17 @@ public record HeavyAssemblyRecipe(List<String> pattern, Map<String, Ingredient> 
 
     public static final MapCodec<HeavyAssemblyRecipe> CODEC = RecordCodecBuilder.<HeavyAssemblyRecipe>mapCodec(i -> i.group(
             Codec.STRING.listOf().flatXmap(HeavyAssemblyRecipe::checkPattern, HeavyAssemblyRecipe::checkPattern)
-                    .fieldOf("pattern").forGetter(HeavyAssemblyRecipe::pattern),
+                    .fieldOf("pattern").forGetter((HeavyAssemblyRecipe r) -> r.pattern),
             KEY_CODEC.fieldOf("key").forGetter(HeavyAssemblyRecipe::key),
             ItemStack.CODEC.fieldOf("result").forGetter(HeavyAssemblyRecipe::result),
             Codec.intRange(1, 72000).optionalFieldOf("time", 200).forGetter(HeavyAssemblyRecipe::time),
-            Codec.intRange(0, 100000).optionalFieldOf("energy_per_tick", 100).forGetter(HeavyAssemblyRecipe::energyPerTick)
+            Codec.intRange(0, 100000).optionalFieldOf("energy_per_tick", 100).forGetter(HeavyAssemblyRecipe::energyPerTick),
+            Codec.STRING.listOf().optionalFieldOf("hardcore_pattern", List.of()).forGetter(HeavyAssemblyRecipe::hardcorePattern)
     ).apply(i, HeavyAssemblyRecipe::new)).validate(HeavyAssemblyRecipe::checkKeys);
 
     private static DataResult<HeavyAssemblyRecipe> checkKeys(HeavyAssemblyRecipe r) {
-        for (String row : r.pattern) {
+        if (!r.hardcorePattern.isEmpty() && checkPattern(r.hardcorePattern).error().isPresent()) return DataResult.error(() -> "hardcore_pattern: ungueltig");
+        for (String row : r.hardcorePattern.isEmpty() ? r.pattern : concat(r.pattern, r.hardcorePattern)) {
             for (char c : row.toCharArray()) {
                 if (c != ' ' && !r.key.containsKey(String.valueOf(c))) return DataResult.error(() -> "key: Zeichen '" + c + "' fehlt");
             }
@@ -70,16 +75,28 @@ public record HeavyAssemblyRecipe(List<String> pattern, Map<String, Ingredient> 
         return DataResult.success(r);
     }
 
+    private static List<String> concat(List<String> a, List<String> b) {
+        List<String> out = new ArrayList<>(a);
+        out.addAll(b);
+        return out;
+    }
+
     public static final StreamCodec<RegistryFriendlyByteBuf, HeavyAssemblyRecipe> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), HeavyAssemblyRecipe::pattern,
+            ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), (HeavyAssemblyRecipe r) -> r.pattern,
             ByteBufCodecs.map(java.util.HashMap::new, ByteBufCodecs.STRING_UTF8, Ingredient.CONTENTS_STREAM_CODEC), HeavyAssemblyRecipe::key,
             ItemStack.STREAM_CODEC, HeavyAssemblyRecipe::result,
             ByteBufCodecs.VAR_INT, HeavyAssemblyRecipe::time,
             ByteBufCodecs.VAR_INT, HeavyAssemblyRecipe::energyPerTick,
+            ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), HeavyAssemblyRecipe::hardcorePattern,
             HeavyAssemblyRecipe::new);
 
-    public int width() { return pattern.get(0).length(); }
-    public int height() { return pattern.size(); }
+    @Override
+    public List<String> pattern() {
+        return hardcorePattern.isEmpty() || !NuclearConfig.hardcoreCosts() ? pattern : hardcorePattern;
+    }
+
+    public int width() { return pattern().get(0).length(); }
+    public int height() { return pattern().size(); }
 
     public int[] offset(Grid grid) {
         for (int dy = 0; dy <= SIZE - height(); dy++) {
@@ -95,7 +112,7 @@ public record HeavyAssemblyRecipe(List<String> pattern, Map<String, Ingredient> 
             for (int x = 0; x < SIZE; x++) {
                 ItemStack s = grid.getItem(y * SIZE + x);
                 int px = x - dx, py = y - dy;
-                char c = px >= 0 && py >= 0 && px < width() && py < height() ? pattern.get(py).charAt(px) : ' ';
+                char c = px >= 0 && py >= 0 && px < width() && py < height() ? pattern().get(py).charAt(px) : ' ';
                 if (c == ' ') {
                     if (!s.isEmpty()) return false;
                 } else if (s.isEmpty() || !key.get(String.valueOf(c)).test(s)) {
@@ -110,7 +127,7 @@ public record HeavyAssemblyRecipe(List<String> pattern, Map<String, Ingredient> 
         List<Integer> out = new ArrayList<>();
         for (int py = 0; py < height(); py++) {
             for (int px = 0; px < width(); px++) {
-                if (pattern.get(py).charAt(px) != ' ') out.add((py + offset[1]) * SIZE + px + offset[0]);
+                if (pattern().get(py).charAt(px) != ' ') out.add((py + offset[1]) * SIZE + px + offset[0]);
             }
         }
         return out;
@@ -129,6 +146,13 @@ public record HeavyAssemblyRecipe(List<String> pattern, Map<String, Ingredient> 
     @Override
     public boolean canCraftInDimensions(int width, int height) {
         return width >= width() && height >= height();
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> out = NonNullList.create();
+        out.addAll(key.values());
+        return out;
     }
 
     @Override

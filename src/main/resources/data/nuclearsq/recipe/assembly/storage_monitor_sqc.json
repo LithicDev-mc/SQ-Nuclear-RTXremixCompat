@@ -30,6 +30,12 @@
         "item": "minecraft:glowstone_dust"
       },
       "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:chest"
+      },
+      "count": 1
     }
   ],
   "result": {

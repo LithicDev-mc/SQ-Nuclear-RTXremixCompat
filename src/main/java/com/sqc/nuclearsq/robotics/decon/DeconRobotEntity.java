@@ -387,6 +387,7 @@ public class DeconRobotEntity extends Mob {
             }
         }
         if (n > 0) {
+            com.sqc.nuclearsq.progression.Titles.mark(sl, controller, "rank:decon");
             setWaste(waste() + n);
             setEnergy(energy() - CLEAN_COST);
             setAgent(agent() - AGENT_COST);

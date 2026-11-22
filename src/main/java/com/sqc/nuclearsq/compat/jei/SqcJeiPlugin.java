@@ -78,7 +78,7 @@ public class SqcJeiPlugin implements IModPlugin {
             if (kind == null) continue;
             RecipeType<RecipeHolder<ReprocessingRecipe>> type = RecipeType.createFromVanilla(kind.type());
             machineTypes.put(kind, type);
-            reg.addRecipeCategories(new SqcJeiCategories.Machine(gui, type, kind, controller(m)));
+            reg.addRecipeCategories(new SqcJeiCategories.Machine(gui, type, m, controller(m)));
         }
     }
 

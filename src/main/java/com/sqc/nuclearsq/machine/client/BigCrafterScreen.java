@@ -16,7 +16,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class BigCrafterScreen extends AbstractContainerScreen<BigCrafterMenu> {
     private static final int W = BigCrafterMenu.W;
     private static final int GREEN = TermKit.GREEN, MID = TermKit.MID, DIM = TermKit.DIM, AMBER = TermKit.AMBER, RED = TermKit.RED;
-    private static final String[] STATES = {"ok", "incomplete", "noinput", "needmore", "outfull", "nopower", "off", "nowater", "nofeed", "shallow", "noacid", "noaux"};
+    private static final String[] STATES = {"ok", "incomplete", "noinput", "needmore", "outfull", "nopower", "off", "nowater", "nofeed", "shallow", "noacid", "noaux", "noarm"};
     private static final int SEG_H = 14;
 
     private int segW() { return asm() ? 62 : 100; }
@@ -106,7 +106,7 @@ public class BigCrafterScreen extends AbstractContainerScreen<BigCrafterMenu> {
     private static int stateColor(int st) {
         return switch (st) {
             case BigCrafter.OK -> GREEN;
-            case BigCrafter.NO_INPUT, BigCrafter.NEED_MORE -> AMBER;
+            case BigCrafter.NO_INPUT, BigCrafter.NEED_MORE, BigCrafter.NO_ARM -> AMBER;
             case BigCrafter.OFF -> DIM;
             case BigCrafter.NO_WATER, BigCrafter.NO_FEED, BigCrafter.SHALLOW -> RED;
             default -> RED;
@@ -168,6 +168,15 @@ public class BigCrafterScreen extends AbstractContainerScreen<BigCrafterMenu> {
             Component made = Component.literal((st == BigCrafter.OK ? menu.energyPerTick() : 0) + " FE/t");
             TermKit.field(g, font, x + gx, y + cy, gw, t("gen"), made, st == BigCrafter.OK ? GREEN : DIM);
             tip(gx, cy - 1, gw, 10, t("gen"), t("tip.gen", menu.energyPerTick()));
+            TermKit.field(g, font, x + 8, y + cy, 100, t("coal_stock"), Component.literal(String.valueOf(menu.needed())), menu.needed() > 0 ? MID : DIM);
+            tip(8, cy - 1, 100, 10, t("coal_stock"), t("tip.coal_stock"));
+            for (int k = 0; k < BigCrafter.COAL_CARDS.size(); k++) {
+                String key = BigCrafter.COAL_CARDS.get(k);
+                int sx = BigCrafterMenu.GEN_CARD_X + k * 20;
+                if (menu.slots.get(1 + k).hasItem()) continue;
+                TermKit.text(g, font, Component.literal(key.substring(0, 1).toUpperCase()), x + sx + 5, y + BigCrafterMenu.IN_Y + 4, TermKit.FAINT);
+                tip(sx - 1, BigCrafterMenu.IN_Y - 1, 18, 18, t("coal_card." + key), t("tip.coal_card." + key));
+            }
         }
         int px, py, pw;
         if (particle()) {

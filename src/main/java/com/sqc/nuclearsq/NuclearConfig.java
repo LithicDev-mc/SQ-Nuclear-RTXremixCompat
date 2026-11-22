@@ -128,6 +128,18 @@ public final class NuclearConfig {
             .comment("An emptied oil well refills by this percentage of its maximum per Minecraft day (24000 ticks). 0 turns refilling off.")
             .defineInRange("refillPercentPerDay", 1.0, 0.0, 100.0);
 
+    public static final ModConfigSpec.IntValue OIL_WELL_SPACING = BUILDER
+            .comment("Oil wells in newly generated chunks: at most one per square of this many chunks on each side (24 = one well in 24x24 chunks,",
+                    "about every 384 blocks). Some squares get none because the spot is water or not natural ground. 4 = the old, very dense layout.")
+            .defineInRange("wellSpacingChunks", 24, 4, 64);
+
+    public static final ModConfigSpec.BooleanValue OIL_REMOVE_OLD_WELLS = BUILDER
+            .comment("Removes oil wells of the old dense layout (one per 4x4 chunks) when their chunk is loaded, unless the well is in use",
+                    "(a derrick or another NuclearSQ block sits on it). Keeps the old well closest to the new layout's spot in each square,",
+                    "so explored areas also end up with about one well per square.",
+                    "The black stain is replaced by the ground around it. /nuclearsq oil clear <radius> does the same at once for loaded chunks.")
+            .define("removeOldWells", true);
+
     static {
         BUILDER.pop();
         BUILDER.push("nanobots");
@@ -249,7 +261,8 @@ public final class NuclearConfig {
 
     public static final ModConfigSpec.EnumValue<Difficulty> DIFFICULTY = BUILDER
             .comment("Difficulty preset. RELAXED: explosions (and fallout) half as strong, fuse 1.5x, radiation uptake half. NORMAL: the values below as set.",
-                    "HARDCORE: explosions 1.5x, fuse half as long, radiation uptake 1.5x. The preset multiplies the single values of this file.")
+                    "HARDCORE: explosions 1.5x, fuse half as long, radiation uptake 1.5x, machine kits and their parts cost the higher hardcore amounts.",
+                    "The preset multiplies the single values of this file.")
             .defineEnum("preset", Difficulty.NORMAL);
 
     public static final ModConfigSpec.DoubleValue RADIATION_FACTOR = BUILDER
@@ -272,6 +285,10 @@ public final class NuclearConfig {
 
     public static double blastFactor() {
         return value(DIFFICULTY).blast;
+    }
+
+    public static boolean hardcoreCosts() {
+        return value(DIFFICULTY) == Difficulty.HARDCORE;
     }
 
     public static double radiationFactor() {

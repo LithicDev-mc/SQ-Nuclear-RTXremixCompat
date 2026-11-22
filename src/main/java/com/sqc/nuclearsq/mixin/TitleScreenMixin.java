@@ -1,5 +1,7 @@
 package com.sqc.nuclearsq.mixin;
 
+import com.sqc.nuclearsq.client.MenuStyle;
+
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.LogoRenderer;
@@ -14,7 +16,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class TitleScreenMixin {
     @Redirect(method = "render", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/gui/components/LogoRenderer;renderLogo(Lnet/minecraft/client/gui/GuiGraphics;IF)V"))
-    private void nuclearsq$noLogo(LogoRenderer logo, GuiGraphics g, int screenWidth, float transparency) {
+    private void nuclearsq$logo(LogoRenderer logo, GuiGraphics g, int screenWidth, float transparency) {
+        MenuStyle.titleLogo(g, screenWidth, transparency);
     }
 
     @Redirect(method = "render", at = @At(value = "INVOKE",

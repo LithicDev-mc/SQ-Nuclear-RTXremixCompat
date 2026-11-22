@@ -19,14 +19,19 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class StorageMonitorBlockEntity extends BlockEntity {
     public static final int PERIOD = 20;
+    public static final int SORT = 0, PAGE = 1, HIDE = 2, WARN = 3;
+    private static final int[] PAGE_TICKS = {100, 200, 600};
+    private static final float[] WARN_FROM = {0.9f, 0.8f, 2f};
 
-    public record Row(BlockPos pos, String machine, boolean online, long used, long capacity, int drives, int slots, int priority) {
+    public record Row(BlockPos pos, String machine, boolean online, long used, long capacity, int drives, int slots, int priority,
+                      int types, int typeCapacity) {
         public float frac() {
             return capacity <= 0 ? 0 : Math.min(1f, used / (float) capacity);
         }
     }
 
     private List<Row> rows = List.of();
+    private final int[] settings = new int[4];
     private CompoundTag lastSync = new CompoundTag();
 
     public StorageMonitorBlockEntity(BlockPos pos, BlockState state) {
@@ -35,6 +40,50 @@ public class StorageMonitorBlockEntity extends BlockEntity {
 
     public List<Row> rows() {
         return rows;
+    }
+
+    public int setting(int kind) {
+        return settings[kind];
+    }
+
+    public int pageTicks() {
+        return PAGE_TICKS[settings[PAGE]];
+    }
+
+    public float warnFrom() {
+        return WARN_FROM[settings[WARN]];
+    }
+
+    public List<Row> sorted(boolean all) {
+        List<Row> out = new ArrayList<>();
+        for (Row r : rows) if (all || settings[HIDE] == 0 || r.online()) out.add(r);
+        if (settings[SORT] == 1) out.sort(java.util.Comparator.comparingDouble((Row r) -> -r.frac()));
+        else if (settings[SORT] == 2) out.sort(java.util.Comparator.comparingDouble((Row r) -> r.pos().distSqr(worldPosition)));
+        return out;
+    }
+
+    public boolean apply(int button) {
+        int kind = button / 4, value = button % 4;
+        int[] max = {3, 3, 2, 3};
+        if (kind < 0 || kind >= settings.length || value >= max[kind] || level == null) return false;
+        if (settings[kind] != value) {
+            settings[kind] = value;
+            setChanged();
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+        }
+        return true;
+    }
+
+    public int types() {
+        int n = 0;
+        for (Row r : rows) n += r.types();
+        return n;
+    }
+
+    public int typeCapacity() {
+        int n = 0;
+        for (Row r : rows) n += r.typeCapacity();
+        return n;
     }
 
     public long used() {
@@ -69,7 +118,8 @@ public class StorageMonitorBlockEntity extends BlockEntity {
             for (BigMachineBlockEntity be : StorageNet.racks(level, l.cells())) {
                 ServerRack r = be.rack();
                 ServerRack.Space sp = r.space();
-                now.add(new Row(be.getBlockPos(), be.machine().id, r.online(), sp.used(), sp.capacity(), sp.drives(), r.slots(), r.priority()));
+                now.add(new Row(be.getBlockPos(), be.machine().id, r.online(), sp.used(), sp.capacity(), sp.drives(), r.slots(), r.priority(),
+                        sp.types(), sp.typeCapacity()));
             }
         }
         int oldCmp = comparator();
@@ -97,6 +147,8 @@ public class StorageMonitorBlockEntity extends BlockEntity {
             c.putInt("drives", r.drives());
             c.putInt("slots", r.slots());
             c.putInt("priority", r.priority());
+            c.putInt("types", r.types());
+            c.putInt("typeCap", r.typeCapacity());
             list.add(c);
         }
         tag.put("racks", list);
@@ -106,6 +158,7 @@ public class StorageMonitorBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         write(tag);
+        tag.putIntArray("settings", settings);
     }
 
     @Override
@@ -115,9 +168,12 @@ public class StorageMonitorBlockEntity extends BlockEntity {
         for (Tag e : tag.getList("racks", Tag.TAG_COMPOUND)) {
             CompoundTag c = (CompoundTag) e;
             out.add(new Row(BlockPos.of(c.getLong("pos")), c.getString("machine"), c.getBoolean("online"), c.getLong("used"),
-                    c.getLong("capacity"), c.getInt("drives"), c.getInt("slots"), c.getInt("priority")));
+                    c.getLong("capacity"), c.getInt("drives"), c.getInt("slots"), c.getInt("priority"),
+                    c.getInt("types"), c.getInt("typeCap")));
         }
         rows = out;
+        int[] s = tag.getIntArray("settings");
+        for (int i = 0; i < settings.length; i++) settings[i] = i < s.length ? Math.max(0, s[i]) : 0;
     }
 
     @Override

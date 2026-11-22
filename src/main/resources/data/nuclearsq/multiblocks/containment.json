@@ -113,7 +113,7 @@
       "cell": [
         12,
         0,
-        1
+        2
       ]
     },
     {
@@ -143,7 +143,7 @@
       "cell": [
         18,
         0,
-        1
+        2
       ]
     },
     {
@@ -161,9 +161,49 @@
       "type": "primary",
       "dir": "out",
       "cell": [
-        29,
+        28,
         0,
         12
+      ]
+    },
+    {
+      "name": "hyd_in",
+      "type": "water",
+      "dir": "in",
+      "cell": [
+        18,
+        1,
+        0
+      ]
+    },
+    {
+      "name": "hyd_out",
+      "type": "water",
+      "dir": "out",
+      "cell": [
+        18,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "treatment_in",
+      "type": "feedwater",
+      "dir": "in",
+      "cell": [
+        18,
+        2,
+        0
+      ]
+    },
+    {
+      "name": "treatment_out",
+      "type": "feedwater",
+      "dir": "out",
+      "cell": [
+        18,
+        2,
+        2
       ]
     }
   ],
@@ -177,13 +217,14 @@
     "n": "nuclearsq:machine_port_wet_steam_sqc",
     "e": "nuclearsq:machine_port_energy_sqc",
     "t": "nuclearsq:machine_port_terminal_sqc",
-    "p": "nuclearsq:machine_port_primary_sqc"
+    "p": "nuclearsq:machine_port_primary_sqc",
+    "w": "nuclearsq:machine_port_water_sqc"
   },
   "layers": [
     [
       "            pCi@  p            ",
-      "         CCCpCCC  pCCC         ",
-      "       CCC           CCC       ",
+      "         CCCCCCC  CCCC         ",
+      "       CCC  p     p  CCC       ",
       "      CC               CC      ",
       "     CC                 CC     ",
       "    CC                   CC    ",
@@ -193,7 +234,7 @@
       " CC                         CC ",
       " C                           C ",
       " C                           C ",
-      "CC                           pp",
+      "CC                          pCp",
       "CC           P   P           CC",
       "CC                           CC",
       "CC                           ee",
@@ -214,9 +255,9 @@
       "            CCCtCCC            "
     ],
     [
-      "            CCCC  C            ",
+      "            CCCC  w            ",
       "         CCCCCCC  CCCC         ",
-      "       CCC           CCC       ",
+      "       CCC        w  CCC       ",
       "      CC               CC      ",
       "     CC                 CC     ",
       "    CC                   CC    ",
@@ -247,9 +288,9 @@
       "            CCCCCCC            "
     ],
     [
-      "            CCCC  C            ",
+      "            CCCC  f            ",
       "         CCCCCCC  CCCC         ",
-      "       CCC           CCC       ",
+      "       CCC        f  CCC       ",
       "      CC               CC      ",
       "     CC                 CC     ",
       "    CC                   CC    ",

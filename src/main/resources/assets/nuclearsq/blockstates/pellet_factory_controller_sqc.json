@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/pellet_factory_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/pellet_factory_shell_sqc"
     }
   }
 }

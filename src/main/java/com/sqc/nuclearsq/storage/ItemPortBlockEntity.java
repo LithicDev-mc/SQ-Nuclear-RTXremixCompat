@@ -151,6 +151,7 @@ public class ItemPortBlockEntity extends BlockEntity {
         if (!(level instanceof ServerLevel sl) || !enabled) return;
         if (--cooldown > 0) return;
         cooldown = PERIOD;
+        refreshShown();
         if (sl.hasNeighborSignal(worldPosition)) {
             lastProblem = "paused";
             return;
@@ -160,16 +161,12 @@ public class ItemPortBlockEntity extends BlockEntity {
             lastProblem = "no_inventory";
             return;
         }
-        if (mode == EXPORT && filterCount() == 0) {
-            lastProblem = "no_filter";
-            return;
-        }
         int moved = mode == EXPORT ? exportTo(inv, AMOUNT) : importFrom(inv, AMOUNT);
         if (moved >= 0) {
             lastMoved = moved;
             lastProblem = moved > 0 ? "" : "idle";
+            if (moved > 0) refreshShown();
         }
-        refreshShown();
         setChanged();
     }
 
@@ -205,10 +202,11 @@ public class ItemPortBlockEntity extends BlockEntity {
             return -1;
         }
         int total = 0;
-        for (int i = 0; i < FILTER_SLOTS && total < limit; i++) {
-            ItemStack f = filters.getItem(i);
-            if (f.isEmpty()) continue;
-            ItemKey key = ItemKey.of(f);
+        java.util.List<ItemKey> keys = new java.util.ArrayList<>();
+        for (int i = 0; i < FILTER_SLOTS; i++) if (!filters.getItem(i).isEmpty()) keys.add(ItemKey.of(filters.getItem(i)));
+        if (keys.isEmpty()) keys.addAll(net.list().keySet());
+        for (int i = 0; i < keys.size() && total < limit; i++) {
+            ItemKey key = keys.get(i);
             ItemStack offer = net.extractStack(key, Math.min(limit - total, key.maxStack()), true);
             if (offer.isEmpty()) continue;
             ItemStack rest = ItemHandlerHelper.insertItem(inv, offer, true);
@@ -221,6 +219,34 @@ public class ItemPortBlockEntity extends BlockEntity {
             total += real.getCount() - left.getCount();
         }
         return total;
+    }
+
+    public int problemIndex() {
+        for (int i = 0; i < PROBLEMS.length; i++) if (PROBLEMS[i].equals(lastProblem)) return i;
+        return 0;
+    }
+
+    public net.minecraft.world.inventory.ContainerData menuData() {
+        return new net.minecraft.world.inventory.ContainerData() {
+            @Override
+            public int get(int i) {
+                return switch (i) {
+                    case 0 -> mode;
+                    case 1 -> enabled ? 1 : 0;
+                    case 2 -> lastMoved;
+                    case 3 -> problemIndex();
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int i, int v) { }
+
+            @Override
+            public int getCount() {
+                return ItemPortMenu.DATA;
+            }
+        };
     }
 
     @Nullable

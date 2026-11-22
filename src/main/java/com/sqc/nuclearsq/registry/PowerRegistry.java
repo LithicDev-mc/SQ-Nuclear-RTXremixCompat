@@ -56,6 +56,9 @@ public final class PowerRegistry {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RtgBlockEntity>> RTG_BE =
             BLOCK_ENTITIES.register("rtg", () -> BlockEntityType.Builder.of(RtgBlockEntity::new, RTG.get()).build(null));
 
+    public static final java.util.List<DeferredItem<Item>> COAL_CARDS = java.util.stream.Stream.of("output", "efficiency", "buffer")
+            .map(k -> ITEMS.registerSimpleItem("coal_generator_card_" + k + "_sqc", new Item.Properties().stacksTo(8))).toList();
+
     public static final DeferredItem<Item> ISOTOPE_CAPSULE = ITEMS.registerItem("isotope_capsule_sqc", RtgCapsuleItem::new);
     public static final DeferredItem<Item> PLUTONIUM_CAPSULE = ITEMS.registerItem("plutonium_capsule_sqc",
             p -> new RtgCapsuleItem(p, RtgBlockEntity.PEAK_PU238, RtgBlockEntity.STEP_TICKS_PU238));

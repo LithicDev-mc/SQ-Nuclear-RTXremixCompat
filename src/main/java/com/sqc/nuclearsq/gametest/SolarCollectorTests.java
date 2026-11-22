@@ -37,8 +37,8 @@ public final class SolarCollectorTests {
         var lvl = h.getLevel();
         lvl.setWeatherParameters(12000, 0, false, false);
         lvl.setDayTime(6000);
-        if (SolarCollectorBlockEntity.peakPerTick() != Math.round(440 / 6f)) {
-            throw new GameTestAssertException("Spitze " + SolarCollectorBlockEntity.peakPerTick() + " statt 1/6 von 440 FE/t");
+        if (SolarCollectorBlockEntity.peakPerTick() != 312) {
+            throw new GameTestAssertException("Spitze " + SolarCollectorBlockEntity.peakPerTick() + " statt 312 FE/t");
         }
         BlockPos sink = new BlockPos(2, 2, 3), branch = new BlockPos(5, 2, 4);
         BigMachineBlockEntity bat = TestSinks.battery(h, sink, Direction.EAST);

@@ -80,7 +80,7 @@ public class ComponentAssemblerScreen extends AbstractContainerScreen<ComponentA
     protected void renderBg(GuiGraphics g, float pt, int mx, int my) {
         int x = leftPos, y = topPos;
         TermKit.recipes(com.sqc.nuclearsq.client.RecipeLink.machine(com.sqc.nuclearsq.machine.big.BigMachine.COMPONENT_ASSEMBLER));
-        TermKit.monitor(g, x - 4, y - 4, W + 8, H + 8);
+        TermKit.monitor(g, x - 4, y - 4, W + 8, H + 8, 34);
         TermKit.title(g, font, title, x + 8, y + 7, W - 16);
         TermKit.text(g, font, t("power", menu.powerUse()), x + 8, y + 18, TermKit.MID);
         TermKit.button(g, font, x + W - 52, y + 17, 44, 11, Component.translatable("gui.nuclearsq.access.button"), TermKit.CYAN, true,
@@ -98,7 +98,8 @@ public class ComponentAssemblerScreen extends AbstractContainerScreen<ComponentA
         int kind = Math.max(0, Math.min(KIND.length - 1, menu.previewKind()));
         TermKit.frame(g, font, x + pv.x - 1, y + pv.y - 1, 18, 18, null, kind == 0 ? TermKit.FAINT : TermKit.GREEN);
         Component kc = t("kind." + KIND[kind]);
-        TermKit.center(g, font, kc, x + pv.x + 8, y + pv.y + 20, kind == 0 ? TermKit.DIM : TermKit.GREEN);
+        int kw = Math.min(TermKit.width(font, kc), 44);
+        TermKit.fit(g, font, kc, x + pv.x + 8 - kw / 2, y + pv.y + 20, 44, kind == 0 ? TermKit.DIM : TermKit.GREEN);
         tip(pv.x - 1, pv.y - 1, 18, 30, kc, t("kind.tip"));
 
         Slot us = menu.slots.get(ComponentAssemblerMenu.UPG);
@@ -139,9 +140,10 @@ public class ComponentAssemblerScreen extends AbstractContainerScreen<ComponentA
             default -> TermKit.RED;
         };
         Component stc = t("status." + STATUS[st]);
-        TermKit.text(g, font, stc, x + 32, y + jy, sc);
+        Component jc = t("jobs", menu.jobs());
+        TermKit.fit(g, font, stc, x + 32, y + jy, W - 46 - TermKit.width(font, jc), sc);
         tip(30, jy - 1, 100, 10, stc, t("status." + STATUS[st] + ".tip"));
-        TermKit.right(g, font, t("jobs", menu.jobs()), x + W - 8, y + jy, menu.jobs() > 0 ? TermKit.CYAN : TermKit.DIM);
+        TermKit.right(g, font, jc, x + W - 8, y + jy, menu.jobs() > 0 ? TermKit.CYAN : TermKit.DIM);
         if (menu.jobs() > 0) {
             ItemStack target = js.getItem();
             Component line = t("job", menu.jobAmount(), target.getHoverName(), menu.step(), menu.steps(), menu.leftInStep());

@@ -151,7 +151,15 @@ public final class OcclusionCull {
         return ray(level, cam, b, cx, cy, cz)
                 || ray(level, cam, b, cx + ix, cy, cz) || ray(level, cam, b, cx - ix, cy, cz)
                 || ray(level, cam, b, cx, cy, cz + iz) || ray(level, cam, b, cx, cy, cz - iz)
-                || ray(level, cam, b, cx, cy + iy, cz) || ray(level, cam, b, cx, cy - iy, cz);
+                || ray(level, cam, b, cx, cy + iy, cz) || ray(level, cam, b, cx, cy - iy, cz)
+                || (cam.y > b.maxY && top(level, cam, b, cx, cz, ix, iz));
+    }
+
+    private static boolean top(Level level, Vec3 cam, AABB b, double cx, double cz, double ix, double iz) {
+        double ty = b.maxY - 0.05;
+        return ray(level, cam, b, cx, ty, cz)
+                || ray(level, cam, b, cx + ix, ty, cz) || ray(level, cam, b, cx - ix, ty, cz)
+                || ray(level, cam, b, cx, ty, cz + iz) || ray(level, cam, b, cx, ty, cz - iz);
     }
 
     private static boolean ray(Level level, Vec3 cam, AABB b, double tx, double ty, double tz) {

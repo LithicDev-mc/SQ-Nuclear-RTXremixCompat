@@ -99,7 +99,9 @@ public final class PolymerTests {
         BigMachineBlockEntity be = build(h, BigMachine.POLYMER_PLANT, new BlockPos(2, 4, 2));
         h.onEachTick(() -> be.energy().receiveEnergy(be.energy().getMaxEnergyStored(), false));
         fill(be, port, f, 4000);
-        be.itemsAt("item_in").insertItem(0, in, false);
+        var items = be.itemsAt("item_in");
+        ItemStack rest = in;
+        for (int i = 0; i < items.getSlots() && !rest.isEmpty(); i++) rest = items.insertItem(i, rest, false);
         h.runAfterDelay(wait, () -> {
             if (out(be, result) != expect) throw new GameTestAssertException("Erwartet " + expect + " x " + result + ", ist " + out(be, result));
             if (be.tank(port).getFluidAmount() != 4000 - mb) throw new GameTestAssertException("Verbrauch an " + port + " falsch: " + be.tank(port).getFluidAmount());
@@ -122,9 +124,9 @@ public final class PolymerTests {
         runFluid(h, "naphtha_in", ModFluids.NAPHTHA.source.get(), new ItemStack(item("sulfur_dust_sqc")), item("photoresist_sqc"), 4, 250, 250);
     }
 
-    @GameTest(template = FLOOR, batch = "polymer_hdpe", timeoutTicks = 450)
+    @GameTest(template = FLOOR, batch = "polymer_hdpe", timeoutTicks = 550)
     public static void ethyleneMakesHdpe(GameTestHelper h) {
-        runFluid(h, "ethylene_in", ModFluids.ETHYLENE.source.get(), new ItemStack(Items.IRON_NUGGET), item("hdpe_sheet_sqc"), 4, 500, 300);
+        runFluid(h, "ethylene_in", ModFluids.ETHYLENE.source.get(), new ItemStack(Items.IRON_NUGGET), item("hdpe_sheet_sqc"), 2, 1000, 400);
     }
 
     @GameTest(template = FLOOR, batch = "polymer_tar_coke", timeoutTicks = 400)

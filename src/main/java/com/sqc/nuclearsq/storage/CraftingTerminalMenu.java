@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -218,6 +219,13 @@ public class CraftingTerminalMenu extends StorageTerminalMenu {
         if (!(player instanceof ServerPlayer)) return;
         ItemKey key = ItemKey.of(proto);
         if (key != null && access().extract(key, 1, false) == 1) grid.setItem(index, key.stack(1));
+    }
+
+    @Override
+    protected Level netLevel() {
+        GlobalPos link = WifiTerminalItem.link(wifiStack(player));
+        Level l = link != null && player instanceof ServerPlayer sp ? sp.server.getLevel(link.dimension()) : null;
+        return l != null ? l : player.level();
     }
 
     @Override

@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/reheater_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/reheater_shell_sqc"
     }
   }
 }

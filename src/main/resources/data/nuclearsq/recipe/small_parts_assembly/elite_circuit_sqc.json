@@ -11,18 +11,30 @@
       "ingredient": {
         "item": "minecraft:gold_ingot"
       },
-      "count": 2
+      "count": 6
     },
     {
       "ingredient": {
         "item": "minecraft:glowstone_dust"
       },
-      "count": 4
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:blaze_powder"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:ender_pearl"
+      },
+      "count": 1
     }
   ],
   "result": {
     "id": "nuclearsq:elite_circuit_sqc",
     "count": 1
   },
-  "time": 100
+  "time": 160
 }

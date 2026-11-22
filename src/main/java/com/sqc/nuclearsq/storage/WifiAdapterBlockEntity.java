@@ -10,9 +10,11 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -97,6 +99,29 @@ public class WifiAdapterBlockEntity extends BlockEntity {
         return WifiValues.adapter().rangeFor(antennas);
     }
 
+    public boolean unlimited() {
+        return range() < 0;
+    }
+
+    private double reach() {
+        return unlimited() ? Double.POSITIVE_INFINITY : range();
+    }
+
+    public Component rangeText() {
+        return unlimited() ? Component.translatable("message.nuclearsq.wifi.range_unlimited")
+                : Component.translatable("message.nuclearsq.wifi.range", range());
+    }
+
+    public static Item module(int level) {
+        return (level <= 2 ? StorageRegistry.WIFI_ANTENNA : level == 3 ? StorageRegistry.WIFI_ANTENNA_SECTOR
+                : level == 4 ? StorageRegistry.WIFI_ANTENNA_DISH : StorageRegistry.WIFI_ANTENNA_QUANTUM).get();
+    }
+
+    public static boolean isModule(ItemStack stack) {
+        return stack.is(StorageRegistry.WIFI_ANTENNA.get()) || stack.is(StorageRegistry.WIFI_ANTENNA_SECTOR.get())
+                || stack.is(StorageRegistry.WIFI_ANTENNA_DISH.get()) || stack.is(StorageRegistry.WIFI_ANTENNA_QUANTUM.get());
+    }
+
     public boolean addAntenna() {
         if (antennas >= WifiValues.adapter().maxAntennas()) return false;
         antennas++;
@@ -127,20 +152,26 @@ public class WifiAdapterBlockEntity extends BlockEntity {
         return charging;
     }
 
-    public boolean inRange(Vec3 p) {
+    public boolean inRange(@Nullable Level l, Vec3 p) {
+        if (unlimited()) return true;
+        if (l != level) return false;
         double r = range();
         return level == null ? Vec3.atCenterOf(worldPosition).distanceToSqr(p) <= r * r
                 : com.sqc.nuclearsq.compat.sable.SableCompat.distSqr(level, Vec3.atCenterOf(worldPosition), p) <= r * r;
     }
 
     private boolean linksTo(WifiAdapterBlockEntity o) {
-        double r = Math.min(range(), o.range());
+        double r = Math.min(reach(), o.reach());
         return level == null ? Vec3.atCenterOf(worldPosition).distanceToSqr(Vec3.atCenterOf(o.worldPosition)) <= r * r
                 : com.sqc.nuclearsq.compat.sable.SableCompat.distSqr(level, worldPosition, o.worldPosition) <= r * r;
     }
 
     public boolean reaches(Vec3 p) {
-        if (inRange(p)) return true;
+        return reaches(level, p);
+    }
+
+    public boolean reaches(@Nullable Level l, Vec3 p) {
+        if (inRange(l, p)) return true;
         if (level == null) return false;
         Set<WifiAdapterBlockEntity> all = LOADED.get(level.dimension());
         if (all == null) return false;
@@ -152,7 +183,7 @@ public class WifiAdapterBlockEntity extends BlockEntity {
             WifiAdapterBlockEntity a = todo.poll();
             for (WifiAdapterBlockEntity o : all) {
                 if (o.isRemoved() || !o.online() || o.level != level || seen.contains(o) || !a.linksTo(o)) continue;
-                if (o.inRange(p)) return true;
+                if (o.inRange(l, p)) return true;
                 seen.add(o);
                 todo.add(o);
             }
@@ -169,6 +200,8 @@ public class WifiAdapterBlockEntity extends BlockEntity {
         if (be.online && level.getGameTime() % CHARGE_INTERVAL == 0) be.charge(level, v);
         else if (!be.online) be.charging = 0;
         if (be.online != was) be.setChanged();
+        int shown = Math.min(be.antennas, WifiAdapterBlock.MAX_SHOWN);
+        if (state.getValue(WifiAdapterBlock.ANTENNAS) != shown) level.setBlock(pos, state.setValue(WifiAdapterBlock.ANTENNAS, shown), 3);
     }
 
     private void charge(Level level, WifiValues.Adapter v) {

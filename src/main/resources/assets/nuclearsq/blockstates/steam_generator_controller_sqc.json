@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/steam_generator_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/steam_generator_shell_sqc"
     }
   }
 }

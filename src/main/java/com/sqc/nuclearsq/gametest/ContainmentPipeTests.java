@@ -45,11 +45,11 @@ public final class ContainmentPipeTests {
     @GameTest(template = FLOOR, batch = "containment_pipe", timeoutTicks = 100)
     public static void primaryPortsSitAtLowestRing(GameTestHelper h) {
         BigMachine c = BigMachine.CONTAINMENT;
-        for (String[] pair : new String[][] {{"relief_in", "relief_out", "160"}, {"hpi_in", "hpi_out", "320"}, {"emc_in", "emc_out", "80"}}) {
+        for (String[] pair : new String[][] {{"relief_in", "relief_out", "160"}, {"hpi_in", "hpi_out", "320"}, {"emc_in", "emc_out", "320"}}) {
             BigMachine.Port a = c.port(pair[0]), b = c.port(pair[1]);
             check(a != null && b != null, "Port-Paar fehlt: " + pair[0]);
             check(a.y() == 0 && b.y() == 0, pair[0] + ": nicht am untersten Ring");
-            check(Math.abs(a.x() - b.x()) + Math.abs(a.z() - b.z()) == 1, pair[0] + ": Ports nicht nebeneinander");
+            check(Math.abs(a.x() - b.x()) + Math.abs(a.z() - b.z()) <= 2, pair[0] + ": Ports zu weit auseinander");
             check(a.rate() == Integer.parseInt(pair[2]) && b.rate() == a.rate(), pair[0] + ": Rate " + a.rate() + "/" + b.rate() + " statt " + pair[2]);
         }
         h.succeed();

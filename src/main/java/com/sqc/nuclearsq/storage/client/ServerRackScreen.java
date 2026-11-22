@@ -64,7 +64,7 @@ public class ServerRackScreen extends AbstractContainerScreen<ServerRackMenu> {
     @Override
     protected void renderBg(GuiGraphics g, float pt, int mx, int my) {
         int x = leftPos, y = topPos, w = imageWidth, h = imageHeight;
-        TermKit.monitor(g, x - 4, y - 4, w + 8, h + 8);
+        TermKit.monitor(g, x - 4, y - 4, w + 8, h + 8, 20);
         TermKit.header(g, font, title, t(menu.cards ? "cards" : "drives", menu.driveCount(), menu.driveSlots), x + 8, y + 7, w - 16, TermKit.MID);
         for (int i = 0; i < menu.driveSlots; i++) {
             Slot s = menu.slots.get(i);

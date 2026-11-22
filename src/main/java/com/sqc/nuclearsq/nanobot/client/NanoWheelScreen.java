@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class NanoWheelScreen extends Screen {
-    private static final int RX = 150, RY = 84, BW = 104, BH = 14, DEAD = 24;
+    private static final int RX = 150, RY = 104, BW = 120, BH = 14, DEAD = 24;
     private static final int TOGGLE = -1, GADGET = -2, SETTINGS = -3, BACK = -4;
     private boolean gadget;
 
@@ -76,8 +76,11 @@ public class NanoWheelScreen extends Screen {
             int x = cx + (int) Math.round(Math.sin(a) * RX), y = cy - (int) Math.round(Math.cos(a) * RY);
             if (i == hov) TermKit.line(g, cx, cy, x, y, TermKit.GREEN);
             int color = it[i] == TOGGLE ? TermKit.AMBER : it[i] < 0 ? TermKit.CYAN : TermKit.GREEN;
-            TermKit.button(g, font, x - BW / 2, y - BH / 2, BW, BH, label(it[i]), color, true, i == hov, it[i] == cur);
+            int bw = Math.min(BW, Math.max(60, font.width(label(it[i])) + 12));
+            TermKit.button(g, font, x - bw / 2, y - BH / 2, bw, BH, label(it[i]), color, true, i == hov, it[i] == cur);
         }
+        int tw = font.width(title);
+        g.fill(cx - tw / 2 - 5, cy - 7, cx + tw / 2 + 5, cy + 7, 0xC0000000);
         TermKit.center(g, font, title, cx, cy - 4, TermKit.MID);
     }
 

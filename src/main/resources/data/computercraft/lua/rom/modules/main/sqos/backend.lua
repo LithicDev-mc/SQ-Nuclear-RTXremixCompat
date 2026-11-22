@@ -87,6 +87,22 @@ local function pixelDriver(mon, name, opts, prefix)
         palVersion = 0, palette = {} }
     local ppb = opts.density or 128
     local drv = { kind = "pixel", target = mon, name = name, touchOnly = true }
+    local held, main = {}, nil
+    local function guard(f)
+        return function(...)
+            if not main or coroutine.running() ~= main then return f(...) end
+            local co = coroutine.create(f)
+            local r = table.pack(coroutine.resume(co, ...))
+            while coroutine.status(co) ~= "dead" do
+                local ev = table.pack(coroutine.yield())
+                held[#held + 1] = ev
+                if r[2] == nil or r[2] == ev[1] then r = table.pack(coroutine.resume(co, unpack(ev, 1, ev.n))) end
+            end
+            if not r[1] then error(r[2], 0) end
+            return unpack(r, 2, r.n)
+        end
+    end
+    mon = setmetatable({ batch = guard(mon.batch), getResolution = guard(mon.getResolution) }, { __index = mon })
     for i = 1, 16 do g.palette[i] = 0 end
     local view
 
@@ -136,6 +152,13 @@ local function pixelDriver(mon, name, opts, prefix)
 
     function drv.restore()
         pcall(mon.clear, 0)
+    end
+
+    function drv.hold(co)
+        main = co
+        return function()
+            return table.remove(held, 1)
+        end
     end
 
     local function cell(px, py)

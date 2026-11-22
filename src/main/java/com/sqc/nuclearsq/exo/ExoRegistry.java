@@ -17,6 +17,7 @@ import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
@@ -40,15 +41,17 @@ public final class ExoRegistry {
     private static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, NuclearSQ.MODID);
     private static final DeferredRegister<DataComponentType<?>> COMPONENTS = DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, NuclearSQ.MODID);
 
+    public static final TagKey<Item> REPAIR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, "exo_repair"));
+
     public static final DeferredHolder<ArmorMaterial, ArmorMaterial> MATERIAL = MATERIALS.register("exo", () -> {
         Map<ArmorItem.Type, Integer> def = new EnumMap<>(ArmorItem.Type.class);
-        def.put(ArmorItem.Type.HELMET, 2);
-        def.put(ArmorItem.Type.CHESTPLATE, 6);
-        def.put(ArmorItem.Type.LEGGINGS, 5);
-        def.put(ArmorItem.Type.BOOTS, 2);
+        def.put(ArmorItem.Type.HELMET, 4);
+        def.put(ArmorItem.Type.CHESTPLATE, 9);
+        def.put(ArmorItem.Type.LEGGINGS, 7);
+        def.put(ArmorItem.Type.BOOTS, 4);
         def.put(ArmorItem.Type.BODY, 5);
-        return new ArmorMaterial(def, 9, SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.EMPTY,
-                List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, "exo"))), 0f, 0f);
+        return new ArmorMaterial(def, 9, SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.of(REPAIR),
+                List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, "exo"))), 3f, 0.1f);
     });
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TIER = COMPONENTS.register("exo_tier",

@@ -1,0 +1,144 @@
+{
+  "textures": {
+    "clamp": "nuclearsq:block/cable_clamp_sqc",
+    "particle": "nuclearsq:block/cable_hardened_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        13.25,
+        7.5
+      ],
+      "to": [
+        16,
+        14.25,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        },
+        "east": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        "south": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        },
+        "west": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        "up": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        },
+        "down": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        1.75,
+        7.5
+      ],
+      "to": [
+        16,
+        2.75,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        },
+        "east": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        "south": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        },
+        "west": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        "up": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        },
+        "down": {
+          "texture": "#clamp",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        }
+      }
+    }
+  ]
+}

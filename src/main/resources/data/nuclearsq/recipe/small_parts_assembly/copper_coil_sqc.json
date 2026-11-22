@@ -5,17 +5,21 @@
       "ingredient": {
         "item": "minecraft:copper_ingot"
       },
-      "count": 61
+      "count": 16
     },
     {
       "ingredient": {
         "item": "minecraft:iron_bars"
       },
-      "count": 15
+      "count": 4
     }
   ],
   "result": {
     "id": "nuclearsq:copper_coil_sqc",
     "count": 1
-  }
+  },
+  "hardcore_counts": [
+    61,
+    15
+  ]
 }

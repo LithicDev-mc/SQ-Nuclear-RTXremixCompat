@@ -2,9 +2,9 @@
   "type": "nuclearsq:heavy_assembly",
   "pattern": [
     "crrrc",
-    "rL@Lr",
+    " L@L ",
     "ufCfu",
-    "rieLr",
+    " ieL ",
     "crhrm"
   ],
   "key": {
@@ -47,5 +47,12 @@
     "count": 1
   },
   "time": 400,
-  "energy_per_tick": 9600
+  "energy_per_tick": 9600,
+  "hardcore_pattern": [
+    "crrrc",
+    "rL@Lr",
+    "ufCfu",
+    "rieLr",
+    "crhrm"
+  ]
 }

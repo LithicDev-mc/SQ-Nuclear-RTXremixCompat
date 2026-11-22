@@ -1,0 +1,27 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_1_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:coal_block"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:chest"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:coal_generator_card_buffer_sqc",
+    "count": 1
+  }
+}

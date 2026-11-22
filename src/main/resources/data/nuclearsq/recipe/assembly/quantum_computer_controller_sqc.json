@@ -41,7 +41,7 @@
       "ingredient": {
         "item": "nuclearsq:quantum_module_sqc"
       },
-      "count": 8
+      "count": 2
     },
     {
       "ingredient": {
@@ -53,5 +53,15 @@
   "result": {
     "id": "nuclearsq:quantum_computer_controller_sqc",
     "count": 1
-  }
+  },
+  "hardcore_counts": [
+    2,
+    2,
+    1,
+    4,
+    8,
+    8,
+    8,
+    1
+  ]
 }

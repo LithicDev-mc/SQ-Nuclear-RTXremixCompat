@@ -4,20 +4,20 @@
     "item": "minecraft:iron_nugget"
   },
   "count": 1,
-  "time": 160,
+  "time": 240,
   "energy_per_tick": 2100,
   "results": [
     {
       "item": {
         "id": "nuclearsq:hdpe_sheet_sqc",
-        "count": 4
+        "count": 2
       }
     }
   ],
   "fluids": [
     {
       "port": "ethylene_in",
-      "amount": 500
+      "amount": 1000
     }
   ]
 }

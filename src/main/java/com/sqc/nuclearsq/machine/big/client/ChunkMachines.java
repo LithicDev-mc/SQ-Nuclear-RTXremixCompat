@@ -103,7 +103,7 @@ public final class ChunkMachines {
 
     static boolean chunkable(BigMachineBlockEntity be) {
         return be.machine().chunkBaked() && NuclearClientConfig.chunkBaking() && BakedMachines.active()
-                && !((be.machine().isCoolingTower() || be.machine() == BigMachine.INTAKE_PUMP) && shaderOn())
+                && !shaderOn()
                 && !be.isRemoved() && be.formedRot() >= 0 && be.getLevel() != null;
     }
 
@@ -114,8 +114,8 @@ public final class ChunkMachines {
     private static final boolean SODIUM = net.neoforged.fml.ModList.get().isLoaded("sodium");
 
     private static boolean fits(BigMachineBlockEntity be) {
-        if (!SODIUM) return false;
         BigMachine m = be.machine();
+        if (!SODIUM || m == BigMachine.CONTAINMENT) return false;
         int rot = be.formedRot();
         BlockPos pos = be.getBlockPos();
         BlockPos a = m.structure.world(pos, rot, 0, 0, 0), b = m.structure.world(pos, rot, m.w - 1, m.h - 1, m.d - 1);

@@ -2,8 +2,8 @@
   "type": "nuclearsq:heavy_assembly",
   "pattern": [
     "crrrc",
-    "r%@%r",
-    "rKCKr",
+    " %@% ",
+    " KCK ",
     "cgerm"
   ],
   "key": {
@@ -40,5 +40,11 @@
     "count": 1
   },
   "time": 400,
-  "energy_per_tick": 9600
+  "energy_per_tick": 9600,
+  "hardcore_pattern": [
+    "crrrc",
+    "r%@%r",
+    "rKCKr",
+    "cgerm"
+  ]
 }

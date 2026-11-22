@@ -11,19 +11,19 @@
       "ingredient": {
         "item": "minecraft:gold_ingot"
       },
-      "count": 2
+      "count": 4
     },
     {
       "ingredient": {
         "item": "minecraft:quartz"
       },
-      "count": 2
+      "count": 6
     },
     {
       "ingredient": {
         "item": "minecraft:redstone"
       },
-      "count": 2
+      "count": 6
     },
     {
       "ingredient": {
@@ -35,12 +35,12 @@
       "ingredient": {
         "item": "nuclearsq:chip_2_sqc"
       },
-      "count": 1
+      "count": 2
     }
   ],
   "result": {
     "id": "nuclearsq:cpu_module_8_sqc",
     "count": 1
   },
-  "time": 120
+  "time": 240
 }

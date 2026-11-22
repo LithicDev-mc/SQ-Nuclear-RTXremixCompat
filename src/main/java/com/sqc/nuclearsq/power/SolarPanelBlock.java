@@ -41,7 +41,7 @@ public class SolarPanelBlock extends Block implements EntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof SolarPanelBlockEntity be) {
-            player.displayClientMessage(Component.translatable("message.nuclearsq.solar.status", be.rate(), be.peak(), be.delivered()), true);
+            player.displayClientMessage(Component.translatable("message.nuclearsq.solar.status", be.rate(), be.peak(), be.delivered(), be.stored(), be.capacity()), true);
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
     }

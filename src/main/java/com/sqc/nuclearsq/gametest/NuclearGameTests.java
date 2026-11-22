@@ -302,6 +302,12 @@ public final class NuclearGameTests {
         return be.tank(port).fill(new FluidStack(f, mb), IFluidHandler.FluidAction.SIMULATE);
     }
 
+    private static void keepEmergencyFlowing(BigMachineBlockEntity be) {
+        net.neoforged.neoforge.fluids.capability.templates.FluidTank water = be.tank("water_in"), out = be.tank("primary_out");
+        if (water.getSpace() > 0) water.fill(new FluidStack(Fluids.WATER, water.getSpace()), IFluidHandler.FluidAction.EXECUTE);
+        if (out.getFluidAmount() > 4000) out.drain(out.getFluidAmount() - 4000, IFluidHandler.FluidAction.EXECUTE);
+    }
+
     private static void charge(BigMachineBlockEntity be) {
         while (be.energy().receiveEnergy(1000, false) > 0) { }
     }
@@ -699,6 +705,39 @@ public final class NuclearGameTests {
         });
     }
 
+    @GameTest(template = FLOOR, batch = "big_steam_chain", timeoutTicks = 100)
+    public static void dryerPassesDrySteamFromSeparator(GameTestHelper h) {
+        BigMachineBlockEntity dry = buildBig(h, BigMachine.STEAM_DRYER, new BlockPos(2, 4, 2));
+        fill(dry, "wet_steam_in", ModFluids.STEAM.source.get(), 400);
+        h.runAfterDelay(60, () -> {
+            formed(dry);
+            expect(dry, "wet_steam_in", ModFluids.STEAM.source.get(), 0);
+            expect(dry, "steam_out", ModFluids.STEAM.source.get(), 400);
+            expect(dry, "water_out", Fluids.WATER, 0);
+            h.succeed();
+        });
+    }
+
+    @GameTest(template = FLOOR, batch = "big_tower_part_load", timeoutTicks = 100)
+    public static void coolingTowerEvaporatesInProportion(GameTestHelper h) {
+        BigMachineBlockEntity be = buildBig(h, BigMachine.COOLING_TOWER_LARGE, new BlockPos(1, 4, 1));
+        BigMachine.Port in = be.machine().port("coolant_in");
+        int evap = be.machine().extra("evaporation_mb_t"), part = in.rate() / 4;
+        int[] fed = {0};
+        h.onEachTick(() -> {
+            if (be.isFormed() && fed[0] < 40) {
+                fill(be, "coolant_in", ModFluids.HOT_COOLANT.source.get(), part);
+                fed[0]++;
+            }
+        });
+        h.runAfterDelay(80, () -> {
+            formed(be);
+            if (fed[0] != 40) throw new GameTestAssertException("Testaufbau: nur " + fed[0] + " Ticks gespeist");
+            expect(be, "coolant_out", ModFluids.COOLANT.source.get(), part * 40 - evap * 10);
+            h.succeed();
+        });
+    }
+
     @GameTest(template = FLOOR, batch = "big_steam_generator", timeoutTicks = 80)
     public static void bigSteamGeneratorIdlesWithoutPrimary(GameTestHelper h) {
         BigMachineBlockEntity be = buildBig(h, BigMachine.STEAM_GENERATOR, new BlockPos(2, 4, 2));
@@ -803,6 +842,31 @@ public final class NuclearGameTests {
             if (drive.vesselDry()) throw new GameTestAssertException("Durchfluss reisst trotz Dampferzeuger ab");
             if (drive.signalOut() <= 0) throw new GameTestAssertException("Kein Flux-Signal am Antrieb trotz Leistung");
             if (sg.lastMb() < 60) throw new GameTestAssertException("Dampferzeuger macht zu wenig Nassdampf: " + sg.lastMb() + " mB/t");
+            drive.scram();
+            h.succeed();
+        });
+    }
+
+    @GameTest(template = FLOOR, batch = "big_pump_dry", timeoutTicks = 600)
+    public static void dryMainCoolantPumpStopsDriveFlow(GameTestHelper h) {
+        BigMachineBlockEntity drive = rodDrive(h, new BlockPos(2, 4, 2));
+        BigMachineBlockEntity pump = buildBig(h, BigMachine.MAIN_COOLANT_PUMP, new BlockPos(2, 4, 10));
+        twoRods(h, drive);
+        h.onEachTick(() -> {
+            charge(pump);
+            drive.tank("primary_cold_in").fill(new FluidStack(ModFluids.PRIMARY_WATER.source.get(), 32000), IFluidHandler.FluidAction.EXECUTE);
+            drive.tank("primary_hot_out").drain(100000, IFluidHandler.FluidAction.EXECUTE);
+        });
+        h.runAfterDelay(25, () -> {
+            formed(drive);
+            formed(pump);
+            for (int k = 0; k < 9; k++) drive.setShaftLocked(k, true);
+            drive.setRodTarget(15);
+        });
+        h.runAfterDelay(500, () -> {
+            if (drive.pumpFlow() != 0) throw new GameTestAssertException("Trockene Pumpe meldet " + drive.pumpFlow() + " mB/t an den Antrieb");
+            if (pump.lastMb() != 0) throw new GameTestAssertException("Trockene Pumpe zeigt " + pump.lastMb() + " mB/t");
+            if (!drive.vesselDry()) throw new GameTestAssertException("Antrieb laeuft ohne Umwaelzung weiter");
             drive.scram();
             h.succeed();
         });
@@ -967,17 +1031,29 @@ public final class NuclearGameTests {
 
     @GameTest(template = FLOOR, batch = "compendium_loop", timeoutTicks = 20)
     public static void reactorLoopPageIsComplete(GameTestHelper h) {
-        var nodes = com.sqc.nuclearsq.progression.ReactorLoop.NODES;
-        int ring = com.sqc.nuclearsq.progression.ReactorLoop.RING;
-        int[] order = com.sqc.nuclearsq.progression.ReactorLoop.ORDER;
+        var d = com.sqc.nuclearsq.progression.ReactorLoop.DIAGRAM;
+        var nodes = d.nodes();
+        int[] order = d.order();
         if (order.length != nodes.size()) h.fail("Reihenfolge hat " + order.length + " statt " + nodes.size() + " Eintraege");
         java.util.Set<Integer> seen = new java.util.HashSet<>();
-        for (int s = 0; s < order.length; s++) {
-            int k = order[s];
+        for (int k : order) {
+            if (k < 0 || k >= nodes.size()) h.fail("Knoten " + k + " gibt es nicht");
             if (!seen.add(k)) h.fail("Knoten " + k + " doppelt in der Reihenfolge");
-            int par = nodes.get(k).parent();
-            if (k >= ring && (par < 0 || par >= ring)) h.fail(nodes.get(k).key() + ": Ast haengt an keinem Ringknoten");
-            if (k < ring && par >= 0) h.fail(nodes.get(k).key() + ": Ringknoten mit Elternknoten");
+        }
+        java.util.Set<String> kinds = new java.util.HashSet<>();
+        java.util.Set<Integer> linked = new java.util.HashSet<>();
+        for (var f : d.flows()) {
+            if (f.from() < 0 || f.from() >= nodes.size() || f.to() < 0 || f.to() >= nodes.size() || f.from() == f.to())
+                h.fail("Leitung " + f.kind() + " verbindet ungueltige Knoten");
+            if (f.path().length < 4 || f.path().length % 2 != 0) h.fail("Leitung " + f.kind() + " hat keinen gueltigen Weg");
+            kinds.add(f.kind());
+            linked.add(f.from());
+            linked.add(f.to());
+        }
+        for (int k = 0; k < nodes.size(); k++) {
+            var n = nodes.get(k);
+            if (!linked.contains(k)) h.fail(n.key() + " haengt an keiner Leitung");
+            if (n.x() < 0 || n.x() > d.width() || n.y() < 0 || n.y() > d.height()) h.fail(n.key() + " liegt ausserhalb der Seite");
         }
         for (String lang : List.of("de_de", "en_us")) {
             com.google.gson.JsonObject l;
@@ -993,6 +1069,8 @@ public final class NuclearGameTests {
                     if (!l.has("compendium.loop." + n.key() + "." + part)) h.fail(lang + ": compendium.loop." + n.key() + "." + part + " fehlt");
                 if (!l.has("compendium." + n.page() + ".title")) h.fail(lang + ": Zielseite " + n.page() + " hat keinen Titel");
             }
+            for (String kind : kinds)
+                if (!l.has("compendium.loop.pwr_flow." + kind)) h.fail(lang + ": compendium.loop.pwr_flow." + kind + " fehlt");
         }
         for (var n : nodes) {
             var it = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, n.item()));
@@ -1004,16 +1082,32 @@ public final class NuclearGameTests {
     @GameTest(template = FLOOR, batch = "compendium_loop", timeoutTicks = 20)
     public static void primaryLoopPageIsComplete(GameTestHelper h) {
         var nodes = com.sqc.nuclearsq.progression.PrimaryLoop.NODES;
-        int ring = com.sqc.nuclearsq.progression.PrimaryLoop.RING;
+        var flows = com.sqc.nuclearsq.progression.PrimaryLoop.FLOWS;
         int[] order = com.sqc.nuclearsq.progression.PrimaryLoop.ORDER;
         if (order.length != nodes.size()) h.fail("Reihenfolge hat " + order.length + " statt " + nodes.size() + " Eintraege");
         java.util.Set<Integer> seen = new java.util.HashSet<>();
         for (int k : order) {
+            if (k < 0 || k >= nodes.size()) h.fail("Knoten " + k + " gibt es nicht");
             if (!seen.add(k)) h.fail("Knoten " + k + " doppelt in der Reihenfolge");
-            int par = nodes.get(k).parent();
-            if (k >= ring && (par < 0 || par >= ring)) h.fail(nodes.get(k).key() + ": Ast haengt an keinem Ringknoten");
-            if (k < ring && par >= 0) h.fail(nodes.get(k).key() + ": Ringknoten mit Elternknoten");
         }
+        java.util.Set<String> keys = new java.util.HashSet<>();
+        for (var n : nodes) {
+            if (!keys.add(n.key())) h.fail("Knoten " + n.key() + " doppelt");
+            if (n.x() < 0 || n.x() > com.sqc.nuclearsq.progression.PrimaryLoop.WIDTH || n.y() < 0 || n.y() > com.sqc.nuclearsq.progression.PrimaryLoop.HEIGHT)
+                h.fail(n.key() + " liegt ausserhalb der Seite");
+        }
+        if (keys.contains("pwr_pressurizer")) h.fail("Druckhalter gehoert nicht mehr in den Grundkreis");
+        for (String want : List.of("pwr_containment", "pwr_drive", "pwr_steam_generator", "pwr_pump", "pwr_emergency", "pwr_intake", "pwr_treatment", "pwr_separator", "turbine"))
+            if (!keys.contains(want)) h.fail("Grundkreis ohne " + want);
+        java.util.Set<String> kinds = new java.util.HashSet<>();
+        for (var f : flows) {
+            if (f.from() < 0 || f.from() >= nodes.size() || f.to() < 0 || f.to() >= nodes.size() || f.from() == f.to())
+                h.fail("Leitung " + f.kind() + " verbindet ungueltige Knoten");
+            if (f.path().length < 4 || f.path().length % 2 != 0) h.fail("Leitung " + f.kind() + " hat keinen gueltigen Weg");
+            kinds.add(f.kind());
+        }
+        if (!kinds.contains("bigpipe")) h.fail("Grossrohr fehlt im Grundkreis");
+        if (!kinds.contains("hydraulic")) h.fail("Hydraulik fehlt im Grundkreis");
         for (String lang : List.of("de_de", "en_us")) {
             com.google.gson.JsonObject l;
             try (var in = NuclearGameTests.class.getResourceAsStream("/assets/" + NuclearSQ.MODID + "/lang/" + lang + ".json")) {
@@ -1029,11 +1123,80 @@ public final class NuclearGameTests {
                     if (!l.has("compendium.loop." + n.key() + "." + part)) h.fail(lang + ": compendium.loop." + n.key() + "." + part + " fehlt");
                 if (!l.has("compendium." + n.page() + ".title")) h.fail(lang + ": Zielseite " + n.page() + " hat keinen Titel");
             }
+            for (String kind : kinds)
+                if (!l.has("compendium.loop.pwr_flow." + kind)) h.fail(lang + ": compendium.loop.pwr_flow." + kind + " fehlt");
         }
         for (var n : nodes) {
             var it = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, n.item()));
             if (it == net.minecraft.world.item.Items.AIR) h.fail(n.key() + ": Item " + n.item() + " ist nicht registriert");
         }
+        h.succeed();
+    }
+
+    @GameTest(template = FLOOR, batch = "compendium_loop", timeoutTicks = 20)
+    public static void reactorFluidsPageIsComplete(GameTestHelper h) {
+        var fluids = com.sqc.nuclearsq.progression.ReactorFluids.FLUIDS;
+        java.util.Set<String> pages = CompendiumPageTests.pageIds();
+        if (!pages.contains("reactor_fluids")) h.fail("Seite reactor_fluids fehlt in der Struktur");
+        java.util.Set<String> keys = new java.util.HashSet<>(), machines = new java.util.TreeSet<>(), langKeys = new java.util.TreeSet<>();
+        List<String> problems = new java.util.ArrayList<>();
+        for (var f : fluids) {
+            if (!keys.add(f.key())) problems.add("Stoff " + f.key() + " doppelt");
+            var fluid = net.minecraft.core.registries.BuiltInRegistries.FLUID.get(net.minecraft.resources.ResourceLocation.parse(f.fluid()));
+            if (fluid == Fluids.EMPTY) { problems.add(f.key() + ": Fluid " + f.fluid() + " fehlt"); continue; }
+            FluidStack fs = new FluidStack(fluid, 1);
+            if (f.links().isEmpty()) problems.add(f.key() + ": kein Baum");
+            if (!f.fluid().startsWith("minecraft:")) langKeys.add(f.nameKey());
+            langKeys.add("compendium.fluids." + f.key() + ".text");
+            for (var link : f.links()) {
+                if (link.to().isEmpty()) problems.add(f.key() + ": " + link.from().machine() + " fuehrt nirgends hin");
+                java.util.List<com.sqc.nuclearsq.progression.ReactorFluids.End> ends = new java.util.ArrayList<>(link.to());
+                ends.add(0, link.from());
+                for (int i = 0; i < ends.size(); i++) {
+                    var e = ends.get(i);
+                    boolean out = i == 0;
+                    machines.add(e.machine());
+                    String page = com.sqc.nuclearsq.progression.ReactorFluids.PAGES.get(e.machine());
+                    if (page == null || !pages.contains(page)) problems.add(e.machine() + ": Seite " + page + " fehlt");
+                    var it = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID,
+                            com.sqc.nuclearsq.progression.ReactorFluids.controllerItem(e.machine())));
+                    if (it == net.minecraft.world.item.Items.AIR) problems.add(e.machine() + ": Controller-Item fehlt");
+                    for (String pn : e.ports()) {
+                        langKeys.add(com.sqc.nuclearsq.progression.ReactorFluids.portKey(e.machine(), pn));
+                        String where = f.key() + ": " + e.machine() + "." + pn;
+                        if (com.sqc.nuclearsq.progression.ReactorFluids.TURBINE.equals(e.machine())) {
+                            if (out && !(pn.equals("water") && fluid == ModFluids.EXHAUST_STEAM.source.get())) problems.add(where + " gibt das nicht ab");
+                            if (!out && !(pn.equals("steam") && fs.is(com.sqc.nuclearsq.turbine.TurbineControllerBlockEntity.TURBINE_STEAM))) problems.add(where + " nimmt das nicht");
+                            continue;
+                        }
+                        BigMachine m;
+                        try {
+                            m = BigMachine.valueOf(e.machine().toUpperCase(java.util.Locale.ROOT));
+                        } catch (IllegalArgumentException ex) {
+                            problems.add(where + ": Maschine unbekannt");
+                            continue;
+                        }
+                        BigMachine.Port port = m.port(pn);
+                        if (port == null) { problems.add(where + ": Anschluss fehlt"); continue; }
+                        if (out ? !port.out() : !port.in()) problems.add(where + ": falsche Richtung " + port.dir());
+                        if (!BigMachineBlockEntity.accepts(m, port).test(fs)) problems.add(where + ": Tank nimmt " + f.fluid() + " nicht");
+                    }
+                }
+            }
+        }
+        for (String m : machines) langKeys.add("compendium.fluids.m." + m);
+        langKeys.addAll(List.of("compendium.reactor_fluids.title", "compendium.reactor_fluids.text", "compendium.fluids.from", "compendium.fluids.to",
+                "compendium.fluids.rate", "compendium.loop.open"));
+        for (String lang : List.of("de_de", "en_us", "ru_ru")) {
+            com.google.gson.JsonObject l;
+            try (var in = NuclearGameTests.class.getResourceAsStream("/assets/" + NuclearSQ.MODID + "/lang/" + lang + ".json")) {
+                l = com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
+            } catch (Exception ex) {
+                throw new GameTestAssertException(lang + " nicht lesbar: " + ex);
+            }
+            for (String k : langKeys) if (!l.has(k)) problems.add(lang + ": " + k + " fehlt");
+        }
+        if (!problems.isEmpty()) throw new GameTestAssertException(problems.size() + " Probleme: " + String.join("; ", problems));
         h.succeed();
     }
 
@@ -1392,6 +1555,28 @@ public final class NuclearGameTests {
                 }
                 h.succeed();
             });
+        });
+    }
+
+    @GameTest(template = FLOOR, batch = "transport_fluid_branch", timeoutTicks = 140)
+    public static void pipesSkipDeadEndBranch(GameTestHelper h) {
+        Block pipe = com.sqc.nuclearsq.transport.TransportRegistry.PIPES.get(com.sqc.nuclearsq.transport.TransportTier.BASIC).get();
+        BlockPos src = new BlockPos(2, 4, 2), shower = new BlockPos(6, 4, 2), b1 = new BlockPos(4, 4, 3), b2 = new BlockPos(4, 4, 4);
+        h.setBlock(src, com.sqc.nuclearsq.registry.TestSourceRegistry.FLUID_SOURCE.get());
+        for (int x = 3; x <= 5; x++) h.setBlock(new BlockPos(x, 4, 2), pipe);
+        h.setBlock(b1, pipe);
+        h.setBlock(b2, pipe);
+        h.setBlock(shower, com.sqc.nuclearsq.radiation.ProtectionRegistry.SHOWER.get());
+        com.sqc.nuclearsq.radiation.DeconShowerBlockEntity t = h.getBlockEntity(shower);
+        int[] stray = {0};
+        h.onEachTick(() -> {
+            com.sqc.nuclearsq.transport.ConduitBlockEntity p1 = h.getBlockEntity(b1), p2 = h.getBlockEntity(b2);
+            stray[0] = Math.max(stray[0], p1.fluid().getAmount() + p2.fluid().getAmount());
+        });
+        h.runAfterDelay(100, () -> {
+            if (t.tank().getFluidAmount() <= 0) throw new GameTestAssertException("Rohre bringen kein Wasser in die Dusche");
+            if (stray[0] > 0) throw new GameTestAssertException("Wasser laeuft in den toten Abzweig: " + stray[0] + " mB");
+            h.succeed();
         });
     }
 
@@ -2057,18 +2242,14 @@ public final class NuclearGameTests {
     }
 
     @GameTest(template = FLOOR, batch = "big_emergency", timeoutTicks = 120)
-    public static void bigEmergencyCoolingNeedsSignal(GameTestHelper h) {
+    public static void bigEmergencyCoolingRunsWithPower(GameTestHelper h) {
         BigMachineBlockEntity be = buildBig(h, BigMachine.EMERGENCY_COOLING, new BlockPos(2, 4, 2));
         charge(be);
-        fill(be, "water_in", Fluids.WATER, 4000);
+        h.onEachTick(() -> keepEmergencyFlowing(be));
         h.runAfterDelay(40, () -> {
             formed(be);
-            expect(be, "primary_out", ModFluids.PRIMARY_WATER.source.get(), 0);
-            h.getLevel().setBlockAndUpdate(be.getBlockPos().north(), Blocks.REDSTONE_BLOCK.defaultBlockState());
-        });
-        h.runAfterDelay(80, () -> {
             int fw = be.tank("primary_out").getFluidAmount();
-            if (fw <= 0 || !be.isRunning()) throw new GameTestAssertException("Notkuehlung laeuft mit Signal nicht: " + fw);
+            if (be.manual() || fw <= 0 || !be.isRunning()) throw new GameTestAssertException("Notkuehlung laeuft mit Strom ohne Signal nicht: " + fw + " " + be.stateKey());
             h.succeed();
         });
     }
@@ -2097,7 +2278,7 @@ public final class NuclearGameTests {
     public static void bigEmergencyCoolingManualRunsWithoutSignal(GameTestHelper h) {
         BigMachineBlockEntity be = buildBig(h, BigMachine.EMERGENCY_COOLING, new BlockPos(2, 4, 2));
         charge(be);
-        fill(be, "water_in", Fluids.WATER, 4000);
+        h.onEachTick(() -> keepEmergencyFlowing(be));
         be.setManual(true);
         h.runAfterDelay(60, () -> {
             formed(be);
@@ -2196,6 +2377,30 @@ public final class NuclearGameTests {
             if (used < Math.min(64000, rate * 30) || used > rate * 41 || used % rate != 0) throw new GameTestAssertException("Foerdermenge " + used + " mB nach 40 Ticks");
             if (flow[0] != rate) throw new GameTestAssertException("Antrieb bekommt " + flow[0] + " statt " + rate + " mB/t gemeldet");
             if (!be.isRunning()) throw new GameTestAssertException("Pumpe gilt nicht als laufend");
+            h.succeed();
+        });
+    }
+
+    @GameTest(template = FLOOR, batch = "big_pump_full", timeoutTicks = 100)
+    public static void mainCoolantPumpShowsFlowInFullLoop(GameTestHelper h) {
+        BigMachineBlockEntity drive = rodDrive(h, new BlockPos(2, 4, 2));
+        BigMachineBlockEntity be = buildBig(h, BigMachine.MAIN_COOLANT_PUMP, new BlockPos(10, 4, 4));
+        BigMachineBlockEntity off = buildBig(h, BigMachine.MAIN_COOLANT_PUMP, new BlockPos(10, 4, 10));
+        charge(be);
+        for (BigMachineBlockEntity p : new BigMachineBlockEntity[] {be, off}) {
+            fill(p, "primary_in", ModFluids.PRIMARY_WATER.source.get(), p.tank("primary_in").getCapacity());
+            fill(p, "primary_out", ModFluids.PRIMARY_WATER.source.get(), p.tank("primary_out").getCapacity());
+        }
+        h.runAfterDelay(20, () -> {
+            formed(be);
+            formed(off);
+            formed(drive);
+            int rate = be.machine().port("primary_in").rate();
+            if (be.lastMb() != rate) throw new GameTestAssertException("Volle Pumpe mit Strom zeigt " + be.lastMb() + " statt " + rate + " mB/t");
+            if (!be.isRunning()) throw new GameTestAssertException("Volle Pumpe mit Strom gilt nicht als laufend");
+            if (drive.pumpFlow() != rate) throw new GameTestAssertException("Antrieb bekommt " + drive.pumpFlow() + " statt " + rate + " mB/t");
+            if (off.lastMb() != 0) throw new GameTestAssertException("Pumpe ohne Strom zeigt " + off.lastMb() + " mB/t");
+            if (be.tank("primary_in").getSpace() != 0 || be.tank("primary_out").getSpace() != 0) throw new GameTestAssertException("Volle Tanks veraendert");
             h.succeed();
         });
     }
@@ -2730,10 +2935,10 @@ public final class NuclearGameTests {
             if (be.crafter().status() != com.sqc.nuclearsq.machine.big.BigCrafter.OK) throw new GameTestAssertException("Zustand " + be.crafter().status() + ", Akku " + sink.energy().getEnergyStored());
             if (be.items().getStackInSlot(0).getCount() != 1) throw new GameTestAssertException("Kohle nicht angezuendet: " + be.items().getStackInSlot(0));
             if (!be.isRunning()) throw new GameTestAssertException("Generator gilt nicht als laufend");
-            if (be.energy().getEnergyStored() > 160 || sink.energy().getEnergyStored() < 30 * 160) {
+            if (be.energy().getEnergyStored() > 720 || sink.energy().getEnergyStored() < 30 * 720) {
                 throw new GameTestAssertException("Strom: Generator " + be.energy().getEnergyStored() + ", Akku " + sink.energy().getEnergyStored());
             }
-            if (be.lastOut() != 160) throw new GameTestAssertException("Abgabe " + be.lastOut() + " statt 160 FE/t");
+            if (be.lastOut() != 720) throw new GameTestAssertException("Abgabe " + be.lastOut() + " statt 720 FE/t");
             h.succeed();
         });
     }
@@ -2746,12 +2951,43 @@ public final class NuclearGameTests {
             formed(be);
             int progress = be.crafter().progress();
             if (be.crafter().status() != com.sqc.nuclearsq.machine.big.BigCrafter.OUTPUT_FULL) throw new GameTestAssertException("Zustand " + be.crafter().status() + " statt kein Abnehmer");
-            if (be.energy().getEnergyStored() > 160) throw new GameTestAssertException("Generator speichert " + be.energy().getEnergyStored() + " FE");
+            if (be.energy().getEnergyStored() > 720) throw new GameTestAssertException("Generator speichert " + be.energy().getEnergyStored() + " FE");
             h.runAfterDelay(20, () -> {
                 if (be.crafter().progress() != progress) throw new GameTestAssertException("Brennt ohne Abnehmer weiter: " + progress + " -> " + be.crafter().progress());
                 if (be.items().getStackInSlot(0).getCount() < 1) throw new GameTestAssertException("Kohle verbraucht ohne Abnehmer");
                 h.succeed();
             });
+        });
+    }
+
+    @GameTest(template = FLOOR, batch = "coal_generator", timeoutTicks = 100)
+    public static void coalGeneratorCards(GameTestHelper h) {
+        BigMachineBlockEntity be = buildBig(h, BigMachine.COAL_GENERATOR, new BlockPos(3, 4, 3));
+        var cards = com.sqc.nuclearsq.registry.PowerRegistry.COAL_CARDS;
+        if (!be.itemsAt("item_in").insertItem(1, new ItemStack(cards.get(0).get()), true).is(cards.get(0).get())) throw new GameTestAssertException("Trichter setzt Karten ein");
+        be.items().setStackInSlot(1, new ItemStack(cards.get(0).get(), 8));
+        be.items().setStackInSlot(2, new ItemStack(cards.get(1).get(), 4));
+        be.items().setStackInSlot(3, new ItemStack(cards.get(2).get(), 2));
+        for (int i = 0; i < 3; i++) {
+            if (!net.neoforged.neoforge.items.ItemHandlerHelper.insertItem(be.itemsAt("item_in"), new ItemStack(net.minecraft.world.item.Items.COAL, 64), false).isEmpty()) {
+                throw new GameTestAssertException("Brennstofffeld nimmt keinen Stapel " + (i + 1));
+            }
+        }
+        if (net.neoforged.neoforge.items.ItemHandlerHelper.insertItem(be.itemsAt("item_in"), new ItemStack(net.minecraft.world.item.Items.COAL, 1), false).isEmpty()) {
+            throw new GameTestAssertException("Brennstofffeld nimmt mehr als 3 Stapel");
+        }
+        BlockPos out = BigMachine.COAL_GENERATOR.structure.world(be.getBlockPos(), 0, 3, 0, 1);
+        BigMachineBlockEntity sink = TestSinks.batteryAt(h, out, Direction.WEST);
+        h.runAfterDelay(60, () -> {
+            formed(be);
+            formed(sink);
+            if (be.lastOut() != 3200) throw new GameTestAssertException("Abgabe " + be.lastOut() + " statt 3200 FE/t");
+            if (be.crafter().maxProgress() != 1600 * 50 * 10000 / (100 * 35560)) throw new GameTestAssertException("Brenndauer " + be.crafter().maxProgress());
+            if (be.items().getStackInSlot(0).getCount() != 64 || be.crafter().needed() != 127) throw new GameTestAssertException("Vorrat " + be.items().getStackInSlot(0) + " und " + be.crafter().needed());
+            for (int i = 1; i < 4; i++) {
+                if (!be.itemsAt("item_out").extractItem(i, 8, true).isEmpty()) throw new GameTestAssertException("Ausgang gibt Karte " + i + " her");
+            }
+            h.succeed();
         });
     }
 
@@ -2769,16 +3005,34 @@ public final class NuclearGameTests {
         lvl.setBlockAndUpdate(panelPos, com.sqc.nuclearsq.registry.PowerRegistry.SOLAR_PANEL.get().defaultBlockState());
         h.runAfterDelay(30, () -> {
             formed(field);
+            for (MultiblockStructure.Cell c : BigMachine.SOLAR_FIELD.structure.cells(field.getBlockPos(), field.formedRot())) {
+                BlockState st = lvl.getBlockState(c.pos());
+                if (st.hasProperty(com.sqc.nuclearsq.reactor.ReactorCasingBlock.SKY)
+                        && (!st.getValue(com.sqc.nuclearsq.reactor.ReactorCasingBlock.SKY) || st.getLightBlock(lvl, c.pos()) != 0
+                        || st.isValidSpawn(lvl, c.pos(), net.minecraft.world.entity.EntityType.ZOMBIE))) {
+                    throw new GameTestAssertException("Solarfeld-Gehaeuse sperrt Himmelslicht oder laesst Monster spawnen bei " + c.pos());
+                }
+            }
+            if (BigMachine.SOLAR_FIELD.extra("fe_per_tick_peak") != 2400 || field.energy().getMaxEnergyStored() != 1000000) {
+                throw new GameTestAssertException("Solarfeld-Spitze " + BigMachine.SOLAR_FIELD.extra("fe_per_tick_peak") + " (2400), Puffer " + field.energy().getMaxEnergyStored() + " (1000000)");
+            }
             if (!(lvl.getBlockEntity(panelPos) instanceof com.sqc.nuclearsq.power.SolarPanelBlockEntity panel)) throw new GameTestAssertException("Solarmodul ohne BlockEntity");
             if (panel.rate() <= 0) throw new GameTestAssertException("Solarmodul mittags ohne Strom: " + panel.rate());
             if (panel.delivered() != 0) throw new GameTestAssertException("Solarmodul ohne Abnehmer gibt " + panel.delivered() + " FE/t ab");
-            if (field.lastMb() <= 0 || !field.isRunning() || field.energy().getEnergyStored() > field.lastMb()) {
-                throw new GameTestAssertException("Solarfeld mittags: " + field.lastMb() + " FE/t, Puffer " + field.energy().getEnergyStored());
+            if (panel.capacity() != 69 * 400 || panel.stored() <= 0) throw new GameTestAssertException("Solarmodul puffert nicht: " + panel.stored() + " / " + panel.capacity());
+            if (field.lastMb() <= 0 || !field.isRunning() || field.energy().getEnergyStored() <= field.lastMb()) {
+                throw new GameTestAssertException("Solarfeld mittags ohne Abnehmer puffert nicht: " + field.lastMb() + " FE/t, Puffer " + field.energy().getEnergyStored());
             }
+            lvl.setDayTime(10000);
+            float fixed = com.sqc.nuclearsq.power.SolarMath.daylight(lvl), tracked = com.sqc.nuclearsq.power.SolarMath.trackedDaylight(lvl);
+            if (fixed > 0.9f || tracked < 0.95f) throw new GameTestAssertException("Nachfuehrung am Nachmittag: fest " + fixed + ", nachgefuehrt " + tracked);
             lvl.setDayTime(18000);
+            if (com.sqc.nuclearsq.power.SolarMath.trackedDaylight(lvl) != 0f) throw new GameTestAssertException("Nachfuehrung nachts nicht 0");
+            int stored = field.energy().getEnergyStored();
             h.runAfterDelay(50, () -> {
                 if (panel.rate() != 0) throw new GameTestAssertException("Solarmodul nachts: " + panel.rate());
                 if (field.lastMb() != 0 || field.isRunning()) throw new GameTestAssertException("Solarfeld nachts: " + field.lastMb());
+                if (field.energy().getEnergyStored() < stored) throw new GameTestAssertException("Solarfeld-Puffer ohne Abnehmer verliert Strom: " + field.energy().getEnergyStored() + " < " + stored);
                 lvl.setDayTime(6000);
                 h.succeed();
             });
@@ -2804,8 +3058,8 @@ public final class NuclearGameTests {
                 if (be.energy().getEnergyStored() > be.lastMb()) throw new GameTestAssertException(be.machine().id + " speichert Strom: " + be.energy().getEnergyStored());
                 if (!be.isGenerator() || be.generatorPeak() != peak) throw new GameTestAssertException(be.machine().id + " ist kein Erzeuger mit Spitze " + peak);
             }
-            if (BigMachine.WIND_TURBINE_SMALL.extra("fe_per_tick_peak") != 88 || BigMachine.WIND_TURBINE_MEDIUM.extra("fe_per_tick_peak") != 440
-                    || BigMachine.WIND_TURBINE_LARGE.extra("fe_per_tick_peak") != 1760) throw new GameTestAssertException("Spitzenleistung der Windturbinen geaendert");
+            if (BigMachine.WIND_TURBINE_SMALL.extra("fe_per_tick_peak") != 352 || BigMachine.WIND_TURBINE_MEDIUM.extra("fe_per_tick_peak") != 1760
+                    || BigMachine.WIND_TURBINE_LARGE.extra("fe_per_tick_peak") != 7040) throw new GameTestAssertException("Spitzenleistung der Windturbinen geaendert");
             h.succeed();
         });
     }
@@ -2845,7 +3099,7 @@ public final class NuclearGameTests {
             BigMachine m = be.machine();
             if (m.w != 35 || m.h != 72 || m.d != 14) throw new GameTestAssertException("Raster " + m.w + "x" + m.h + "x" + m.d);
             if (m.structure.charAt(m.extra("hub_x"), m.extra("hub_y"), m.extra("hub_z")) == ' ') throw new GameTestAssertException("Nabenfeld ist im Blockmuster leer");
-            if (be.lastMb() <= 0 || be.lastMb() > 1600) throw new GameTestAssertException("Windkraftanlage im Sturm: " + be.lastMb() + " FE/t, Zustand " + be.stateKey());
+            if (be.lastMb() <= 0 || be.lastMb() > 6400) throw new GameTestAssertException("Windkraftanlage im Sturm: " + be.lastMb() + " FE/t, Zustand " + be.stateKey());
             h.succeed();
         });
     }

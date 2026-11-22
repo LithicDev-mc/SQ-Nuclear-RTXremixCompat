@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/fast_breeder_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/fast_breeder_shell_sqc"
     }
   }
 }

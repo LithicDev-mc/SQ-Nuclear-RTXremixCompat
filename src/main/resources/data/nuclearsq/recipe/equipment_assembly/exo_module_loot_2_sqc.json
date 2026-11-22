@@ -11,6 +11,12 @@
       "ingredient": {
         "item": "nuclearsq:chip_1_sqc"
       },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_1_sqc"
+      },
       "count": 2
     }
   ],

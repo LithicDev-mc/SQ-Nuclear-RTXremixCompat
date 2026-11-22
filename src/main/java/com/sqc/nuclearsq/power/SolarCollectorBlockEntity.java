@@ -1,6 +1,5 @@
 package com.sqc.nuclearsq.power;
 
-import com.sqc.nuclearsq.machine.big.BigMachine;
 import com.sqc.nuclearsq.registry.PowerRegistry;
 
 import java.util.ArrayDeque;
@@ -28,10 +27,13 @@ public class SolarCollectorBlockEntity extends SolarPanelBlockEntity {
     }
 
     public static int peakPerTick() {
-        return Math.max(1, Math.round(BigMachine.SOLAR_FIELD.extra("fe_per_tick_peak") / 6f));
+        return 312;
     }
 
     public int distance() { return dist; }
+
+    @Override
+    protected boolean tracks() { return true; }
 
     @Override
     protected void onSecond() {

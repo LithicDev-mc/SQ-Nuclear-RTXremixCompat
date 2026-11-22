@@ -12,6 +12,12 @@
         "item": "minecraft:yellow_wool"
       },
       "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:string"
+      },
+      "count": 4
     }
   ],
   "result": {

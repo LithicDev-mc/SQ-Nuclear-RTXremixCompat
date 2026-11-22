@@ -44,9 +44,29 @@ public class AccessScreen extends Screen {
 
     @Override
     protected void init() {
-        name = new EditBox(font, left() + 8, top() + 118, 110, 14, t("name"));
+        name = new EditBox(font, left() + 11, top() + 121, 104, 10, t("name"));
+        name.setBordered(false);
         name.setMaxLength(32);
+        name.setTextColor(TermKit.tcol(TermKit.GREEN));
         addRenderableWidget(name);
+    }
+
+    @Override
+    protected void setInitialFocus() {
+        if (state.admin()) setInitialFocus(name);
+    }
+
+    private boolean add() {
+        if (name.getValue().isBlank()) return false;
+        send(AccessPayloads.SET, kind, name.getValue(), LEVELS[level]);
+        name.setValue("");
+        return true;
+    }
+
+    @Override
+    public boolean keyPressed(int key, int scan, int mods) {
+        if ((key == 257 || key == 335) && state.admin() && add()) return true;
+        return super.keyPressed(key, scan, mods);
     }
 
     private boolean over(double mx, double my, int x, int y, int w, int h) {
@@ -67,18 +87,13 @@ public class AccessScreen extends Screen {
             }
             if (over(mx, my, x + 122, y + 118, 36, 14)) { kind = 1 - kind; return true; }
             if (over(mx, my, x + 160, y + 118, 36, 14)) { level = (level + 1) % LEVELS.length; return true; }
-            if (over(mx, my, x + 198, y + 118, 34, 14) && !name.getValue().isBlank()) {
-                send(AccessPayloads.SET, kind, name.getValue(), LEVELS[level]);
-                name.setValue("");
-                return true;
-            }
+            if (over(mx, my, x + 198, y + 118, 34, 14) && add()) return true;
         }
         return super.mouseClicked(mx, my, button);
     }
 
     @Override
-    public void render(GuiGraphics g, int mx, int my, float pt) {
-        renderBackground(g, mx, my, pt);
+    public void renderBackground(GuiGraphics g, int mx, int my, float pt) {
         int x = left(), y = top();
         TermKit.monitor(g, x - 4, y - 4, W + 8, 158);
         TermKit.header(g, font, title, t("owner", state.owner()), x + 8, y + 8, W - 16, TermKit.MID);
@@ -95,6 +110,7 @@ public class AccessScreen extends Screen {
         }
         if (state.admin()) {
             TermKit.rule(g, x + 8, y + 112, W - 16, TermKit.FAINT);
+            TermKit.frame(g, font, x + 8, y + 118, 110, 14, null, name.isFocused() ? TermKit.MID : TermKit.FAINT);
             TermKit.button(g, font, x + 122, y + 118, 36, 14, t("kind." + kind), TermKit.AMBER, true, over(mx, my, x + 122, y + 118, 36, 14), false);
             TermKit.button(g, font, x + 160, y + 118, 36, 14, t("level." + LEVELS[level]), TermKit.CYAN, true, over(mx, my, x + 160, y + 118, 36, 14), false);
             TermKit.button(g, font, x + 198, y + 118, 34, 14, t("add"), TermKit.GREEN, !name.getValue().isBlank(), over(mx, my, x + 198, y + 118, 34, 14), false);
@@ -103,6 +119,11 @@ public class AccessScreen extends Screen {
             name.visible = false;
             TermKit.text(g, font, t("readonly"), x + 8, y + 138, TermKit.DIM);
         }
+    }
+
+    @Override
+    public void render(GuiGraphics g, int mx, int my, float pt) {
+        int x = left(), y = top();
         super.render(g, mx, my, pt);
         TermKit.scanlines(g, x - 4, y - 4, W + 8, 158);
     }

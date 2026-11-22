@@ -163,6 +163,7 @@ local function listApp(def)
                 rows, head, hero = {}, { { tostring(r), C.alarm } }, nil
             end
             if sel and sel > #rows then sel = #rows > 0 and #rows or nil end
+            if top > #rows then top = 1 end
         end
 
         local function setMsg(t, kind)
@@ -279,7 +280,7 @@ local function listApp(def)
 
         local function defaultAction()
             for _, a in ipairs(currentActions()) do
-                if a.row then
+                if a.row and a[3] ~= "danger" then
                     a[2]()
                     applyJump()
                     return

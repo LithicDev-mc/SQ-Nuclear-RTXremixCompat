@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/server_rack_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/server_rack_shell_sqc"
     }
   }
 }

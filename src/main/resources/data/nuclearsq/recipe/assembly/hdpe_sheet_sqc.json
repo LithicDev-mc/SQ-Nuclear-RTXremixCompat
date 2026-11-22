@@ -3,26 +3,26 @@
   "ingredients": [
     {
       "ingredient": {
-        "item": "minecraft:dried_kelp"
+        "item": "nuclearsq:enriched_carbon_sqc"
       },
       "count": 4
     },
     {
       "ingredient": {
-        "item": "nuclearsq:enriched_carbon_sqc"
+        "tag": "minecraft:coals"
       },
-      "count": 1
+      "count": 2
     },
     {
       "ingredient": {
-        "item": "minecraft:slime_ball"
+        "item": "minecraft:iron_nugget"
       },
       "count": 1
     }
   ],
   "result": {
     "id": "nuclearsq:hdpe_sheet_sqc",
-    "count": 2
+    "count": 1
   },
-  "time": 100
+  "time": 200
 }

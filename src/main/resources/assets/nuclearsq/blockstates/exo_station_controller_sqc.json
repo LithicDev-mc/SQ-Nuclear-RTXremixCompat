@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/exo_station_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/exo_station_shell_sqc"
     }
   }
 }

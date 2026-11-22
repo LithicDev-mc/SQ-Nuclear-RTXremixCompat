@@ -76,7 +76,7 @@ function M.run(ctx)
     local function stamp(tm)
         if type(tm) ~= "number" then return nil, "" end
         local t = tm + 6000
-        return math.floor(t / 24000), string.format("%02d:%02d", math.floor(t % 24000 / 1000), math.floor(t % 1000 * 60 / 1000))
+        return math.floor(t / 24000) + 1, string.format("%02d:%02d", math.floor(t % 24000 / 1000), math.floor(t % 1000 * 60 / 1000))
     end
 
     local function sync()

@@ -101,11 +101,68 @@ public final class WaterTreatmentTests {
         h.runAfterDelay(10, () -> {
             be.tank("water_in_2").fill(new FluidStack(Fluids.WATER, 4000), IFluidHandler.FluidAction.EXECUTE);
             be.tank("water_in_9").fill(new FluidStack(Fluids.WATER, 4000), IFluidHandler.FluidAction.EXECUTE);
-            h.runAfterDelay(5, () -> {
+            h.runAfterDelay(2, () -> {
                 if (be.tank("water_in_9").getFluidAmount() >= be.tank("water_in_2").getFluidAmount())
                     throw new GameTestAssertException("Pumpenwasser zuerst verbraucht: Kondensat " + be.tank("water_in_9").getFluidAmount() + ", Pumpe " + be.tank("water_in_2").getFluidAmount());
                 h.succeed();
             });
         });
+    }
+
+    private static final String[] OUTS = {"feedwater_out", "feedwater_out_2", "feedwater_out_3", "feedwater_out_4"};
+
+    private static BigMachineBlockEntity place(GameTestHelper h) {
+        BlockPos ctrl = h.absolutePos(new BlockPos(3, 2, 3)).subtract(M.structure.world(BlockPos.ZERO, 0, 0, 0, 0));
+        for (MultiblockStructure.Cell c : M.structure.cells(ctrl, 0)) h.getLevel().setBlockAndUpdate(c.pos(), c.block().defaultBlockState());
+        if (!(h.getLevel().getBlockEntity(ctrl) instanceof BigMachineBlockEntity be)) throw new GameTestAssertException("kein Controller");
+        return be;
+    }
+
+    private static void feed(BigMachineBlockEntity be) {
+        be.tank("water_in").fill(new FluidStack(Fluids.WATER, be.tank("water_in").getSpace()), IFluidHandler.FluidAction.EXECUTE);
+        for (String o : OUTS) be.tank(o).drain(be.tank(o).getFluidAmount(), IFluidHandler.FluidAction.EXECUTE);
+    }
+
+    @GameTest(template = "floor", batch = "water_treatment_rate", timeoutTicks = 200)
+    public static void treatsFullRate(GameTestHelper h) {
+        BigMachineBlockEntity be = place(h);
+        int[] best = {0};
+        h.onEachTick(() -> {
+            be.energy().receiveEnergy(be.energy().getMaxEnergyStored(), false);
+            if (!be.isFormed()) return;
+            best[0] = Math.max(best[0], be.lastMb());
+            feed(be);
+        });
+        h.succeedWhen(() -> {
+            if (best[0] != 1280) throw new GameTestAssertException("Erwartet 1280 mB/t, beste Rate " + best[0]);
+        });
+    }
+
+    @GameTest(template = "floor", batch = "water_treatment_power", timeoutTicks = 200)
+    public static void uses720FePerTick(GameTestHelper h) {
+        BigMachineBlockEntity be = place(h);
+        be.energy().setStored(M.energy.capacity());
+        int[] last = {-1}, seen = {-1};
+        h.onEachTick(() -> {
+            if (!be.isFormed()) return;
+            int now = be.energy().getEnergyStored();
+            if (last[0] >= 0 && be.lastMb() > 0 && seen[0] < 0) seen[0] = last[0] - now;
+            last[0] = now;
+            feed(be);
+        });
+        h.succeedWhen(() -> {
+            if (seen[0] != 720) throw new GameTestAssertException("Erwartet 720 FE/t, ist " + seen[0]);
+        });
+    }
+
+    @GameTest(template = "floor", batch = "water_treatment_ports", timeoutTicks = 20)
+    public static void portRates(GameTestHelper h) {
+        if (M.energy.use() != 720) throw new GameTestAssertException("Strom " + M.energy.use());
+        for (int i = 1; i <= 10; i++) {
+            String n = i == 1 ? "water_in" : "water_in_" + i;
+            if (M.port(n) == null || M.port(n).rate() != 320) throw new GameTestAssertException(n + " nicht 320 mB/t");
+        }
+        for (String o : OUTS) if (M.port(o) == null || M.port(o).rate() != 1280) throw new GameTestAssertException(o + " nicht 1280 mB/t");
+        h.succeed();
     }
 }

@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/chemical_lab_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/chemical_lab_shell_sqc"
     }
   }
 }

@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/coal_generator_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/coal_generator_shell_sqc"
     }
   }
 }

@@ -45,6 +45,52 @@ public final class OilWellTests {
     }
 
     @GameTest(template = FLOOR, batch = "oil_well", timeoutTicks = 20)
+    public static void onePlanPerRegion(GameTestHelper h) {
+        long seed = 1234567L;
+        for (int region : new int[] {OilWellFeature.LEGACY_REGION, 24}) {
+            for (int rx = -2; rx < 2; rx++) {
+                for (int rz = -2; rz < 2; rz++) {
+                    int n = 0;
+                    for (int cx = rx * region; cx < (rx + 1) * region; cx++) {
+                        for (int cz = rz * region; cz < (rz + 1) * region; cz++) {
+                            OilWellFeature.Plan p = OilWellFeature.plan(seed, region, new ChunkPos(cx, cz));
+                            if (p == null) continue;
+                            n++;
+                            ChunkPos cp = new ChunkPos(cx, cz);
+                            int lx = p.x() - cp.getMinBlockX(), lz = p.z() - cp.getMinBlockZ();
+                            if (lx < 4 || lx > 11 || lz < 4 || lz > 11) throw new GameTestAssertException("Quelle nicht in der Chunkmitte: " + lx + "/" + lz);
+                        }
+                    }
+                    if (n != 1) throw new GameTestAssertException("Raster " + region + ", Feld " + rx + "/" + rz + ": " + n + " Quellen statt 1");
+                }
+            }
+        }
+        h.succeed();
+    }
+
+    @GameTest(template = FLOOR, batch = "oil_well", timeoutTicks = 20)
+    public static void oneLegacyWellKeptPerRegion(GameTestHelper h) {
+        long seed = 1234567L;
+        for (int region : new int[] {24, 10}) {
+            for (int rx = -2; rx < 2; rx++) {
+                for (int rz = -2; rz < 2; rz++) {
+                    int kept = 0, candidates = 0;
+                    for (int cx = rx * region; cx < (rx + 1) * region; cx++) {
+                        for (int cz = rz * region; cz < (rz + 1) * region; cz++) {
+                            ChunkPos cp = new ChunkPos(cx, cz);
+                            if (OilWellFeature.plan(seed, OilWellFeature.LEGACY_REGION, cp) == null) continue;
+                            candidates++;
+                            if (OilWellFeature.keepsLegacy(seed, region, cp)) kept++;
+                        }
+                    }
+                    if (candidates == 0 || kept != 1) throw new GameTestAssertException("Raster " + region + ", Feld " + rx + "/" + rz + ": " + kept + " von " + candidates + " alten Quellen behalten statt 1");
+                }
+            }
+        }
+        h.succeed();
+    }
+
+    @GameTest(template = FLOOR, batch = "oil_well", timeoutTicks = 20)
     public static void drainAndRefill(GameTestHelper h) {
         BlockPos pos = h.absolutePos(new BlockPos(2, 3, 2));
         h.getLevel().setBlockAndUpdate(pos, OilRegistry.WELL.get().defaultBlockState());

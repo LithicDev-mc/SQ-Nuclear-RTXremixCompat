@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/control_rod_drive_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/control_rod_drive_shell_sqc"
     }
   }
 }

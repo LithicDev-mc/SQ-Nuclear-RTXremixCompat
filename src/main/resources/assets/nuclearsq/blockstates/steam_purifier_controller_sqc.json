@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/steam_purifier_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/steam_purifier_shell_sqc"
     }
   }
 }

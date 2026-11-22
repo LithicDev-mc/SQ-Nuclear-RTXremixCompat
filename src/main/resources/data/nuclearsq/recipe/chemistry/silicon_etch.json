@@ -23,5 +23,6 @@
       "port": "water_in",
       "amount": 100
     }
-  ]
+  ],
+  "priority": 1
 }

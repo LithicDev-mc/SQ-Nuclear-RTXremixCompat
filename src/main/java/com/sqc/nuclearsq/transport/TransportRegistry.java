@@ -73,6 +73,14 @@ public final class TransportRegistry {
         BLOCK_ITEMS.add(POWER_GATE_ITEM);
     }
 
+    public static final DeferredBlock<ConduitFrameBlock> CONDUIT_FRAME =
+            BLOCKS.register("conduit_frame_sqc", () -> new ConduitFrameBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(1.5f, 6.0f).sound(SoundType.METAL).noOcclusion()));
+    public static final DeferredItem<BlockItem> CONDUIT_FRAME_ITEM = ITEMS.registerSimpleBlockItem(CONDUIT_FRAME);
+
+    static {
+        BLOCK_ITEMS.add(CONDUIT_FRAME_ITEM);
+    }
+
     public static final DeferredItem<WrenchItem> WRENCH =
             ITEMS.register("wrench_sqc", () -> new WrenchItem(new Item.Properties().stacksTo(1)));
 

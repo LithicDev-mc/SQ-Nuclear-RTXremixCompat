@@ -30,6 +30,9 @@ public final class Streak {
     public static final Supplier<AttachmentType<Integer>> TICKS = TYPES.register("streak_ticks",
             () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).copyOnDeath().build());
 
+    public static final Supplier<AttachmentType<Integer>> TOTAL = TYPES.register("reactor_total_ticks",
+            () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).copyOnDeath().build());
+
     public static final int STEP = 40;
 
     public static void register(IEventBus modBus) {
@@ -40,19 +43,24 @@ public final class Streak {
         return p.getData(TICKS.get());
     }
 
+    public static int total(ServerPlayer p) {
+        return p.getData(TOTAL.get());
+    }
+
     public static void step(ServerPlayer p) {
         if (!(p.level() instanceof ServerLevel level)) return;
         boolean running = false, alarm = false;
+        boolean shared = TeamProgress.shared(p);
         int pcx = SectionPos.blockToSectionCoord(p.getBlockX()), pcz = SectionPos.blockToSectionCoord(p.getBlockZ());
         for (int cx = pcx - GuideProgress.SCAN_CHUNKS; cx <= pcx + GuideProgress.SCAN_CHUNKS; cx++) {
             for (int cz = pcz - GuideProgress.SCAN_CHUNKS; cz <= pcz + GuideProgress.SCAN_CHUNKS; cz++) {
                 LevelChunk chunk = level.getChunkSource().getChunkNow(cx, cz);
                 if (chunk == null) continue;
                 for (BlockEntity be : java.util.List.copyOf(chunk.getBlockEntities().values())) {
-                    if (!(be instanceof BigMachineBlockEntity m) || m.machine() != BigMachine.CONTROL_ROD_DRIVE || !m.isFormed()) continue;
+                    if (!(be instanceof BigMachineBlockEntity m) || m.machine() != BigMachine.CONTROL_ROD_DRIVE || !m.isFormed() || !TeamProgress.counts(p, m.owner(), shared)) continue;
                     var c = m.core();
                     if (c != null && (c.overheated() || c.hot()) || m.vesselDry() || m.rodFault()) alarm = true;
-                    else if (m.rodCount() > 0 && m.reactorPower() > 0) running = true;
+                    if (m.rodCount() > 0 && m.reactorPower() > 0) running = true;
                 }
             }
         }
@@ -60,6 +68,7 @@ public final class Streak {
     }
 
     public static void apply(ServerPlayer p, boolean alarm, boolean running) {
+        if (running) p.setData(TOTAL.get(), total(p) + STEP);
         if (alarm) p.setData(TICKS.get(), 0);
         else if (running) p.setData(TICKS.get(), ticks(p) + STEP);
     }

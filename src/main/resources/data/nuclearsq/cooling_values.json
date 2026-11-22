@@ -14,7 +14,7 @@
         "coolant_out": {"type": "coolant", "dir": "out", "rate": 960, "unit": "mB/t", "tank": 48000},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       },
-      "evaporation_mb_t": 20
+      "evaporation_mb_t": 1
     },
     "cooling_tower_xl": {
       "energy": null,
@@ -23,7 +23,7 @@
         "coolant_out": {"type": "coolant", "dir": "out", "rate": 3840, "unit": "mB/t", "tank": 192000},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       },
-      "evaporation_mb_t": 80
+      "evaporation_mb_t": 4
     },
     "containment": {
       "energy": {"capacity": 300000, "use": 150},
@@ -41,8 +41,12 @@
         "relief_out": {"type": "primary", "dir": "out", "rate": 160, "unit": "mB/t", "tank": 16000},
         "hpi_in": {"type": "primary", "dir": "in", "rate": 320, "unit": "mB/t", "tank": 16000},
         "hpi_out": {"type": "primary", "dir": "out", "rate": 320, "unit": "mB/t", "tank": 16000},
-        "emc_in": {"type": "primary", "dir": "in", "rate": 80, "unit": "mB/t", "tank": 16000},
-        "emc_out": {"type": "primary", "dir": "out", "rate": 80, "unit": "mB/t", "tank": 16000}
+        "emc_in": {"type": "primary", "dir": "in", "rate": 320, "unit": "mB/t", "tank": 16000},
+        "emc_out": {"type": "primary", "dir": "out", "rate": 320, "unit": "mB/t", "tank": 16000},
+        "hyd_in": {"type": "water", "dir": "in", "rate": 80, "unit": "mB/t", "tank": 16000},
+        "hyd_out": {"type": "water", "dir": "out", "rate": 80, "unit": "mB/t", "tank": 16000},
+        "treatment_in": {"type": "feedwater", "dir": "in", "rate": 1280, "unit": "mB/t", "tank": 32000},
+        "treatment_out": {"type": "feedwater", "dir": "out", "rate": 1280, "unit": "mB/t", "tank": 32000}
       }
     },
     "steam_generator": {
@@ -103,8 +107,8 @@
       "energy": {"capacity": 180000, "use": 360},
       "ports": {
         "energy_in": {"type": "energy", "dir": "in", "rate": 3000, "unit": "FE/t"},
-        "water_in": {"type": "water", "dir": "in", "rate": 80, "unit": "mB/t", "tank": 16000},
-        "primary_out": {"type": "primary", "dir": "out", "rate": 80, "unit": "mB/t", "tank": 16000},
+        "water_in": {"type": "water", "dir": "in", "rate": 320, "unit": "mB/t", "tank": 16000},
+        "primary_out": {"type": "primary", "dir": "out", "rate": 320, "unit": "mB/t", "tank": 16000},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       }
     },
@@ -206,51 +210,53 @@
       }
     },
     "coal_generator": {
-      "energy": {"capacity": 160, "use": 0},
-      "fe_per_tick": 160,
+      "energy": {"capacity": 4096, "use": 0},
+      "fe_per_tick": 720,
       "burn_pct": 50,
+      "card_output_max_pct": 3445,
+      "card_efficiency_max_pct": 500,
       "ports": {
-        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 1},
+        "item_in": {"type": "item", "dir": "in", "rate": 1, "unit": "Stapel/t", "slots": 12},
         "item_out": {"type": "item", "dir": "out", "rate": 1, "unit": "Stapel/t", "slots": 1},
-        "energy_out": {"type": "energy", "dir": "out", "rate": 640, "unit": "FE/t"},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 4096, "unit": "FE/t"},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       }
     },
     "solar_field": {
-      "energy": {"capacity": 440, "use": 0},
-      "fe_per_tick_peak": 440,
+      "energy": {"capacity": 1000000, "use": 0},
+      "fe_per_tick_peak": 2400,
       "ports": {
-        "energy_out": {"type": "energy", "dir": "out", "rate": 1600, "unit": "FE/t"},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 4096, "unit": "FE/t"},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       }
     },
     "wind_turbine_small": {
-      "energy": {"capacity": 88, "use": 0},
-      "fe_per_tick_peak": 88,
+      "energy": {"capacity": 352, "use": 0},
+      "fe_per_tick_peak": 352,
       "hub_x": 3, "hub_y": 10, "hub_z": 2,
       "ray_range": 20, "ray_skip": 4,
       "ports": {
-        "energy_out": {"type": "energy", "dir": "out", "rate": 200, "unit": "FE/t"},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 512, "unit": "FE/t"},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       }
     },
     "wind_turbine_medium": {
-      "energy": {"capacity": 440, "use": 0},
-      "fe_per_tick_peak": 440,
+      "energy": {"capacity": 1760, "use": 0},
+      "fe_per_tick_peak": 1760,
       "hub_x": 8, "hub_y": 27, "hub_z": 3,
       "ray_range": 40, "ray_skip": 6,
       "ports": {
-        "energy_out": {"type": "energy", "dir": "out", "rate": 800, "unit": "FE/t"},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 2048, "unit": "FE/t"},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       }
     },
     "wind_turbine_large": {
-      "energy": {"capacity": 1760, "use": 0},
-      "fe_per_tick_peak": 1760,
+      "energy": {"capacity": 7040, "use": 0},
+      "fe_per_tick_peak": 7040,
       "hub_x": 17, "hub_y": 55, "hub_z": 7,
       "ray_range": 64, "ray_skip": 12,
       "ports": {
-        "energy_out": {"type": "energy", "dir": "out", "rate": 4000, "unit": "FE/t"},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 8192, "unit": "FE/t"},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       }
     },
@@ -482,104 +488,104 @@
     "water_treatment": {
       "energy": {
         "capacity": 180000,
-        "use": 360
+        "use": 720
       },
       "ports": {
         "water_in": {
           "type": "big_water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "water_in_2": {
           "type": "big_water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "water_in_3": {
           "type": "big_water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "water_in_4": {
           "type": "big_water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "water_in_5": {
           "type": "big_water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "water_in_6": {
           "type": "big_water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "water_in_7": {
           "type": "big_water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "water_in_8": {
           "type": "big_water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "water_in_9": {
           "type": "water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "water_in_10": {
           "type": "water",
           "dir": "in",
-          "rate": 160,
+          "rate": 320,
           "unit": "mB/t",
           "tank": 4000
         },
         "feedwater_out": {
           "type": "feedwater",
           "dir": "out",
-          "rate": 640,
+          "rate": 1280,
           "unit": "mB/t",
           "tank": 16000
         },
         "feedwater_out_2": {
           "type": "feedwater",
           "dir": "out",
-          "rate": 640,
+          "rate": 1280,
           "unit": "mB/t",
           "tank": 16000
         },
         "feedwater_out_3": {
           "type": "feedwater",
           "dir": "out",
-          "rate": 640,
+          "rate": 1280,
           "unit": "mB/t",
           "tank": 16000
         },
         "feedwater_out_4": {
           "type": "feedwater",
           "dir": "out",
-          "rate": 640,
+          "rate": 1280,
           "unit": "mB/t",
           "tank": 16000
         },
@@ -999,30 +1005,31 @@
       }
     },
     "fuel_cell": {
-      "energy": {"capacity": 500, "use": 0},
-      "fe_per_tick": 500,
-      "h2_mb_t": 2,
+      "energy": {"capacity": 15000, "use": 0},
+      "fe_per_tick": 15000,
+      "h2_mb_t": 15,
       "ports": {
         "hydrogen_in": {"type": "gas", "dir": "in", "rate": 40, "unit": "mB/t", "tank": 8000},
         "oxygen_in": {"type": "gas", "dir": "in", "rate": 40, "unit": "mB/t", "tank": 8000},
-        "energy_out": {"type": "energy", "dir": "out", "rate": 1000, "unit": "FE/t"},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 16384, "unit": "FE/t"},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       }
     },
     "gas_generator": {
-      "energy": {"capacity": 1200, "use": 0},
-      "fe_per_tick": 1200,
-      "ethylene_mb_t": 3,
+      "energy": {"capacity": 10000, "use": 0},
+      "fe_per_tick": 10000,
+      "ethylene_mb_t": 6,
       "ports": {
         "ethylene_in": {"type": "gas", "dir": "in", "rate": 50, "unit": "mB/t", "tank": 8000},
-        "energy_out": {"type": "energy", "dir": "out", "rate": 2400, "unit": "FE/t"},
+        "energy_out": {"type": "energy", "dir": "out", "rate": 16384, "unit": "FE/t"},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       }
     },
     "fluid_buffer": {
       "energy": null,
       "ports": {
-        "fluid_io": {"type": "acid", "dir": "both", "rate": 200, "unit": "mB/t", "tank": 128000},
+        "fluid_in": {"type": "acid", "dir": "in", "rate": 200, "unit": "mB/t", "tank": 256000},
+        "fluid_out": {"type": "acid", "dir": "out", "rate": 200, "unit": "mB/t"},
         "data": {"type": "terminal", "dir": "both", "rate": 0, "unit": "Datennetz"}
       }
     },

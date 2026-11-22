@@ -45,7 +45,7 @@ public final class CleanRoomTests {
 
     private static void chipThreeIngredients(BigMachineBlockEntity be) {
         be.items().insertItem(0, new ItemStack(item("chip_2_sqc")), false);
-        be.items().insertItem(1, new ItemStack(item("silicon_pure_sqc"), 2), false);
+        be.items().insertItem(1, new ItemStack(item("silicon_pure_sqc"), 3), false);
         be.items().insertItem(2, new ItemStack(Items.ENDER_PEARL), false);
         be.items().insertItem(3, new ItemStack(Items.DIAMOND), false);
         be.items().insertItem(4, new ItemStack(Items.GOLD_INGOT, 2), false);
@@ -70,6 +70,7 @@ public final class CleanRoomTests {
             chipThreeIngredients(be);
             h.runAfterDelay(5, () -> {
                 if (be.crafter().partsRecipe() != null) throw new GameTestAssertException("Chip III ohne Greifarm erkannt");
+                if (be.crafter().status() != com.sqc.nuclearsq.machine.big.BigCrafter.NO_ARM) throw new GameTestAssertException("Zustand " + be.crafter().status() + " statt GREIFARM FEHLT");
                 dock(h, ctrl);
                 h.runAfterDelay(60, () -> {
                     if (be.crafter().partsRecipe() == null) throw new GameTestAssertException("Chip III mit angedocktem Greifarm nicht erkannt");

@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import com.sqc.nuclearsq.multiblock.Waterlog;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,14 +14,16 @@ import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.material.FluidState;
 
 public class ReactorCasingBlock extends Block implements SimpleWaterloggedBlock {
+    public static final BooleanProperty SKY = BooleanProperty.create("sky");
+
     public ReactorCasingBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(Waterlog.WATERLOGGED, false).setValue(ReactorProps.FORMED, false));
+        registerDefaultState(stateDefinition.any().setValue(Waterlog.WATERLOGGED, false).setValue(ReactorProps.FORMED, false).setValue(SKY, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ReactorProps.FORMED, Waterlog.WATERLOGGED);
+        builder.add(ReactorProps.FORMED, SKY, Waterlog.WATERLOGGED);
     }
 
     @Override
@@ -30,7 +33,12 @@ public class ReactorCasingBlock extends Block implements SimpleWaterloggedBlock 
 
     @Override
     protected int getLightBlock(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos) {
-        return state.getValue(ReactorProps.FORMED) ? 15 : super.getLightBlock(state, level, pos);
+        return state.getValue(ReactorProps.FORMED) && !state.getValue(SKY) ? 15 : super.getLightBlock(state, level, pos);
+    }
+
+    @Override
+    protected boolean propagatesSkylightDown(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos) {
+        return state.getValue(SKY) || super.propagatesSkylightDown(state, level, pos);
     }
 
     @Override

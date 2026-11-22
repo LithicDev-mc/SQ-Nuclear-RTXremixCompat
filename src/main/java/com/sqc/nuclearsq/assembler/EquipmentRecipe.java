@@ -4,9 +4,11 @@ import com.mojang.serialization.MapCodec;
 import com.sqc.nuclearsq.registry.EquipmentRegistry;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -30,6 +32,11 @@ public record EquipmentRecipe(SmallPartsRecipe base) implements Recipe<SmallPart
     @Override
     public boolean canCraftInDimensions(int width, int height) {
         return base.canCraftInDimensions(width, height);
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return base.getIngredients();
     }
 
     @Override

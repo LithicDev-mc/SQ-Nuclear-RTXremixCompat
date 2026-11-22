@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/cracker_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/cracker_shell_sqc"
     }
   }
 }

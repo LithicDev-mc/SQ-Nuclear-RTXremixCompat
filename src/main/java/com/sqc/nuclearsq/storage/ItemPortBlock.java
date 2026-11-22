@@ -115,9 +115,8 @@ public class ItemPortBlock extends Block implements EntityBlock, DataDevice {
             if (player.isShiftKeyDown()) {
                 be.clearFilters();
                 player.displayClientMessage(Component.translatable("message.nuclearsq.item_port.filter_cleared"), true);
-            } else {
-                be.cycleMode();
-                player.displayClientMessage(be.status(), true);
+            } else if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
+                ItemPortMenu.open(sp, be);
             }
         }
         return InteractionResult.sidedSuccess(level.isClientSide);

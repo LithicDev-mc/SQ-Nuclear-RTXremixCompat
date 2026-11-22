@@ -24,6 +24,12 @@
         "item": "nuclearsq:data_cable_sqc"
       },
       "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:comparator"
+      },
+      "count": 2
     }
   ],
   "result": {

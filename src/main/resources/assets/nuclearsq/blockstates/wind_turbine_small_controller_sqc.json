@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/wind_turbine_small_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/wind_turbine_small_shell_sqc"
     }
   }
 }

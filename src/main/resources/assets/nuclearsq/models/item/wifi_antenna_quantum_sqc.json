@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nuclearsq:item/wifi_antenna_quantum_sqc"
+  }
+}

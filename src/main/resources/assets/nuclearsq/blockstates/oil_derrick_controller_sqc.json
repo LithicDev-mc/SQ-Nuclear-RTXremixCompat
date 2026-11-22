@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/oil_derrick_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/oil_derrick_shell_sqc"
     }
   }
 }

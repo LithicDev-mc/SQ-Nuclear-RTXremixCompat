@@ -31,8 +31,8 @@ public class Substation implements GridNode {
     private List<BlockPos> targets = List.of();
     private int nodes;
     private long searchedAt = -1_000_000L;
-    private int inTick, lineTick, outTick;
-    private float inAvg, lineAvg, outAvg;
+    private int inTick, lineTick, outTick, recvTick;
+    private float inAvg, lineAvg, outAvg, recvAvg;
     private final IEnergyStorage[] inputs;
     private final int[] inputUsed;
 
@@ -65,6 +65,9 @@ public class Substation implements GridNode {
     public int inRate() { return Math.round(inAvg); }
     public int lineRateNow() { return Math.round(lineAvg); }
     public int outRate() { return Math.round(outAvg); }
+    public int lineInRate() { return Math.max(0, Math.round(recvAvg)); }
+    public int feedPermille() { return (int) (1000L * feed / lineRate()); }
+    public int supplyPermille() { return (int) (1000L * supply / lineRate()); }
 
     @Override
     public BlockPos nodePos() {
@@ -118,6 +121,7 @@ public class Substation implements GridNode {
         int n = Math.max(0, Math.min(max, lineSpace()));
         if (n > 0) {
             supply += n;
+            recvTick += n;
             be.setChanged();
         }
         return n;
@@ -207,6 +211,7 @@ public class Substation implements GridNode {
                 GridNode n = t.equals(nodePos()) ? this : level.isLoaded(t) ? GridNode.node(level, t) : null;
                 if (n == null || !n.delivers()) continue;
                 int took = n.fromLine(share);
+                if (n == this) recvTick -= took;
                 feed -= took;
                 lineTick += took;
             }
@@ -217,7 +222,8 @@ public class Substation implements GridNode {
         inAvg += (inTick - inAvg) * 0.1f;
         lineAvg += (lineTick - lineAvg) * 0.1f;
         outAvg += (outTick - outAvg) * 0.1f;
-        inTick = lineTick = outTick = 0;
+        recvAvg += (recvTick - recvAvg) * 0.1f;
+        inTick = lineTick = outTick = recvTick = 0;
         return moved;
     }
 

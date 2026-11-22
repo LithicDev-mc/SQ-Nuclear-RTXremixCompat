@@ -12,17 +12,21 @@
           "c:ingots/brass"
         ]
       },
-      "count": 30
+      "count": 8
     },
     {
       "ingredient": {
         "item": "nuclearsq:andesite_housing_sqc"
       },
-      "count": 4
+      "count": 2
     }
   ],
   "result": {
     "id": "nuclearsq:brass_bearing_sqc",
     "count": 1
-  }
+  },
+  "hardcore_counts": [
+    30,
+    4
+  ]
 }

@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/spent_fuel_rack_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/spent_fuel_rack_shell_sqc"
     }
   }
 }

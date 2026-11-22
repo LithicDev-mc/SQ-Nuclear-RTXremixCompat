@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/weapons_processing_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/weapons_processing_shell_sqc"
     }
   }
 }

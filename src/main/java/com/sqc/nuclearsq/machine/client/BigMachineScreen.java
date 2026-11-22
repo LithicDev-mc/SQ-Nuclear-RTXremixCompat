@@ -378,9 +378,11 @@ public class BigMachineScreen extends AbstractContainerScreen<DeviceMenu> {
                     pct > BigMachineBlockEntity.PRESSURE_RELIEF || pct < BigMachineBlockEntity.PRESSURE_LOW ? RED : GREEN, pct / 100f);
             tip(8, ty, fw, th, t("pressure"), t("tip.pressure", bar, pct));
         } else {
-            int v = sub ? menu.i32(BigMachineBlockEntity.FUSION_DATA) : menu.u(4);
-            TermKit.tile(g, font, x + 8, y + ty, fw, th, t(tp), Component.literal(v + unit), GREEN, -1);
-            tip(8, ty, fw, th, t(tp), t("tip." + tp, v));
+            int in = sub ? menu.i32(BigMachineBlockEntity.FUSION_DATA) : 0, line = sub ? menu.i32(BigMachineBlockEntity.FUSION_DATA + 4) : 0;
+            int v = sub ? in + line : menu.u(4), buf = menu.u(BigMachineBlockEntity.FUSION_DATA + 6);
+            TermKit.tile(g, font, x + 8, y + ty, fw, th, t(tp), Component.literal(v + unit), GREEN, sub ? buf / 1000f : -1);
+            if (sub) tip(8, ty, fw, th, t(tp), t("tip.sub_feed", in, line), t("tip.sub_buffer", buf / 10));
+            else tip(8, ty, fw, th, t(tp), t("tip." + tp, v));
         }
         if (fusion()) {
             int net = menu.i32(BigMachineBlockEntity.FUSION_DATA), ign = menu.u(BigMachineBlockEntity.FUSION_DATA + 3);
@@ -389,8 +391,12 @@ public class BigMachineScreen extends AbstractContainerScreen<DeviceMenu> {
             tip(14 + fw, ty, fw, th, t("net"), t("tip.net", net, ign, m.energy.capacity()));
         } else if (solar || sub) {
             int out = sub ? menu.i32(BigMachineBlockEntity.FUSION_DATA + 2) : menu.u(5);
-            TermKit.tile(g, font, x + 14 + fw, y + ty, fw, th, t("out"), Component.literal(out + " FE/t"), out > 0 ? AMBER : DIM, -1);
-            tip(14 + fw, ty, fw, th, t("out"), t(sub ? "tip.line_out" : "tip.out", out));
+            boolean field = machine() == BigMachine.SOLAR_FIELD;
+            int buf = sub || field ? menu.u(BigMachineBlockEntity.FUSION_DATA + 7) : -1;
+            TermKit.tile(g, font, x + 14 + fw, y + ty, fw, th, t("out"), Component.literal(out + " FE/t"), out > 0 || buf > 0 ? AMBER : DIM, buf >= 0 ? buf / 1000f : -1);
+            if (sub) tip(14 + fw, ty, fw, th, t("out"), t("tip.line_out", out), t("tip.sub_buffer", buf / 10));
+            else if (field) tip(14 + fw, ty, fw, th, t("out"), t("tip.out_buffer", out), t("tip.sub_buffer", buf / 10));
+            else tip(14 + fw, ty, fw, th, t("out"), t("tip.out", out));
         } else if (m.energy != null) {
             int e = menu.u(5);
             TermKit.tile(g, font, x + 14 + fw, y + ty, fw, th, t("power"), Component.literal(e + "%"),

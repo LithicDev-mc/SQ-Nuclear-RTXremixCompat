@@ -10,10 +10,12 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.sqc.nuclearsq.NuclearConfig;
 import com.sqc.nuclearsq.NuclearSQ;
 import com.sqc.nuclearsq.registry.AssemblyRegistry;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -31,7 +33,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public record AssemblyRecipe(List<Need> ingredients, ItemStack result, int time, int energyPerTick)
+public record AssemblyRecipe(List<Need> ingredients, ItemStack result, int time, int energyPerTick, List<Integer> hardcoreCounts)
         implements Recipe<AssemblyRecipe.Input> {
 
     public static final TagKey<Item> REACTOR_PARTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(NuclearSQ.MODID, "reactor_parts"));
@@ -71,32 +73,48 @@ public record AssemblyRecipe(List<Need> ingredients, ItemStack result, int time,
         }
     }
 
-    public static final MapCodec<AssemblyRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+    public static final MapCodec<AssemblyRecipe> CODEC = RecordCodecBuilder.<AssemblyRecipe>mapCodec(i -> i.group(
             Need.CODEC.listOf().validate(l -> l.isEmpty() || l.size() > 9
                     ? DataResult.error(() -> "ingredients: 1 bis 9 Zutaten") : DataResult.success(l))
-                    .fieldOf("ingredients").forGetter(AssemblyRecipe::ingredients),
+                    .fieldOf("ingredients").forGetter((AssemblyRecipe r) -> r.ingredients),
             ItemStack.CODEC.fieldOf("result").forGetter(AssemblyRecipe::result),
             Codec.intRange(0, 72000).optionalFieldOf("time", 0).forGetter(AssemblyRecipe::time),
-            Codec.intRange(0, 100000).optionalFieldOf("energy_per_tick", 0).forGetter(AssemblyRecipe::energyPerTick)
-    ).apply(i, AssemblyRecipe::new));
+            Codec.intRange(0, 100000).optionalFieldOf("energy_per_tick", 0).forGetter(AssemblyRecipe::energyPerTick),
+            Codec.intRange(1, 576).listOf().optionalFieldOf("hardcore_counts", List.of()).forGetter(AssemblyRecipe::hardcoreCounts)
+    ).apply(i, AssemblyRecipe::new)).validate((AssemblyRecipe r) -> r.hardcoreCounts.isEmpty() || r.hardcoreCounts.size() == r.ingredients.size()
+            ? DataResult.success(r) : DataResult.error(() -> "hardcore_counts: so viele Zahlen wie Zutaten"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, AssemblyRecipe> STREAM_CODEC = StreamCodec.composite(
-            Need.STREAM_CODEC.apply(ByteBufCodecs.list()), AssemblyRecipe::ingredients,
+            Need.STREAM_CODEC.apply(ByteBufCodecs.list()), (AssemblyRecipe r) -> r.ingredients,
             ItemStack.STREAM_CODEC, AssemblyRecipe::result,
             ByteBufCodecs.VAR_INT, AssemblyRecipe::time,
             ByteBufCodecs.VAR_INT, AssemblyRecipe::energyPerTick,
+            ByteBufCodecs.VAR_INT.apply(ByteBufCodecs.list()), AssemblyRecipe::hardcoreCounts,
             AssemblyRecipe::new);
 
+    public AssemblyRecipe(List<Need> ingredients, ItemStack result, int time, int energyPerTick) {
+        this(ingredients, result, time, energyPerTick, List.of());
+    }
+
+    @Override
+    public List<Need> ingredients() {
+        if (hardcoreCounts.isEmpty() || !NuclearConfig.hardcoreCosts()) return ingredients;
+        List<Need> out = new ArrayList<>(ingredients.size());
+        for (int i = 0; i < ingredients.size(); i++) out.add(new Need(ingredients.get(i).ingredient(), hardcoreCounts.get(i)));
+        return out;
+    }
+
     private int[] counts() {
-        int[] c = new int[ingredients.size()];
-        for (int i = 0; i < c.length; i++) c[i] = ingredients.get(i).count();
+        List<Need> l = ingredients();
+        int[] c = new int[l.size()];
+        for (int i = 0; i < c.length; i++) c[i] = l.get(i).count();
         return c;
     }
 
     @Nullable
     public int[][] plan(List<ItemStack> grid) {
         if (result.isEmpty()) return null;
-        return FormlessMatch.plan(ingredients, counts(), grid);
+        return FormlessMatch.plan(ingredients(), counts(), grid);
     }
 
     @Override
@@ -106,12 +124,12 @@ public record AssemblyRecipe(List<Need> ingredients, ItemStack result, int time,
 
     public int weight() {
         int sum = 0;
-        for (Need n : ingredients) sum += n.count();
+        for (Need n : ingredients()) sum += n.count();
         return sum;
     }
 
     public static final Comparator<AssemblyRecipe> SPECIFIC_FIRST =
-            Comparator.comparingInt((AssemblyRecipe r) -> r.ingredients.size()).thenComparingInt(AssemblyRecipe::weight).reversed();
+            Comparator.comparingInt((AssemblyRecipe r) -> r.ingredients().size()).thenComparingInt(AssemblyRecipe::weight).reversed();
 
     public static List<RecipeHolder<AssemblyRecipe>> all(RecipeManager recipes) {
         return recipes.getAllRecipesFor(AssemblyRegistry.TYPE.get());
@@ -148,7 +166,14 @@ public record AssemblyRecipe(List<Need> ingredients, ItemStack result, int time,
 
     @Override
     public boolean canCraftInDimensions(int width, int height) {
-        return width * height >= ingredients.size();
+        return width * height >= ingredients().size();
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> out = NonNullList.create();
+        for (Need n : ingredients()) out.add(n.ingredient());
+        return out;
     }
 
     @Override

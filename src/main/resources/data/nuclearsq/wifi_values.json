@@ -1,6 +1,6 @@
 {
   "adapter": {
-    "range": [48, 128, 320],
+    "range": [48, 128, 320, 1024, 4096, -1],
     "fe_per_tick": 12,
     "buffer": 300000,
     "max_receive": 4000,

@@ -13,6 +13,7 @@ public record DataValue(String key, Component label, double value, double max, S
     }
 
     public static String number(double v) {
+        if (Double.isInfinite(v)) return "\u221e";
         if (Math.abs(v - Math.rint(v)) < 1e-6) return Long.toString(Math.round(v));
         return String.format(java.util.Locale.ROOT, "%.1f", v);
     }

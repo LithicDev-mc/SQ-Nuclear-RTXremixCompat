@@ -2,7 +2,7 @@
   "parent": "minecraft:block/block",
   "ambientocclusion": false,
   "textures": {
-    "particle": "nuclearsq:block/nuclear_bomb_large_sqc_atlas",
+    "particle": "nuclearsq:block/nuclear_bomb_large_sqc_particle",
     "atlas": "nuclearsq:block/nuclear_bomb_large_sqc_atlas"
   },
   "elements": [

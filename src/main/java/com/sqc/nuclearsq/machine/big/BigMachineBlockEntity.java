@@ -89,6 +89,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
     private int batteryFlow, charge;
 
     private boolean formed, running;
+    private boolean resizeChecked;
     private boolean reassert;
     private boolean doorOpen, doorPowered;
     @Nullable private Boolean doorShown;
@@ -153,6 +154,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
     private int sepAcc;
     private int elecAcc;
     private int residueAcc;
+    private int evaporated;
 
     public BigMachineBlockEntity(BlockPos pos, BlockState state) {
         super(BigMachineRegistry.CONTROLLER_BE.get(), pos, state);
@@ -163,15 +165,16 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         for (BigMachine.Port p : machine.ports) {
             if (p.kind() == BigPortKind.ITEM) slots = Math.max(slots, p.slots());
             if (!p.kind().isFluid() || p.tank() <= 0) continue;
-            FluidTank t = new FluidTank(p.tank(), accepts(p)) {
+            FluidTank t = new FluidTank(p.tank(), accepts(machine, p)) {
                 @Override
                 protected void onContentsChanged() { setChanged(); }
             };
             tanks.put(p.name(), t);
             portFluids.put(p.name(), p.in() && p.out() ? t : p.in() ? fillOnly(t) : drainOnly(t));
         }
+        if (machine == BigMachine.FLUID_BUFFER) portFluids.put("fluid_out", drainOnly(tanks.get("fluid_in")));
         BigMachine.Energy e = machine.energy;
-        energy = e == null ? null : new MachineEnergy(e.capacity(), e.maxReceive(), e.maxExtract());
+        energy = e == null ? null : new MachineEnergy(e.capacity(), machine == BigMachine.CONTAINMENT ? Integer.MAX_VALUE : e.maxReceive(), e.maxExtract());
         battery = BigBattery.handles(machine) && energy != null ? new BigBattery(machine, energy, this::setChanged) : null;
         items = slots <= 0 ? null : new ItemStackHandler(slots) {
             @Override
@@ -179,6 +182,8 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
                 if (machine == BigMachine.STEAM_PURIFIER) return false;
                 if (machine == BigMachine.FAST_BREEDER) return BreederCore.accepts(slot, stack);
                 if (machine == BigMachine.FUSION_REACTOR) return FusionCore.valid(slot, stack);
+                if (machine == BigMachine.COAL_GENERATOR && slot > 3) return BigCrafter.isFuel(stack);
+                if (machine == BigMachine.COAL_GENERATOR && slot > 0) return stack.is(com.sqc.nuclearsq.registry.PowerRegistry.COAL_CARDS.get(slot - 1).get());
                 if (machine == BigMachine.PARTICLE_ASSEMBLER && slot == com.sqc.nuclearsq.particle.ParticleClasses.CARD) {
                     return com.sqc.nuclearsq.particle.ParticleClassCardItem.tierOf(stack) > 0;
                 }
@@ -222,9 +227,11 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         fusion = FusionCore.handles(machine) && energy != null ? new FusionCore(machine, this::setChanged) : null;
     }
 
-    private Predicate<FluidStack> accepts(BigMachine.Port p) {
+    public static Predicate<FluidStack> accepts(BigMachine machine, BigMachine.Port p) {
         return switch (p.kind()) {
-            case WET_STEAM -> machine == BigMachine.STEAM_GENERATOR || machine == BigMachine.STEAM_SEPARATOR || machine == BigMachine.STEAM_DRYER || machine == BigMachine.CONTAINMENT
+            case WET_STEAM -> machine == BigMachine.STEAM_DRYER && p.in()
+                    ? fs -> fs.is(ModFluids.WET_STEAM.source.get()) || fs.is(ModFluids.CONTAMINATED_STEAM.source.get()) || fs.is(ModFluids.STEAM.source.get())
+                    : machine == BigMachine.STEAM_GENERATOR || machine == BigMachine.STEAM_SEPARATOR || machine == BigMachine.STEAM_DRYER || machine == BigMachine.CONTAINMENT
                     ? fs -> fs.is(ModFluids.WET_STEAM.source.get()) || fs.is(ModFluids.CONTAMINATED_STEAM.source.get())
                     : fs -> fs.is(ModFluids.WET_STEAM.source.get());
             case FEEDWATER -> machine == BigMachine.STEAM_GENERATOR || machine == BigMachine.FEEDWATER_PUMP || machine == BigMachine.CONTAINMENT || machine == BigMachine.FAST_BREEDER
@@ -471,6 +478,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
             player.displayClientMessage(Component.translatable("message.nuclearsq.rack.assembled_only"), true);
             return true;
         }
+        if (machine == BigMachine.FLUID_BUFFER) return formed && net.neoforged.neoforge.fluids.FluidUtil.interactWithFluidHandler(player, hand, tanks.get("fluid_in"));
         if (breeder != null && formed) {
             FluidTank sodium = tanks.get("sodium_in");
             if (sodium != null && net.neoforged.neoforge.fluids.FluidUtil.interactWithFluidHandler(player, hand, portFluids.get("sodium_in"))) return true;
@@ -730,11 +738,13 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         if (rot < 0 || level == null) return;
         MultiblockStructure s = structure();
         int flags = s.size >= QUIET_CELLS ? QUIET : net.minecraft.world.level.block.Block.UPDATE_ALL;
+        boolean sky = hidden && machine == BigMachine.SOLAR_FIELD;
         for (MultiblockStructure.Cell c : s.cells(worldPosition, rot)) {
             BlockState st = level.getBlockState(c.pos());
-            if (c.ok(st) && st.hasProperty(ReactorProps.FORMED) && st.getValue(ReactorProps.FORMED) != hidden) {
-                level.setBlock(c.pos(), st.setValue(ReactorProps.FORMED, hidden), flags);
-            }
+            if (!c.ok(st) || !st.hasProperty(ReactorProps.FORMED)) continue;
+            BlockState want = st.setValue(ReactorProps.FORMED, hidden);
+            if (want.hasProperty(com.sqc.nuclearsq.reactor.ReactorCasingBlock.SKY)) want = want.setValue(com.sqc.nuclearsq.reactor.ReactorCasingBlock.SKY, sky);
+            if (want != st) level.setBlock(c.pos(), want, flags);
         }
         BigShellBlock shell = machine.shellBlock();
         for (int[] cell : machine.cells) {
@@ -937,6 +947,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
 
     public void serverTick() {
         if (level == null) return;
+        if (!resizeChecked) resizeChecked = com.sqc.nuclearsq.kit.LegacyResize.check(this);
         boolean wasFormed = formed, wasRunning = running, wasFault = rodFault, wasDry = vesselDry;
         boolean wasHot = core != null && core.hot();
         int wasRot = formedRot, wasRod = rod, wasHeads = rodHeads(), wasCharge = chargeLevel();
@@ -959,6 +970,12 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         idle = lastMb > 0 ? 0 : Math.min(idle + 1, RUN_HOLD);
         running = formed && idle < RUN_HOLD;
         if (formed) pushOutputs();
+        if (formed && owner != null) {
+            String mark = rankMark();
+            if (mark != null) com.sqc.nuclearsq.progression.Titles.mark(level, owner, mark);
+            if (lastOut > 0 && (isGenerator() || machine == BigMachine.SHAFT_GENERATOR || machine == BigMachine.FUSION_REACTOR))
+                com.sqc.nuclearsq.progression.Titles.power(level, owner, lastOut);
+        }
         if (battery != null) batteryFlow = battery.tick(level.hasNeighborSignal(worldPosition));
         if (machine == BigMachine.SPENT_FUEL_RACK && crafter != null && ticks % 20 == 0 && level instanceof net.minecraft.server.level.ServerLevel sl) {
             com.sqc.nuclearsq.radiation.RadiationManager.emit(sl, worldPosition, crafter.poolRadiation(formed));
@@ -986,7 +1003,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
     private int lastComparator;
 
     public int comparator() {
-        FluidTank t = machine == BigMachine.FLUID_BUFFER ? tanks.get("fluid_io") : null;
+        FluidTank t = machine == BigMachine.FLUID_BUFFER ? tanks.get("fluid_in") : null;
         long v = battery != null ? energy.getEnergyStored() : t != null ? t.getFluidAmount() : -1;
         long cap = battery != null ? energy.getMaxEnergyStored() : t != null ? t.getCapacity() : 1;
         if (v < 0) return running ? 15 : 0;
@@ -1008,8 +1025,11 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         return switch (machine) {
             case COOLING_TOWER_LARGE, COOLING_TOWER_XL -> {
                 BigMachine.Port in = machine.port("coolant_in");
-                int keep = Math.max(0, in.rate() - machine.extra("evaporation_mb_t"));
-                int n = convert("coolant_in", in.rate(), "coolant_out", ModFluids.COOLANT.source.get(), keep, in.rate(), null, null);
+                int n = convert("coolant_in", in.rate(), "coolant_out", ModFluids.COOLANT.source.get(), 1, 1, null, null);
+                evaporated += n * machine.extra("evaporation_mb_t");
+                int lost = evaporated / Math.max(1, in.rate());
+                evaporated -= lost * in.rate();
+                if (lost > 0) tanks.get("coolant_out").drain(lost, IFluidHandler.FluidAction.EXECUTE);
                 if (n > 0 && ticks % 4 == 0 && level instanceof net.minecraft.server.level.ServerLevel sl) plume(sl);
                 yield n;
             }
@@ -1022,6 +1042,9 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
             }
             case PRESSURIZER -> pressurizer();
             case STEAM_SEPARATOR, STEAM_DRYER -> {
+                if (tanks.get("wet_steam_in") != null && tanks.get("wet_steam_in").getFluid().is(ModFluids.STEAM.source.get())) {
+                    yield convert("wet_steam_in", rate("wet_steam_in"), "steam_out", ModFluids.STEAM.source.get(), 1, 1, null, null);
+                }
                 boolean dirty = tanks.get("wet_steam_in") != null && tanks.get("wet_steam_in").getFluid().is(ModFluids.CONTAMINATED_STEAM.source.get());
                 yield convert("wet_steam_in", rate("wet_steam_in"), "steam_out", (dirty ? ModFluids.CONTAMINATED_STEAM : ModFluids.STEAM).source.get(),
                         rate("steam_out"), rate("wet_steam_in"), "water_out", Fluids.WATER);
@@ -1037,7 +1060,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
             case EMERGENCY_COOLING -> {
                 checkLowPressure();
                 powered = emergencyActive() && usePower();
-                if (powered && boronStock > 0 && ticks % 40 == 0) {
+                if (powered && (manual || triggered()) && boronStock > 0 && ticks % 40 == 0) {
                     BigMachineBlockEntity r = reactor(q -> true);
                     if (r != null && r.core != null && r.core.chem().dose()) {
                         boronStock--;
@@ -1071,13 +1094,10 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
             case SOLAR_FIELD -> {
                 if (ticks % 20 == 0) {
                     BlockPos sky = structure().world(worldPosition, Math.max(formedRot, 0), 2, 2, 2);
-                    solarRate = Math.round(machine.extra("fe_per_tick_peak") * com.sqc.nuclearsq.power.SolarMath.factor(level, sky));
+                    solarRate = Math.round(machine.extra("fe_per_tick_peak") * com.sqc.nuclearsq.power.SolarMath.factor(level, sky, true));
                 }
                 powered = true;
-                if (energy != null) {
-                    energy.setStored(0);
-                    if (solarRate > 0) energy.add(solarRate);
-                }
+                if (energy != null && solarRate > 0) energy.add(solarRate);
                 yield solarRate;
             }
             case WIND_TURBINE_SMALL, WIND_TURBINE_MEDIUM, WIND_TURBINE_LARGE -> {
@@ -1303,6 +1323,20 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         return need;
     }
 
+    @Nullable
+    private String rankMark() {
+        return switch (machine) {
+            case OIL_DERRICK -> lastMb > 0 ? "rank:oil" : null;
+            case FUSION_REACTOR -> fusion != null && fusion.phase() == FusionCore.PLASMA ? "rank:fusion" : null;
+            case WASTE_REPOSITORY -> disposed > 0 ? "rank:waste" : null;
+            case FAST_BREEDER -> items != null && ticks % 20 == 0 && BreederCore.bredCount(items) > 0 ? "rank:breeder" : null;
+            case CLEAN_ROOM -> crafter != null && crafter.takeRuns() > 0 ? "rank:chip" : null;
+            case SERVER_RACK_SMALL, SERVER_RACK, SERVER_RACK_LARGE -> rack != null && ticks % 20 == 0
+                    && rack.space().used() >= com.sqc.nuclearsq.progression.Titles.DATA_HOARDER_ITEMS ? "rank:storage" : null;
+            default -> null;
+        };
+    }
+
     private int repository() {
         if (items == null) return 0;
         int slot = -1;
@@ -1324,7 +1358,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
     public static final int REPOSITORY_BATCH = 4;
 
     private boolean emergencyActive() {
-        return manual || triggered();
+        return manual || machine == BigMachine.EMERGENCY_COOLING || triggered();
     }
 
     private boolean triggered() {
@@ -1488,14 +1522,21 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         if (in == null || out == null) return 0;
         powered = usePower();
         if (!powered) return 0;
-        for (BigMachineBlockEntity r : rs) r.addPrimaryFlow(rate("primary_in"));
+        boolean dry = in.isEmpty();
         int n = Math.min(Math.min(rate("primary_in"), in.getFluidAmount()), out.getSpace());
-        if (n <= 0) return 0;
-        in.drain(n, IFluidHandler.FluidAction.EXECUTE);
-        out.fill(new FluidStack(ModFluids.PRIMARY_WATER.source.get(), n), IFluidHandler.FluidAction.EXECUTE);
-        return n;
+        if (n > 0) {
+            in.drain(n, IFluidHandler.FluidAction.EXECUTE);
+            out.fill(new FluidStack(ModFluids.PRIMARY_WATER.source.get(), n), IFluidHandler.FluidAction.EXECUTE);
+        }
+        if (!dry) pumpDryTicks = 0;
+        else if (rs.stream().anyMatch(r -> r.vesselWant > 0)) pumpDryTicks = Math.min(PUMP_DRY_TICKS, pumpDryTicks + 1);
+        if (pumpDryTicks < PUMP_DRY_TICKS) for (BigMachineBlockEntity r : rs) r.addPrimaryFlow(rate("primary_in"));
+        if (n > 0 || rs.isEmpty()) return Math.max(0, n);
+        return dry && out.isEmpty() ? 0 : rate("primary_in");
     }
 
+    public static final int PUMP_DRY_TICKS = 200;
+    private int pumpDryTicks;
     private long pumpTick = -1;
     private int pumpNow, pumpLast;
 
@@ -2340,6 +2381,8 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         passThrough("relief_in", "relief_out");
         passThrough("hpi_in", "hpi_out");
         passThrough("emc_in", "emc_out");
+        passThrough("hyd_in", "hyd_out");
+        passThrough("treatment_in", "treatment_out");
         powered = enabled && usePower();
         return powered ? 1 : 0;
     }
@@ -2357,7 +2400,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
     private int passThrough(String from, String to) {
         FluidTank in = tanks.get(from), out = tanks.get(to);
         if (in == null || out == null || in.isEmpty()) return 0;
-        FluidStack fs = in.getFluid().copyWithAmount(Math.min(in.getFluidAmount(), rate(from)));
+        FluidStack fs = in.getFluid().copy();
         int n = out.fill(fs, IFluidHandler.FluidAction.EXECUTE);
         if (n > 0) in.drain(n, IFluidHandler.FluidAction.EXECUTE);
         return n;
@@ -2404,11 +2447,11 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
                 continue;
             }
             if (p.in() || !p.kind().isFluid()) continue;
-            FluidTank t = tanks.get(p.name());
+            FluidTank t = tanks.get(machine == BigMachine.FLUID_BUFFER ? "fluid_in" : p.name());
             if (t == null || t.isEmpty()) continue;
             BlockPos pos = portPos(p);
             if (pos == null) continue;
-            int left = p.rate();
+            int left = machine == BigMachine.CONTAINMENT ? Integer.MAX_VALUE : p.rate();
             for (Direction dir : Direction.values()) {
                 if (left <= 0 || t.isEmpty()) break;
                 BlockPos n = pos.relative(dir);
@@ -2448,7 +2491,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
     private void pushEnergy(BigMachine.Port p, MachineEnergy src) {
         BlockPos pos = portPos(p);
         if (pos == null) return;
-        int left = p.rate();
+        int left = machine == BigMachine.CONTAINMENT ? Integer.MAX_VALUE : p.rate();
         for (Direction dir : Direction.values()) {
             if (left <= 0 || src.getEnergyStored() <= 0) break;
             BlockPos n = pos.relative(dir);
@@ -2474,11 +2517,20 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
             BlockPos n = pos.relative(dir);
             BlockEntity nb = level.getBlockEntity(n);
             if (nb instanceof BigMachineBlockEntity || nb instanceof BigPortBlockEntity pb && pb.findController() == this) continue;
-            if (nb instanceof com.sqc.nuclearsq.transport.ConduitBlockEntity c && c.dist() >= Math.max(1, battery.fill()) * 1024) continue;
+            if (nb instanceof com.sqc.nuclearsq.transport.ConduitBlockEntity c && (c.dist() >= com.sqc.nuclearsq.transport.ConduitBlockEntity.FAR || c.toBattery() && c.dist() >= com.sqc.nuclearsq.transport.ConduitBlockEntity.needFor(battery.store().getEnergyStored(), battery.store().getMaxEnergyStored()))) continue;
+            if (nb instanceof com.sqc.nuclearsq.transport.ConduitBlockEntity c && c.toBattery()) left = Math.min(left, balance(c.target()));
+            if (left <= 0) continue;
             IEnergyStorage target = level.getCapability(Capabilities.EnergyStorage.BLOCK, n, dir.getOpposite());
             if (target == null || !target.canReceive()) continue;
             battery.took(p, target.receiveEnergy(left, false));
         }
+    }
+
+    private int balance(@Nullable IEnergyStorage other) {
+        if (other == null) return 0;
+        long e1 = battery.store().getEnergyStored(), c1 = Math.max(1, battery.store().getMaxEnergyStored());
+        long e2 = other.getEnergyStored(), c2 = Math.max(1, other.getMaxEnergyStored());
+        return (int) Math.max(0, Math.min(Integer.MAX_VALUE, (e1 * c2 - e2 * c1) / (c1 + c2) / 4));
     }
 
     public boolean enabled() { return enabled; }
@@ -2549,8 +2601,11 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
         return new ContainerData() {
             @Override
             public int get(int i) {
-                if (substation != null && i >= FUSION_DATA && i < FUSION_DATA + 4) {
-                    int v = i < FUSION_DATA + 2 ? substation.inRate() : substation.outRate();
+                if (substation != null && i >= FUSION_DATA + 6 && i < FUSION_DATA + 8) {
+                    return i == FUSION_DATA + 6 ? substation.feedPermille() : substation.supplyPermille();
+                }
+                if (substation != null && i >= FUSION_DATA && i < FUSION_DATA + 6) {
+                    int v = i < FUSION_DATA + 2 ? substation.inRate() : i < FUSION_DATA + 4 ? substation.outRate() : substation.lineInRate();
                     return (i - FUSION_DATA) % 2 == 0 ? DeviceMenu.lo(v) : DeviceMenu.hi(v);
                 }
                 if (fusion != null && i >= FUSION_EXTRA) {
@@ -2603,6 +2658,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
                     case FUSION_DATA + 4 -> fusion == null ? 0 : fusion.burnNow();
                     case FUSION_DATA + 5 -> fusion != null && fusion.ddMode() && fusion.burning() ? 1 : 0;
                     case FUSION_DATA + 6 -> fusion == null ? 0 : fusion.phase();
+                    case FUSION_DATA + 7 -> machine == BigMachine.SOLAR_FIELD && energy != null ? Math.round(1000f * energy.getEnergyStored() / Math.max(1, energy.getMaxEnergyStored())) : 0;
                     default -> 0;
                 };
             }
@@ -2688,7 +2744,7 @@ public class BigMachineBlockEntity extends BlockEntity implements GeoBlockEntity
             return machine == BigMachine.INTAKE_PUMP && formed && !intakeWet ? line.copy().append(Component.translatable(k + "dry")) : line;
         }
         return switch (p.kind()) {
-            case ENERGY -> energy == null ? name : isGenerator() ? Component.translatable(k + "energy_gen", name, lastOut, generatorPeak())
+            case ENERGY -> energy == null ? name : machine == BigMachine.CONTAINMENT ? Component.translatable(k + "energy_pass", name, energy.getEnergyStored(), energy.getMaxEnergyStored(), lastOut) : isGenerator() ? Component.translatable(k + "energy_gen", name, lastOut, generatorPeak())
                     : Component.translatable(k + "energy", name, energy.getEnergyStored(),
                     energy.getMaxEnergyStored(), machine.energy.use());
             case SIGNAL -> Component.translatable(k + "signal", name, p.in() ? signalIn : signalOut,

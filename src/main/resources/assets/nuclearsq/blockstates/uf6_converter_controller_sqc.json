@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/uf6_converter_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/uf6_converter_shell_sqc"
     }
   }
 }

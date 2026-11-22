@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/water_treatment_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/water_treatment_shell_sqc"
     }
   }
 }

@@ -121,6 +121,7 @@ public final class EconomyData extends SavedData {
     private long inflow;
     long feesBurned;
     private final Exchange exchange = new Exchange(this);
+    private final Auctions auctions = new Auctions(this);
     private final java.util.ArrayDeque<String> audit = new java.util.ArrayDeque<>();
     private final Map<UUID, long[]> rate = new java.util.HashMap<>();
 
@@ -165,12 +166,16 @@ public final class EconomyData extends SavedData {
         long sum = feesBurned;
         for (Account a : accounts.values()) sum += a.balance + a.proceeds;
         for (Loan l : loans.values()) if (l.status == Status.OPEN) sum += l.amount;
-        sum += exchange.escrowTotal();
+        sum += exchange.escrowTotal() + auctions.escrowTotal();
         return sum == inflow && exchange.invariantHolds();
     }
 
     public Exchange exchange() {
         return exchange;
+    }
+
+    public Auctions auctions() {
+        return auctions;
     }
 
     int newId() {
@@ -617,6 +622,7 @@ public final class EconomyData extends SavedData {
         }
         tag.put("offers", of);
         tag.put("exchange", exchange.save());
+        tag.put("auctions", auctions.save(registries));
         return tag;
     }
 
@@ -666,6 +672,7 @@ public final class EconomyData extends SavedData {
             d.offers.put(o.id, o);
         }
         d.exchange.load(tag.getCompound("exchange"));
+        d.auctions.load(tag.getCompound("auctions"), registries);
         return d;
     }
 }

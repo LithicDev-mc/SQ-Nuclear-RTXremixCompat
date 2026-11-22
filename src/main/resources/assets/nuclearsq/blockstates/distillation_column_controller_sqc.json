@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/distillation_column_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/distillation_column_shell_sqc"
     }
   }
 }

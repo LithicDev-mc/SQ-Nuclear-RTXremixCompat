@@ -19,6 +19,8 @@ import net.minecraft.world.item.ItemStack;
 public final class ModScope {
     public static final int SLOT = 18, PITCH = 22, PAD = 8, HEAD = 14, SEC_HEAD = 22, GAP = 6, SEC_GAP = 12;
     private static final String START = "uranium_ore_sqc";
+    private static final Map<String, String> HOME = Map.of("hazmat_1_chestplate_sqc", "prot_suit",
+            "pocket_battery_small_sqc", "tools_nanobots", "geiger_counter_sqc", "prot_geiger");
 
     public record Node(Item item, String page, int box, int x, int y, boolean machine) {}
 
@@ -135,6 +137,11 @@ public final class ModScope {
                     }
                 }
             }
+        Map<String, String> proof = new HashMap<>();
+        for (var nd : AchievementTree.NODES)
+            for (String id : AchievementTree.proofItems(nd)) if (chapterOfPage.containsKey(nd.page())) proof.putIfAbsent(id, nd.page());
+        Map<String, String> home = new HashMap<>();
+        for (var e : HOME.entrySet()) if (chapterOfPage.containsKey(e.getValue())) home.put(CompendiumItems.family(e.getKey()), e.getValue());
         Map<Item, Integer> index = new LinkedHashMap<>();
         List<Item> items = new ArrayList<>();
         List<String> pages = new ArrayList<>();
@@ -143,16 +150,23 @@ public final class ModScope {
         for (Item item : BuiltInRegistries.ITEM) {
             var id = BuiltInRegistries.ITEM.getKey(item);
             if (!id.getNamespace().equals(NuclearSQ.MODID) || exempt(id.getPath())) continue;
-            String pg = exact.get(id.getPath());
+            String pg = proof.get(id.getPath());
+            if (pg == null) pg = home.get(CompendiumItems.family(id.getPath()));
+            if (pg == null) pg = exact.get(id.getPath());
             if (pg == null) pg = family.get(CompendiumItems.family(id.getPath()));
             if (pg == null) pg = CompendiumItems.page(id.getPath());
             Integer c = pg == null ? null : chapterOfPage.get(pg);
             if (c == null) continue;
-            if (id.getPath().endsWith("_kit_sqc")) c = kits;
+            if (id.getPath().endsWith("_kit_sqc") && !id.getPath().startsWith("robo_")) c = kits;
             index.put(item, items.size());
             items.add(item);
             pages.add(pg);
             chap.add(c);
+            if (PlantOverview.ICON_ONLY.contains(id.getPath())) {
+                items.add(item);
+                pages.add(pg);
+                chap.add(kits);
+            }
         }
         Set<Long> seen = new HashSet<>();
         List<int[]> links = new ArrayList<>();

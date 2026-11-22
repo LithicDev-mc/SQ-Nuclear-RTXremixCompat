@@ -30,6 +30,12 @@
         "item": "minecraft:chest"
       },
       "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:gold_ingot"
+      },
+      "count": 4
     }
   ],
   "result": {

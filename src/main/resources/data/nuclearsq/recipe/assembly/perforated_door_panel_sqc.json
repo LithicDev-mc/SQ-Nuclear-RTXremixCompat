@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_bars"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:brass_bearing_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_trapdoor"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:perforated_door_panel_sqc",
+    "count": 8
+  }
+}

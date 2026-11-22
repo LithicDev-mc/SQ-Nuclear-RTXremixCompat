@@ -15,9 +15,9 @@
     },
     {
       "ingredient": {
-        "item": "nuclearsq:rubber_sqc"
+        "item": "minecraft:piston"
       },
-      "count": 8
+      "count": 4
     }
   ],
   "result": {

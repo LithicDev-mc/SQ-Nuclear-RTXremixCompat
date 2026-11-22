@@ -1,0 +1,39 @@
+{
+  "type": "nuclearsq:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:steel_sheet_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:glass_pane"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_1_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:glowstone_dust"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:login_monitor_sqc",
+    "count": 1
+  }
+}

@@ -32,7 +32,7 @@ public final class DriveCore {
     private static final float HEAR_VOLUME = 3.2f;
     private static final double FAR_PARTICLE_RANGE = 256.0;
 
-    private float heat, coolingAcc, lastCooling = PASSIVE_COOLING, insertion;
+    private float heat, coolingAcc, lastCooling, insertion;
     private int meltdownTicks = MELTDOWN_TICKS;
     private float riseScale = HEAT_RISE_PCT / 100f;
     private double radiation;
@@ -58,7 +58,8 @@ public final class DriveCore {
     boolean tick(ServerLevel sl, Vec3 core, int tick, float insertion, int flowMb, int missingMb, float heatFactor, float coolerAdd) {
         this.insertion = Mth.clamp(insertion, 0f, 1f);
         float gen = this.insertion * HEAT_FULL * heatFactor + missingMb * DRY_HEAT_PER_MB;
-        lastCooling = PASSIVE_COOLING + (flowMb * PRIMARY_COOLING_PER_MB + coolingAcc + coolerAdd) * chem.crudCoolingFactor();
+        float passive = flowMb > 0 || coolingAcc > 0f ? PASSIVE_COOLING : 0f;
+        lastCooling = passive + (flowMb * PRIMARY_COOLING_PER_MB + coolingAcc + coolerAdd) * chem.crudCoolingFactor();
         coolingAcc = 0f;
         float net = gen - lastCooling;
         if (net > 0f) net *= riseScale;
@@ -89,8 +90,7 @@ public final class DriveCore {
         coolingAcc = 0f;
         insertion = 0f;
         radiation = 0;
-        lastCooling = PASSIVE_COOLING;
-        heat = Math.max(0f, heat - PASSIVE_COOLING);
+        lastCooling = 0f;
         if (heat <= MAX_HEAT * RECOVER) overheated = false;
         meltdown = 0;
     }

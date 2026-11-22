@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/feedwater_heater_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/feedwater_heater_shell_sqc"
     }
   }
 }

@@ -36,6 +36,12 @@
         "item": "nuclearsq:copper_coil_sqc"
       },
       "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:bucket"
+      },
+      "count": 4
     }
   ],
   "result": {

@@ -36,6 +36,12 @@
         "item": "nuclearsq:brass_bearing_sqc"
       },
       "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:furnace"
+      },
+      "count": 1
     }
   ],
   "result": {

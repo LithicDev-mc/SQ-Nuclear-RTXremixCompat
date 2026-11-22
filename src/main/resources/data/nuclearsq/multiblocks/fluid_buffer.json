@@ -17,11 +17,21 @@
   ],
   "ports": [
     {
-      "name": "fluid_io",
+      "name": "fluid_in",
       "type": "acid",
-      "dir": "both",
+      "dir": "in",
       "cell": [
         0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "fluid_out",
+      "type": "acid",
+      "dir": "out",
+      "cell": [
+        2,
         0,
         1
       ]
@@ -46,7 +56,7 @@
   "layers": [
     [
       "R@R",
-      "aRR",
+      "aRa",
       "RtR"
     ],
     [

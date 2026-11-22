@@ -207,6 +207,16 @@ public final class ModNetwork {
                 com.sqc.nuclearsq.monitor.ImageMonitorInputPayload::handle);
         registrar.playToClient(com.sqc.nuclearsq.monitor.ImageMonitorPayload.TYPE, com.sqc.nuclearsq.monitor.ImageMonitorPayload.STREAM_CODEC,
                 com.sqc.nuclearsq.monitor.ImageMonitorPayload::handle);
+        registrar.playToServer(com.sqc.nuclearsq.apps.AppPayloads.Action.TYPE, com.sqc.nuclearsq.apps.AppPayloads.Action.STREAM_CODEC,
+                com.sqc.nuclearsq.apps.LoginMonitor::handle);
+        registrar.playToClient(com.sqc.nuclearsq.apps.AppPayloads.State.TYPE, com.sqc.nuclearsq.apps.AppPayloads.State.STREAM_CODEC,
+                (payload, ctx) -> ctx.enqueueWork(() -> ClientPayloadHandler.appLogin(payload)));
+        registrar.playToServer(com.sqc.nuclearsq.apps.AuctionPayloads.Action.TYPE, com.sqc.nuclearsq.apps.AuctionPayloads.Action.STREAM_CODEC,
+                com.sqc.nuclearsq.apps.AuctionMonitor::handle);
+        registrar.playToClient(com.sqc.nuclearsq.apps.AuctionPayloads.State.TYPE, com.sqc.nuclearsq.apps.AuctionPayloads.State.STREAM_CODEC,
+                (payload, ctx) -> ctx.enqueueWork(() -> ClientPayloadHandler.appAuction(payload)));
+        registrar.playToClient(com.sqc.nuclearsq.apps.AppPayloads.Session.TYPE, com.sqc.nuclearsq.apps.AppPayloads.Session.STREAM_CODEC,
+                (payload, ctx) -> ctx.enqueueWork(() -> ClientPayloadHandler.appSession(payload)));
         registrar.playToServer(com.sqc.nuclearsq.machine.AccessPayloads.Action.TYPE, com.sqc.nuclearsq.machine.AccessPayloads.Action.STREAM_CODEC,
                 com.sqc.nuclearsq.machine.AccessPayloads::handle);
         registrar.playToClient(com.sqc.nuclearsq.machine.AccessPayloads.State.TYPE, com.sqc.nuclearsq.machine.AccessPayloads.State.STREAM_CODEC,
@@ -221,6 +231,22 @@ public final class ModNetwork {
                             && com.sqc.nuclearsq.robotics.decon.DeconRobotEntity.controlledBy(sp) instanceof com.sqc.nuclearsq.robotics.decon.DeconRobotEntity robot) {
                         if (payload.stop()) robot.stopControl("stopped");
                         else robot.input(payload.forward(), payload.turn(), payload.pitch());
+                    }
+                }));
+        registrar.playToClient(com.sqc.nuclearsq.robotics.drone.DronePayloads.State.TYPE, com.sqc.nuclearsq.robotics.drone.DronePayloads.State.STREAM_CODEC,
+                (payload, ctx) -> ctx.enqueueWork(() -> com.sqc.nuclearsq.robotics.drone.client.SurveyDroneControlClient.setControl(payload.droneId())));
+        registrar.playToClient(com.sqc.nuclearsq.robotics.drone.DronePayloads.Scan.TYPE, com.sqc.nuclearsq.robotics.drone.DronePayloads.Scan.STREAM_CODEC,
+                (payload, ctx) -> ctx.enqueueWork(() -> com.sqc.nuclearsq.robotics.drone.client.SurveyDroneControlClient.receive(payload)));
+        registrar.playToServer(com.sqc.nuclearsq.robotics.drone.DronePayloads.Fly.TYPE, com.sqc.nuclearsq.robotics.drone.DronePayloads.Fly.STREAM_CODEC,
+                (payload, ctx) -> ctx.enqueueWork(() -> {
+                    if (ctx.player() instanceof net.minecraft.server.level.ServerPlayer sp) com.sqc.nuclearsq.robotics.drone.SurveyTabletItem.fly(sp, payload.mainHand());
+                }));
+        registrar.playToServer(com.sqc.nuclearsq.robotics.drone.DronePayloads.Input.TYPE, com.sqc.nuclearsq.robotics.drone.DronePayloads.Input.STREAM_CODEC,
+                (payload, ctx) -> ctx.enqueueWork(() -> {
+                    if (ctx.player() instanceof net.minecraft.server.level.ServerPlayer sp
+                            && com.sqc.nuclearsq.robotics.drone.SurveyDroneEntity.controlledBy(sp) instanceof com.sqc.nuclearsq.robotics.drone.SurveyDroneEntity drone) {
+                        if (payload.stop()) drone.stopControl("stopped");
+                        else drone.input(payload.forward(), payload.strafe(), payload.up(), payload.yaw(), payload.pitch());
                     }
                 }));
     }

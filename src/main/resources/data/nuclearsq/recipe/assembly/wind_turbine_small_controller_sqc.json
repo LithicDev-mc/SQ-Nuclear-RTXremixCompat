@@ -36,6 +36,12 @@
         "item": "nuclearsq:brass_bearing_sqc"
       },
       "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:white_wool"
+      },
+      "count": 4
     }
   ],
   "result": {

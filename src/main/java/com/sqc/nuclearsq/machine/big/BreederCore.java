@@ -183,7 +183,7 @@ public final class BreederCore {
         return false;
     }
 
-    private static int bredCount(ItemStackHandler items) {
+    public static int bredCount(ItemStackHandler items) {
         int n = 0;
         ItemStack probe = new ItemStack(item("bred_blanket_sqc")), probeNp = new ItemStack(item("bred_neptunium_sqc"));
         for (int o = 0; o < OUT_SLOTS; o++) {

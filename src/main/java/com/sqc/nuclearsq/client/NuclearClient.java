@@ -46,6 +46,8 @@ public final class NuclearClient {
         event.register(com.sqc.nuclearsq.storage.StorageRegistry.CRAFTING_MENU.get(), com.sqc.nuclearsq.storage.client.CraftingTerminalScreen::new);
         event.register(com.sqc.nuclearsq.storage.StorageRegistry.RACK_MENU.get(), com.sqc.nuclearsq.storage.client.ServerRackScreen::new);
         event.register(com.sqc.nuclearsq.storage.StorageRegistry.ASSEMBLER_MENU.get(), com.sqc.nuclearsq.storage.client.ComponentAssemblerScreen::new);
+        event.register(com.sqc.nuclearsq.storage.StorageRegistry.MONITOR_MENU.get(), com.sqc.nuclearsq.storage.client.StorageMonitorScreen::new);
+        event.register(com.sqc.nuclearsq.storage.StorageRegistry.ITEM_PORT_MENU.get(), com.sqc.nuclearsq.storage.client.ItemPortScreen::new);
     }
 
     @SubscribeEvent

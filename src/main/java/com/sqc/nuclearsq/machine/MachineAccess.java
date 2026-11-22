@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import com.sqc.nuclearsq.compat.ftbteams.FtbTeamsCompat;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -32,11 +34,17 @@ public final class MachineAccess {
         TeamData teams = TeamData.get(sp.server);
         for (Map.Entry<String, Integer> e : grants.entrySet())
             if (e.getKey().startsWith("g:") && teams.inTeam(e.getKey().substring(2), sp.getUUID())) r |= e.getValue();
+        if ((r & USE) == 0 && FtbTeamsCompat.sameTeam(owner, sp.getUUID())) r |= USE;
         return r;
     }
 
     public boolean can(ServerPlayer sp, @Nullable UUID owner, int level) {
         return (rights(sp, owner) & level) == level;
+    }
+
+    public boolean canBuild(ServerPlayer sp, @Nullable UUID owner) {
+        return can(sp, owner, ADMIN) || owner != null && (FtbTeamsCompat.sameTeam(owner, sp.getUUID())
+                || grants.keySet().stream().anyMatch(k -> k.startsWith("g:") && TeamData.get(sp.server).inTeam(k.substring(2), sp.getUUID())));
     }
 
     public CompoundTag save() {

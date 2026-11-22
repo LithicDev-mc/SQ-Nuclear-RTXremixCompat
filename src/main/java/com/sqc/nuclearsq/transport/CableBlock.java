@@ -136,7 +136,7 @@ public class CableBlock extends ConduitBlock {
         Direction m = state.getValue(MOUNT);
         if (s == ConduitSide.ON && dir.getAxis() != m.getAxis()) {
             BlockState n = level.getBlockState(pos.relative(dir));
-            if (n.getBlock() instanceof CableBlock && n.getValue(MOUNT) != m) return n.getValue(MOUNT) == dir ? ConduitSide.ON : ConduitSide.PORT;
+            if (n.getBlock() instanceof CableBlock && n.getValue(MOUNT) != m) return n.getValue(MOUNT).getAxis() == dir.getAxis() ? ConduitSide.ON : ConduitSide.PORT;
         }
         return s;
     }
@@ -150,6 +150,11 @@ public class CableBlock extends ConduitBlock {
     protected int hold(BlockState state, Level level, BlockPos pos, int conn) {
         Direction m = state.getValue(MOUNT);
         BlockPos under = pos.relative(m);
+        if (m.getAxis().isHorizontal() && !onTray(m, conn)) {
+            if (ConduitSide.of(conn, m.getOpposite()) != ConduitSide.NONE && ((pos.get(m.getAxis()) & 3) != 0 || anchorNear(level, pos, m, m.getAxis()))) return 0;
+            int ceil = ceiling(level, pos);
+            return ceil > 0 ? hang(ceil) : 0;
+        }
         if (!onTray(m, conn) || edgeSide(m, conn) != null) return 0;
         boolean stacked = m == Direction.DOWN && ConduitSide.of(conn, m) == ConduitSide.NONE && floorTray(level, under);
         if (!stacked && !level.getBlockState(under).getCollisionShape(level, under).isEmpty()) return 0;
@@ -161,11 +166,13 @@ public class CableBlock extends ConduitBlock {
             run = run == null || run == d.getAxis() ? d.getAxis() : m.getAxis();
         }
         boolean carried = carried(level, pos, m);
-        if (arms == 2 && run != m.getAxis() && (pos.get(run) & 3) != 0 && !carried) return 0;
+        if (arms == 2 && run != m.getAxis() && ((pos.get(run) & 3) != 0 || anchorNear(level, pos, m, run)) && !carried) return 0;
         for (Direction d : Direction.values()) {
             if (!carried && d.getAxis() != m.getAxis() && ConduitSide.of(conn, d) == ConduitSide.NONE && sturdy(level, pos, d)) return 1 << d.ordinal();
         }
+        int ceil = carried || m != Direction.DOWN || run == m.getAxis() || ConduitSide.of(conn, m.getOpposite()) != ConduitSide.NONE ? 0 : ceiling(level, pos);
         for (int n = 1; m == Direction.DOWN && n <= POST_MAX + 1; n++) {
+            if (ceil > 0 && ceil < n) return hang(ceil);
             BlockPos p = pos.below(n);
             if ((n > 1 || stacked) && floorTray(level, p)) return 1 << Direction.DOWN.ordinal() | ((barX(level, p) ? 1 : 2) * POST_CABLE + n) << 6;
             BlockState b = level.getBlockState(p);
@@ -174,6 +181,7 @@ public class CableBlock extends ConduitBlock {
             break;
         }
         if (carried) return 1 << Direction.DOWN.ordinal() | POST_BAR << 6;
+        if (ceil > 0) return hang(ceil);
         Direction up = m.getOpposite();
         return ConduitSide.of(conn, up) == ConduitSide.NONE && sturdy(level, pos, up) ? 1 << up.ordinal() : 0;
     }
@@ -181,6 +189,39 @@ public class CableBlock extends ConduitBlock {
     public static final int POST_MAX = 8;
     public static final int POST_CABLE = 16;
     public static final int POST_BAR = 15;
+    public static final int POST_CEIL = 48;
+
+    private static boolean anchorNear(Level level, BlockPos pos, Direction m, Direction.Axis a) {
+        for (Direction d : Direction.values()) {
+            if (d.getAxis() != a) continue;
+            for (int n = 1; n <= 3; n++) {
+                BlockPos p = pos.relative(d, n);
+                BlockState s = level.getBlockState(p);
+                if (!(s.getBlock() instanceof CableBlock) || s.getValue(MOUNT) != m) break;
+                int c = connOf(level, p);
+                if (ConduitSide.of(c, d) == ConduitSide.NONE) return true;
+                if (a != m.getAxis() && ConduitSide.of(c, m.getOpposite()) != ConduitSide.NONE) return true;
+                for (Direction e : Direction.values()) {
+                    if (e.getAxis() != a && e.getAxis() != m.getAxis() && ConduitSide.of(c, e) != ConduitSide.NONE) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static int hang(int ceil) {
+        return 1 << Direction.UP.ordinal() | (ceil > 1 ? POST_CEIL + ceil - 1 : 0) << 6;
+    }
+
+    private static int ceiling(Level level, BlockPos pos) {
+        for (int n = 1; n <= POST_MAX + 1; n++) {
+            BlockPos p = pos.above(n);
+            BlockState b = level.getBlockState(p);
+            if (b.getCollisionShape(level, p).isEmpty()) continue;
+            return b.isFaceSturdy(level, p, Direction.DOWN) ? n : 0;
+        }
+        return 0;
+    }
 
     static boolean barX(BlockGetter level, BlockPos p) {
         int c = connOf(level, p);
@@ -219,6 +260,7 @@ public class CableBlock extends ConduitBlock {
         long before = be == null ? 0 : (long) be.conn() << 32 | be.hold() & 0xFFFFFFFFL;
         super.refresh(level, pos);
         if (be != null && before != ((long) be.conn() << 32 | be.hold() & 0xFFFFFFFFL)) refreshColumn(level, pos);
+        if (be != null && before >>> 32 != (be.conn() & 0xFFFFFFFFL)) refreshRun(level, pos);
     }
 
     @Override
@@ -231,6 +273,16 @@ public class CableBlock extends ConduitBlock {
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState now, boolean moved) {
         super.onRemove(state, level, pos, now, moved);
         if (!now.is(state.getBlock())) refreshColumn(level, pos);
+    }
+
+    private static void refreshRun(Level level, BlockPos pos) {
+        for (Direction d : Direction.values()) {
+            for (int n = 1; n <= 3; n++) {
+                BlockPos p = pos.relative(d, n);
+                if (!(level.getBlockState(p).getBlock() instanceof CableBlock c)) break;
+                c.refresh(level, p);
+            }
+        }
     }
 
     private static void refreshColumn(Level level, BlockPos pos) {
@@ -254,34 +306,45 @@ public class CableBlock extends ConduitBlock {
     }
 
     private int edge(Direction m, int conn, LevelAccessor level, BlockPos pos) {
-        Direction up = m.getOpposite();
-        Direction e = edgeTarget(m, conn, level, pos);
+        Direction up = m.getOpposite(), at = up;
+        Direction e = edgeTarget(up, conn, level, pos);
+        if (e == null && edgeSide(m, conn) == null) {
+            e = edgeTarget(m, conn, level, pos);
+            if (e != null && ConduitSide.of(conn, e) == ConduitSide.NONE) e = null;
+            at = m;
+        }
         if (e != null) {
-            conn = ConduitSide.with(ConduitSide.with(conn, up, ConduitSide.PORT), e, ConduitSide.PORT);
+            conn = ConduitSide.with(ConduitSide.with(conn, at, ConduitSide.PORT), e, ConduitSide.PORT);
             for (Direction d : Direction.values()) {
                 if (d.getAxis() != m.getAxis() && d != e && ConduitSide.of(conn, d) == ConduitSide.PORT) conn = ConduitSide.with(conn, d, ConduitSide.ON);
             }
         } else if (edgeSide(m, conn) != null) {
             conn = ConduitSide.with(conn, up, ConduitSide.ON);
+        } else if (cornerSide(m, conn) != null) {
+            conn = ConduitSide.with(conn, m, ConduitSide.ON);
         }
         return conn;
     }
 
     @Nullable
-    private Direction edgeTarget(Direction m, int conn, LevelAccessor level, BlockPos pos) {
-        Direction up = m.getOpposite();
-        if (ConduitSide.of(conn, up) == ConduitSide.NONE) return null;
-        BlockState n = level.getBlockState(pos.relative(up));
-        if (!(n.getBlock() instanceof CableBlock) || n.getValue(MOUNT).getAxis() == m.getAxis()) return null;
+    private Direction edgeTarget(Direction at, int conn, LevelAccessor level, BlockPos pos) {
+        if (ConduitSide.of(conn, at) == ConduitSide.NONE) return null;
+        BlockState n = level.getBlockState(pos.relative(at));
+        if (!(n.getBlock() instanceof CableBlock) || n.getValue(MOUNT).getAxis() == at.getAxis()) return null;
         return n.getValue(MOUNT);
     }
 
     @Nullable
     public static Direction edgeSide(Direction m, int conn) {
-        if (ConduitSide.of(conn, m.getOpposite()) != ConduitSide.PORT) return null;
+        return cornerSide(m.getOpposite(), conn);
+    }
+
+    @Nullable
+    private static Direction cornerSide(Direction at, int conn) {
+        if (ConduitSide.of(conn, at) != ConduitSide.PORT) return null;
         Direction found = null;
         for (Direction d : Direction.values()) {
-            if (d.getAxis() == m.getAxis() || ConduitSide.of(conn, d) != ConduitSide.PORT) continue;
+            if (d.getAxis() == at.getAxis() || ConduitSide.of(conn, d) != ConduitSide.PORT) continue;
             if (found != null) return null;
             found = d;
         }

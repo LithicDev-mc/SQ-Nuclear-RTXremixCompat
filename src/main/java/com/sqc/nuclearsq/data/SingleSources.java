@@ -226,7 +226,8 @@ public final class SingleSources {
         @Override
         void collect(List<DataValue> out) {
             int max = com.sqc.nuclearsq.storage.WifiValues.adapter().maxAntennas();
-            out.add(new DataValue("range", label("range"), be.range(), com.sqc.nuclearsq.storage.WifiValues.adapter().rangeFor(max), "m"));
+            out.add(new DataValue("range", label("range"), be.unlimited() ? Double.POSITIVE_INFINITY : be.range(),
+                    com.sqc.nuclearsq.storage.WifiValues.adapter().maxFinite(), "m"));
             out.add(new DataValue("antennas", label("antennas"), be.antennas(), max, ""));
             out.add(new DataValue("energy", label("energy"), be.stored(), be.capacity(), "FE"));
             out.add(new DataValue("charging", label("charging"), be.charging(), 0, ""));

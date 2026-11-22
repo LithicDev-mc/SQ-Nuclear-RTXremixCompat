@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "nuclearsq:ore_milling",
+  "ingredient": {
+    "item": "create:veridium"
+  },
+  "count": 1,
+  "time": 200,
+  "energy_per_tick": 120,
+  "results": [
+    {
+      "item": {
+        "id": "nuclearsq:copper_dust_sqc",
+        "count": 1
+      },
+      "chance": 0.8
+    },
+    {
+      "item": {
+        "id": "create:copper_nugget",
+        "count": 1
+      },
+      "chance": 0.8
+    }
+  ]
+}

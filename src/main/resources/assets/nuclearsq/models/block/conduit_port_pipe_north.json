@@ -1,0 +1,33 @@
+{
+  "render_type": "minecraft:solid",
+  "textures": {
+    "port": "nuclearsq:block/conduit_port_pipe_sqc",
+    "particle": "nuclearsq:block/conduit_port_pipe_sqc"
+  },
+  "elements": [
+    {
+      "from": [
+        1.0,
+        1.0,
+        -0.1
+      ],
+      "to": [
+        15.0,
+        15.0,
+        0.0
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#port",
+          "cullface": "north"
+        }
+      }
+    }
+  ]
+}

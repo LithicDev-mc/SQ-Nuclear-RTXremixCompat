@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "formed=false": {
       "model": "nuclearsq:block/solar_field_controller_sqc"
+    },
+    "formed=true": {
+      "model": "nuclearsq:block/solar_field_shell_sqc"
     }
   }
 }

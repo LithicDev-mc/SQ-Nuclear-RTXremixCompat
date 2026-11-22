@@ -1,0 +1,35 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:wifi_antenna_dish_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:quantum_module_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:nether_star"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:ender_eye"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:wifi_antenna_quantum_sqc",
+    "count": 1
+  },
+  "time": 600,
+  "energy_per_tick": 1920
+}

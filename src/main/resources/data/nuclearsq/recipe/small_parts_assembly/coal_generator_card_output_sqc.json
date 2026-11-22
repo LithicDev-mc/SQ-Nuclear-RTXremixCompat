@@ -1,0 +1,33 @@
+{
+  "type": "nuclearsq:small_parts_assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "nuclearsq:control_board_1_sqc"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "nuclearsq:copper_coil_sqc"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:coal_block"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:redstone"
+      },
+      "count": 15
+    }
+  ],
+  "result": {
+    "id": "nuclearsq:coal_generator_card_output_sqc",
+    "count": 1
+  }
+}

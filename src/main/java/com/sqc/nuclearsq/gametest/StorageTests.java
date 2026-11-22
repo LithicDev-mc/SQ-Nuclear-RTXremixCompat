@@ -191,6 +191,37 @@ public final class StorageTests {
         });
     }
 
+    @GameTest(template = FLOOR, batch = "storage_monitor", timeoutTicks = 80)
+    public static void storageMonitorMenuKeepsSettings(GameTestHelper h) {
+        BigMachineBlockEntity a = build(h, BigMachine.SERVER_RACK_SMALL, new BlockPos(2, 2, 2));
+        BlockPos ba = behind(a);
+        cable(h, ba, ba.offset(2, 0, 0));
+        BlockPos o = ba.offset(1, 1, 0);
+        h.getLevel().setBlockAndUpdate(o, StorageRegistry.MONITOR.get().defaultBlockState()
+                .setValue(com.sqc.nuclearsq.data.DataPanelBlock.FACING, Direction.SOUTH));
+        h.runAfterDelay(45, () -> {
+            if (!(h.getLevel().getBlockEntity(o) instanceof com.sqc.nuclearsq.storage.StorageMonitorBlockEntity mon) || mon.rows().size() != 1 || mon.online() != 0) {
+                throw new GameTestAssertException("Monitor sieht das Rack ohne Strom nicht");
+            }
+            ServerPlayer p = AuditFixTests.testPlayer(h);
+            var menu = new com.sqc.nuclearsq.storage.StorageMonitorMenu(0, o);
+            if (!menu.clickMenuButton(p, com.sqc.nuclearsq.storage.StorageMonitorBlockEntity.HIDE * 4 + 1)) throw new GameTestAssertException("Ausblenden abgelehnt");
+            if (!mon.sorted(false).isEmpty() || mon.sorted(true).size() != 1) throw new GameTestAssertException("Rack ohne Strom nicht ausgeblendet");
+            if (mon.comparator() != 0 || mon.rows().size() != 1) throw new GameTestAssertException("Ausblenden aendert die Daten");
+            menu.clickMenuButton(p, com.sqc.nuclearsq.storage.StorageMonitorBlockEntity.PAGE * 4 + 2);
+            menu.clickMenuButton(p, com.sqc.nuclearsq.storage.StorageMonitorBlockEntity.WARN * 4 + 1);
+            if (menu.clickMenuButton(p, com.sqc.nuclearsq.storage.StorageMonitorBlockEntity.HIDE * 4 + 2)) throw new GameTestAssertException("ungueltiger Wert angenommen");
+            if (mon.pageTicks() != 600 || mon.warnFrom() != 0.8f) throw new GameTestAssertException("Einstellung nicht gesetzt");
+            var reg = h.getLevel().registryAccess();
+            var copy = new com.sqc.nuclearsq.storage.StorageMonitorBlockEntity(o, mon.getBlockState());
+            copy.loadWithComponents(mon.saveWithoutMetadata(reg), reg);
+            if (copy.setting(com.sqc.nuclearsq.storage.StorageMonitorBlockEntity.HIDE) != 1 || copy.pageTicks() != 600 || copy.warnFrom() != 0.8f || copy.rows().size() != 1) {
+                throw new GameTestAssertException("Einstellungen nach Neuladen weg");
+            }
+            h.succeed();
+        });
+    }
+
     @GameTest(template = FLOOR, batch = "storage_space", timeoutTicks = 100)
     public static void serverRackShowsSpace(GameTestHelper h) {
         BigMachineBlockEntity a = build(h, BigMachine.SERVER_RACK_SMALL, new BlockPos(2, 2, 2));
