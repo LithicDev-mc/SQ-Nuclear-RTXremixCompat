@@ -47,7 +47,7 @@ public class BigMachineRenderer extends GeoBlockRenderer<BigMachineBlockEntity> 
                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         long t0 = com.sqc.nuclearsq.client.PerfProbe.start();
         try {
-            renderMachine(be, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+            renderMachine(be, partialTick, poseStack, RtxBatchBufferSource.wrap(bufferSource), packedLight, packedOverlay);
         } finally {
             com.sqc.nuclearsq.client.PerfProbe.end(t0);
         }
